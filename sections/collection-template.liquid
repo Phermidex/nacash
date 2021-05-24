@@ -1,0 +1,266 @@
+
+{% assign collection_banner_title = section.settings.collection_banner_title %}
+{% assign collection_height_image = section.settings.collection_height_image %}
+
+{% assign sidebar_categories_title = section.settings.sidebar_categories_title %}
+{% assign collection_results_per_row = section.settings.collection_results_per_row %}
+{% assign collection_infinite_scrolling = settings.collection_infinite_scrollings %}
+{% assign collection_infinite_scrolling_text = settings.collection_infinite_scrolling_text %}
+{% assign collection_infinite_scrolling_no_more_product_text = settings.collection_infinite_scrolling_no_more_product_text %}
+{% assign enable_categories = section.settings.enable_categories %}
+
+ {% include 'collection-sidebar' %}
+
+{% schema %}
+{
+  "name": "Sidebar",
+  "settings": [
+    {
+      "type":      "header",
+      "content":   "Sidebar Navigation"
+    },
+    {
+        "type":      "checkbox",
+        "id":        "sidebar_nav_enabled",
+        "label":     "Enabled?"
+    },
+    {
+      "type": "text",
+      "id": "sidebar_nav_title",
+      "label": "Sidebar Navigation Title",
+      "default": "Title"
+    },
+    {
+      "type": "link_list",
+      "id": "sidebar_nav_link_list",
+      "label": "Sidebar Navigation Menu"
+    }  
+  ],
+  "blocks": [
+  
+            {
+              "type": "block_filter_categories",
+              "name": "Filters",
+              "settings": [
+                {
+                  "type": "text",
+                  "id": "sidebar_categories_title",
+                  "label": "Categories Block Title",
+                  "default": "Collections"
+                },
+                {
+                  "type": "checkbox",
+                  "id": "open_tabs",
+                  "label": "Open Tab By Default",
+                  "default": true
+                }
+              ]
+            },
+
+
+
+
+			      {
+              "type": "block_filter_size",
+              "name": "Filter By Tags",
+              "settings": [
+                  {
+                    "type": "paragraph",
+                    "content": "[Filter values correspond to the value \"Tags\" in the product.](https:\/\/docs.shopify.com\/manual\/your-store\/products\/edit-tags)"
+                  },
+                {
+                  "type": "checkbox",
+                  "id": "show_tooltips",
+                  "label": "Show Tooltips",
+                  "default": true
+                },
+                {
+                  "type": "checkbox",
+                  "id": "open_tabs",
+                  "label": "Open Tab By Default",
+                  "default": true
+                },
+                {
+                  "type": "select",
+                  "id": "style_filter",
+                  "label": "Design",
+                  "options": [
+                    {
+                      "value": "default",
+                      "label": "Links"
+                    },
+                    {
+                      "value": "inrow",
+                      "label": "Links in row"
+                    },
+                    {
+                      "value": "button",
+                      "label": "Buttons"
+                    },
+                    {
+                      "value": "color",
+                      "label": "Color Group"
+                    }
+                  ],
+                  "default": "default"
+                },
+                {
+                  "type": "text",
+                  "id": "title",
+                  "label": "Title",
+                  "default": "Shop By Tag"
+                },
+                {
+                  "type": "text",
+                  "id": "shop_by_tags_2_list_tags",
+                  "label": "Unique Tags List",
+                  "default": "dress,tops,shirts",
+                  "info": "Separate by a comma. Example: dress,tops,shirts"
+                }
+              ]
+            },{
+              "type": "block_filter_material",
+              "name": "Filter By Images",
+              "settings": [
+                  {
+                    "type": "paragraph",
+                    "content": "Please setup in tabs: Theme settings -> Option/Variant Design -> Associate Variant With Image"
+                  },
+                {
+                  "type": "checkbox",
+                  "id": "show_tooltips",
+                  "label": "Show Tooltips",
+                  "default": true
+                },
+                {
+                  "type": "checkbox",
+                  "id": "open_tabs",
+                  "label": "Open Tab By Default",
+                  "default": true
+                },
+
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      }
+              ]
+            },
+			{
+              "type": "block_promobox",
+              "name": "Promo box",
+              "settings": [
+                {
+                  "type": "text",
+                  "id": "title",
+                  "label": "Title"
+                },
+                {
+                  "type": "url",
+                  "id": "url",
+                  "label": "Url"
+                },
+                {
+                  "type": "image_picker",
+                  "id": "image",
+                  "label": "Image"
+                },
+                {
+                  "type": "textarea",
+                  "id": "custom_html",
+                  "label": "Custom HTML"
+                },
+                {
+                  "type": "text",
+                  "id": "button_text",
+                  "label": "Button text",
+                  "default": "Button text"
+                }
+              ]
+            },
+			{
+              "type": "block_customhtml",
+              "name": "Custom HTML",
+              "settings": [
+                {
+                  "type": "text",
+                  "id": "title",
+                  "label": "Title"
+                },
+                {
+                  "type": "textarea",
+                  "id": "custom_html",
+                  "label": "Custom HTML"
+                },
+                {
+                  "type": "text",
+                  "id": "button_text",
+                  "label": "Button text",
+                  "default": "Button text"
+                },
+                {
+                  "type": "url",
+                  "id": "url",
+                  "label": "Url"
+                }
+              ]
+            },
+			{
+              "type": "block_newsletter",
+              "name": "Custom Newsletter",
+              "settings": [
+                {
+                  "type": "text",
+                  "id": "home_newsletter_title",
+                  "label": "Heading",
+                  "default": "Newsletter"
+                },
+                {
+                  "type": "text",
+                  "id": "home_newsletter_subtitle",
+                  "label": "Subheading",
+                  "default": "Subscribe now to get daily updates "
+                },
+                {
+                  "type": "textarea",
+                  "id": "footer_newsletter_go",
+                  "label": " Button Label",
+                  "default": "Subscribe"
+                },
+                {
+                  "type": "text",
+                  "id": "mailing_list_form_action",
+                  "label": "MailChimp form action URL",
+                  "info": "[Where do I find my MailChimp form action URL?](http:\/\/docs.shopify.com\/support\/configuration\/store-customization\/where-do-i-get-my-mailchimp-form-action)"
+                }
+              ]
+            },
+			{
+              "type": "block_product",
+              "name": "Products",
+              "settings": [
+                  {
+                    "type": "text",
+                    "id": "tabs_title_block",
+                    "label": "Heading",
+                    "default": "Product Grid"
+                  },
+                  {
+                    "type": "collection",
+                    "id": "tabnew_collection",
+                    "label": "Collection"
+                  },
+                {
+                  "type": "range",
+                  "id": "products_limit",
+                  "min": 1,
+                  "max": 60,
+                  "step": 1,
+                  "label": "Limit",
+                  "default": 3
+                }
+              ]
+            }
+	]
+}
+{% endschema %}

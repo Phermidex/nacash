@@ -1,0 +1,17 @@
+
+    <img src="{{section.settings.logo_img | img_url: '300x'}}">
+
+
+{% schema %}
+{
+    "name": "Logo",
+    "class": "giveaway-logo-block",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "logo_img",
+            "label": "Logo Image"
+        }
+    ]
+}
+{% endschema %}

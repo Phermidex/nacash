@@ -1,0 +1,58 @@
+<!--Top Menu -->
+
+<div class=" megamenu">
+  <ul class="navbar-nav site-nav">
+    {% assign menu = linklists[section.settings.menu] %}
+    {% for link in menu.links %}
+    {% capture childrens %}
+    {% assign megamenu = null %}
+    {% for block in section.blocks %}
+    {% if block.type == 'megamenu' %}
+    {% assign for_item_handle = block.settings.for_item | handle %}
+    {% if for_item_handle == link.handle %}
+    {% assign megamenu = block.settings %}
+    {% include 'megamenu_1' %}
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+    {% if megamenu == null %}
+    <div class="dropdown-sub level1">
+      <ul>
+        {% for sub_link in link.links %}
+        <li class="{% if sub_link.levels > 0 %} menu-dropdown {%endif %}">
+          {% include 'menu-labels' with link: link sub_link: sub_link %}
+          <a href="{{ sub_link.url }}" class="">
+            <span>{{ sub_link.title }}</span>
+            {{ labels }}{% if sub_link.levels > 0 %} <i class="cs-font clever-icon-arrow-right"></i>{% endif %}</a>
+          {% if sub_link.levels > 0 %}
+          <div class="dropdown-sub level2">
+            <ul>
+              {% for sub_sub_link in sub_link.links %}
+              {% include 'menu-labels' with link: link sub_link: sub_link sub_sub_link: sub_sub_link %}
+              <li class="menu__item"><a href="{{ sub_sub_link.url }}" class="">
+                <span>{{ sub_sub_link.title }}</span>
+                {{ labels }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+    {% endcapture %}
+    <li class="  level-top {% if link.levels > 0 %}menu-dropdown{% if megamenu != null %} megamenu-dropdow{% endif %}{% endif %}">
+      {% include 'menu-labels' with link: link %}
+      <a href="{{ link.url }}" class="">
+        <span>{{ link.title }}</span>
+        {{ labels }}{% if link.levels > 0 %}<i class="cs-font clever-icon-down"></i>{% endif %}</a>
+      {% if link.levels > 0 or megamenu != null %}
+      {{ childrens }}
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</div>  
+
+<!-- End Menu -->

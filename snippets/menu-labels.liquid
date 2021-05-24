@@ -1,0 +1,24 @@
+{% assign link_handle = link.handle | default: false %}
+{% assign sub_link_handle = sub_link.handle | default: false %}
+{% assign sub_sub_link_handle = sub_sub_link.handle | default: false %}
+{% assign labels = null %}
+{% for block in section.blocks %}
+{% if block.type == 'megamenu_label' %}
+{% assign for_item_array = block.settings.for_item | split: '+' %}
+{% assign for_item_link_handle = for_item_array[0] | handle | default: false %}
+{% assign for_item_sub_link_handle = for_item_array[1] | handle | default: false %}
+{% assign for_item_sub_sub_link_handle = for_item_array[2] | handle | default: false %}
+{% if link_handle == for_item_link_handle and sub_link_handle == for_item_sub_link_handle and sub_sub_link_handle == for_item_sub_sub_link_handle %}
+{% capture label %}
+{% if block.settings.type == 'hot' %}
+<span class="label-hot">{{ block.settings.text | default: 'hot' }}</span>
+{% elsif block.settings.type == 'sale' %}
+<span class="label-sale">{{ block.settings.text | default: 'sale' }}</span>
+{% elsif block.settings.type == 'new' %}
+<span class="label-news">{{ block.settings.text | default: 'new' }}</span>
+{%- endif %}
+{% endcapture %}
+{% assign labels = labels | append: label %}
+{% endif %}
+{% endif %}
+{% endfor %}

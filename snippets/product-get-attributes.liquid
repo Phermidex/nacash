@@ -1,0 +1,42 @@
+{% assign metafields = product.metafields %}
+{% if build_variant == 'all' or build_variant == 'json' %}
+{% capture json_images %}
+{% for image in product.images %}
+{"id":"{{ image.id }}","src":"{{ image.src | img_url: 'master' }}"}{% if forloop.last != true %},{% endif %}
+{% endfor %}
+{% endcapture %}
+
+{% capture json_variants_quantity %}
+{% assign is_first = true %}
+{% for variant in product.variants %}
+{% if variant.inventory_quantity != 0 %}
+{% if is_first != true %},{% endif %}{"id":"{{ variant.id }}","quantity":"{{ variant.inventory_quantity }}"}
+{%- assign is_first = false %}
+{% endif %}
+{% endfor %}
+{% endcapture %}
+{% capture json_variants_price_sale_details %}
+{% assign is_first = true %}
+{% for variant in product.variants %}
+{% if variant.compare_at_price > variant.price %}
+{% assign price_save = variant.compare_at_price | minus: variant.price %}
+{% assign price_save_money = price_save | money | replace: '"', '\"' %}
+{% assign price_save_quotient = variant.compare_at_price | divided_by: 100 %}
+{% assign price_save_procent = price_save | divided_by: price_save_quotient %}
+{% if is_first != true %},{% endif %}{"id":"{{ variant.id }}","details":"{{ 'products.product.price_sale_details_html' | t: price: price_save_money, procent: price_save_procent }}"}
+{% assign is_first = false %}
+{% endif %}
+{% endfor %}
+{% endcapture %}
+{% capture json_product %}
+{"handle":"{{ product.handle }}","variants":{{ product.variants | json }},"variants_quantity":[ {{ json_variants_quantity }} ],"variants_price_sale_details":[ {{ json_variants_price_sale_details }} ],"options":{{ product.options | json }},"images":[ {{ json_images }} ], "default_variant_id":"{{ product.selected_or_first_available_variant.id }}","image_size":"{{ image_size }}"}
+{% endcapture %}
+{% assign json_product = json_product | strip_newlines | strip | replace: '  ', '' %}
+{% endif -%}
+{% if build_variant == 'json' %}
+{% capture product_attrs %}{{ json_product }}{% endcapture %}
+{% else %}
+{% capture product_attrs %} data-js-product{% if settings.product_ajax_preload_json %} data-js-product-json-preload{% endif %} data-product-handle="{{ product.handle }}" data-product-variant-id="{{ current_variant_id }}"{% if json_product and show_options or show_images_navigation %} data-json-product='{{ json_product }}'{% endif %}{% endcapture %}
+{% endif %}
+{{ product_attrs }}
+{% assign build_variant = null %}

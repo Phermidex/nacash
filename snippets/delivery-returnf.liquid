@@ -1,0 +1,21 @@
+{% if section.settings.enable_delivery %}
+<div class="clearfix"></div>
+
+<div class="delivery-popup" style="display:none;">
+  <div class="delivery-popup-contents"> 
+    <a class="delivery-product-close"><i class="cs-font clever-icon-close"></i></a>
+    <div class="delivery-content">{{section.settings.delivery_content }}</div>
+  </div>  
+</div>
+<div class="clearfix"></div>
+<script>
+  jQuery(document).ready(function() {
+    jQuery('.delivery-product-lable').click(function(){
+      jQuery('body').addClass('open-delivery-product');
+    })
+    jQuery('.delivery-product-close').click(function(){
+      jQuery('body').removeClass('open-delivery-product');
+    })
+  });
+</script>
+{% endif %}

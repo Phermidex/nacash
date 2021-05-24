@@ -1,0 +1,43 @@
+
+    <p>{{section.settings.footer_text}}</p>
+    <ul>
+        {% for block in section.blocks %}
+        <li>
+            <a href="{{block.settings.social_link}}">
+                <img src="{{block.settings.social_icon | img_url: '80x'}}">
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+
+{% schema %}
+{
+    "name": "Giveaway Footer",
+    "class": "giveaway-footer",
+    "settings": [
+        {
+            "type": "textarea",
+            "id": "footer_text",
+            "label": "Footer Text"
+        }
+    ],
+    "blocks": [
+        {
+            "name": "Social",
+            "type": "item",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "social_link",
+                    "label": "Social Link"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "social_icon",
+                    "label": "Social Icon"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

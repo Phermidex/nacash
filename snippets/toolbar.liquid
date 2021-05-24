@@ -1,0 +1,135 @@
+<div class="toolbar">
+  {% paginate collection.products by product_per_page %}
+  {% if section.settings.colection_title %}
+  <div class="showing"><h1>{{ collection.title }}</h1></div>
+  {% endif %}
+  <!------ Collection Desscription
+  {% if section.settings.colection_decription %}
+  <div class="description"><p>{{ collection.description }}</p></div>
+  {% endif %}
+----->
+  {% endpaginate %}
+  <div class="toolbar-mode">
+    {% if section.settings.colection_view %}
+    <div class="collection-view">
+      <label>View As</label>
+
+      <a class="change-view grid{% unless template contains 'list' %} active{% endunless %}" id="grid" rel="tooltip" title="Grid view">
+        <div class="layer layer--primary"><div></div><div></div></div><div class="layer layer--secondary"><div></div><div></div></div>
+      </a>
+
+      <a class="change-view list{% if template contains 'list' %} active{% endif %}" id="list" rel="tooltip" title="List view">
+        <div class="togglelines"></div>
+      </a>      
+    </div>
+    {% endif %}
+    <div class="filter-collection-left">
+      <a {% if  settings.collection_layout == 'colection-left' and settings.collection_layout == 'right_sibar'%}style="display: none;"{% endif %}>
+        <span class="togglelines"></span>
+        <span class="shop-filter-text no-select">
+          <span class="closetext">{{ 'collection.toolbar.filter' | t }}</span>
+          <span class="opentext">Close</span>
+        </span>
+      </a>
+    </div>
+    {% if settings.isotope_collection_results_per_page != blank %}
+    {% assign product_per_page = settings.isotope_collection_results_per_page %}
+    {% else %}
+    {% assign product_per_page = 14 %}
+    {% endif %}
+
+    <div class="toolbar-right">
+      {%if section.settings.colection_softby %}
+      <div class="browse-tags">
+        <label>{{ 'collection.toolbar.label_softby' |t }}</label>
+        <select class="sort-by">
+          <option value="manual">FEATURED</option>
+          <option value="price-ascending">PRICE: LOW TO HIGH</option>
+          <option value="price-descending">PRICE: HIGH TO LOW</option>
+          <option value="title-ascending">ALPHABETICALLY: A-Z</option>
+          <option value="title-descending">ALPHABETICALLY: Z-A</option>
+          <option value="created-ascending">DATE: OLD TO NEW</option>
+          <option value="created-descending">DATE: NEW TO OLD</option>
+          <option value="best-selling">BEST SELLING</option>
+        </select>  
+        <i class="cs-font clever-icon-down"></i>
+      </div>
+      {% endif %}
+    </div>
+ 
+  </div>
+
+</div>
+
+<style>
+  body .filter-collection-left{display:block}
+</style>
+<script>
+  jQuery("#filter-sidebar").scroll(function() {
+    if (jQuery(window).width() < 991) {
+      var scroll = jQuery("#filter-sidebar").scrollTop();
+      if (scroll > 30) {
+        jQuery(".continue-filter").addClass("fillter-ticky");
+      }else{
+        jQuery(".continue-filter").removeClass("fillter-ticky");
+      }
+    }
+  });
+
+  jQuery('.sort-by')
+  .val('{{ collection.sort_by | default: collection.default_sort_by  }}')
+       .bind('change', function() {
+    Shopify.queryParams.sort_by = jQuery(this).val();
+    location.search = jQuery.param(Shopify.queryParams).replace(/\+/g, '%20');
+  });
+  jQuery(function() {
+    $('.hidden-sidebar  #filter-sidebar').hide();
+    $('.hidden-sidebar .filter-collection-left > a').click( function(){
+      $('.toolbar').toggleClass('active');
+      $('#filter-sidebar').toggle(400);
+    });
+    jQuery('.close-sibade').on('click', function(){
+      jQuery('.wrapper-container').removeClass('show-fillter');
+      jQuery('.toolbar').removeClass('active');
+    });
+    $('.colection-left .filter-collection-left > a').click( function(){
+      $('.toolbar').toggleClass('active');
+      if ( $('.wrapper-container').hasClass('show-fillter') ) {
+        $('.wrapper-container').removeClass('show-fillter');
+      } else {
+        $('.wrapper-container').removeClass('show-fillter');
+        $('.wrapper-container').addClass('show-fillter');    
+      }
+    });
+
+    jQuery('body.template-collection .collection-view a').on('click', function() {
+      jQuery('.collection-view a.active').removeClass('active');
+      jQuery(this).addClass('active');
+
+    });
+
+    jQuery('body.template-collection .collection-view a.list').on('click', function() {
+      jQuery('body.template-collection').find('.products-grid').addClass('product-list-item');
+      if( jQuery('body.template-collection .products-grid').hasClass('product-grid-item')){
+        jQuery('body.template-collection').find('.products-grid').removeClass('product-grid-item');
+
+      }else{
+        jQuery('body.template-collection').find('.products-grid').addClass('');
+      }
+
+    });
+    jQuery('body.template-collection .collection-view a.grid').on('click', function() {
+      jQuery('body.template-collection').find('.products-grid').addClass('product-grid-item');
+      if( jQuery('body.template-collection .products-grid').hasClass('product-list-item')){
+        jQuery('body.template-collection').find('.products-grid').removeClass('product-list-item');
+
+      }else{
+        jQuery('body.template-collection').find('.products-grid').addClass('');
+      }
+    });
+
+
+  });
+
+
+</script>

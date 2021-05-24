@@ -1,0 +1,73 @@
+<div class="home-newsletter" style="margin:{{section.settings.block_home_7  }};">
+  <div class="newsletter">
+    {% if section.settings.home_newsletter_title != blank %}
+    <div class="heading-block">
+      <h3 class="title">
+        {{ section.settings.home_newsletter_title }}
+      </h3>
+      {% if section.settings.home_newsletter_subtitle != blank %}
+      <p class="subtitle">
+        {{ section.settings.home_newsletter_subtitle }}
+      </p>
+      {% endif %}
+    </div>
+    {% endif %}
+    <div class="content">
+      <form action="{{ section.settings.mailing_list_form_action }}" method="post" name="mc-embedded-subscribe-form" target="_blank" class="input-group">
+        <div class="input-group newsletter_form_content">
+          <input  class="input__field input-group-field" type="email" value="" placeholder="{{ 'footer.footer_newsletter_content' | t }}" name="EMAIL" aria-label="Email Address">
+          <span class="input-group-btn">
+            <input type="submit" class="btn harman_btn5" value="{{ 'footer.footer_newsletter_go' | t }}" name="subscribe">
+            <i class="cs-font clever-icon-arrow-right-5"></i>
+          </span>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+	"name": "Newsletter",
+    "class": "index-section section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "block_home_7",
+        "label": "Margin",
+        "default": "0px 0px 0px 0px"
+      },
+      {
+        "type": "text",
+        "id": "home_newsletter_title",
+        "label": "Heading",
+        "default": "Newsletter"
+      },
+      {
+        "type": "text",
+        "id": "home_newsletter_subtitle",
+        "label": "Subheading",
+        "default": "Subscribe now to get daily updates "
+      },
+      {
+        "type": "text",
+        "id": "mailing_list_form_action",
+        "label": "MailChimp form action URL",
+        "info": "[Where do I find my MailChimp form action URL?](http:\/\/docs.shopify.com\/support\/configuration\/store-customization\/where-do-i-get-my-mailchimp-form-action)"
+      }
+	],
+    "presets": [
+        {
+          "name": "Newsletter",
+           "category": "3) Builder"
+          
+        }
+  	]
+ }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

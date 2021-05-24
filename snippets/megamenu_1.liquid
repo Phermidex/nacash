@@ -1,0 +1,110 @@
+<div class="dropdown-subs ">
+  <div class="dropdown-menu-inner container">
+    {% assign columns_left = null %}
+    {% assign columns_right = null %}
+    {% include 'megamenu-content' %}
+    {% if megamenu.second_level_column != true %}
+    <div class="{% if link.levels > 0 %} nav-links row {% endif %} sub-menu-lv2 {% if megamenu.second_level_column %}  level-colum {% endif %}">
+      {{ columns_left }}
+      {% if link.levels > 0 %}
+      {% for sub_link in link.links %}
+      <div class="widget-inner{% if sub_link.levels > 0 %} {% endif %} col-lg-{{ megamenu.grid }} ">
+        {% include 'menu-labels' with link: link sub_link: sub_link %}
+        <a href="{{ sub_link.url }}" class="menu-title">
+          <span>{{ sub_link.title }}</span>
+          {{ labels }}{% if sub_link.levels > 0 %} <i class="cs-font clever-icon-arrow-right-2"></i>{% endif %}</a>
+        {% for block in section.blocks %}
+        {% if block.type == 'megamenu_title_image' %}
+        {% assign for_item_array = block.settings.for_item | split: '+' %}
+        {% assign for_item_link_handle = for_item_array[0] | handle %}
+        {% assign for_item_sub_link_handle = for_item_array[1] | handle %}
+        {% if link.handle == for_item_link_handle and sub_link.handle == for_item_sub_link_handle %}
+        {% if block.settings.image != blank %}
+        <a href="{{ block.settings.url | default: sub_link.url }}">
+          <img class="" src="{{ block.settings.image | img_url: '2048x'  }}" alt="{{ image.alt | escape }}" />
+        </a>
+        {% else %}
+        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+        {% endif %}
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+        {% if sub_link.levels > 0 %}
+        <div class="nav-links sub-menu-lv3 row">
+          <ul>
+            {% assign sub_sub_links_html = null %}
+            {% assign links_html = null %}
+            {% for sub_sub_link in sub_link.links %}
+            {% capture links_html %}
+            {% include 'menu-labels' with link: link sub_link: sub_link sub_sub_link: sub_sub_link %}
+            <li class="">
+              <a href="{{ sub_sub_link.url }}" class="">
+                <span>{{ sub_sub_link.title }}</span>
+                {{ labels }}
+              </a>
+            </li>
+            {% endcapture %}
+            {% assign sub_sub_links_html = sub_sub_links_html | append: links_html %}
+            {% assign index_modulo = forloop.index | modulo: megamenu.second_level_column_size %}
+            {% if forloop.last or index_modulo == 0 %}
+            <div class="col-lg">
+              <div class="widget-inner">
+                {{ sub_sub_links_html }}
+              </div>
+            </div>
+            {% assign sub_sub_links_html = null %}
+            {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+      {% endif %}
+      {{ columns_right }}
+    </div>
+
+
+    {% else %}
+    <div class="row nav-links {% if megamenu.second_level_column %}  level-colum {% endif %}">
+
+      {{ columns_left }}
+      {% if link.levels > 0 %}
+
+      {% assign sub_links_html = null %}
+      {% for sub_link in link.links %}
+      {% capture links_html %}
+      {% include 'menu-labels' with link: link sub_link: sub_link %}
+      <div class="widget-inner {% if sub_link.levels > 0 %} {% endif %}">
+        <a href="{{ sub_link.url }}" class="">
+          <span>{{ sub_link.title }}</span>
+          {{ labels }}{% if sub_link.levels > 0 %} <i class="cs-font clever-icon-arrow-right-2"></i>{% endif %}</a>
+        {% if sub_link.levels > 0 %}
+        <div class="nav-links">
+          <ul>
+            {% for sub_sub_link in sub_link.links %}
+            {% include 'menu-labels' with link: link sub_link: sub_link sub_sub_link: sub_sub_link %}
+            <li ><a href="{{ sub_sub_link.url }}" class="">{{ sub_sub_link.title }}
+              <span>{{ sub_sub_link.title }}</span>
+              {{ labels }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+      </div>
+      {% endcapture %}
+      {% assign sub_links_html = sub_links_html | append: links_html %}
+      {% assign index_modulo = forloop.index | modulo: megamenu.second_level_column_size %}
+      {% if forloop.last or index_modulo == 0 %}
+      <div class="col-lg-{{ megamenu.grid }}">
+        {{ sub_links_html }}
+      </div>
+      {% assign sub_links_html = null %}
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+      {{ columns_right }}
+    </div>
+    {% endif %}
+  </div>
+</div>

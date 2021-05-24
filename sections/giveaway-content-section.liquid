@@ -1,0 +1,124 @@
+<div class="giveaway-hero-block">
+    <div class="giveaway-hero-title">
+        <h2>{{section.settings.hero_title}}</h2>
+        <p>{{section.settings.hero_sub_title}}</p>
+    </div>
+    <div class="giveaway-hero-content">
+        <img class="giveaway-sticker-1" src="{{section.settings.sticker_1 | img_url: 'master'}}">
+        <img class="giveaway-sticker-4" src="{{section.settings.sticker_2 | img_url: 'master'}}">
+        <h3>{{section.settings.content_title}}</h3>
+        <ul>
+            <li>
+                <img src="{{section.settings.content_icon_1 | img_url: '50x'}}">
+                <p>{{section.settings.content_text_1}}</p>
+            </li>
+            <li>
+                <img src="{{section.settings.content_icon_2 | img_url: '50x'}}">
+                <p>{{section.settings.content_text_2}}</p>
+            </li>
+            <li>
+                <img src="{{section.settings.content_icon_3 | img_url: '50x'}}">
+                <p>{{section.settings.content_text_3}}</p>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="giveaway-form-block">
+    <img class="giveaway-sticker-2" src="{{section.settings.sticker_2 | img_url: 'master'}}">
+    <img class="giveaway-sticker-3" src="{{section.settings.sticker_3 | img_url: 'master' }}">
+    
+    <div class="giveaway-form-wrapper">
+        <div class="giveaway-form">
+            <img class="giveaway-sticker-5" src="{{section.settings.sticker_1 | img_url: 'master'}}">
+            <h3>{{section.settings.form_title}}</h3>
+            {{section.settings.form_code}}
+        </div>
+        <div class="giveaway-form-img">
+            <img src="{{section.settings.form_img | img_url: '1000x'}}">
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Content",
+    "settings": [
+        {
+            "type": "html",
+            "id": "hero_title",
+            "label": "Hero Title"
+        },
+        {
+            "type": "html",
+            "id": "hero_sub_title",
+            "label": "Hero Sub Title"
+        },
+        {
+            "type": "html",
+            "id": "content_title",
+            "label": "Content Title"
+        },
+        {
+            "type": "image_picker",
+            "id": "content_icon_1",
+            "label": "Content Icon 1"
+        },
+        {
+            "type": "html",
+            "id": "content_text_1",
+            "label": "Content Text 1"
+        },
+        {
+            "type": "image_picker",
+            "id": "content_icon_2",
+            "label": "Content Icon 2"
+        },
+        {
+            "type": "html",
+            "id": "content_text_2",
+            "label": "Content Text 2"
+        },
+        {
+            "type": "image_picker",
+            "id": "content_icon_3",
+            "label": "Content Icon 3"
+        },
+        {
+            "type": "html",
+            "id": "content_text_3",
+            "label": "Content Text 3"
+        },
+        {
+            "type": "html",
+            "id": "form_title",
+            "label": "Form Title"
+        },
+        {
+            "type": "html",
+            "id": "form_code",
+            "label": "Form Code"
+        },
+        {
+            "type": "image_picker",
+            "id": "form_img",
+            "label": "Form Img"
+        },
+        {
+            "type": "image_picker",
+            "id": "sticker_1",
+            "label": "Sticker 1"
+        },
+        {
+            "type": "image_picker",
+            "id": "sticker_2",
+            "label": "Sticker 2"
+        },
+        {
+            "type": "image_picker",
+            "id": "sticker_3",
+            "label": "Sticker 3"
+        }
+    ]
+}
+{% endschema %}

@@ -1,0 +1,2043 @@
+{%- if section.settings.reponsive_mt != blank -%}
+{%- assign margin_top_responsive = section.settings.reponsive_mt | split: ',' -%}
+{% capture margin_top %}mt-{{ margin_top_responsive[0] }} mt-sm-{{ margin_top_responsive[1] }} mt-md-{{ margin_top_responsive[2] }} mt-lg-{{ margin_top_responsive[3] }} {% endcapture %}
+
+{%- endif -%}
+{%- if section.settings.reponsive_bt != blank -%}
+{%- assign margin_bottom_responsive = section.settings.margin_bottom_responsive | split: ',' -%}
+{% capture margin_bottom %}mb-{{ margin_bottom_responsive[0] }} mb-sm-{{ margin_bottom_responsive[1] }} mb-md-{{ margin_bottom_responsive[2] }} mb-lg-{{ margin_bottom_responsive[3] }} {% endcapture %}
+{%- elsif section.settings.margin_bottom != blank -%}
+{% capture margin_bottom %}margin-bottom-{{ section.settings.margin_bottom }}{% endcapture %}
+{%- endif -%}
+
+<div class="grid-builder-image {{margin_top}} {{margin_bottom}} grid-builder-{{section.id}} parallax_effect--{{ section.settings.parallax_effect }}" style="{%- unless section.settings.reponsive_mt != blank -%}margin-top:{{ section.settings.margin_top }}px;{%endunless %}{%- unless section.settings.reponsive_bt != blank -%}margin-bottom:{{ section.settings.margin_bottom }}px;{%endunless %}">
+  <div class="grid-inner {% if section.settings.parallax_effect %}bcg {% endif %} grid-inner-{{ section.id }}" data-image="{{ section.settings.image | img_url: '2048x' }}"
+
+       style="background-color:{{section.settings.background_color}};{%if  section.settings.image != blank %} background-image:url( {{ section.settings.image | img_url: '2048x' }});{% endif %}"
+       {% if section.settings.parallax_effect %}
+       data-bottom-top="background-position: 50% 0vh;"
+       data-top-bottom="background-position: 50% -20vh;"
+       {% endif %}
+       >
+    <div class="{% if section.settings.enable_block_home_icon_full %} full-width {% else %} container {% endif %}">
+
+      <div class="row align-horizontal-{{section.settings.horizontal_align}} align-vertical-{{section.settings.vertical_align}}" style="min-height:{{section.settings.min_height}}px">
+
+        {%- assign block_types = 'heading,newsletter,spacer,countdown,group_incol,block,carousel_slide,text,promobox,group_slider,group_slider_item,block_icon,group_testimonial,group_testimonial_item' | split: ',' -%}
+        {%- for block in section.blocks -%}
+
+        {%- if block_types contains block.type -%}
+        {%- case block.type -%}
+
+        {%- when 'group_slider' -%}
+        {%- if block.settings.grid_responsive != blank -%}
+        {%- assign grid_responsive = block.settings.grid_responsive | split: ',' -%}
+        {% capture class_grid %}col col-{{ grid_responsive[4] }} col-sm-{{ grid_responsive[3] }} col-md-{{ grid_responsive[2] }} col-lg-{{ grid_responsive[1] }} col-xl-{{ grid_responsive[0] }}{% endcapture %}
+        {%- else -%}
+        {% capture class_grid %}col-12 col-md-{{ block.settings.grid }}{% endcapture %}
+        {%- endif -%}
+        {%- if block.settings.reponsive_mt != blank -%}
+        {%- assign margin_top_responsive = block.settings.reponsive_mt | split: ',' -%}
+        {% capture margin_top %}mt-{{ margin_top_responsive[0] }} mt-sm-{{ margin_top_responsive[1] }} mt-md-{{ margin_top_responsive[2] }} mt-lg-{{ margin_top_responsive[3] }} {% endcapture %}
+        {%- endif -%}
+        {%- if block.settings.reponsive_bt != blank -%}
+        {%- assign margin_bottom_responsive = block.settings.margin_bottom_responsive | split: ',' -%}
+        {% capture margin_bottom %}mb-{{ margin_bottom_responsive[0] }} mb-sm-{{ margin_bottom_responsive[1] }} mb-md-{{ margin_bottom_responsive[2] }} mb-lg-{{ margin_bottom_responsive[3] }} {% endcapture %}
+        {%- elsif section.settings.margin_bottom != blank -%}
+        {% capture margin_bottom %}margin-bottom-{{ block.settings.margin_bottom }}{% endcapture %}
+        {%- endif -%}
+        <div class="{{class_grid}} bullet-type-{{block.settings.style_dots }} slide-show group {{margin_top}} {{margin_bottom}}" style="{%- unless block.settings.reponsive_mt != blank -%}margin-top:{{ block.settings.margin_top }}px;{%endunless %}{%- unless block.settings.reponsive_bt != blank -%}margin-bottom:{{ block.settings.margin_bottom }}px;{%endunless %}">
+          {% assign show_navigation = block.settings.show_navigation %}
+          {% assign show_pavigation = block.settings.show_pavigation %}
+          {%- assign slider_name = block.settings.for_group -%}
+          <div data-section-id="{{ block.id }}" data-section-type="slideshow-section" class="loadding slideshow-container slider-{{ section.id }}" >
+            <div class="slideshow-wrapper arrows_type-{{block.settings.arrows_type }} navigation_type-{{block.settings.navigation_type}} {{block.settings.button_size }} " style="min-height:{{section.settings.min_height}}">
+              <div class="slideshow flexslider " id="Slideshow-{{ section.id }}" data-hover="{{block.settings.pause_on_hover}}"  data-autoplay="{{ block.settings.autoplay }}" data-dots="{{ block.settings.show_bullets }}" data-nav="{{ block.settings.show_navigation }}" data-speed="{{ block.settings.autoplay_speed }}000">
+                <ul class="slides " style="{%- unless block.settings.gridheight != blank -%}min-height:{{section.settings.min_height}}px {% endunless %}">
+                  {%- for block in section.blocks -%}
+                  {%- if block.type == 'group_slider_item' and block.settings.for_item == slider_name -%}
+                  {% include 'buider-slidershow' %}
+                  {% endif %}
+                  {% include 'buider-testimonial' %}
+                  {%- if block.type == 'spacer' and block.settings.for_item == slider_name -%}
+                  {%- if block.settings.reponsive_mt != blank -%}
+                  {%- assign margin_top_responsive = block.settings.reponsive_mt | split: ',' -%}
+                  {% capture margin_top %}mt-{{ margin_top_responsive[0] }} mt-sm-{{ margin_top_responsive[1] }} mt-md-{{ margin_top_responsive[2] }} mt-lg-{{ margin_top_responsive[3] }} {% endcapture %}
+
+                  {%- endif -%}
+                  {%- if block.settings.reponsive_bt != blank -%}
+                  {%- assign margin_bottom_responsive = block.settings.margin_bottom_responsive | split: ',' -%}
+                  {% capture margin_bottom %}mb-{{ margin_bottom_responsive[0] }} mb-sm-{{ margin_bottom_responsive[1] }} mb-md-{{ margin_bottom_responsive[2] }} mb-lg-{{ margin_bottom_responsive[3] }} {% endcapture %}
+                  {%- elsif section.settings.margin_bottom != blank -%}
+                  {% capture margin_bottom %}margin-bottom-{{ block.settings.margin_bottom }}{% endcapture %}
+                  {%- endif -%}
+                  {%- if block.settings.grid_responsive != blank -%}
+                  {%- assign grid_responsive = block.settings.grid_responsive | split: ',' -%}
+                  {% capture class_grid %}col col-{{ grid_responsive[4] }} col-sm-{{ grid_responsive[3] }} col-md-{{ grid_responsive[2] }} col-lg-{{ grid_responsive[1] }} col-xl-{{ grid_responsive[0] }}{% endcapture %}
+                  {%- else -%}
+                  {% capture class_grid %}col-12 col-md-{{ block.settings.grid }}{% endcapture %}
+                  {%- endif -%}
+                  <div class="add-space {{class_grid}} {{margin_top}} {{margin_bottom}}" style="width: 100%;display: block;{%- unless block.settings.reponsive_mt != blank -%}margin-top:{{ block.settings.margin_top }}px;{%endunless %}{%- unless block.settings.reponsive_bt != blank -%}margin-bottom:{{ block.settings.margin_bottom }}px;{%endunless %} height:1px;">
+                  </div>
+                  {% endif %}
+                  {% endfor %}
+
+                </ul>
+              </div>
+              <style>
+                {%- if block.settings.gridheight != blank -%}
+                {%- assign gridheight = block.settings.gridheight | split: ',' -%}
+                {% capture margin_top %}mt-{{ gridheight[0] }} mt-sm-{{ gridheight[1] }} mt-md-{{ gridheight[2] }} mt-lg-{{ gridheight[3] }} {% endcapture %}
+
+                @media (max-width: 767px) { 
+                  .slider-{{ section.id }} .slides, .slider-{{ section.id }}  .slides .slideshow__image{height:{{ gridheight[3] }}; }
+                }
+
+                @media (min-width: 768px) { 
+                  .slider-{{ section.id }}  .slides, .slider-{{ section.id }} .slides .slideshow__image{height:{{ gridheight[2] }}; }
+                }
+
+                @media (min-width: 992px) {
+                  .slider-{{ section.id }} .slides, .slider-{{ section.id }} .slides .slideshow__image{height:{{ gridheight[1] }}; }
+                }
+
+                @media (min-width: 1200px) { 
+                  .slider-{{ section.id }} .slides, .slider-{{ section.id }} .slides .slideshow__image{height:{{ gridheight[0] }}; }
+                }
+                {%- endif -%}
+              </style>
+            </div>
+          </div>
+        </div>
+        {%- when 'group_incol' -%}
+        <div class="col-lg-{{ block.settings.grid }} group" >
+          <div class="row"> 
+            {%- assign slider_name = block.settings.for_group -%}
+            {%- for block in section.blocks -%}
+             {%- if block.type == 'heading' and block.settings.for_item == slider_name -%}
+            {%- if block.settings.reponsive_mt != blank -%}
+            {%- assign margin_top_responsive = block.settings.reponsive_mt | split: ',' -%}
+            {% capture margin_top %}mt-{{ margin_top_responsive[0] }} mt-sm-{{ margin_top_responsive[1] }} mt-md-{{ margin_top_responsive[2] }} mt-lg-{{ margin_top_responsive[3] }} {% endcapture %}
+
+            {%- endif -%}
+            {%- if block.settings.reponsive_bt != blank -%}
+            {%- assign margin_bottom_responsive = block.settings.margin_bottom_responsive | split: ',' -%}
+            {% capture margin_bottom %}mb-{{ margin_bottom_responsive[0] }} mb-sm-{{ margin_bottom_responsive[1] }} mb-md-{{ margin_bottom_responsive[2] }} mb-lg-{{ margin_bottom_responsive[3] }} {% endcapture %}
+            {%- elsif section.settings.margin_bottom != blank -%}
+            {% capture margin_bottom %}margin-bottom-{{ block.settings.margin_bottom }}{% endcapture %}
+            {%- endif -%}
+            {%- if block.settings.grid_responsive != blank -%}
+            {%- assign grid_responsive = block.settings.grid_responsive | split: ',' -%}
+            {% capture class_grid %}col col-{{ grid_responsive[4] }} col-sm-{{ grid_responsive[3] }} col-md-{{ grid_responsive[2] }} col-lg-{{ grid_responsive[1] }} col-xl-{{ grid_responsive[0] }}{% endcapture %}
+            {%- else -%}
+            {% capture class_grid %}col-12 col-md-{{ block.settings.grid }}{% endcapture %}
+            {%- endif -%}
+            <div class="block-heading {{class_grid}} {{margin_top}} {{margin_bottom}} type-{{block.settings.type}}" style="{%- unless block.settings.reponsive_mt != blank -%}margin-top:{{ block.settings.margin_top }}px;{%endunless %}{%- unless block.settings.reponsive_bt != blank -%}margin-bottom:{{ block.settings.margin_bottom }}px;{%endunless %}">
+              <{{block.settings.html_tag}} class="size-{{block.settings.font_size}} heading-title" style="text-transform:{{block.settings.text_transform}};color:{{block.settings.color}};text-align:{{block.settings.alignment}};">
+                  {{block.settings.title}}
+                </{{block.settings.html_tag}}>
+             </div>
+            {% endif %}
+              {%- if block.type == 'newsletter' and block.settings.for_item == slider_name -%}
+              {%- if block.settings.reponsive_mt != blank -%}
+              {%- assign margin_top_responsive = block.settings.reponsive_mt | split: ',' -%}
+              {% capture margin_top %}mt-{{ margin_top_responsive[0] }} mt-sm-{{ margin_top_responsive[1] }} mt-md-{{ margin_top_responsive[2] }} mt-lg-{{ margin_top_responsive[3] }} {% endcapture %}
+
+              {%- endif -%}
+              {%- if block.settings.reponsive_bt != blank -%}
+              {%- assign margin_bottom_responsive = block.settings.margin_bottom_responsive | split: ',' -%}
+              {% capture margin_bottom %}mb-{{ margin_bottom_responsive[0] }} mb-sm-{{ margin_bottom_responsive[1] }} mb-md-{{ margin_bottom_responsive[2] }} mb-lg-{{ margin_bottom_responsive[3] }} {% endcapture %}
+              {%- elsif section.settings.margin_bottom != blank -%}
+              {% capture margin_bottom %}margin-bottom-{{ block.settings.margin_bottom }}{% endcapture %}
+              {%- endif -%}
+              {%- if block.settings.grid_responsive != blank -%}
+              {%- assign grid_responsive = block.settings.grid_responsive | split: ',' -%}
+              {% capture class_grid %}col col-{{ grid_responsive[4] }} col-sm-{{ grid_responsive[3] }} col-md-{{ grid_responsive[2] }} col-lg-{{ grid_responsive[1] }} col-xl-{{ grid_responsive[0] }}{% endcapture %}
+              {%- else -%}
+              {% capture class_grid %}col-12 col-md-{{ block.settings.grid }}{% endcapture %}
+              {%- endif -%}
+              <div class="home-newsletter block-newsletter {{class_grid}} {{margin_top}} {{margin_bottom}} type-{{block.settings.type}}" style="{%- unless block.settings.reponsive_mt != blank -%}margin-top:{{ block.settings.margin_top }}px;{%endunless %}{%- unless block.settings.reponsive_bt != blank -%}margin-bottom:{{ block.settings.margin_bottom }}px;{%endunless %}">
+                <div class="newsletter">
+                <form action="{{ block.settings.mailing_list_form_action }}" method="post" name="mc-embedded-subscribe-form" target="_blank" class="input-group" style="text-align:{{block.settings.alignment}};">
+                  <div class="input-group newsletter_form_content">
+                    <input  class="input__field input-group-field" type="email" value="" name="EMAIL" aria-label="Email Address"  placeholder="{{ 'footer.footer_newsletter_content' | t }}">
+                    <span class="input-group-btn">
+                      <input type="submit" class="btn"  value="{{ 'footer.footer_newsletter_go' | t }}" name="subscribe"><i class="cs-font clever-icon-arrow-right-5"></i>
+                    </span>
+                  </div>
+                </form>
+                </div>
+              </div>
+              {% endif %}
+            {%- if block.type == 'block' and block.settings.for_item == slider_name -%}
+            <div class="col-lg-{{ block.settings.grid }} " style="padding:{{block.settings.home_padding_item }}">
+              <div class="content-baner">
+                <div class="image-banner">
+                  {% if block.settings.image != blank %}
+                  <a href="{{ block.settings.button_link }}">
+                    {%- assign img_url = block.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                    <img class="lazyload"
+                         src="{{ block.settings.image | img_url: '2048x'  }}"
+                         data-src="{{ img_url }}"
+                         data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                         data-aspectratio="{{ block.settings.image.aspect_ratio }}"
+                         data-sizes="auto"
+                         alt="{{ image.alt | escape }}">
+                  </a>
+                  {% else %}
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {% endif %}
+                </div>
+                <div class="content-banner-text">
+                  {% if block.settings.header_title != blank %}
+                  <h3>{{ block.settings.header_title }}</h3>
+                  {% endif %}
+                  {% if block.settings.text != blank %}
+                  <div class="sub-heading">{{block.settings.text}}</div>
+                  {% endif %}
+                  {% if block.settings.button_label != blank %}
+                  <div class="button-view"><a href="{{block.settings.button_link}}">{{block.settings.button_label}}</a></div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+            {% endif %}
+            {%- if block.type == 'spacer' and block.settings.for_item == slider_name -%}
+            {%- if block.settings.reponsive_mt != blank -%}
+            {%- assign margin_top_responsive = block.settings.reponsive_mt | split: ',' -%}
+            {% capture margin_top %}mt-{{ margin_top_responsive[0] }} mt-sm-{{ margin_top_responsive[1] }} mt-md-{{ margin_top_responsive[2] }} mt-lg-{{ margin_top_responsive[3] }} {% endcapture %}
+
+            {%- endif -%}
+            {%- if block.settings.reponsive_bt != blank -%}
+            {%- assign margin_bottom_responsive = block.settings.margin_bottom_responsive | split: ',' -%}
+            {% capture margin_bottom %}mb-{{ margin_bottom_responsive[0] }} mb-sm-{{ margin_bottom_responsive[1] }} mb-md-{{ margin_bottom_responsive[2] }} mb-lg-{{ margin_bottom_responsive[3] }} {% endcapture %}
+            {%- elsif section.settings.margin_bottom != blank -%}
+            {% capture margin_bottom %}margin-bottom-{{ block.settings.margin_bottom }}{% endcapture %}
+            {%- endif -%}
+            {%- if block.settings.grid_responsive != blank -%}
+            {%- assign grid_responsive = block.settings.grid_responsive | split: ',' -%}
+            {% capture class_grid %}col col-{{ grid_responsive[4] }} col-sm-{{ grid_responsive[3] }} col-md-{{ grid_responsive[2] }} col-lg-{{ grid_responsive[1] }} col-xl-{{ grid_responsive[0] }}{% endcapture %}
+            {%- else -%}
+            {% capture class_grid %}col-12 col-md-{{ block.settings.grid }}{% endcapture %}
+            {%- endif -%}
+            <div class="add-space {{class_grid}} {{margin_top}} {{margin_bottom}}" style="width: 100%;display: block;{%- unless block.settings.reponsive_mt != blank -%}margin-top:{{ block.settings.margin_top }}px;{%endunless %}{%- unless block.settings.reponsive_bt != blank -%}margin-bottom:{{ block.settings.margin_bottom }}px;{%endunless %} height:1px;">
+            </div>
+            {% endif %}
+            {%- if block.type == 'text' and block.settings.for_item == slider_name -%}
+            {%- if block.settings.grid_responsive != blank -%}
+            {%- assign grid_responsive = block.settings.grid_responsive | split: ',' -%}
+            {% capture class_grid %}col col-{{ grid_responsive[4] }} col-sm-{{ grid_responsive[3] }} col-md-{{ grid_responsive[2] }} col-lg-{{ grid_responsive[1] }} col-xl-{{ grid_responsive[0] }}{% endcapture %}
+            {%- else -%}
+            {% capture class_grid %}col-12 col-md-{{ block.settings.grid }}{% endcapture %}
+            {%- endif -%}
+            <div class="col-lg-{{ class_grid }} ct-block-horizontal-{{block.settings.horizontal_align}} ct-block-vertical-{{block.settings.vertical_align}}" style="padding:{{block.settings.home_padding_item }}">
+              <div class="content-text-custom">
+
+                {% if block.settings.text != blank %}
+                <div class="sub-heading" style="color:{{block.settings.color }}">{{block.settings.text}}</div>
+                {% endif %}
+                {% if block.settings.button_label != blank %}
+                <div class="button-view {{block.settings.color_button_type }}"><a href="{{block.settings.button_link}}">{{block.settings.button_label}}</a></div>
+                {% endif %}
+              </div>
+            </div>
+            {% endif %}
+            {%- if block.type == 'block_icon' and block.settings.for_item == slider_name -%}
+            <div class="col-lg-{{ block.settings.grid }}" style="padding:{{block.settings.home_padding_item }};text-align:{{block.settings.horizontal_align}}">
+              <div class="content-text-icon vertical-{{block.settings.vertical_alignment }}">
+                {% if block.settings.icon_position == 'left' %}
+                {% if block.settings.text != blank %}
+                <div class="block-icon"><i class="cs-font {{block.settings.icon }}" style="font-size:{{block.settings.font_size}};transform: rotate({{block.settings.rotate}}deg);"></i></div>
+                {% endif %}
+                {% endif %}
+                <div class="icon-content-text">
+                  {% if block.settings.icon_position == 'center' %}
+                  {% if block.settings.text != blank %}
+                  <div class="block-icon"><i class="cs-font {{block.settings.icon }}" style="font-size:{{block.settings.font_size}};transform: rotate({{block.settings.rotate}}deg);"></i></div>
+                  {% endif %}
+                  {% endif %}
+                  {% if block.settings.title != blank %}
+                  <div class="heading">{{block.settings.title}}</div>
+                  {% endif %}
+                  {% if block.settings.text != blank %}
+                  <div class="sub-heading">{{block.settings.text}}</div>
+                  {% endif %}
+                </div>
+                {% if block.settings.icon_position == 'right' %}
+                {% if block.settings.text != blank %}
+                <div class="block-icon"><i class="cs-font {{block.settings.icon }}" style="font-size:{{block.settings.font_size}};transform: rotate({{block.settings.rotate}}deg);"></i></div>
+                {% endif %}
+                {% endif %}
+              </div>
+            </div>
+            {% endif %}
+            {%- if block.type == 'promobox' and block.settings.for_item == slider_name -%}
+            <div class="col-lg-{{ block.settings.grid }} promobox promobox-{{ block.id }}" style="margin-top:{{block.settings.margin_top }}px;margin-bottom:{{block.settings.margin_bottom }}px;padding:{{block.settings.home_padding_item }} ">
+              {% include 'builder-promobox' %}
+            </div>
+            {% endif %}
+
+            {%- if block.type == 'countdown' and block.settings.for_item == slider_name -%}
+            {%- if block.settings.grid_responsive != blank -%}
+            {%- assign grid_responsive = block.settings.grid_responsive | split: ',' -%}
+            {% capture class_grid %}col col-{{ grid_responsive[4] }} col-sm-{{ grid_responsive[3] }} col-md-{{ grid_responsive[2] }} col-lg-{{ grid_responsive[1] }} col-xl-{{ grid_responsive[0] }}{% endcapture %}
+            {%- else -%}
+            {% capture class_grid %}col-12 col-md-{{ block.settings.grid }}{% endcapture %}
+            {%- endif -%}
+            {%- if block.settings.reponsive_mt != blank -%}
+            {%- assign margin_top_responsive = block.settings.reponsive_mt | split: ',' -%}
+            {% capture margin_top %}mt-{{ margin_top_responsive[0] }} mt-sm-{{ margin_top_responsive[1] }} mt-md-{{ margin_top_responsive[2] }} mt-lg-{{ margin_top_responsive[3] }} {% endcapture %}
+            {%- endif -%}
+            {%- if block.settings.reponsive_bt != blank -%}
+            {%- assign margin_bottom_responsive = block.settings.margin_bottom_responsive | split: ',' -%}
+            {% capture margin_bottom %}mb-{{ margin_bottom_responsive[0] }} mb-sm-{{ margin_bottom_responsive[1] }} mb-md-{{ margin_bottom_responsive[2] }} mb-lg-{{ margin_bottom_responsive[3] }} {% endcapture %}
+            {%- elsif section.settings.margin_bottom != blank -%}
+            {% capture margin_bottom %}margin-bottom-{{ block.settings.margin_bottom }}{% endcapture %}
+            {%- endif -%}
+            <div class="{{class_grid}} col-lg-{{ block.settings.grid }} countdown-{{block.id}} countdown-section {{margin_top}} {{margin_bottom}}" style="{%- unless block.settings.reponsive_mt != blank -%}margin-top:{{ block.settings.margin_top }}px;{%endunless %}{%- unless block.settings.reponsive_bt != blank -%}margin-bottom:{{ block.settings.margin_bottom }}px;{%endunless %}">
+              {% include 'builder-countdown' %}
+              <style>
+                .countdown-section.countdown-{{block.id}} .block-countdown .timline .timeline-block > div{color:{{block.settings.color}};border-color:{{block.settings.color}}}
+              </style>
+            </div>
+            {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+        {%- when 'block' -%}
+        {% if block.settings.for_item == blank %}
+        <div class="col-md-{{ block.settings.grid }} col-12  no-group" style="padding:{{block.settings.home_padding_item }}">
+          <div class="content-baner">
+            {% if block.settings.image != blank %}
+            <a href="{{ block.settings.button_link }}">
+              {%- assign img_url = block.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+              <img class="lazyload"
+                   src="{{ block.settings.image | img_url: '2048x'  }}"
+                   data-src="{{ img_url }}"
+                   data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                   data-aspectratio="{{ block.settings.image.aspect_ratio }}"
+                   data-sizes="auto"
+                   alt="{{ image.alt | escape }}">
+            </a>
+            {% else %}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {% endif %}
+            {% if block.settings.header_title != blank %}
+            <h3>{{ block.settings.header_title }}</h3>
+            {% endif %}
+            {% if block.settings.text != blank %}
+            <div class="sub-heading">{{block.settings.text}}</div>
+            {% endif %}
+            {% if block.settings.button_label != blank %}
+            <div class="button-view"><a href="{{block.settings.button_link}}">{{block.settings.button_label}}</a></div>
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
+          {%- when 'heading' -%}
+          {% if block.settings.for_item == blank %}
+            {%- if block.settings.reponsive_mt != blank -%}
+            {%- assign margin_top_responsive = block.settings.reponsive_mt | split: ',' -%}
+            {% capture margin_top %}mt-{{ margin_top_responsive[0] }} mt-sm-{{ margin_top_responsive[1] }} mt-md-{{ margin_top_responsive[2] }} mt-lg-{{ margin_top_responsive[3] }} {% endcapture %}
+
+            {%- endif -%}
+            {%- if block.settings.reponsive_bt != blank -%}
+            {%- assign margin_bottom_responsive = block.settings.margin_bottom_responsive | split: ',' -%}
+            {% capture margin_bottom %}mb-{{ margin_bottom_responsive[0] }} mb-sm-{{ margin_bottom_responsive[1] }} mb-md-{{ margin_bottom_responsive[2] }} mb-lg-{{ margin_bottom_responsive[3] }} {% endcapture %}
+            {%- elsif section.settings.margin_bottom != blank -%}
+            {% capture margin_bottom %}margin-bottom-{{ block.settings.margin_bottom }}{% endcapture %}
+            {%- endif -%}
+            {%- if block.settings.grid_responsive != blank -%}
+            {%- assign grid_responsive = block.settings.grid_responsive | split: ',' -%}
+            {% capture class_grid %}col col-{{ grid_responsive[4] }} col-sm-{{ grid_responsive[3] }} col-md-{{ grid_responsive[2] }} col-lg-{{ grid_responsive[1] }} col-xl-{{ grid_responsive[0] }}{% endcapture %}
+            {%- else -%}
+            {% capture class_grid %}col-12 col-md-{{ block.settings.grid }}{% endcapture %}
+            {%- endif -%}
+            <div class="block-heading {{class_grid}} {{margin_top}} {{margin_bottom}} " style="{%- unless block.settings.reponsive_mt != blank -%}margin-top:{{ block.settings.margin_top }}px;{%endunless %}{%- unless block.settings.reponsive_bt != blank -%}margin-bottom:{{ block.settings.margin_bottom }}px;{%endunless %}">
+              <{{block.settings.html_tag}} class="size-{{block.settings.font_size}} heading-title" style="text-transform:{{block.settings.text_transform}};color:{{block.settings.color}};text-align:{{block.settings.alignment}};">
+                  {{block.settings.title}}
+                </{{block.settings.html_tag}}>
+             </div>
+            {% endif %}
+              {%- when 'newsletter' -%}
+              {% if block.settings.for_item == blank %}
+              {%- if block.settings.reponsive_mt != blank -%}
+              {%- assign margin_top_responsive = block.settings.reponsive_mt | split: ',' -%}
+              {% capture margin_top %}mt-{{ margin_top_responsive[0] }} mt-sm-{{ margin_top_responsive[1] }} mt-md-{{ margin_top_responsive[2] }} mt-lg-{{ margin_top_responsive[3] }} {% endcapture %}
+
+              {%- endif -%}
+              {%- if block.settings.reponsive_bt != blank -%}
+              {%- assign margin_bottom_responsive = block.settings.margin_bottom_responsive | split: ',' -%}
+              {% capture margin_bottom %}mb-{{ margin_bottom_responsive[0] }} mb-sm-{{ margin_bottom_responsive[1] }} mb-md-{{ margin_bottom_responsive[2] }} mb-lg-{{ margin_bottom_responsive[3] }} {% endcapture %}
+              {%- elsif section.settings.margin_bottom != blank -%}
+              {% capture margin_bottom %}margin-bottom-{{ block.settings.margin_bottom }}{% endcapture %}
+              {%- endif -%}
+              {%- if block.settings.grid_responsive != blank -%}
+              {%- assign grid_responsive = block.settings.grid_responsive | split: ',' -%}
+              {% capture class_grid %}col col-{{ grid_responsive[4] }} col-sm-{{ grid_responsive[3] }} col-md-{{ grid_responsive[2] }} col-lg-{{ grid_responsive[1] }} col-xl-{{ grid_responsive[0] }}{% endcapture %}
+              {%- else -%}
+              {% capture class_grid %}col-12 col-md-{{ block.settings.grid }}{% endcapture %}
+              {%- endif -%}
+              <div class="home-newsletter block-newsletter {{class_grid}} {{margin_top}} {{margin_bottom}} type-{{block.settings.type}}" style="{%- unless block.settings.reponsive_mt != blank -%}margin-top:{{ block.settings.margin_top }}px;{%endunless %}{%- unless block.settings.reponsive_bt != blank -%}margin-bottom:{{ block.settings.margin_bottom }}px;{%endunless %}">
+                <div class="newsletter">
+                <form action="{{ block.settings.mailing_list_form_action }}" method="post" name="mc-embedded-subscribe-form" target="_blank" class="input-group" style="text-align:{{block.settings.alignment}};">
+                  <div class="input-group newsletter_form_content">
+                    <input  class="input__field input-group-field" type="email" value="" name="EMAIL" aria-label="Email Address"  placeholder="{{ 'footer.footer_newsletter_content' | t }}">
+                    <span class="input-group-btn">
+                      <input type="submit" class="btn"  value="{{ 'footer.footer_newsletter_go' | t }}" name="subscribe">
+                    </span>
+                  </div>
+                </form>
+                </div>
+              </div>
+              {% endif %}
+        {%- when 'text' -%}
+        {% if block.settings.for_item == blank %}
+        {%- if block.settings.grid_responsive != blank -%}
+        {%- assign grid_responsive = block.settings.grid_responsive | split: ',' -%}
+        {% capture class_grid %}col col-{{ grid_responsive[4] }} col-sm-{{ grid_responsive[3] }} col-md-{{ grid_responsive[2] }} col-lg-{{ grid_responsive[1] }} col-xl-{{ grid_responsive[0] }}{% endcapture %}
+        {%- else -%}
+        {% capture class_grid %}col-12 col-md-{{ block.settings.grid }}{% endcapture %}
+        {%- endif -%}
+        <div class="col-lg-{{ class_grid }} col-12 no-group content-text-custom ct-block-horizontal-{{block.settings.horizontal_align}} ct-block-vertical-{{block.settings.vertical_align}}" style="padding:{{block.settings.home_padding_item }}">
+          <div class="content-text-custom">
+
+            {% if block.settings.text != blank %}
+            <div class="sub-heading" style="color:{{block.settings.color }}">{{block.settings.text}}</div>
+            {% endif %}
+            {% if block.settings.button_label != blank %}
+            <div class="button-view {{block.settings.color_button_type }}"><a href="{{block.settings.button_link}}">{{block.settings.button_label}}</a></div>
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
+        {%- when 'block_icon' -%}
+        {% if block.settings.for_item == blank %}
+
+        <div class="col-md-{{ block.settings.grid }} col-12" style="padding:{{block.settings.home_padding_item }};text-align:{{block.settings.horizontal_align}}">
+          <div class="content-text-icon vertical-{{block.settings.vertical_alignment }} icon_position-{{ block.settings.icon_position }}">
+            {% if block.settings.icon_position == 'left' %}
+            {% if block.settings.text != blank %}
+            <div class="block-icon"><i class="cs-font {{block.settings.icon }}" style="font-size:{{block.settings.font_size}}px;transform: rotate({{block.settings.rotate}}deg);"></i></div>
+            {% endif %}
+            {% endif %}
+            <div class="icon-content-text">
+              {% if block.settings.icon_position == 'center' %}
+              {% if block.settings.text != blank %}
+              <div class="block-icon"><i class="cs-font {{block.settings.icon }}" style="font-size:{{block.settings.font_size}}px;transform: rotate({{block.settings.rotate}}deg);"></i></div>
+              {% endif %}
+              {% endif %}
+              {% if block.settings.title != blank %}
+              <div class="heading">{{block.settings.title}}</div>
+              {% endif %}
+              {% if block.settings.text != blank %}
+              <div class="sub-heading">{{block.settings.text}}</div>
+              {% endif %}
+            </div>
+            {% if block.settings.icon_position == 'right' %}
+            {% if block.settings.text != blank %}
+            <div class="block-icon"><i class="cs-font {{block.settings.icon }}" style="font-size:{{block.settings.font_size}}px;transform: rotate({{block.settings.rotate}}deg);"></i></div>
+            {% endif %}
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
+
+        {%- when 'promobox' -%}
+        {% if block.settings.for_item == blank %}
+        <div class="col-lg-{{ block.settings.grid }} promobox promobox-{{ block.id }}" style="margin-top:{{block.settings.margin_top }}px;margin-bottom:{{block.settings.margin_bottom }}px;padding:{{block.settings.home_padding_item }}">
+          {% include 'builder-promobox' %}
+        </div>
+        {% endif %}
+        {%- when 'spacer' -%}
+        {% if block.settings.for_item == blank %}
+        {%- if block.settings.reponsive_mt != blank -%}
+        {%- assign margin_top_responsive = block.settings.reponsive_mt | split: ',' -%}
+        {% capture margin_top %}mt-{{ margin_top_responsive[0] }} mt-sm-{{ margin_top_responsive[1] }} mt-md-{{ margin_top_responsive[2] }} mt-lg-{{ margin_top_responsive[3] }} {% endcapture %}
+
+        {%- endif -%}
+        {%- if block.settings.reponsive_bt != blank -%}
+        {%- assign margin_bottom_responsive = block.settings.margin_bottom_responsive | split: ',' -%}
+        {% capture margin_bottom %}mb-{{ margin_bottom_responsive[0] }} mb-sm-{{ margin_bottom_responsive[1] }} mb-md-{{ margin_bottom_responsive[2] }} mb-lg-{{ margin_bottom_responsive[3] }} {% endcapture %}
+        {%- elsif section.settings.margin_bottom != blank -%}
+        {% capture margin_bottom %}margin-bottom-{{ block.settings.margin_bottom }}{% endcapture %}
+        {%- endif -%}
+        {%- if block.settings.grid_responsive != blank -%}
+        {%- assign grid_responsive = block.settings.grid_responsive | split: ',' -%}
+        {% capture class_grid %}col col-{{ grid_responsive[4] }} col-sm-{{ grid_responsive[3] }} col-md-{{ grid_responsive[2] }} col-lg-{{ grid_responsive[1] }} col-xl-{{ grid_responsive[0] }}{% endcapture %}
+        {%- else -%}
+        {% capture class_grid %}col-12 col-md-{{ block.settings.grid }}{% endcapture %}
+        {%- endif -%}
+        <div class="add-space {{class_grid}} {{margin_top}} {{margin_bottom}}" style="width: 100%;display: block;{%- unless block.settings.reponsive_mt != blank -%}margin-top:{{ block.settings.margin_top }}px;{%endunless %}{%- unless block.settings.reponsive_bt != blank -%}margin-bottom:{{ block.settings.margin_bottom }}px;{%endunless %} height:1px;">
+        </div>
+        {% endif %}
+        {%- when 'countdown' -%}
+        {% if block.settings.for_item == blank %}
+        {%- if block.settings.grid_responsive != blank -%}
+        {%- assign grid_responsive = block.settings.grid_responsive | split: ',' -%}
+        {% capture class_grid %}col col-{{ grid_responsive[4] }} col-sm-{{ grid_responsive[3] }} col-md-{{ grid_responsive[2] }} col-lg-{{ grid_responsive[1] }} col-xl-{{ grid_responsive[0] }}{% endcapture %}
+        {%- else -%}
+        {% capture class_grid %}col-12 col-md-{{ block.settings.grid }}{% endcapture %}
+        {%- endif -%}
+        {%- if block.settings.reponsive_mt != blank -%}
+        {%- assign margin_top_responsive = block.settings.reponsive_mt | split: ',' -%}
+        {% capture margin_top %}mt-{{ margin_top_responsive[0] }} mt-sm-{{ margin_top_responsive[1] }} mt-md-{{ margin_top_responsive[2] }} mt-lg-{{ margin_top_responsive[3] }} {% endcapture %}
+        {%- endif -%}
+        {%- if block.settings.reponsive_bt != blank -%}
+        {%- assign margin_bottom_responsive = block.settings.margin_bottom_responsive | split: ',' -%}
+        {% capture margin_bottom %}mb-{{ margin_bottom_responsive[0] }} mb-sm-{{ margin_bottom_responsive[1] }} mb-md-{{ margin_bottom_responsive[2] }} mb-lg-{{ margin_bottom_responsive[3] }} {% endcapture %}
+        {%- elsif section.settings.margin_bottom != blank -%}
+        {% capture margin_bottom %}margin-bottom-{{ block.settings.margin_bottom }}{% endcapture %}
+        {%- endif -%}
+
+        <div class="{{class_grid}} countdown-{{block.id}} countdown-section {{margin_top}} {{margin_bottom}}" style="{%- unless block.settings.reponsive_mt != blank -%}margin-top:{{ block.settings.margin_top }}px;{%endunless %}{%- unless block.settings.reponsive_bt != blank -%}margin-bottom:{{ block.settings.margin_bottom }}px;{%endunless %}">
+          {% include 'builder-countdown' %}
+          <style>
+            .countdown-section.countdown-{{block.id}} .block-countdown .timline .timeline-block > div{color:{{block.settings.color}};border-color:{{block.settings.color}}}
+          </style>
+        </div>
+        {% endif %}
+        {%- endcase -%}
+        {% else %}
+
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    jQuery(document).ready(function($){
+      setTimeout(function(){ 
+        $(window).scroll(function () {
+          var scroll = jQuery(window).scrollTop();  
+          var ofset_top = $('.grid-builder-{{section.id}}').offset().top;
+                            var ofset_to = ofset_top - 250 ;
+                            var height = $( window ).height() + 30;
+          var ofset_tr = ofset_top - height ;
+
+          if(scroll > ofset_tr){
+            if ($('.grid-builder-{{section.id}}').hasClass('parallax_effect--true')){
+                  if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) && $(window).width() > 300) {
+              skrollr.init({forceHeight: false});
+
+              var s = skrollr.init({forceHeight: false});
+              s.refresh($(".grid-builder-{{section.id}} .bcg"));
+
+            } else if ($(window).width() > 300) {
+              $('.grid-builder-{{section.id}}').removeClass('parallax_effect--true').addClass('parallax_effect--false');
+                }
+                }
+                }
+                });
+            }, 1000);
+          });
+  </script>
+{% schema %}
+{
+  "name": "Grid Builder",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_block_home_icon_full",
+      "label": "Enable Full Width"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 10
+    },
+    {
+      "type": "text",
+      "id": "reponsive_mt",
+      "label": "Responsive Margin Top",
+      "info": "Example is '20,30,40,60'"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 10
+    },
+    {
+      "type": "text",
+      "id": "reponsive_bt",
+      "label": "Responsive Margin Bottom",
+      "info": "Example is '20,30,40,60'"
+    },
+    {
+      "type": "select",
+      "id": "vertical_align",
+      "label": "Content Position",
+      "default": "top",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Middle"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ]
+    },
+
+
+        {
+          "type": "range",
+          "id": "min_height",
+          "min": 0,
+          "max": 1000,
+          "step": 50,
+          "unit": "px",
+          "label": "Min Height",
+          "default": 300
+        },
+ 	{
+          "type": "color",
+          "id": "background_color",
+          "label": "Background Color"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Background Image"
+        },
+    	{
+      		"type": "checkbox",
+      		"id": "parallax_effect",
+      		"label": "Enable Parallax",
+      		"default": false
+    	}
+  ],
+  "blocks": [
+		{
+      "type": "promobox",
+      "name": "Banner",
+      "settings": [
+        {
+          "type": "text",
+          "id": "for_item",
+          "label": "For Group Item"
+        },
+        {
+          "type": "header",
+          "content": "Grid"
+        },
+
+        {
+          "type": "text",
+          "id": "home_padding_item",
+          "label": "Padding",
+          "default": "0px 0px 0px 0px"
+        },
+        {
+          "type": "range",
+          "id": "grid",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "/12",
+          "label": "Column size",
+          "default": 4
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "px",
+          "label": "Margin top",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "px",
+          "label": "Margin bottom",
+          "default": 15
+        },
+        {
+          "type": "header",
+          "content": "Settings"
+        },
+        {
+          "type": "select",
+          "id": "type",
+          "label": "Type",
+          "default": "4",
+          "options": [
+            {
+              "value": "1",
+              "label": "Type #1"
+            },
+            {
+              "value": "2",
+              "label": "Type #2"
+            },
+            {
+              "value": "3",
+              "label": "Type #3"
+            },
+            {
+              "value": "4",
+              "label": "Type #4"
+            },
+            {
+              "value": "5",
+              "label": "Type #5"
+            },
+            {
+              "value": "6",
+              "label": "Type #6"
+            },
+            {
+              "value": "7",
+              "label": "Type #7"
+            },
+            {
+              "value": "8",
+              "label": "Type #8"
+            }
+          ]
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "checkbox",
+          "id": "disable_lazyload",
+          "label": "Disable lazy load",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "video_mp4_url",
+          "label": "Video Url",
+          "info": "Video type is \"mp4\""
+        },
+        {
+          "type": "video_url",
+          "id": "video_external_url",
+          "label": "Youtube or Vimeo video URL",
+          "accept": ["youtube", "vimeo"]
+        },
+        {
+          "type": "checkbox",
+          "id": "video_autoplay",
+          "label": "Autoplay",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "video_controls",
+          "label": "Controls",
+          "default": false
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Url"
+        },
+        {
+          "type": "text",
+          "id": "text_line_1",
+          "label": "Text line 1",
+          "default": "Text line 1"
+        },
+        {
+          "type": "text",
+          "id": "text_line_2",
+          "label": "Text line 2",
+          "default": "Text line 2"
+        },
+        {
+          "type": "text",
+          "id": "text_line_3",
+          "label": "Text line 3",
+          "default": "Text line 3"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text",
+          "default": "Button text"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu"
+        },
+        {
+          "type": "textarea",
+          "id": "custom_html",
+          "label": "Custom HTML"
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "color_text_line_1",
+          "label": "Text line 1"
+        },
+        {
+          "type": "color",
+          "id": "color_text_line_2",
+          "label": "Text line 2"
+        },
+        {
+          "type": "color",
+          "id": "color_text_line_3",
+          "label": "Text line 3"
+        },
+        {
+          "type": "color",
+          "id": "color_button_link",
+          "label": "Button Link Color"
+        },
+        {
+          "type": "color",
+          "id": "bg_button_link",
+          "label": "Button Link Background Color"
+        },
+        {
+          "type": "select",
+          "id": "color_button_type",
+          "label": "Button",
+          "default": "3",
+          "options": [
+            {
+              "value": "1",
+              "label": "Type #1"
+            },
+            {
+              "value": "2",
+              "label": "Type #2"
+            },
+            {
+              "value": "3",
+              "label": "Type #3"
+            },
+            {
+              "value": "4",
+              "label": "Type #4"
+            }
+          ]
+        }
+      ]
+    },
+	{
+           "type": "countdown",
+           "name": "Countdown",	
+           "settings": [
+	{
+          "type": "text",
+          "id": "for_item",
+          "label": "For Group Item"
+        },
+        {
+          "type": "range",
+          "id": "grid",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "/12",
+          "label": "Column size",
+          "default": 4
+        },
+
+        {
+          "type": "text",
+          "id": "grid_responsive",
+          "label": "Responsive size",
+          "info": "Example is '12,12,12,12', 1 < value < 12"
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 200,
+          "step": 2,
+          "unit": "px",
+          "label": "Margin Top",
+          "default": 10
+        },
+        {
+          "type": "text",
+          "id": "reponsive_mt",
+          "label": "Responsive Margin Top",
+          "info": "Example is '20,30,40,60'"
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 200,
+          "step": 2,
+          "unit": "px",
+          "label": "Margin Bottom",
+          "default": 10
+        },
+        {
+          "type": "text",
+          "id": "reponsive_bt",
+          "label": "Responsive Margin Bottom",
+          "info": "Example is '20,30,40,60'"
+        },
+             
+              {
+                "type": "text",
+                "id": "home_block_countdown_7",
+                "label": "Countdown",
+                "default": "2017\/12\/31 10:30:00"
+              },
+
+      {
+        "type": "color",
+        "id": "color",
+        "label": "Color",
+        "default": "#222"
+      }
+      		]
+    	},
+
+    
+    {
+      "type": "text",
+      "name": "Custom HTML",
+      "settings": [
+
+        {
+          "type": "text",
+          "id": "for_item",
+          "label": "For Group Item"
+        },
+        {
+          "type": "text",
+          "id": "home_padding_item",
+          "label": "Padding",
+          "default": "0px 0px 0px 0px",
+            "info": "Default Value: 10px 10px 10px 10px"
+        },
+
+        {
+          "type": "select",
+          "id": "horizontal_align",
+          "label": "Alignment",
+          "default": "left",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "vertical_align",
+          "label": "Vertical Alignment",
+          "default": "top",
+          "options": [
+            {
+              "value": "top",
+              "label": "Top"
+            },
+            {
+              "value": "center",
+              "label": "Middle"
+            },
+            {
+              "value": "bottom",
+              "label": "Bottom"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "grid",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "/12",
+          "label": "Column size",
+          "default": 4
+        },
+        {
+          "type": "text",
+          "id": "grid_responsive",
+          "label": "Responsive size",
+          "info": "Example is '12,12,12,12', 1 < value < 12"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "<h3>Clearance Sales<br>Up to 70% Off. All Sales are Final</h3><h6>Last chance to take advantage of our discounts!</h6>"
+        },
+		{
+            "type": "color",
+            "id": "color",
+            "label": "Color ",
+            "default": "#FFF",
+            "info": "Default Value: #FFF"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Anchor Text"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Link"
+        },
+        {
+          "type": "select",
+          "id": "color_button_type",
+          "label": "Button Type",
+          "default": "color_button_type_1",
+          "options": [
+            {
+              "value": "color_button_type_1",
+              "label": "Type 1"
+            },
+            {
+              "value": "color_button_type_2",
+              "label": "Type 2"
+            },
+            {
+              "value": "color_button_type_3",
+              "label": "Type 3"
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "block_icon",
+      "name": "Icon Box",
+      "settings": [
+
+        {
+          "type": "text",
+          "id": "for_item",
+          "label": "For Group Item"
+        },
+        {
+          "type": "text",
+          "id": "home_padding_item",
+          "label": "Padding",
+          "info": "Example is ‘0px 0px 0px 0px’"
+        },
+
+
+        {
+          "type": "select",
+          "id": "icon_position",
+          "label": "Icon Position",
+          "default": "left",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ]
+        },
+		{
+          "type": "select",
+          "id": "vertical_alignment",
+          "label": "Vertical Alignment",
+          "default": "middle",
+          "options": [
+            {
+              "value": "top",
+              "label": "Top"
+            },
+            {
+              "value": "middle",
+              "label": "Middle"
+            },
+            {
+              "value": "bottom",
+              "label": "Bottom"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "horizontal_align",
+          "label": "Text Alignment",
+          "default": "left",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "grid",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "/12",
+          "label": "Column size",
+          "default": 4
+        },
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon Cheatsheet",
+		  "info": "[Get CleverFont Icon Cheatsheet](https:\/\/doc.zooextension.com\/cleverfonticon)"
+        },
+        {
+          "type": "range",
+          "id": "font_size",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Icon Size",
+          "default": 40
+        },
+        {
+          "type": "range",
+          "id": "rotate",
+          "min": 0,
+          "max": 360,
+          "step": 5,
+          "unit": "deg",
+          "label": "Rotate",
+          "default": 0
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    },
+    
+    {
+      "type": "group_incol",
+      "name": "Inner Group",
+      "settings": [
+        {
+          "type": "text",
+          "id": "for_group",
+          "label": "Name"
+        },
+        {
+          "type": "range",
+          "id": "grid",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "/12",
+          "label": "Column size",
+          "default": 4
+        }
+       
+      ]
+    },
+    {
+      "type": "group_slider",
+      "name": "Slider",
+      "settings": [
+        
+        {
+          "type": "text",
+          "id": "for_group",
+          "label": "Name"
+        },
+        {
+          "type": "range",
+          "id": "grid",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "/12",
+          "label": "Column size",
+          "default": 4
+        },
+
+        {
+          "type": "text",
+          "id": "grid_responsive",
+          "label": "Responsive size",
+          "info": "Example is '12,12,12,12', 1 < value < 12"
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 200,
+          "step": 2,
+          "unit": "px",
+          "label": "Margin Top",
+          "default": 10
+        },
+        {
+          "type": "text",
+          "id": "reponsive_mt",
+          "label": "Responsive Margin Top",
+          "info": "Example is '20,30,40,60'"
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 200,
+          "step": 2,
+          "unit": "px",
+          "label": "Margin Bottom",
+          "default": 10
+        },
+        {
+          "type": "text",
+          "id": "reponsive_bt",
+          "label": "Responsive Margin Bottom",
+          "info": "Example is '20,30,40,60'"
+        },
+		{
+           "type": "text",
+           "id": "gridheight",
+           "label": "Responsive height",
+           "info": "Example is '550px,500px,400px,125%', value can setting in % (percent) or px (pixels)",
+           "default": "550px,500px,400px,125%"
+        },
+		{
+          "type": "header",
+          "content": "AUTO SLIDE"
+        },
+        {
+          "type": "checkbox",
+          "id": "autoplay",
+          "label": "Auto Slide",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "autoplay_speed",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "label": "Change slides every second",
+          "default": 5 
+        },
+        {
+          "type": "checkbox",
+          "id": "pause_on_hover",
+          "label": "Pause on Hover",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "NAVIGATION"
+        },
+		{
+          "type": "select",
+          "id": "navigation_type",
+          "label": "Navigation Type",
+          "default": "navigation_light",
+          "options": [
+            {
+              "value": "navigation_light",
+              "label": "Light"
+            },
+            {
+              "value": "navigation_dark",
+              "label": "Dark"
+            }
+          ]
+        },        
+        {
+          "type": "checkbox",
+          "id": "show_navigation",
+          "label": "Show Arrows",
+          "default": true
+        },
+		{
+          "type": "select",
+          "id": "arrows_type",
+          "label": "Arrows Type",
+          "default": "arrows_simple",
+          "options": [
+            {
+              "value": "arrows_simple",
+              "label": "Simple"
+            },
+            {
+              "value": "arrows_circle",
+              "label": "Circle"
+            }
+          ]
+        },
+		{
+          "type": "select",
+          "id": "button_size",
+          "label": "Arrows Size",
+          "default": "button_size_medium",
+          "options": [
+            {
+              "value": "button_size_small",
+              "label": "Small"
+            },
+            {
+              "value": "button_size_medium",
+              "label": "Medium"
+            },
+            {
+              "value": "button_size_large",
+              "label": "Large"
+            }
+          ]
+        },	
+        {
+          "type": "checkbox",
+          "id": "show_bullets",
+          "label": "Show Bullets",
+          "default": true
+        },
+		
+        {
+          "type": "select",
+          "id": "style_dots",
+          "label": "Bullet Type",
+          "default": "default",
+          "options": [
+            {
+              "value": "default",
+              "label": "Circle"
+            },
+            {
+              "value": "dashes",
+              "label": "Dashes"
+            },
+            {
+              "value": "dashes_space",
+              "label": "Dashes (Spaced)"
+            },
+            {
+              "value": "simple",
+              "label": "Simple"
+            },
+            {
+              "value": "square",
+              "label": "Square"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "group_slider_item",
+      "name": "Slide Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "for_item",
+          "label": "For Group Item"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+                {
+                    "type": "text",
+                    "id": "video_mp4_url",
+                    "label": "Video Url",
+                    "info": "Video type is \"mp4\""
+                },
+                {
+                    "type": "video_url",
+                    "id": "video_external_url",
+                    "label": "Youtube or Vimeo video URL",
+                    "accept": ["youtube", "vimeo"]
+                },
+                {
+                    "type": "checkbox",
+                    "id": "video_autoplay",
+                    "label": "Autoplay",
+                    "default": true
+                },
+                {
+                    "type": "checkbox",
+                    "id": "video_controls",
+                    "label": "Controls",
+                    "default": false
+                },
+        {
+          "type": "select",
+          "id": "alignment",
+          "label": "Horizontal position",
+          "default": "center",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ]
+        },
+                {
+                    "type": "range",
+                    "id": "offset_h",
+                    "min": 0,
+                    "max": 200,
+                    "step": 5,
+                    "label": "Horizontal offset",
+                    "default": 0
+                },
+                {
+                    "type": "checkbox",
+                    "id": "offset_reverse_h",
+                    "label": "Reverse horizontal offset",
+                    "default": false
+                },
+        {
+          "type": "select",
+          "id": "subheading2_title_alignment",
+          "label": "Vertical position",
+          "default": "middle",
+          "options": [
+            {
+              "value": "top",
+              "label": "Top"
+            },
+            {
+              "value": "middle",
+              "label": "Middle"
+            },
+            {
+              "value": "bottom",
+              "label": "Bottom"
+            }
+          ]
+        },
+                {
+                    "type": "range",
+                    "id": "offset_v",
+                    "min": 0,
+                    "max": 200,
+                    "step": 5,
+                    "label": "Vertical offset",
+                    "default": 10
+                },
+                {
+                    "type": "checkbox",
+                    "id": "offset_reverse_v",
+                    "label": "Reverse vertical offset",
+                    "default": true
+                },
+		 {
+          "type": "select",
+          "id": "style_color_text",
+          "label": "Text Color Type",
+          "default": "dark",
+          "options": [
+            {
+              "value": "dark",
+              "label": "Dark"
+            },
+            {
+              "value": "white",
+              "label": "White"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Text line 1",
+          "default": "Text line 1"
+        },
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Text line 2",
+          "default": "Text line 2"
+        },
+        {
+          "type": "text",
+          "id": "subheading_1",
+          "label": "Text line 3",
+          "default": "Text line 3"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button 1",
+          "default": "Shop Now"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Button link 1"
+        },
+        {
+          "type": "text",
+          "id": "button_label_1",
+          "label": "Button 2",
+          "default": "Discover Now"
+        },
+        {
+          "type": "url",
+          "id": "link_1",
+          "label": "Button link 2"
+        },
+        {
+          "type": "select",
+          "id": "text_align",
+          "label": "Text Align",
+          "default": "center",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "effect_text",
+          "label": "Animation Text ",
+          "default": "none",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "fade_in_left",
+              "label": "Fade In Left"
+            },
+            {
+              "value": "fade_in_right",
+              "label": "Fade In Right"
+            },
+            {
+              "value": "fade_in_up",
+              "label": "Fade In Up"
+            },
+            {
+              "value": "fade_in_down",
+              "label": "Fade In Down"
+            },
+            {
+              "value": "bounce_in",
+              "label": "Bounce In"
+            },
+            {
+              "value": "bounce_in_up",
+              "label": "Bounce In Up"
+            },
+            {
+              "value": "bounce_in_down",
+              "label": "Bounce In Down"
+            },
+            {
+              "value": "bounce_in_left",
+              "label": "Bounce In Left"
+            },
+            {
+              "value": "bounce_in_right",
+              "label": "Bounce In Right"
+            },
+            {
+              "value": "blur_in",
+              "label": "Blur In"
+            },
+            {
+              "value": "flip_in_x",
+              "label": "Flip In X"
+            },
+            {
+              "value": "flip_in_y",
+              "label": "Flip In Y"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "color_button_type",
+          "label": "Button Type",
+          "default": "color_button_type_1",
+          "options": [
+            {
+              "value": "color_button_type_1",
+              "label": "Type 1"
+            },
+            {
+              "value": "color_button_type_2",
+              "label": "Type 2"
+            },
+            {
+              "value": "color_button_type_3",
+              "label": "Type 3"
+            }
+          ]
+        },
+{
+      "type": "header",
+      "content": "Parallax"
+    },
+    {
+      "type": "checkbox",
+      "id": "parallax_effect",
+      "label": "Enable Parallax",
+      "default": true
+    }
+      ]
+    },
+
+	{
+      "type": "spacer",
+      "name": "Spacer",
+      "settings": [
+{
+          "type": "text",
+          "id": "for_item",
+          "label": "For Group Item"
+        },
+
+        
+        {
+          "type": "range",
+          "id": "grid",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "/12",
+          "label": "Column size",
+          "default": 4
+        },
+
+        {
+          "type": "text",
+          "id": "grid_responsive",
+          "label": "Responsive size",
+          "info": "Example is '12,12,12,12', 1 < value < 12"
+        },
+        {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Space",
+      "default": 10
+    },
+    {
+      "type": "text",
+      "id": "reponsive_mt",
+      "label": "Responsive Space",
+      "info": "Example is '20,30,40,60'"
+    }
+      ]
+    },
+{
+      "type": "group_testimonial_item",
+      "name": "Testimonial",
+      "settings": [
+
+        {
+          "type": "text",
+          "id": "for_item",
+          "label": "For Group Item"
+        },
+
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Type",
+          "default": "type_1",
+          "options": [
+            {
+              "value": "type_1",
+              "label": "Type #1"
+            },
+            {
+              "value": "type_2",
+              "label": "Type #2"
+            },
+            {
+              "value": "type_3",
+              "label": "Type #3"
+            }
+          ]
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+
+        {
+          "type": "range",
+          "id": "image_size",
+          "min": 2,
+          "max": 200,
+          "step": 2,
+          "unit": "px",
+          "label": "Image Size",
+          "default": 60
+        },
+        {
+          "type": "html",
+          "id": "text",
+          "label": "Text",
+          "default": "Add customer reviews and testimonials to showcase your store’s happy customers."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author",
+          "info": "Author’s name"
+        }
+      ]
+    },
+{
+      "type": "heading",
+      "name": "Heading",
+      "settings": [
+
+        {
+          "type": "text",
+          "id": "for_item",
+          "label": "For Group Item"
+        },
+		{
+          "type": "range",
+          "id": "grid",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "/12",
+          "label": "Column size",
+          "default": 12
+        },
+
+        {
+          "type": "text",
+          "id": "grid_responsive",
+          "label": "Responsive size",
+          "info": "Example is '12,12,12,12', 1 < value < 12"
+        },
+    	{
+      		"type": "range",
+      		"id": "margin_top",
+      		"min": 0,
+      		"max": 100,
+      		"step": 1,
+      		"unit": "px",
+      		"label": "Margin Top",
+      		"default": 10
+    	},
+    	{
+      		"type": "text",
+      		"id": "reponsive_mt",
+      		"label": "Responsive Margin Top",
+      		"info": "Example is '20,30,40,60'"
+    	},
+    	{
+      		"type": "range",
+      		"id": "margin_bottom",
+      		"min": 0,
+      		"max": 100,
+      		"step": 1,
+      		"unit": "px",
+      		"label": "Margin Bottom",
+      		"default": 10
+    	},
+    	{
+      		"type": "text",
+      		"id": "reponsive_bt",
+      		"label": "Responsive Margin Bottom",
+      		"info": "Example is '20,30,40,60'"
+    	},  
+      	{
+        "type": "html",
+        "id": "title",
+        "label": "Heading",
+        "default": "Add Your Heading Text Here"
+      	},
+		{
+            "type": "color",
+            "id": "color",
+            "label": "Color ",
+            "default": "#000",
+            "info": "Default Value: #000"
+        }, 
+    	{
+          	"type": "range",
+          	"id": "font_size",
+          	"min": 1,
+          	"max": 100,
+          	"step": 1,
+          	"unit": "px",
+          	"label": "Size",
+          	"default": 40
+        },
+    	{
+      		"type": "select",
+      		"id": "html_tag",
+      		"label": "Html Tag",
+      		"default": "h3",
+      		"options": [
+        		{
+          			"value": "h1",
+          			"label": "H1"
+        		},
+        		{
+          			"value": "h2",
+          			"label": "H2"
+        		},
+        		{
+          			"value": "h3",
+          			"label": "H3"
+        		},
+        		{
+          			"value": "h4",
+          			"label": "H4"
+        		},
+        		{
+          			"value": "h5",
+          			"label": "H5"
+        		},
+        		{
+          			"value": "h6",
+          			"label": "H6"
+        		},
+        		{
+          			"value": "div",
+          			"label": "div"
+        		},
+        		{
+          			"value": "span",
+          			"label": "span"
+        		},
+        		{
+          			"value": "p",
+          			"label": "p"
+        		}
+      		]
+    	},
+    	{
+      		"type": "select",
+      		"id": "text_transform",
+      		"label": "Text Transform",
+      		"default": "none",
+      		"options": [
+ 
+        		{
+          			"value": "none",
+          			"label": "None"
+        		},
+        		{
+          			"value": "uppercase",
+          			"label": "Uppercase"
+        		},
+        		{
+          			"value": "capitalize",
+          			"label": "Capitalize"
+        		},
+        		{
+          			"value": "lowercase",
+          			"label": "Lowercase"
+        		}
+      		]
+    	},
+    	{
+      		"type": "select",
+      		"id": "alignment",
+      		"label": "Alignment",
+      		"default": "center",
+      		"options": [
+        		{
+          			"value": "left",
+          			"label": "Left"
+        		},
+        		{
+          			"value": "center",
+          			"label": "Center"
+        		},
+        		{
+          			"value": "right",
+          			"label": "Right"
+        		}
+      		]
+    	}
+      ]
+    },
+    {
+      "type": "newsletter",
+      "name": "Newsletter",
+      "settings": [
+
+        {
+          "type": "text",
+          "id": "for_item",
+          "label": "For Group Item"
+        },
+		{
+          "type": "range",
+          "id": "grid",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "/12",
+          "label": "Column size",
+          "default": 12
+        },
+
+        {
+          "type": "text",
+          "id": "grid_responsive",
+          "label": "Responsive size",
+          "info": "Example is '12,12,12,12', 1 < value < 12"
+        },
+    	{
+      		"type": "range",
+      		"id": "margin_top",
+      		"min": 0,
+      		"max": 100,
+      		"step": 1,
+      		"unit": "px",
+      		"label": "Margin Top",
+      		"default": 10
+    	},
+    	{
+      		"type": "text",
+      		"id": "reponsive_mt",
+      		"label": "Responsive Margin Top",
+      		"info": "Example is '20,30,40,60'"
+    	},
+    	{
+      		"type": "range",
+      		"id": "margin_bottom",
+      		"min": 0,
+      		"max": 100,
+      		"step": 1,
+      		"unit": "px",
+      		"label": "Margin Bottom",
+      		"default": 10
+    	},
+    	{
+      		"type": "text",
+      		"id": "reponsive_bt",
+      		"label": "Responsive Margin Bottom",
+      		"info": "Example is '20,30,40,60'"
+    	},  
+    	{
+      		"type": "select",
+      		"id": "alignment",
+      		"label": "Alignment",
+      		"default": "center",
+      		"options": [
+        		{
+          			"value": "left",
+          			"label": "Left"
+        		},
+        		{
+          			"value": "center",
+          			"label": "Center"
+        		},
+        		{
+          			"value": "right",
+          			"label": "Right"
+        		}
+      		]
+    	},
+      {
+        "type": "text",
+        "id": "mailing_list_form_action",
+        "label": "MailChimp form action URL",
+        "info": "[Where do I find my MailChimp form action URL?](http:\/\/docs.shopify.com\/support\/configuration\/store-customization\/where-do-i-get-my-mailchimp-form-action)"
+      }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Grid Builder",
+      "category": "3) Builder"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

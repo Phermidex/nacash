@@ -1,0 +1,145 @@
+<section id="section-lightbox" class="box clv-box">
+  <div class="lightbox showlightbox">
+    <div class="clever-close">
+      <button class="btn-float close-button" id="close-button">
+        <i class="cs-font clever-icon-close"></i>
+      </button>
+    </div>
+    <div class="sections">
+      <label>Import Theme Demo</label>
+      <div class="sections-inner">
+        <div class="layout-update clearfix row">
+          {% for i in (1..10) %}
+          {% capture thumb %}ciao-{{ i }}.jpg{% endcapture %}
+          <div class="col-md-3 col-6">
+            <div class="update-item-inner">
+              <img  src="{{ thumb | asset_url }}" alt="" >
+              <div class="import-form-fields">
+                <span>Set up home {{ i }}</span>
+                <button class="import-btn" data-layout="Home{{i}}" title="Set Up Home {{i}}">
+                  <img src="{{ 'loading.gif' | asset_url }}" alt="" />
+                  <span  class="cs-font clever-icon-download-2"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="import-export row">
+          <div class="col-12 col-md-6">
+            <label>Import Preset Json</label>
+            <form action="">
+              <textarea id="import-json" rows="8" placeholder="Upadate preset json here..." required></textarea>
+              <button id="update-json" type="submit">Update Preset</button>
+            </form>
+          </div>
+          <div class="col-12 col-md-6">
+            <label>Export Preset Json</label>             
+            <form action="">
+              <textarea id="export-json" rows="8" placeholder="Preset Json current theme" readonly></textarea>
+              <button id="clv-copytext" type="submit">Copy Content</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script type="text/javascript">
+  function inAdmin() {
+    return window !== window.parent && window.top.location.pathname.indexOf("/admin") >= 0 && window.top.location.pathname.indexOf("/editor") >= 0
+  }
+  function updateSection() {
+    var t = [];
+    $(top.document).find("[data-content-for-index]").children("li").each(function() {
+      var e = $(this).attr("data-section-id");
+      e && t.push(e)
+    }), t.length > 0 && (top.window.jsContentForIndex = t)
+  }
+  function isObject(t) {return t === Object(t)}
+  function isArray(t) {return Array.isArray(t)}
+  function isFile(t) {return t instanceof File}
+  function mapToJson(t, e, n) {
+    var n = n || {};
+    return 1 === t.length ? (e.indexOf("[]") > -1 ? e = [] : e.indexOf('["') > -1 && (e = e.replace('["', "").replace('"]', "").replace(new RegExp('","', "g"), "|").split("|")), n[t[0]] = e, n) : (n[t[0]] = n[t[0]] || {}, n[t[0]] = mapToJson(t.slice(1), e, n[t[0]]), n)
+  }
+  function homePosition(t, e, n) {
+    return e = e || [], Object.keys(t).forEach(function(o) {
+      var i = n ? n + "[" + o + "]" : o;
+      !isObject(t[o]) || isArray(t[o]) || isFile(t[o]) ? isArray(t[o]) ? t[o].forEach(function(t) {
+        var n = i + "[]";
+        isObject(t) && !isFile(t) ? homePosition(t, e, n) : e.push({
+          name: n,
+          value: t
+        })
+      }) : e.push({
+        name: i,
+        value: t[o]
+      }) : homePosition(t[o], e, i)
+    }), e
+  }
+  function getDemoJson() {
+    var t = $(window.top.document).find("#theme-editor-form").serializeArray();
+    t.push({
+      name: "settings[content_for_index]",
+      value: '["' + top.window.jsContentForIndex.join('","') + '"]'
+    });
+    for (var e = {}, n = 0; n < t.length; n++) mapToJson(t[n].name.replace("settings", "").split("][").join("|").replace("[", "").replace("]", "").split("|"), t[n].value, e);
+    return e
+  }
+  function changeData(t) {
+    var CurrentSettings = getDemoJson();
+        var OldParams = {
+          "accessToken": CurrentSettings["CurrentSettings"]
+        };
+    console.log(CurrentSettings);
+        return $.extend({}, OldParams, t);
+  }
+  function importData(t, e) {
+    var n = {method: "PATCH",url: top.Shopify.routes.theme_editor_save(top.THEME_ID).html,data: t},
+        o = $.extend({}, n, e);
+    top.Shopify.ajax(o).done(function(t) {top.window.location.reload()}).fail(function(t) {})
+  }
+  if ($(document).on("click", ".close-button", function() {
+    $(".btn-float").removeClass("active"), $("body").toggleClass("lightbox-active");
+    $('.import-export').show();
+    $('.layout-update').show();
+    $('.sections > label').replaceWith( "<label>Import Theme Demo</label>" );
+  }), inAdmin()) {
+    window.updateJson = {}, window.updateJson.settings_data_json_url = "{{ 'settings_preset.json ' | asset_url }}", top.window.jsContentForIndex || (top.window.jsContentForIndex = top.window.Shopify.contentForIndex), $(document).on("shopify:section:load", updateSection), $(document).on("shopify:section:reorder", updateSection);
+    var $top = $(top.document),
+        $list_item = $top.find(".ui-action-list").first();
+    0 == $list_item.find("li .import_demo").length && $list_item.append($('<li class="ui-action-list__item"><a href="#" class="ui-action-list-action import_demo">1 Click Demo Importer</a></li>'));
+   // 0 == $list_item.find("li .import_json").length && $list_item.append($('<li class="ui-action-list__item"><a href="#" class="ui-action-list-action import_json">Export/Import Theme Settings</a></li>'));
+    var $importDemo = window.top.document.querySelector(".import_demo");
+//     var $importJson = window.top.document.querySelector(".import_json");
+//     $importJson.addEventListener("click", function() {
+//       $("#close-button").trigger("click");
+//       $('.layout-update').hide();
+//       $('.import-export').show();
+//       $('.sections > label').replaceWith( "<label>Export/Import Theme Settings</label>" );
+//     })
+    $importDemo.addEventListener("click", function() {
+      $("#close-button").trigger("click");
+      $('.import-export').hide();
+      $('.layout-update').show();
+      $('.sections  > label').replaceWith( "<label>Import Theme Demo</label>" );
+    }), $.get(window.updateJson.settings_data_json_url, function(t, e) {
+      "success" == e && ($data = t.presets)
+    }), $(document).on("shopify:section:select"), $(document).on("shopify:section:reorder"), $(document).on("click", ".import-btn", function(t) {
+      t.preventDefault(), $(this).addClass("loading");
+      var e = $(this),
+          n = e.data("layout");
+      $data[n], importData(homePosition(changeData($data[n]), !1, "settings")), $(".import-btn").removeClass("active"), e.addClass("active")
+    })
+    $(document).on('click', '#close-button', function() {$("#export-json").val(JSON.stringify(getDemoJson()));});
+    $(document).on("click", "#update-json", function() {
+      var r = $("#import-json").val();
+      try {importData(homePosition(JSON.parse(r), !1, "settings"))} catch (r) {alert("Errors");}
+    });
+    $(document).on("click", "#clv-copytext", function(t) {
+      t.preventDefault(), $("#export-json").select();
+      try {document.execCommand("copy");} catch (t) {$(this).text("ERROR").addClass("error")}
+    });
+  }
+</script>

@@ -1,0 +1,42 @@
+{% if section.settings.enable_ask_product %}
+<div class="clearfix"></div>
+
+<div class="contact-forms" style="display:none;">
+  <div class="contact-form-contents">
+    <a class="ask-product-close"><i class="cs-font clever-icon-close"></i></a>
+    <div class="contact-form-body">
+      {% form 'contact' %}
+      {% comment %}
+      Successful message
+      {% endcomment %}
+      {% if form.posted_successfully? %}
+      <p class="note form-success">
+        {{ 'page_cms.contact_success' | t }}
+      </p>
+      {% endif %}
+      {% include 'form-errors-custom' %}
+      <div id="contactFormWrapper">
+        {% if section.settings.contact_title_1 != blank %}
+        <span>{{ section.settings.contact_title_1 }}</span>
+        {% endif %}
+        <input type="text" name="contact[name]" id="contactFormName" placeholder="{{ 'page_cms.contact_yourname' | t }}" required>
+        <input type="email" name="contact[email]" id="contactFormEmail" autocorrect="off" autocapitalize="off" placeholder="{{ 'page_cms.contact_youremail' | t }}" required>
+        <textarea rows="4" name="contact[body]" id="contactFormMessage" placeholder="{{ 'page_cms.contact_yourcomment' | t }}" required></textarea>
+        <input type="submit" class="btn left" value="{{ 'page_cms.contact_button' | t }}">
+      </div>
+      {% endform %}
+    </div>
+  </div>
+</div>  
+<div class="clearfix"></div>
+<script>
+  jQuery(document).ready(function() {
+    jQuery('.ask-product-lable').click(function(){
+      jQuery('body').addClass('open-ask-product');
+    })
+    jQuery('.ask-product-close').click(function(){
+      jQuery('body').removeClass('open-ask-product');
+    })
+  });
+</script>
+{% endif %}

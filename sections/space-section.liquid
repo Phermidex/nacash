@@ -1,0 +1,67 @@
+{%- if section.settings.reponsive_mt != blank -%}
+{%- assign margin_top_responsive = section.settings.reponsive_mt | split: ',' -%}
+{% capture margin_top %}mt-{{ margin_top_responsive[0] }} mt-sm-{{ margin_top_responsive[1] }} mt-md-{{ margin_top_responsive[2] }} mt-lg-{{ margin_top_responsive[3] }} {% endcapture %}
+
+{%- endif -%}
+{%- if section.settings.reponsive_bt != blank -%}
+{%- assign margin_bottom_responsive = section.settings.margin_bottom_responsive | split: ',' -%}
+{% capture margin_bottom %}mb-{{ margin_bottom_responsive[0] }} mb-sm-{{ margin_bottom_responsive[1] }} mb-md-{{ margin_bottom_responsive[2] }} mb-lg-{{ margin_bottom_responsive[3] }} {% endcapture %}
+{%- elsif section.settings.margin_bottom != blank -%}
+{% capture margin_bottom %}margin-bottom-{{ section.settings.margin_bottom }}{% endcapture %}
+{%- endif -%}
+<div class="add-space {{margin_top}} {{margin_bottom}}" style="{%- unless section.settings.reponsive_mt != blank -%}margin-top:{{ section.settings.margin_top }}px;{%endunless %}{%- unless section.settings.reponsive_bt != blank -%}margin-bottom:{{ section.settings.margin_bottom }}px;{%endunless %} height:1px;">
+  
+</div>
+
+{% schema %}
+  {
+    "name": "Spacer",
+    "settings": [
+		
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 10
+    },
+    {
+      "type": "text",
+      "id": "reponsive_mt",
+      "label": "Responsive Margin Top",
+      "info": "Example is '0,0,0,0,0'"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 10
+    },
+    {
+      "type": "text",
+      "id": "reponsive_bt",
+      "label": "Responsive Margin Bottom",
+      "info": "Example is '0,0,0,0,0'"
+    }
+	],
+  "presets": [
+    {
+      "name": "Spacer",
+       "category": "3) Builder"
+    }
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

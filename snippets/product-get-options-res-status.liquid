@@ -1,0 +1,18 @@
+{%- assign active_value = false -%}
+{%- assign disabled_value = true -%}
+{%- for variant in product.variants -%}
+{%- if variant.option1 == value or variant.option2 == value or variant.option3 == value -%}
+{%- if variant.available -%}
+{%- assign disabled_value = false -%}
+{%- break -%}
+{%- endif -%}
+{% endif %}
+{%- endfor -%}
+{%- unless disabled_value == true -%}
+{%- if product.options contains option.name -%}
+{%- if current_variant.option1 == value or current_variant.option2 == value or current_variant.option3 == value -%}
+{%- assign active_value = true -%}
+{%- endif -%}
+{%- endif -%}
+{%- endunless -%}
+{% capture trigger_attr %}{% if trigger %} data-js-trigger="{{ trigger }}-{{ clear_name }}-{{ value }}"{% elsif trigger_id %} data-js-trigger-id="{{ trigger_id }}-{{ clear_name }}-{{ value }}"{% endif %}{% endcapture %}

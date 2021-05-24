@@ -1,0 +1,90 @@
+{% comment %}
+Regular page content goes here.
+{% endcomment %}
+<div class="about-page">
+  <div class="container">
+    <div class="row">
+      <div class="about-banner col-12">
+        <h1>{{ section.settings.title_about }}</h1>
+        {% if section.settings.enable_about_banner %}
+        <div class="images">
+          {%- assign img_url = section.settings.bg_about_banner | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+          <img class="lazyload"
+               src="{{ section.settings.bg_about_banner | img_url: '2048x'  }}"
+               data-src="{{ img_url }}"
+               data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+               data-aspectratio="{{ section.settings.bg_about_banner.aspect_ratio }}"
+               data-sizes="auto"
+               alt="{{ image.alt | escape }}">
+        </div>
+        {% endif %}
+      </div>
+      <div class="about-content col-12">
+        {% if section.settings.sub_title_about_texts_1 != blank %}
+        {{ section.settings.sub_title_about_texts_1 }}
+        {% endif %}
+        {% if section.settings.bg_image_address_1 != blank %}
+        <img src="{{ section.settings.bg_image_address_1 | img_url: '2048x'  }}" alt="{{ image.alt | escape }}">
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  jQuery('.main-content > .container').removeClass('container');
+</script>
+<style>.main-content {padding-bottom: 0;}</style>
+
+{% schema %}
+  {
+    "name": "About us",
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "title_about",
+        "label": "Title About",
+        "default": "Text Default"
+      },
+		 {
+        "type": "header",
+        "content": "About Banner"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_about_banner",
+        "label": "Show banner"
+      },
+      {
+        "type": "image_picker",
+        "id": "bg_about_banner",
+        "label": "About Images"
+      },
+      {
+        "type": "header",
+        "content": "About Text"
+      },
+      {
+        "type": "textarea",
+        "id": "sub_title_about_texts_1",
+        "label": "Content",
+        "default": "Text Default"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_about_address",
+        "label": "Show signature"
+      },
+      {
+        "type": "image_picker",
+        "id": "bg_image_address_1",
+        "label": "Signature Images"
+      }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

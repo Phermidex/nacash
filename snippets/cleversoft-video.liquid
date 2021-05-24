@@ -1,0 +1,20 @@
+{% assign instructions = product.metafields.meta %}
+{% assign key = 'video' %}
+{% if instructions.video %}
+<div class="product-video">
+  <a href="{{ instructions.video }}" class="video-link"><span>Watch Video</span></a>
+</div>
+{{ 'jquery.magnific-popup.js' | asset_url | script_tag }}
+<script>
+  jQuery(document).ready(function(){
+    jQuery('.video-link').magnificPopup({
+      disableOn: 767,
+      type: 'iframe',
+      removalDelay: 160,
+      preloader: false,			
+      fixedContentPos: false
+    });
+
+  });
+</script>
+{%endif %}

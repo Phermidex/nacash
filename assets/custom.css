@@ -1,0 +1,32 @@
+
+
+
+a.btn.vt-suggestion-add{
+
+	color:initial;
+    line-height: 25px;
+}
+
+
+#dcodeInnerWrapper{
+
+	margin-top:initial !important;
+    margin-bottom:30px !important;
+}
+
+
+.template-collection .product-customizer-options{
+
+	display:none;
+}
+
+/* Blog Buy Button */
+
+.blog-products-wrap{
+	display:flex;
+    justify-content: space-evenly; 
+    margin-bottom: 20px;
+}
+
+
+#best-professional-electric-wax-warmers-nacach-wax #ui-id-13{display:none;}

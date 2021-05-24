@@ -1,0 +1,1396 @@
+{
+  "form": {
+    "id": "ZxPtB5",
+    "name": "Registration",
+    "handle": "registration-327",
+    "theme_id": "87745626250",
+    "settings": {
+      "locales": {
+        "back": "Back",
+        "next": "Next",
+        "cancel": "Cancel",
+        "edit_link": "Edit account",
+        "fix_errors": "Please fix errors before continuing",
+        "is_invalid": "{{label}} is invalid",
+        "email_taken": "Email has already been taken",
+        "phone_taken": "Phone number has already been taken",
+        "step_counter": "Step {{current}} of {{total}}",
+        "verify_email": "Check your email for a verification link to activate your account.",
+        "not_available": "An error occurred while saving your account, please try again in a few minutes.",
+        "create_account": "Create account",
+        "update_account": "Update account",
+        "recaptcha_error": "Challenge verification failed, please try again",
+        "creating_account": "Creating account...",
+        "updating_account": "Updating account...",
+        "invalid_email_domain": "Email contains an invalid domain name"
+      },
+      "enableRecaptcha": false,
+      "whitelistedTags": "",
+      "recaptchaSiteKey": "",
+      "markRequiredFields": true,
+      "displayCancelButton": true,
+      "goBackAfterSubmission": false,
+      "cancelButtonRedirectUrl": "\/account\/login",
+      "postSubmissionRedirectUrl": "\/account",
+      "goBackAfterCancelButtonClick": false
+    },
+    "install_locations": [
+      "page_template"
+    ],
+    "customers_count": 0,
+    "customers_today_count": 0,
+    "created_at": "2020-02-17T15:54:17Z",
+    "updated_at": "2020-02-17T17:51:45Z",
+    "revision_ids": [
+      "8oTvee",
+      "qYTpb9",
+      "evTMkq",
+      "nRTDab",
+      "PnTPe9",
+      "VNTpnM",
+      "OzTwoA",
+      "3qT6AM",
+      "xMTglw",
+      "1wT0dG",
+      "znTOgA",
+      "RxTRMd"
+    ]
+  },
+  "revision": {
+    "id": "8oTvee",
+    "created_at": "2020-02-17T19:00:59Z",
+    "embed_version": "3.0.7",
+    "published_at": null,
+    "fields": [
+      {
+        "id": 0,
+        "dataColumn": {
+          "key": "first_name",
+          "label": "First name",
+          "dataType": "text"
+        },
+        "parentId": null,
+        "position": 0,
+        "type": "text",
+        "stepId": 1,
+        "default": "",
+        "label": "First name",
+        "placeholder": "",
+        "description": null,
+        "enum": null,
+        "appearance": {
+          "width": 6
+        },
+        "settings": {},
+        "validations": [
+          {
+            "operator": "not_blank",
+            "comparand": "",
+            "errorMessage": "Must not be blank",
+            "metadata": {
+              "hiddenInApp": true
+            }
+          }
+        ],
+        "sensitive": null,
+        "preset": "first_name",
+        "autotag": null
+      },
+      {
+        "id": 1,
+        "dataColumn": {
+          "key": "last_name",
+          "label": "Last name",
+          "dataType": "text"
+        },
+        "parentId": null,
+        "position": 1,
+        "type": "text",
+        "stepId": 1,
+        "default": "",
+        "label": "Last name",
+        "placeholder": "",
+        "description": null,
+        "enum": null,
+        "appearance": {
+          "width": 6
+        },
+        "settings": {},
+        "validations": [
+          {
+            "operator": "not_blank",
+            "comparand": "",
+            "errorMessage": "Must not be blank",
+            "metadata": {
+              "hiddenInApp": true
+            }
+          }
+        ],
+        "sensitive": null,
+        "preset": "last_name",
+        "autotag": null
+      },
+      {
+        "id": 128045,
+        "dataColumn": {
+          "key": "default_address.country",
+          "label": "Country",
+          "dataType": "text"
+        },
+        "parentId": null,
+        "position": 10,
+        "type": "dropdown",
+        "stepId": 1,
+        "default": "",
+        "label": "Country",
+        "placeholder": "Select a country...",
+        "description": "",
+        "enum": [
+          {
+            "value": "",
+            "label": ""
+          }
+        ],
+        "appearance": {
+          "width": 6
+        },
+        "settings": {
+          "isCountryField": true
+        },
+        "validations": [],
+        "sensitive": null,
+        "preset": "country",
+        "autotag": null
+      },
+      {
+        "id": 775642,
+        "dataColumn": {
+          "key": "default_address.province",
+          "label": "State\/Province",
+          "dataType": "text"
+        },
+        "parentId": null,
+        "position": 11,
+        "type": "dropdown",
+        "stepId": 1,
+        "default": "",
+        "label": "State\/Province",
+        "placeholder": "Select a state\/province...",
+        "description": "",
+        "enum": [
+          {
+            "value": "",
+            "label": ""
+          }
+        ],
+        "appearance": {
+          "width": 6
+        },
+        "settings": {
+          "defaultCountry": "United States",
+          "isProvinceField": true
+        },
+        "validations": [],
+        "sensitive": null,
+        "preset": "province",
+        "autotag": null
+      },
+      {
+        "id": 270179,
+        "dataColumn": {
+          "key": "default_address.city",
+          "label": "City",
+          "dataType": "text"
+        },
+        "parentId": null,
+        "position": 12,
+        "type": "text",
+        "stepId": 1,
+        "default": "",
+        "label": "City",
+        "placeholder": null,
+        "description": "",
+        "enum": [],
+        "appearance": {
+          "width": 6
+        },
+        "settings": {},
+        "validations": [],
+        "sensitive": null,
+        "preset": "city",
+        "autotag": null
+      },
+      {
+        "id": 178589,
+        "dataColumn": {
+          "key": "default_address.zip",
+          "label": "Zip\/Postal code",
+          "dataType": "text"
+        },
+        "parentId": null,
+        "position": 13,
+        "type": "text",
+        "stepId": 1,
+        "default": "",
+        "label": "Zip\/Postal code",
+        "placeholder": null,
+        "description": "",
+        "enum": [],
+        "appearance": {
+          "width": 6
+        },
+        "settings": {},
+        "validations": [],
+        "sensitive": null,
+        "preset": "zip",
+        "autotag": null
+      },
+      {
+        "id": 374476,
+        "dataColumn": null,
+        "parentId": null,
+        "position": 14,
+        "type": "divider",
+        "stepId": 1,
+        "default": "",
+        "label": "business_divider",
+        "placeholder": null,
+        "description": "",
+        "enum": [],
+        "appearance": {
+          "width": 12
+        },
+        "settings": {
+          "hideLabel": true,
+          "verticalMargin": 20
+        },
+        "validations": [],
+        "sensitive": null,
+        "preset": null,
+        "autotag": null
+      },
+      {
+        "id": 737158,
+        "dataColumn": null,
+        "parentId": null,
+        "position": 15,
+        "type": "heading",
+        "stepId": 1,
+        "default": "",
+        "label": "business_heading",
+        "placeholder": null,
+        "description": "",
+        "enum": [],
+        "appearance": {
+          "width": 12
+        },
+        "settings": {
+          "size": "3",
+          "content": "Business Information",
+          "hideLabel": true,
+          "fontWeight": "bold"
+        },
+        "validations": [],
+        "sensitive": null,
+        "preset": null,
+        "autotag": null
+      },
+      {
+        "id": 200428,
+        "dataColumn": {
+          "key": "default_address.company",
+          "label": "Company",
+          "dataType": "text"
+        },
+        "parentId": null,
+        "position": 16,
+        "type": "text",
+        "stepId": 1,
+        "default": "",
+        "label": "Company Name",
+        "placeholder": null,
+        "description": "",
+        "enum": [],
+        "appearance": {
+          "width": 12
+        },
+        "settings": {},
+        "validations": [],
+        "sensitive": null,
+        "preset": "company",
+        "autotag": null
+      },
+      {
+        "id": 312775,
+        "dataColumn": {
+          "key": "salon_license",
+          "label": "Salon License",
+          "dataType": "text"
+        },
+        "parentId": null,
+        "position": 17,
+        "type": "text",
+        "stepId": 1,
+        "default": "",
+        "label": "Salon License",
+        "placeholder": null,
+        "description": "",
+        "enum": [],
+        "appearance": {
+          "width": 12
+        },
+        "settings": {},
+        "validations": [],
+        "sensitive": null,
+        "preset": null,
+        "autotag": null
+      },
+      {
+        "id": 817412,
+        "dataColumn": {
+          "key": "ein_number",
+          "label": "EIN Number",
+          "dataType": "text"
+        },
+        "parentId": null,
+        "position": 18,
+        "type": "text",
+        "stepId": 1,
+        "default": "",
+        "label": "EIN Number",
+        "placeholder": "Exclusively for tax purposes.",
+        "description": "",
+        "enum": [],
+        "appearance": {
+          "width": 12
+        },
+        "settings": {},
+        "validations": [],
+        "sensitive": null,
+        "preset": null,
+        "autotag": null
+      },
+      {
+        "id": 128790,
+        "dataColumn": null,
+        "parentId": null,
+        "position": 19,
+        "type": "divider",
+        "stepId": 1,
+        "default": "",
+        "label": "esthetician_divider",
+        "placeholder": null,
+        "description": "",
+        "enum": [],
+        "appearance": {
+          "width": 12
+        },
+        "settings": {
+          "hideLabel": true,
+          "verticalMargin": 20
+        },
+        "validations": [],
+        "sensitive": null,
+        "preset": null,
+        "autotag": null
+      },
+      {
+        "id": 2,
+        "dataColumn": {
+          "key": "email",
+          "label": "Email address",
+          "dataType": "email"
+        },
+        "parentId": null,
+        "position": 2,
+        "type": "email",
+        "stepId": 1,
+        "default": "",
+        "label": "Email address",
+        "placeholder": "",
+        "description": "Used for account login and order notifications",
+        "enum": null,
+        "appearance": {
+          "width": 12
+        },
+        "settings": {},
+        "validations": [
+          {
+            "operator": "is_valid_email",
+            "comparand": null,
+            "errorMessage": "Please provide a valid email address"
+          },
+          {
+            "operator": "not_blank",
+            "comparand": "",
+            "errorMessage": "Must not be blank",
+            "metadata": {
+              "hiddenInApp": true
+            }
+          }
+        ],
+        "sensitive": null,
+        "preset": "email_address",
+        "autotag": null
+      },
+      {
+        "id": 475486,
+        "dataColumn": null,
+        "parentId": null,
+        "position": 20,
+        "type": "heading",
+        "stepId": 1,
+        "default": "",
+        "label": "esthetician_heading",
+        "placeholder": null,
+        "description": "",
+        "enum": [],
+        "appearance": {
+          "width": 12
+        },
+        "settings": {
+          "size": "3",
+          "content": "Esthetician\/Cosmetologist Information",
+          "hideLabel": true,
+          "fontWeight": "bold"
+        },
+        "validations": [],
+        "sensitive": null,
+        "preset": null,
+        "autotag": null
+      },
+      {
+        "id": 199472,
+        "dataColumn": {
+          "key": "esthetician_license",
+          "label": "Esthetician License",
+          "dataType": "text"
+        },
+        "parentId": null,
+        "position": 21,
+        "type": "text",
+        "stepId": 1,
+        "default": "",
+        "label": "License Number",
+        "placeholder": null,
+        "description": "",
+        "enum": [],
+        "appearance": {
+          "width": 12
+        },
+        "settings": {},
+        "validations": [],
+        "sensitive": null,
+        "preset": null,
+        "autotag": null
+      },
+      {
+        "id": 482759,
+        "dataColumn": {
+          "key": "license_issue_date",
+          "label": "License Issue Date",
+          "dataType": "date"
+        },
+        "parentId": null,
+        "position": 22,
+        "type": "date",
+        "stepId": 1,
+        "default": "",
+        "label": "License Issue Date",
+        "placeholder": null,
+        "description": "",
+        "enum": [],
+        "appearance": {
+          "width": 6
+        },
+        "settings": {
+          "dateInput": "picker",
+          "yearsBack": 100,
+          "dateFormat": "MM-DD-YYYY",
+          "yearsForward": 20
+        },
+        "validations": [],
+        "sensitive": null,
+        "preset": null,
+        "autotag": null
+      },
+      {
+        "id": 985723,
+        "dataColumn": {
+          "key": "license_exp_date",
+          "label": "License Expiration Date",
+          "dataType": "date"
+        },
+        "parentId": null,
+        "position": 23,
+        "type": "date",
+        "stepId": 1,
+        "default": "",
+        "label": "License Expiration Date",
+        "placeholder": null,
+        "description": "",
+        "enum": [],
+        "appearance": {
+          "width": 6
+        },
+        "settings": {
+          "dateInput": "picker",
+          "yearsBack": 100,
+          "dateFormat": "MM-DD-YYYY",
+          "yearsForward": 20
+        },
+        "validations": [],
+        "sensitive": null,
+        "preset": null,
+        "autotag": null
+      },
+      {
+        "id": 146443,
+        "dataColumn": {
+          "key": "state_issued",
+          "label": "State Issued",
+          "dataType": "text"
+        },
+        "parentId": null,
+        "position": 24,
+        "type": "dropdown",
+        "stepId": 1,
+        "default": "",
+        "label": "State Issued",
+        "placeholder": "Select an option...",
+        "description": "",
+        "enum": [
+          {
+            "value": "License from Alabama",
+            "label": "Alabama"
+          },
+          {
+            "value": "License from Alaska",
+            "label": "Alaska"
+          },
+          {
+            "value": "License from Arizona",
+            "label": "Arizona"
+          },
+          {
+            "value": "License from Arkansas",
+            "label": "Arkansas"
+          },
+          {
+            "value": "License from California",
+            "label": "California"
+          },
+          {
+            "value": "License from Colorado",
+            "label": "Colorado"
+          },
+          {
+            "value": "License from Connecticut",
+            "label": "Connecticut"
+          },
+          {
+            "value": "License from Delaware",
+            "label": "Delaware"
+          },
+          {
+            "value": "License from Florida",
+            "label": "Florida"
+          },
+          {
+            "value": "License from Georgia",
+            "label": "Georgia"
+          },
+          {
+            "value": "License from Hawaii",
+            "label": "Hawaii"
+          },
+          {
+            "value": "License from Idaho",
+            "label": "Idaho"
+          },
+          {
+            "value": "License from Illinois",
+            "label": "Illinois"
+          },
+          {
+            "value": "License from Indiana",
+            "label": "Indiana"
+          },
+          {
+            "value": "License from Iowa",
+            "label": "Iowa"
+          },
+          {
+            "value": "License from Kansas",
+            "label": "Kansas"
+          },
+          {
+            "value": "License from Kentucky",
+            "label": "Kentucky"
+          },
+          {
+            "value": "License from Louisiana",
+            "label": "Louisiana"
+          },
+          {
+            "value": "License from Maine",
+            "label": "Maine"
+          },
+          {
+            "value": "License from Maryland",
+            "label": "Maryland"
+          },
+          {
+            "value": "License from Massachusetts",
+            "label": "Massachusetts"
+          },
+          {
+            "value": "License from Michigan",
+            "label": "Michigan"
+          },
+          {
+            "value": "License from Minnesota",
+            "label": "Minnesota"
+          },
+          {
+            "value": "License from Mississippi",
+            "label": "Mississippi"
+          },
+          {
+            "value": "License from Missouri",
+            "label": "Missouri"
+          },
+          {
+            "value": "License from Montana",
+            "label": "Montana"
+          },
+          {
+            "value": "License from Nebraska",
+            "label": "Nebraska"
+          },
+          {
+            "value": "License from Nevada",
+            "label": "Nevada"
+          },
+          {
+            "value": "License from New Hampshire",
+            "label": "New Hampshire"
+          },
+          {
+            "value": "License from New Jersey",
+            "label": "New Jersey"
+          },
+          {
+            "value": "License from New Mexico",
+            "label": "New Mexico"
+          },
+          {
+            "value": "License from New York",
+            "label": "New York"
+          },
+          {
+            "value": "License from North Carolina",
+            "label": "North Carolina"
+          },
+          {
+            "value": "License from North Dakota",
+            "label": "North Dakota"
+          },
+          {
+            "value": "License from Ohio",
+            "label": "Ohio"
+          },
+          {
+            "value": "License from Oklahoma",
+            "label": "Oklahoma"
+          },
+          {
+            "value": "License from Oregon",
+            "label": "Oregon"
+          },
+          {
+            "value": "License from Pennsylvania",
+            "label": "Pennsylvania"
+          },
+          {
+            "value": "License from Rhode Island",
+            "label": "Rhode Island"
+          },
+          {
+            "value": "License from South Carolina",
+            "label": "South Carolina"
+          },
+          {
+            "value": "License from South Dakota",
+            "label": "South Dakota"
+          },
+          {
+            "value": "License from Tennessee",
+            "label": "Tennessee"
+          },
+          {
+            "value": "License from Texas",
+            "label": "Texas"
+          },
+          {
+            "value": "License from Utah",
+            "label": "Utah"
+          },
+          {
+            "value": "License from Vermont",
+            "label": "Vermont"
+          },
+          {
+            "value": "License from Virginia",
+            "label": "Virginia"
+          },
+          {
+            "value": "License from Washington",
+            "label": "Washington"
+          },
+          {
+            "value": "License from West Virginia",
+            "label": "West Virginia"
+          },
+          {
+            "value": "Wisconsin",
+            "label": "Wisconsin"
+          },
+          {
+            "value": "Wyoming",
+            "label": "Wyoming"
+          }
+        ],
+        "appearance": {
+          "width": 12
+        },
+        "settings": {
+          "end": 10,
+          "start": 1,
+          "enumType": "list",
+          "separateValues": true
+        },
+        "validations": [],
+        "sensitive": null,
+        "preset": null,
+        "autotag": true
+      },
+      {
+        "id": 498518,
+        "dataColumn": {
+          "key": "license_id_image",
+          "label": "License ID Image",
+          "dataType": "file"
+        },
+        "parentId": null,
+        "position": 25,
+        "type": "file",
+        "stepId": 1,
+        "default": "",
+        "label": "License ID Image",
+        "placeholder": null,
+        "description": "For faster approval and access to exclusive deals and promotions.",
+        "enum": [],
+        "appearance": {
+          "width": 12
+        },
+        "settings": {},
+        "validations": [],
+        "sensitive": null,
+        "preset": null,
+        "autotag": null
+      },
+      {
+        "id": 373276,
+        "dataColumn": null,
+        "parentId": null,
+        "position": 26,
+        "type": "divider",
+        "stepId": 1,
+        "default": "",
+        "label": "student_divider",
+        "placeholder": null,
+        "description": "",
+        "enum": [],
+        "appearance": {
+          "width": 12
+        },
+        "settings": {
+          "hideLabel": true,
+          "verticalMargin": 20
+        },
+        "validations": [],
+        "sensitive": null,
+        "preset": null,
+        "autotag": null
+      },
+      {
+        "id": 126766,
+        "dataColumn": null,
+        "parentId": null,
+        "position": 27,
+        "type": "heading",
+        "stepId": 1,
+        "default": "",
+        "label": "student_heading",
+        "placeholder": null,
+        "description": "",
+        "enum": [],
+        "appearance": {
+          "width": 12
+        },
+        "settings": {
+          "size": "3",
+          "content": "Student Information",
+          "hideLabel": true,
+          "fontWeight": "bold"
+        },
+        "validations": [],
+        "sensitive": null,
+        "preset": null,
+        "autotag": null
+      },
+      {
+        "id": 610017,
+        "dataColumn": {
+          "key": "cosmetology_school_name",
+          "label": "Cosmetology School Name",
+          "dataType": "text"
+        },
+        "parentId": null,
+        "position": 28,
+        "type": "text",
+        "stepId": 1,
+        "default": "",
+        "label": "Cosmetology School Name",
+        "placeholder": "Enter your cosmetology school name.",
+        "description": "",
+        "enum": [],
+        "appearance": {
+          "width": 12
+        },
+        "settings": {},
+        "validations": [],
+        "sensitive": null,
+        "preset": null,
+        "autotag": null
+      },
+      {
+        "id": 108870,
+        "dataColumn": {
+          "key": "cosmetology_student_id",
+          "label": "Cosmetology Student ID",
+          "dataType": "text"
+        },
+        "parentId": null,
+        "position": 29,
+        "type": "text",
+        "stepId": 1,
+        "default": "",
+        "label": "Cosmetology Student ID",
+        "placeholder": "We will be using this to confirm your enrollment.",
+        "description": "",
+        "enum": [],
+        "appearance": {
+          "width": 12
+        },
+        "settings": {},
+        "validations": [],
+        "sensitive": null,
+        "preset": null,
+        "autotag": null
+      },
+      {
+        "id": 469158,
+        "dataColumn": {
+          "key": "accepts_marketing",
+          "label": "Accepts marketing",
+          "dataType": "boolean"
+        },
+        "parentId": null,
+        "position": 3,
+        "type": "checkbox",
+        "stepId": 1,
+        "default": true,
+        "label": "Subscribe to our email newsletter",
+        "placeholder": null,
+        "description": "",
+        "enum": [],
+        "appearance": {
+          "width": 12
+        },
+        "settings": {},
+        "validations": [],
+        "sensitive": null,
+        "preset": "accepts_marketing",
+        "autotag": null
+      },
+      {
+        "id": 197936,
+        "dataColumn": {
+          "key": "instructors_full_name",
+          "label": "Instructor's Full Name",
+          "dataType": "text"
+        },
+        "parentId": null,
+        "position": 30,
+        "type": "text",
+        "stepId": 1,
+        "default": "",
+        "label": "Instructor's Full Name",
+        "placeholder": null,
+        "description": "",
+        "enum": [],
+        "appearance": {
+          "width": 12
+        },
+        "settings": {},
+        "validations": [],
+        "sensitive": null,
+        "preset": null,
+        "autotag": null
+      },
+      {
+        "id": 158610,
+        "dataColumn": {
+          "key": "cosmetology_school_address",
+          "label": "Cosmetology School Address",
+          "dataType": "text"
+        },
+        "parentId": null,
+        "position": 31,
+        "type": "text",
+        "stepId": 1,
+        "default": "",
+        "label": "Cosmetology School Address",
+        "placeholder": null,
+        "description": "",
+        "enum": [],
+        "appearance": {
+          "width": 12
+        },
+        "settings": {},
+        "validations": [],
+        "sensitive": null,
+        "preset": null,
+        "autotag": null
+      },
+      {
+        "id": 973851,
+        "dataColumn": {
+          "key": "phone",
+          "label": "Phone number",
+          "dataType": "phone"
+        },
+        "parentId": null,
+        "position": 4,
+        "type": "phone",
+        "stepId": 1,
+        "default": "",
+        "label": "Phone number (optional)",
+        "placeholder": "Used for special promos and order updates via SMS",
+        "description": "",
+        "enum": [],
+        "appearance": {
+          "width": 12
+        },
+        "settings": {
+          "defaultCountryCode": "US"
+        },
+        "validations": [],
+        "sensitive": null,
+        "preset": "phone_number",
+        "autotag": null
+      },
+      {
+        "id": 471294,
+        "dataColumn": {
+          "key": "customer_type",
+          "label": "What option best describes you?",
+          "dataType": "text"
+        },
+        "parentId": null,
+        "position": 5,
+        "type": "dropdown",
+        "stepId": 1,
+        "default": null,
+        "label": "What option best describes you?",
+        "placeholder": "Select an option...",
+        "description": "",
+        "enum": [
+          {
+            "value": "Esthetician",
+            "label": "Esthetician"
+          },
+          {
+            "value": "Cosmetologist",
+            "label": "Cosmetologist"
+          },
+          {
+            "value": "Business",
+            "label": "Business"
+          },
+          {
+            "value": "Student",
+            "label": "Student"
+          }
+        ],
+        "appearance": {
+          "width": 12
+        },
+        "settings": {
+          "end": 10,
+          "start": 1,
+          "enumType": "list",
+          "separateValues": false
+        },
+        "validations": [
+          {
+            "operator": "not_blank",
+            "comparand": "",
+            "errorMessage": "You must select and option",
+            "metadata": {
+              "hiddenInApp": true
+            }
+          }
+        ],
+        "sensitive": null,
+        "preset": null,
+        "autotag": true
+      },
+      {
+        "id": 3,
+        "dataColumn": {
+          "key": "password",
+          "label": "Password",
+          "dataType": "text"
+        },
+        "parentId": null,
+        "position": 6,
+        "type": "text",
+        "stepId": 1,
+        "default": "",
+        "label": "Password",
+        "placeholder": "",
+        "description": "",
+        "enum": null,
+        "appearance": {
+          "width": 6
+        },
+        "settings": {},
+        "validations": [
+          {
+            "operator": "not_blank",
+            "comparand": "",
+            "errorMessage": "Must not be blank",
+            "metadata": {
+              "hiddenInApp": true
+            }
+          },
+          {
+            "operator": "longer_than",
+            "comparand": 5,
+            "errorMessage": "Password is too short",
+            "metadata": {
+              "mandatory": true,
+              "staticOperator": true,
+              "comparandFieldProps": {
+                "min": 5
+              }
+            }
+          }
+        ],
+        "sensitive": true,
+        "preset": "password",
+        "autotag": null
+      },
+      {
+        "id": 355059,
+        "dataColumn": {
+          "key": "password_confirmation",
+          "label": "Password confirmation",
+          "dataType": "text"
+        },
+        "parentId": null,
+        "position": 7,
+        "type": "password_confirmation",
+        "stepId": 1,
+        "default": "",
+        "label": "Password confirmation",
+        "placeholder": null,
+        "description": "",
+        "enum": [],
+        "appearance": {
+          "width": 6
+        },
+        "settings": {
+          "passwordMatchErrorMessage": "Must match password"
+        },
+        "validations": [],
+        "sensitive": true,
+        "preset": "password_confirmation",
+        "autotag": null
+      },
+      {
+        "id": 130338,
+        "dataColumn": {
+          "key": "default_address.address1",
+          "label": "Address line 1",
+          "dataType": "text"
+        },
+        "parentId": null,
+        "position": 8,
+        "type": "text",
+        "stepId": 1,
+        "default": "",
+        "label": "Address line 1",
+        "placeholder": null,
+        "description": "",
+        "enum": [],
+        "appearance": {
+          "width": 12
+        },
+        "settings": {},
+        "validations": [],
+        "sensitive": null,
+        "preset": "address1",
+        "autotag": null
+      },
+      {
+        "id": 235201,
+        "dataColumn": {
+          "key": "default_address.address2",
+          "label": "Address line 2",
+          "dataType": "text"
+        },
+        "parentId": null,
+        "position": 9,
+        "type": "text",
+        "stepId": 1,
+        "default": "",
+        "label": "Address line 2",
+        "placeholder": null,
+        "description": "",
+        "enum": [],
+        "appearance": {
+          "width": 12
+        },
+        "settings": {},
+        "validations": [],
+        "sensitive": null,
+        "preset": "address2",
+        "autotag": null
+      }
+    ],
+    "steps": [
+      {
+        "id": 1,
+        "title": "Step 1",
+        "description": ""
+      }
+    ],
+    "rules": [
+      {
+        "id": 198188,
+        "title": "Business",
+        "conditionChaining": "any",
+        "conditions": [
+          {
+            "operand": null,
+            "operator": "contains",
+            "metadata": {
+              "comparand": "Business",
+              "column": {
+                "key": "customer_type",
+                "label": "What option best describes you?",
+                "dataType": "text"
+              }
+            }
+          }
+        ],
+        "actions": [
+          {
+            "effect": "show_field",
+            "metadata": {
+              "fieldId": 737158
+            }
+          },
+          {
+            "effect": "show_field",
+            "metadata": {
+              "fieldId": 374476
+            }
+          },
+          {
+            "effect": "show_field",
+            "metadata": {
+              "fieldId": 200428
+            }
+          },
+          {
+            "effect": "show_field",
+            "metadata": {
+              "fieldId": 312775
+            }
+          },
+          {
+            "effect": "show_field",
+            "metadata": {
+              "fieldId": 817412
+            }
+          }
+        ]
+      },
+      {
+        "id": 156802,
+        "title": "Esthetician\/Cosmetologist",
+        "conditionChaining": "any",
+        "conditions": [
+          {
+            "operand": null,
+            "operator": "contains",
+            "metadata": {
+              "comparand": "Esthetician",
+              "column": {
+                "id": "37FKZl",
+                "key": "customer_type",
+                "label": "What option best describes you?",
+                "dataType": "text",
+                "readOnly": false,
+                "createdAt": "2020-02-17T17:06:16.403Z",
+                "dedicated": false,
+                "archivedAt": null,
+                "expandedLabel": "What option best describes you?"
+              }
+            }
+          },
+          {
+            "operand": null,
+            "operator": "contains",
+            "metadata": {
+              "comparand": "Cosmetologist",
+              "column": {
+                "id": "37FKZl",
+                "key": "customer_type",
+                "label": "What option best describes you?",
+                "dataType": "text",
+                "readOnly": false,
+                "createdAt": "2020-02-17T17:06:16.403Z",
+                "dedicated": false,
+                "archivedAt": null,
+                "expandedLabel": "What option best describes you?"
+              }
+            }
+          }
+        ],
+        "actions": [
+          {
+            "effect": "show_field",
+            "metadata": {
+              "fieldId": 128790
+            }
+          },
+          {
+            "effect": "show_field",
+            "metadata": {
+              "fieldId": 475486
+            }
+          },
+          {
+            "effect": "show_field",
+            "metadata": {
+              "fieldId": 199472
+            }
+          },
+          {
+            "effect": "show_field",
+            "metadata": {
+              "fieldId": 482759
+            }
+          },
+          {
+            "effect": "show_field",
+            "metadata": {
+              "fieldId": 985723
+            }
+          },
+          {
+            "effect": "show_field",
+            "metadata": {
+              "fieldId": 146443
+            }
+          },
+          {
+            "effect": "show_field",
+            "metadata": {
+              "fieldId": 498518
+            }
+          }
+        ]
+      },
+      {
+        "id": 889999,
+        "title": "Student",
+        "conditionChaining": "any",
+        "conditions": [
+          {
+            "operand": null,
+            "operator": "contains",
+            "metadata": {
+              "comparand": "Student",
+              "column": {
+                "id": "37FKZl",
+                "key": "customer_type",
+                "label": "What option best describes you?",
+                "dataType": "text",
+                "readOnly": false,
+                "createdAt": "2020-02-17T17:06:16.403Z",
+                "dedicated": false,
+                "archivedAt": null,
+                "expandedLabel": "What option best describes you?"
+              }
+            }
+          }
+        ],
+        "actions": [
+          {
+            "effect": "show_field",
+            "metadata": {
+              "fieldId": 373276
+            }
+          },
+          {
+            "effect": "show_field",
+            "metadata": {
+              "fieldId": 126766
+            }
+          },
+          {
+            "effect": "show_field",
+            "metadata": {
+              "fieldId": 610017
+            }
+          },
+          {
+            "effect": "show_field",
+            "metadata": {
+              "fieldId": 108870
+            }
+          },
+          {
+            "effect": "show_field",
+            "metadata": {
+              "fieldId": 197936
+            }
+          },
+          {
+            "effect": "show_field",
+            "metadata": {
+              "fieldId": 158610
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

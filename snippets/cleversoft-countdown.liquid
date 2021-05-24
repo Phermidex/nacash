@@ -1,0 +1,21 @@
+{% assign instructions = product.metafields.meta %}
+{% assign key = 'countdown' %}
+{% if instructions.countdown %}
+<p class="product-bar">{{'products.product.countdown.title' | t}}</p>
+<div class="countdown">
+  <div id="cntdwn" class="deal-clock lof-clock-{{ product.id }}-detail"></div>
+  <script>
+    //<![CDATA[
+    jQuery(document).ready(function($){
+      $(".lof-clock-{{ product.id }}-detail").lofCountDown({
+        TargetDate:"{{ instructions.countdown }}",
+
+        DisplayFormat:"<div class='day'><span class='no'>%%D%%</span><span class='text'>days</span></div><div class='hours'><span class='no'>%%H%%</span><span class='text'>hours</span></div><div class='min'><span class='no'>%%M%%</span><span class='text'>min</span></div><div class='second'><span class='no'>%%S%%</span><span class='text'>sec</span></div>",
+        FinishMessage: "Expired"
+        });
+    });
+    //]]>
+  </script>
+  {{ 'jquery.countdown.js' | asset_url | script_tag }}
+</div>
+{% endif %}

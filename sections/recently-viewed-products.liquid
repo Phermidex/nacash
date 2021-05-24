@@ -1,0 +1,211 @@
+{% if section.settings.display_recently_viewed_products %} 
+{{ '//ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js' | script_tag }}
+{{ 'jquery.products.min.js' | asset_url | script_tag }}
+
+{% assign lable_out = true %}
+{% if product.available  %}
+{% assign lable_out = false %}
+{% endif %}
+{% assign id = product.id %}
+{% assign title = product.title %}
+{% assign description = product.description %}
+{% assign type = product.type %}
+{% assign vendor = product.vendor %}
+{% assign metafields = product.metafields %}
+
+{% if select_current_variant_by_id %}
+{% for variant in product.variants %}
+{% if variant.id == select_current_variant_by_id %}
+{% assign current_variant = variant %}
+{% break %}
+{% endif %}
+{% endfor %}
+{% else %}
+{% assign current_variant = product.selected_or_first_available_variant %}
+{% endif -%}
+{% assign current_variant_id = current_variant.id %}
+{% assign current_variant_metafields = current_variant.metafields %}
+
+{% assign url = current_variant.url %}
+{% assign quantity = current_variant.inventory_quantity %}
+{% assign sku = current_variant.sku %}
+{% assign barcode = current_variant.barcode %}
+{% assign price = current_variant.price %}
+{% assign compare_at_price = current_variant.compare_at_price %}
+{% assign available = current_variant.available -%}
+{% assign show_button_add_to_cart = show_button_add_to_cart | default: settings.product_add_tocart %}
+{% if product.selected_variant.id == product.selected_or_first_available_variant.id and current_variant.image != blank %}
+{% assign image = current_variant.image %}
+{% assign hover_image = null %}
+{% else -%}
+{% assign image = product.images[0] %}
+{% assign hover_image = product.images[1] %}
+{% endif -%}
+{% assign select_current_variant_by_id = null %}
+{% assign image_size = image_size | default: '600x' %}
+{% assign show_options = show_options | default: settings.product_collection_show_options %}
+{% assign show_custom_options = show_custom_options | default: settings.product_show_custom_options %}
+{% assign show_custom_options = show_custom_options | default: settings.product_show_custom_options %}
+{% assign img_hover_url = hover_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+<section class="recently-viewed-products">
+  <div class="container">
+
+    {% if section.settings.recently_viewed_products_title != '' %}
+    <div class="related-heading">
+      <h2><span>{{ section.settings.recently_viewed_products_title }}</span></h2>
+    </div>
+    {% endif %}
+    <div class="products-grid row" id="recently-viewed-products-grid">
+    </div>
+  </div>
+</section>
+{% if settings.enable_multilang %}
+<script>
+  function splitTitle(title) {
+    if (title.indexOf("|") < 0) 
+      return title;
+    var titleArr = title.split("|");
+    return titleArr[translator.current_lang - 1];
+  }
+</script>
+{% endif %}
+{% raw %}
+<script id="recently-viewed-product-grid-template" type="text/x-jquery-tmpl">
+
+  <div class="grid-item col-sm-3 {{if !available}}sold-out {{/if}}{{if compare_at_price_min > price_min}}on-sale{{/if}}"{% endraw %} {% include 'product-get-attributes' %} {{settings.product_ajax_preload_json}} {% raw %}>
+    <div class="product-inner" id="product-${id}">
+    {% endraw %}
+
+
+
+     {% form "product", product, data-productid: product.id, id: null, class: "form-add-cart", data-js-product-form: '' %}
+  {% include 'product-customizer' %}
+
+    {% raw %}
+      <div class="product-top">
+      <div class="product-image">
+        <a href="${url}" class="product-grid-image" data-js-product-image>
+          <img src="${Shopify.Products.resizeImage(featured_image, "large")}" alt="${featured_image.alt}"/>
+  </a>
+
+
+          {{if compare_at_price_min > price_min}} 
+            <div class="product-label">
+            <span  >Sale</span>
+  </div>
+          {{/if}}
+          {{if !available}}
+           <div class="product-label">
+            <span>{{ 'product.out_of_stock' | t }}</span>
+  </div>
+          {{/if}}
+          {% endraw %}
+
+       {% raw %}
+<!--div class="add-to-cartS">
+<div class="ro_widget"></div>
+        <button type="submit" class="btn btn--status js-product-button-add-to-cart" name="add" data-js-product-button-add-to-cart     {% endraw %}{% unless current_variant.available %} disabled="disabled" data-button-status="sold-out"{% endunless %}{% raw %}>
+          <i class="cs-font clever-icon-cart-6"></i><span class="text-button-cart">{% endraw %}{{ 'products.product.add_to_cart.title' | t }}{% raw %}</span>
+          <span class="text-button-added" data-button-content="added">{% endraw %}{{ 'products.product.add_to_cart.added' | t }}{% raw %}</span>
+          <span class="sold-out" data-button-content="sold-out">{% endraw %}{{ 'products.product.add_to_cart.sold_out' | t }}{% raw %}</span>
+  </button>
+  </div-->
+  </div>
+
+
+  </div>
+
+      <div class="product-content">
+          <h3><a class="product-title" href="${url}">${splitTitle(title)}</a></h3>
+          <!-- h3> <a class="product-title" href="${url}">${title}</a></h3 -->
+        <span class="shopify-product-reviews-badge" data-id="${id}"></span>
+      <div class="price-box">   
+      {{if compare_at_price_min > price_min}} 
+        <p class="sale">
+          <span class="old-price"> {{html Shopify.formatMoney(compare_at_price_min, window.money_format)}}</span>
+          <span class="special-price">{{if price_varies}}<em{% if settings.enable_multilang %} data-translate="products.product.from"{% endif %}>{{ 'products.product.from' | t}}</em>{{/if}}{{html Shopify.formatMoney(price_min, window.money_format)}}</span>
+  </p>
+      {{else}}
+        <p class="regular-product">
+          <span >{{if price_varies}}<em{% if settings.enable_multilang %} data-translate="products.product.from"{% endif %}>{{ 'products.product.from' | t}}</em>{{/if}}{{html Shopify.formatMoney(price_min, window.money_format)}}</span>
+  </p>
+      {{/if}}
+  </div>
+    {% endraw %}
+    {%- if show_options and show_custom_options -%}
+      <div class="product-collection__options ">
+        {% include 'product-get-options' with hide_options_without_availability: hide_options_without_availability %}
+  </div>
+      {%- endif -%}
+      {%- if show_button_add_to_cart or show_options -%}
+      <div class="product-collection__variants{% if show_options == false or show_custom_options %} d-none{% endif %}">
+        {% include 'product-get-variants' %}
+  </div>
+      {%- endif -%}
+    {% raw %}
+  </div>
+    {% endraw %}
+     {% endform %}
+      {% raw %}
+  </div>
+  </div>
+</script>
+{% endraw %}
+
+<script>
+  Shopify.Products.showRecentlyViewed({ 
+    howManyToShow: {{ section.settings.number_of_recently_viewed_products }}, 
+    wrapperId: 'recently-viewed-products-grid', 
+    templateId: 'recently-viewed-product-grid-template',
+    onComplete: function() {
+    if (jQuery("#recently-viewed-products-grid").children().length > 0) {
+    jQuery(".recently-viewed-products").show();
+
+    {% if settings.enable_multilang %}
+    if (translator.current_lang == 2)
+    translator.doTranslate(".recently-viewed-products");
+    {% endif %}
+
+
+    if (jQuery(".spr-badge").length>0) {
+    return window.SPR.registerCallbacks(), window.SPR.initRatingHandler(), window.SPR.initDomEls(), window.SPR.loadProducts(), window.SPR.loadBadges();
+  }      
+                                      }    
+                                      }
+                                      });
+</script>
+
+{% if template contains 'product' %}
+<script>
+  Shopify.Products.recordRecentlyViewed();
+</script>
+{% endif %}
+
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Recently Viewed Products",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "display_recently_viewed_products",
+        "label": "Display Recently Viewed Products?",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "recently_viewed_products_title",
+        "label": "Title of recently viewed products",
+        "default": "Recently Viewed Products"
+      },
+      {
+        "type": "text",
+        "id": "number_of_recently_viewed_products",
+        "label": "Number of recently viewed products",
+        "default": "8"
+      }
+      
+    ]
+  }
+{% endschema %}

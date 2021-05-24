@@ -1,0 +1,7 @@
+{% assign instructions = product.metafields.meta %}
+{% assign key = 'label-new' %}
+{% if instructions.label-new %}
+<div class="label-new">
+  {{ instructions.label-new }}
+</div>
+{% endif %}

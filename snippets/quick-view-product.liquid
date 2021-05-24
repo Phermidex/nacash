@@ -1,0 +1,244 @@
+<!-- Begin quick-view-template -->
+<div class="clearfix" id="quickview-popup" style="display:none">
+
+  {% assign content = product.description | remove: "[disable-icon-new]" %}
+  {% assign content = content | remove: "[item-gallery]" %}
+  {% assign content = content | remove: "[disable-icon-sale]" %}
+  {% assign content = content | remove: "[icon-new-always]" %}
+  {% if content contains '[countdown]' %}
+  {% assign content = content | split: '[/countdown]' | last %}
+  {% endif %}
+  {% if content contains '[video]' %}
+  {% assign content = content | split: '[/video]' | last %}
+  {% endif %}
+  {% if content contains '[short-description]' %}
+  {% assign content = content | split: '[/short-description]' | last %}
+  {% endif %}
+  {% if content contains '[custom_html]' %}
+  {% assign content = content | split: '[/custom_html]' | last %}
+  {% endif %}
+  {% if content contains '[tabs]' %}
+  {% assign content = content | split: '[/tabs]' | last %}
+  {% endif %}
+  <div class="overlay"></div>
+  <div class="product-content clearfix{% if settings.use_color_swatch %} none-variants{% endif %}">
+    <div class="product-contentss clearfix row">
+      <div class="product-img col-6">
+        <div class="quickview-featured-image"></div>
+        <div class="more-view more-view-wrapper">
+          <ul class="product-photo-thumbs owl-carousel quickview-more-views-owlslider">
+          </ul>
+        </div>
+      </div>
+      <div class="product-shop col-6">
+        <div class="product-item">
+          <h2 class="product-title"><a>&nbsp;</a></h2>
+          <div class="product-details clearfix" id="add-to-cart-form">
+            <form action="/cart/add" data-productid="{{ product.id }}" method="post" class="variants">
+  {% include 'product-customizer' %}
+
+              <div class="prices">
+                <span class="text-price"> Price: </span>
+                <span class="compare-price"></span>
+                <span class="price"></span>
+              </div>
+              <p class="product-description"></p>
+              <select name='id' data-productid='{{ product.id }}' style="display:none"></select>
+              <div class="wrap-button">
+                <div class="wrap-qty">
+                  <div class="custom-qty">
+                    <input type="text" id="quantity" class="quantity" name="quantity" value="1">
+                    <div class="btn-plus">
+                      <span class="dec button down-qty">-</span>
+                      <span class="inc button up-qty">+</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="actions">
+                  <button type="button" class="btn add-to-cart-btn" id="add-to-cart-btn"><i class="cs-font clever-icon-cart-6"></i><span class="span-1">{{'product.detail.add_cart' | t}}</span></button>
+                </div>
+
+              </div>
+            </form>
+            <div class="product-infor">
+
+              <!--             <p class="product-inventory"><label>Availability</label><span></span></p> -->
+
+
+              <!--           <p class="product-type"><label>Product Type</label><span></span></p> -->
+
+              <p class="product-vendor"><label>Vendor:</label><span></span></p>
+            </div>
+            {% if settings.product_flash_sold_enable %}
+            <div class="total-sold-pr">
+              <i class="cs-font clever-icon-fire"></i>
+              <span class="number-solid"></span> sold in last <span class="add-hours-solid"></span> hours
+            </div>
+            {% endif %}
+            {% if settings.show_text_countdown %}
+            <div class="pr-view-countdown">
+              <div class="text-countdowns auto-countdown" >
+                {% capture countdown_counter_html %}<span class="text-countdown" countdown-counter></span>{% endcapture %}
+                {% capture countdown_delivery_html %}<span class="text-underline" countdown-delivery></span>{% endcapture %}
+                <i class="cs-font clever-icon-clock-2"></i> {{ 'products.product.text_countdown_html' | t: counter: countdown_counter_html, delivery: countdown_delivery_html  }}
+              </div>
+            </div>
+            {% endif %}
+            {% if settings.show_visitors %}
+            <div class="product-visitors">
+              <div class="visitors auto-visitors" >
+                {%- assign visitors_random_diff = settings.product_visitors_max | minus: settings.product_visitors_min -%}
+                {%- assign visitors_random = "now" | date: "%N" | modulo: visitors_random_diff | plus: settings.product_visitors_min -%}
+                {% capture visitors_counter_html %}<span class="visitors-text" data-js-counter>{{ visitors_random }}</span>{% endcapture %}
+                <i class="cs-font clever-icon-team"></i> {{ 'products.product.visitors_html' | t: counter: visitors_counter_html }}
+              </div>
+            </div>
+            {% endif %}
+            {% if settings.display_spend_shipping %}
+            <div class="spend-shiping cart-congrats">
+              <i class="cs-font clever-icon-truck"></i> Spend  <span class="moneys">${{settings.calculte_free_shipping_number }}</span> to get Free Shipping
+            </div>
+            {% endif %}
+            {% if settings.product_bagde_image %}
+            <div class="badge-image">
+              <img src="{{ settings.bagde_image | img_url: 'x2048' }}" alt />
+            </div>
+            {% endif %}
+            <div class="product-share-links">
+
+              <div class="product_socials_wrapper">
+                <div class="share-links">
+                  <div class="product_socials_wrapper_inner"> 
+
+                    <a href="//twitter.com/share?url={{ share_url }}&text={{ product.title }}" target="_blank" class="twitter" title="Twitter"><i class='cs-font clever-icon-twitter'></i></a>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ share_url }}" target="_blank" class="facebook" title="Facebook"><i class='cs-font clever-icon-facebook'></i></a>
+                    <a href="//pinterest.com/pin/create/button/?url={{ share_url }}&description={{ product.title }}&media={{ featured_image.src | img_url: 'original' }}" target="_blank" class="pinterest" title="vimeo"><i class="cs-font clever-icon-pinterest"></i></a>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>  
+      <a href="javascript:void(0)" class="close-popup"><i class="cs-font clever-icon-close"></i></a> 
+    </div>
+  </div>
+</div>
+<!-- End of quick-view-template -->
+<script type="text/javascript">  
+
+  Shopify.doNotTriggerClickOnThumb = false; 
+
+  var selectCallbackQuickview = function(variant, selector) {
+    var productItem = jQuery('.product-quickview .product-item');
+    addToCart = productItem.find('.add-to-cart-btn .span-1'),
+      productPrice = productItem.find('.price'),
+      comparePrice = productItem.find('.compare-price'),
+      totalPrice = productItem.find('.total-price span');
+
+
+    if (variant) {
+      if (variant.available) {
+        // We have a valid product variant, so enable the submit button
+        addToCart.removeClass('disabled').removeAttr('disabled').text('Add to Cart');
+
+      } else {
+        // Variant is sold out, disable the submit button
+        addToCart.val('Sold Out').addClass('disabled').attr('disabled', 'disabled');
+      }
+
+      // Regardless of stock, update the product price
+      productPrice.html(Shopify.formatMoney(variant.price, "{{ shop.money_format }}"));
+
+                                            // Also update and show the product's compare price if necessary
+                                            if ( variant.compare_at_price > variant.price ) {
+                        comparePrice
+                        .html(Shopify.formatMoney(variant.compare_at_price, "{{ shop.money_format }}"))
+                        .show();
+      productPrice.addClass('on-sale');
+    } else {
+      comparePrice.hide();
+      productPrice.removeClass('on-sale');
+    }
+
+    {% if settings.use_color_swatch %}
+    // BEGIN SWATCHES
+    var form = jQuery('#' + selector.domIdPrefix).closest('form');
+    for (var i=0,length=variant.options.length; i<length; i++) {
+      var radioButton = form.find('.swatch[data-option-index="' + i + '"] :radio[value="' + variant.options[i] +'"]');
+      if (radioButton.size()) {
+        radioButton.get(0).checked = true;
+      }
+    }
+    // END SWATCHES
+    {% endif %}
+
+    //update variant inventory
+    {% if settings.display_quickview_availability %}
+    var inventoryInfo = productItem.find('.product-inventory span');
+    if (variant.available) {
+      if (variant.inventory_management!=null) {
+        inventoryInfo.text(variant.inventory_quantity + " in stock");
+      } else {
+        inventoryInfo.text("Many in stock");
+      }
+    } else {
+      inventoryInfo.text("Out of stock");
+    }
+    {% endif %}
+
+    /*recaculate total price*/
+    //try pattern one before pattern 2
+    var regex = /([0-9]+[.|,][0-9]+[.|,][0-9]+)/g;
+    var unitPriceTextMatch = jQuery('.product-quickview .price').text().match(regex);
+
+    if (!unitPriceTextMatch) {
+      regex = /([0-9]+[.|,][0-9]+)/g;
+      unitPriceTextMatch = jQuery('.product-quickview .price').text().match(regex);      
+    }
+
+    if (unitPriceTextMatch) {
+      var unitPriceText = unitPriceTextMatch[0];      
+      var unitPrice = unitPriceText.replace(/[.|,]/g,'');
+      var quantity = parseInt(jQuery('.product-quickview input[name=quantity]').val());
+      var totalPrice = unitPrice * quantity;
+
+      var totalPriceText = Shopify.formatMoney(totalPrice, window.money_format);
+
+      totalPriceText = totalPriceText.match(regex)[0];
+
+      var regInput = new RegExp(unitPriceText, "g");  
+      var totalPriceHtml = jQuery('.product-quickview .price').html().replace(regInput ,totalPriceText); 
+      jQuery('.product-quickview .total-price span').html(totalPriceHtml);      
+    }/*end of price calculation*/
+
+
+    /*begin variant image*/
+    if (variant && variant.featured_image) {
+      var originalImage = jQuery(".product-quickview .quickview-featured-image img");
+      var newImage = variant.featured_image;
+      var element = originalImage[0];
+      Shopify.Image.switchImage(newImage, element, function (newImageSizedSrc, newImage, element) {
+        newImageSizedSrc = newImageSizedSrc.replace(/\?(.*)/,"");
+        jQuery('.product-quickview .more-view-wrapper img').each(function() {
+          var grandSize = jQuery(this).attr('src');
+          grandSize = grandSize.replace('compact','grande');
+
+          if (grandSize == newImageSizedSrc) {
+            jQuery(this).parent().trigger('click');              
+            return false;
+          }
+        });
+      });        
+    }
+    /*end of variant image*/  
+
+  } else {
+    // The variant doesn't exist. Just a safegaurd for errors, but disable the submit button anyway
+    addToCart.text('Unavailable').addClass('disabled').attr('disabled', 'disabled');
+  }
+
+  };
+</script>

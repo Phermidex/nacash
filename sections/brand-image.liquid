@@ -1,0 +1,154 @@
+{%- if section.settings.reponsive_bt != blank -%}
+{%- assign margin_bottom_responsive = section.settings.margin_bottom_responsive | split: ',' -%}
+{% capture margin_bottom %}mb-{{ margin_bottom_responsive[0] }} mb-sm-{{ margin_bottom_responsive[1] }} mb-md-{{ margin_bottom_responsive[2] }} mb-lg-{{ margin_bottom_responsive[3] }} {% endcapture %}
+{%- elsif section.settings.margin_bottom != blank -%}
+{% capture margin_bottom %}margin-bottom-{{ section.settings.margin_bottom }}{% endcapture %}
+{%- endif -%}
+<div class="main-brand brand-bottom {{margin_top}} {{margin_bottom}}" style="{%- unless section.settings.reponsive_mt != blank -%}margin-top:{{ section.settings.margin_top }}px;{%endunless %}{%- unless section.settings.reponsive_bt != blank -%}margin-bottom:{{ section.settings.margin_bottom }}px;{%endunless %}">
+  <div class="container">
+    {% if section.settings.brand_title != blank %}
+    <div class="heading-block">
+      <h3 class="title">{{ section.settings.brand_title }}</h3>
+    </div>
+    {% endif %}
+    <div id="logo-brand" class="{{section.settings.show_carousel_layout_brand}} owl-carousel" data-limit="{{number_colum}}" data-dots="{{section.settings.bullets}}" data-button="{{section.settings.arrows}}" data-autoplay="{{section.settings.autoplay}}">
+      {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+      {% if block.settings.brand_thumb1 != blank %}
+      <div class="item a-center">   
+        {% if block.settings.link != blank %}
+        <a href="{{ block.settings.link }}" class="logo-bar__link">
+          {% endif %}
+          {{ block.settings.brand_thumb1 | img_url: '160x160' | img_tag: section.settings.image.alt, 'logo-bar__image' }}
+          {% if block.settings.link != blank %}
+        </a>
+        {% endif %}
+      </div>  
+      {% else %}
+      <div class="logo-bar__item">
+        {{ 'logo' | placeholder_svg_tag: 'placeholder-svg' }}
+      </div>
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+    </div>
+    {% if section.settings.show_carousel_layout_brand == 'slide' %}
+    {% endif %}
+  </div>
+</div>
+{% schema %}
+  {
+  
+	"name": "Brands Carousel",
+    "class": "index-section",
+    "max_blocks": 10,
+    "settings": [
+ 		
+      {
+        "type": "text",
+        "id": "brand_title",
+        "label": "Heading",
+        "default": "Brand Logo"
+      },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 10
+    },
+    {
+      "type": "text",
+      "id": "reponsive_mt",
+      "label": "Responsive Margin Top",
+      "info": "Example is '0,0,0,0,0'"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 10
+    },
+    {
+      "type": "text",
+      "id": "reponsive_bt",
+      "label": "Responsive Margin Bottom",
+      "info": "Example is '0,0,0,0,0'"
+    },
+        {
+            "type": "checkbox",
+            "id": "autoplay",
+            "label": "Autoplay",
+            "default": true
+        },
+        {
+            "type": "checkbox",
+            "id": "arrows",
+            "label": "Arrows",
+            "default": true
+        },
+        {
+            "type": "checkbox",
+            "id": "bullets",
+            "label": "Bullets",
+            "default": true
+        }
+	],
+    "blocks": [
+        {
+          "type": "logo_image",
+          "name": "Logo",
+          "settings": [
+          {
+            "type": "image_picker",
+            "id": "brand_thumb1",
+            "label": "Logo"
+          },
+
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link",
+          "info": "Optional"
+        }
+         ]
+      }
+	],
+    "presets": [
+        {
+          "name": "Brands Carousel",
+           "category": "3) Builder",
+          "blocks": [
+            {
+              "type": "logo_image"
+            },
+            {
+            	"type": "logo_image"
+            },
+            {
+            	"type": "logo_image"
+            },
+            {
+           		"type": "logo_image"
+            },
+            {
+           		"type": "logo_image"
+            }
+          ]
+        }
+  	]
+ }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

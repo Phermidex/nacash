@@ -1,0 +1,79 @@
+
+{{ 'application.js' | asset_url | script_tag }}
+
+{% if template == "index"%}
+{% if settings.layout_fullpage %}
+{{ "jquery.fullPage.js" | asset_url | script_tag }}
+{% endif %}
+{% endif %}
+
+
+
+<script>
+  window.mc_submit = "subscribe";
+  window.mc_subscribing ="Your email address";
+  window.ajax_cart = {{settings.ajax_cart}};
+  window.enable_multilang = {{settings.enable_multilang}};
+  {% if settings.calculte_free_shipping_number != blank %}
+  window.calculte_free_shipping_number = {{settings.calculte_free_shipping_number}};
+  {% endif %}
+
+  window.product_visitors_max = {{settings.product_visitors_max}};
+  window.product_visitors_min = {{settings.product_visitors_min}};
+  window.product_visitors_interval_min = {{settings.product_visitors_interval_min}};
+  window.product_visitors_interval_max = {{settings.product_visitors_interval_max}};
+  window.product_visitors_stroke = {{settings.product_visitors_stroke}};
+
+  window.product_text_countdown_reset_time = {{settings.product_text_countdown_reset_time}};
+  window.product_text_countdown_delivery_time = {{settings.product_text_countdown_delivery_time}};
+
+
+  window.flash_sold_min_qty = {{settings.flash_sold_min_qty}};
+  window.flash_sold_max_qty = {{settings.flash_sold_max_qty}};
+  window.flash_sold_min_time = {{settings.flash_sold_min_time}};
+  window.flash_sold_max_time = {{settings.flash_sold_max_time}};
+
+  window.percent_min_value = {{settings.percent_min_value}};
+  window.percent_max_value = {{settings.percent_max_value}};
+  window.instock_min_value = {{settings.instock_min_value}};
+  window.instock_max_value = {{settings.instock_max_value}};
+
+  window.money_format = "{{shop.money_with_currency_format}}";
+  window.shop_currency = "{{ shop.currency }}";
+  window.show_multiple_currencies = {{settings.show_multiple_currencies}};
+  window.loading_url = "{{ 'loading.gif' | asset_url}}"; 
+  window.use_color_swatch = {{ settings.use_color_swatch }};
+  window.product_image_resize = {{settings.product_image_resize}};
+  window.enable_sidebar_multiple_choice = false;
+  {% if settings.swatch_style == 'color'%}
+  window.swatch_style1 = true;
+  {% endif %}
+  {% if settings.swatch_style == 'color_image'%}
+  window.swatch_style2 = true;
+  {% endif %}
+  {% if settings.swatch_style == "image_variant"%}
+  window.swatch_style3 = true;
+  {% endif %}
+  window.file_url = "{{''|file_url}}";
+  window.asset_url = "{{''|asset_url}}";
+  {% if settings.product_image_crop %}
+  window.images_size = {
+    is_crop: {{ settings.product_image_crop }},
+    ratio_width : {{ settings.product_image_ratio_width }},ratio_height : {{ settings.product_image_ratio_height }},};
+  {% endif %}
+</script>
+{% if settings.enable_multilang %}
+{% include 'translator' %}
+{% endif %}
+<script>
+  jQuery(window).scroll(function() {
+    if (jQuery(window).width() < 1025) {
+      var scroll = jQuery(window).scrollTop();
+      if (scroll > 10) {
+        jQuery("#header-mobile").addClass("is-ticky");
+      }else{
+        jQuery("#header-mobile").removeClass("is-ticky");
+      }
+    }
+  });
+</script>

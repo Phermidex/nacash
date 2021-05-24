@@ -1,0 +1,172 @@
+                   {% if product.type  == 'SHOPSTORM_HIDDEN_PRODUCT' %}
+                     Product is not available
+                     {% break %}
+                   {% endif %}
+
+<!-- Product Schema Markup -->
+{% assign fa_current_variant = product.selected_or_first_available_variant %}
+{%- assign fa_variant_count = product.variants | size -%}
+{%- assign fa_count = 0 -%}
+<script type="application/ld+json" data-creator_name="Nacach Wax">
+{
+  "@context": "http://schema.org/",
+  "@type": "Product",
+  "name": "{{ product.title | strip_html | escape }}",
+  "url": "{{ shop.url }}{{ product.url }}",
+  {%- if product.variants.first.sku != blank -%}
+    "sku": "{{ product.variants.first.sku }}",
+  {%- else -%}
+    "sku": "{{ product.variants.first.id }}",
+  {%- endif -%}
+  {%- if product.variants.first.barcode.size == 12 -%}
+    "gtin12": {{ product.variants.first.barcode }},
+  {%- endif -%}
+  {%- if product.variants.first.barcode.size == 13 -%}
+    "gtin13": {{ product.variants.first.barcode }},
+  {%- endif -%}
+  {%- if product.variants.first.barcode.size == 14 -%}
+    "gtin14": {{ product.variants.first.barcode }},
+  {%- endif -%}
+    "productID": "{{ product.id }}",
+  "brand": {
+    "@type": "Thing",
+    "name": "{{ product.vendor | escape }}"
+  },
+  "description": "{{ product.description | strip_html | escape }}",
+  "image": "https:{{ product.featured_image.src | img_url: 'grande' }}",
+  {%- if product.variants -%}
+  {%- assign fa_count = fa_count | plus: 1 -%}
+    "offers": {% if product.variants.size > 1 %}[{% endif %}
+      {
+        "@type" : "Offer",
+        "priceCurrency": "{{ shop.currency }}",
+        "price": "{{ fa_current_variant.price | money_without_currency  | strip_html | remove: ',' }}",
+        "itemCondition" : "http://schema.org/NewCondition",
+        "availability" : "http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
+        "url" : "{{ shop.url }}{{ fa_current_variant.url }}",
+            {%- if fa_current_variant.image -%}
+              {% assign variant_image_size = fa_current_variant.image.width | append: 'x' %}
+              "image": "https:{{ fa_current_variant.image.src | img_url: variant_image_size }}",
+            {%- else -%}
+              "image": "https:{{ product.featured_image.src | img_url: 'grande' }}",
+            {%- endif -%}
+            {%- if fa_current_variant.title != 'Default Title' -%}
+              "name" : "{{ product.title | strip_html | escape }} - {{ fa_current_variant.title | escape }}",
+            {%- else -%}
+              "name" : "{{ product.title | strip_html | escape }}",
+            {%- endif -%}
+            {% if fa_current_variant.barcode.size == 12 %}
+              "gtin12": {{ fa_current_variant.barcode }},
+            {%- endif -%}
+            {%- if fa_current_variant.barcode.size == 13 -%}
+              "gtin13": {{ fa_current_variant.barcode }},
+            {%- endif -%}
+            {%- if fa_current_variant.barcode.size == 14 -%}
+              "gtin14": {{ fa_current_variant.barcode }},
+            {%- endif -%}
+            {%- if fa_current_variant.sku != blank -%}
+              "sku": "{{ fa_current_variant.sku }}",
+            {%- else -%}
+              "sku": "{{ fa_current_variant.id }}",
+            {%- endif -%}
+            {%- if product.description != blank -%}
+            "description" : "{{ product.description | strip_html | escape }}",
+            {%- endif -%}
+          "priceValidUntil": "{{ 'now' | date: '%s' | plus: 31536000 | date: '%Y-%m-%d' | uri_encode | replace:'+','%20' }}"
+      }{%- if product.variants.size != 1 -%},{%- endif -%}
+      {%- for variant in product.variants -%}
+      {%- if variant != product.selected_or_first_available_variant -%}
+      {%- assign fa_count = fa_count | plus: 1 -%}
+        {
+          "@type" : "Offer",
+          "priceCurrency": "{{ shop.currency }}",
+          "price": "{{ variant.price | money_without_currency  | strip_html | remove: ',' }}",
+          "itemCondition" : "http://schema.org/NewCondition",
+          "availability" : "http://schema.org/{% if variant.available %}InStock{% else %}OutOfStock{% endif %}",
+          "url" : "{{ shop.url }}{{ variant.url }}",
+              {%- if variant.image -%}
+                {% assign variant_image_size = variant.image.width | append: 'x' %}
+                "image": "http:{{ variant.image.src | img_url: variant_image_size }}",
+              {%- else -%}
+                "image": "https:{{ product.featured_image.src | img_url: 'grande' }}",
+              {%- endif -%}
+              {%- if variant.title != 'Default Title' -%}
+                "name" : "{{ product.title | strip_html | escape }} - {{ variant.title | escape }}",
+              {%- else -%}
+                "name" : "{{ product.title | strip_html | escape }}",
+              {%- endif -%}
+              {%- if variant.barcode.size == 12 -%}
+                "gtin12": {{ variant.barcode }},
+              {%- endif -%}
+              {%- if variant.barcode.size == 13 -%}
+                "gtin13": {{ variant.barcode }},
+              {%- endif -%}
+              {%- if variant.barcode.size == 14 -%}
+                "gtin14": {{ variant.barcode }},
+              {%- endif -%}
+              {%- if variant.sku != blank -%}
+                "sku": "{{ variant.sku }}",
+              {%- else -%}
+                "sku": "{{ variant.id }}",
+              {%- endif -%}
+              {%- if product.description != blank -%}
+              "description" : "{{ product.description | strip_html | escape }}",
+              {%- endif -%}
+              "priceValidUntil": "{{ 'now' | date: '%s' | plus: 31536000 | date: '%Y-%m-%d' | uri_encode | replace:'+','%20' }}"
+          }
+          {%- if fa_count < fa_variant_count -%}
+         	{%- unless forloop.last -%},{%- endunless -%}
+          {%- endif -%}
+          {%- endif -%}
+      {%- endfor -%}
+    {%- if product.variants.size > 1 -%}]{%- endif -%}
+    {%- if product.metafields.spr.reviews -%}
+    ,"aggregateRating": {
+     "@type": "AggregateRating",
+     "ratingValue": {{ product.metafields.spr.reviews | split: '"ratingValue": "' | last | split: '"' | first | plus: 0 }},
+     "ratingCount": {{ product.metafields.spr.reviews | split: 'reviewCount": "' | last | split: '"' | first | plus: 0 }}
+    }
+    {%- endif -%}
+  {%- endif -%}
+}
+</script>
+<!-- End Product Schema Markup -->
+
+
+{% include 'shogun-products', content: product %}
+{{product.metafields.shogun.above}}
+<div class="moteeb-here"></div>
+{% section 'product-template' %}
+{% section 'product-related' %}
+{% section 'recently-viewed-products' %}
+
+<!----Product Reviews - Loox ------>
+<div class="related-products">
+
+<div class="container">
+<div id="looxReviews" data-product-id="{{product.id}}" class="loox-reviews-default">{{ product.metafields.loox.reviews }}</div>
+</div>
+
+<style>
+  .product-shop .swatch.swatch-default{display:none;}
+  .variant-option{position:relative;}
+  .lenght-option-2{height:194px;}
+  .lenght-option-3{height:280px;}
+  .fixed-infor .product-dynamic-checkout,.fixed-infor .product-label-wr,.fixed-infor .product-shop .producttop-meta .total-sold-pr, .fixed-infor .prodcuct-vendor, .fixed-infor .product-sku, .fixed-infor .product-information, .fixed-infor .product-dynamic-checkout, .fixed-infor .wishlist-detail, .fixed-infor .compare-detail,
+  .fixed-infor .pr-view-countdown, .fixed-infor .product-visitors, .fixed-infor .spend-shiping, .fixed-infor .badge-image, .fixed-infor .product_meta, .fixed-infor .product-share-links{display:none;}
+  #add-to-cart-form .option1-default .selector-wrapper:nth-child(1){display:block;}
+  #add-to-cart-form .option2-default .selector-wrapper:nth-child(2){display: block;position: absolute;top: 97px;width: 100%;}
+  #add-to-cart-form .option2-default .sw-2{padding-top:107px;}
+  #add-to-cart-form .option3-default .selector-wrapper:nth-child(3){display:block;position: absolute;bottom: 0;width: 100%;}
+  .variant-option.option1-text.lenght-option-3.option2-default.option3-default{height:250px;}
+  .variant-option.option1-text.option2-default{height: 180px;}
+  .option1-default .swatch1-default{display:none;}
+  .option2-default .swatch2-default{display:none;}
+  .option3-default .swatch3-default{display:none;}
+  .fixed-infor #add-to-cart-form .selector-wrapper{display:none !important;}
+  .fixed-infor #add-to-cart-form .option2-default .sw-2 { padding-top: 0;}
+</style>
+
+{{product.metafields.shogun.below}}
+
+

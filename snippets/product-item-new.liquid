@@ -1,0 +1,194 @@
+
+{% assign lable_sale = false %}
+{% if product.compare_at_price_min > product.price_min %}
+{% assign lable_sale = true %}
+{% endif %}
+{% comment %}
+Check if the product is sold out and set a variable to be used below.
+{% endcomment %}
+{% assign lable_out = true %}
+{% if product.available  %}
+{% assign lable_out = false %}
+{% endif %}
+{% assign id = product.id %}
+{% assign title = product.title %}
+{% assign description = product.description %}
+{% assign type = product.type %}
+{% assign vendor = product.vendor %}
+{% assign metafields = product.metafields %}
+{% if select_current_variant_by_id %}
+{% for variant in product.variants %}
+{% if variant.id == select_current_variant_by_id %}
+{% assign current_variant = variant %}
+{% break %}
+{% endif %}
+{% endfor %}
+{% else %}
+{% assign current_variant = product.selected_or_first_available_variant %}
+{% endif -%}
+{% assign current_variant_id = current_variant.id %}
+{% assign current_variant_metafields = current_variant.metafields %}
+{% assign url = current_variant.url %}
+{% assign quantity = current_variant.inventory_quantity %}
+{% assign sku = current_variant.sku %}
+{% assign barcode = current_variant.barcode %}
+{% assign price = current_variant.price %}
+{% assign compare_at_price = current_variant.compare_at_price %}
+{% assign available = current_variant.available -%}
+{% assign show_button_add_to_cart = show_button_add_to_cart | default: settings.product_add_tocart %}
+{% if product.selected_variant.id == product.selected_or_first_available_variant.id and current_variant.image != blank %}
+{% assign image = current_variant.image %}
+{% assign hover_image = null %}
+{% else -%}
+{% assign image = product.images[0] %}
+{% assign hover_image = product.images[1] %}
+{% endif -%}
+{% assign select_current_variant_by_id = null %}
+{% assign image_size = image_size | default: '600x' %}
+{% assign show_options = show_options | default: settings.product_collection_show_options %}
+{% assign show_custom_options = show_custom_options | default: settings.product_collection_show_options %}
+{% assign show_custom_options = show_custom_options | default: settings.product_collection_show_options %}
+{% assign img_hover_url = hover_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+<div class="grid-item product-item" {% include 'product-get-attributes' %} {{settings.product_ajax_preload_json}} >
+  <div class="product-inner">
+    {% include 'wishlist-product' %}
+    {% if settings.enable_product_compare %}
+    <div class="compare-wr">
+      <a class="btn add-to-compare add-product-compare" data-handle-product="{{product.handle}}" href="javascript:void(0);" title="Compare"><i class="cs-font clever-icon-law-1"></i><span>Add to Compare<em>Added to Compare</em></span></a>
+    </div>
+    {% endif %} 
+    {% form "product", product, data-productid: product.id, id: null, class: "form-add-cart no_ro_widget", data-js-product-form: '' %}
+  
+
+    <div class="product-image  js-product-images-navigation">
+      {% if settings.product_collection_lable_sale %}
+      {% if lable_sale or lable_out %}
+      <div class="product-label">
+        {% if lable_sale %}
+        {% if settings.sale_label_style =='percentage_label'%}
+        -{{ product.compare_at_price_max | minus:product.price | times:100 | divided_by:product.compare_at_price_max |round: 0 }}%
+        {% elsif settings.sale_label_style == 'text_label' %}
+        Sale
+        {% endif %}
+        {% endif %}
+        {% if lable_out %}
+        <span>{{ 'product.out_of_stock' | t }}</span>
+        {% endif %}
+      </div>
+      {% endif %}
+      {% endif %}
+      {% if settings.product_collection_lable_new %}
+      {% include 'cleversoft-label' %}
+      {% endif %}
+      <a href="{{ product.url | within: collection }}" class="grid-image cursor-default" data-js-product-image>
+        {% if number_colum_layout == 'slide' %}
+        <img class="lazyOwl feature-images" alt="" data-src="{{ product.featured_image.src | product_img_url: 'master' }}">
+        {% else %}
+        <img class="lazyOwl feature-images" src="{{ product.featured_image.src | product_img_url: 'master' }}" >
+        {% endif %}
+        {% if settings.product_image_hover %}
+        <span class="product-image-hover" data-idproduct="{{ product.id }}">
+          {% for image in product.images %}
+          {% if forloop.first != true %}
+          <img alt="{{ product.title }}" src="{{ image.src | product_img_url: 'master' }}">
+          {% break %}
+          {% endif %}
+          {% endfor %}
+        </span>
+        {% endif %}
+      </a>
+      {% include 'add-to-link' %}
+      {%- if show_button_add_to_cart -%}
+      <div class="add-to-cartS">
+        {% include 'product-customizer' %}
+        <button type="submit" class="btn btn--status js-product-button-add-to-cart" name="add" data-js-product-button-add-to-cart{% unless current_variant.available %} disabled="disabled" data-button-status="sold-out"{% endunless %}>
+          <i class="cs-font clever-icon-cart-6"></i><span class="text-button-cart">{{ 'products.product.add_to_cart.title' | t }}</span>
+          <span class="text-button-added" data-button-content="added">{{ 'products.product.add_to_cart.added' | t }}</span>
+          <span class="sold-out" data-button-content="sold-out">{{ 'products.product.add_to_cart.sold_out' | t }}</span>
+        </button>
+      </div>
+      {%- endif -%}
+      {%if settings.product_collection_countdown %}
+       {% include 'cleversoft-countdown' %}
+      {% endif %}
+    </div>
+    <div class="product-content">
+      <h3>
+        <a class="product-title" href="{{ product.url | within: collection }}">
+          {{ product.title }}
+        </a>
+      </h3>
+
+
+      <a href="#looxReviews">
+        <div class="loox-rating" data-id="{{ product.id }}" data-rating="{{ product.metafields.loox.avg_rating }}" data-raters="{{ product.metafields.loox.num_reviews }}">
+        </div>
+      </a>
+
+
+      {% assign content = product.description | remove: "[disable-icon-new]" %}
+      <p class="short-description">{{ content | strip_html | truncatewords: 35 }}</p>
+
+
+
+      {% if settings.product_collection_price %}
+
+        {%- assign min_price = product.price_min -%}
+        {%- assign max_price = product.price_max -%}
+        {%- assign money_price_min = min_price | money -%}
+        {%- assign money_price_max = max_price | money -%}
+
+        {% if product.variants.size > 1 %}
+          <div class="price-box">
+
+            {%- if show_sale_separator != null -%}
+            {%- assign show_sale_separator_status = show_sale_separator -%}
+            {%- else -%}
+            {%- assign show_sale_separator_status = settings.price_show_sale_separator -%}
+            {%- endif -%}
+            {%- if compare_at_price > price -%}
+            <span class="price-sale " data-js-product-price{% if show_sale_separator_status %} data-js-show-sale-separator{% endif %}><span class="old-price">{{ compare_at_price | money }}</span>
+              {% if show_sale_separator_status %}{{ 'products.product.price_sale_separator' | t }}{% endif %}<span class="special-price">{{ price | money }}</span></span>
+            {%- else -%}
+              <span class="product-price__price"> {{ money_price_min }} - {{ money_price_max }}</span>
+            {%- endif -%}
+
+          </div>
+        {% else %}
+
+          <div class="price-box">
+            {%- if show_sale_separator != null -%}
+            {%- assign show_sale_separator_status = show_sale_separator -%}
+            {%- else -%}
+            {%- assign show_sale_separator_status = settings.price_show_sale_separator -%}
+            {%- endif -%}
+            {%- if compare_at_price > price -%}
+            <span class="price-sale " data-js-product-price{% if show_sale_separator_status %} data-js-show-sale-separator{% endif %}><span class="old-price">{{ compare_at_price | money }}</span>
+              {% if show_sale_separator_status %}{{ 'products.product.price_sale_separator' | t }}{% endif %}<span class="special-price">{{ price | money }}</span></span>
+            {%- else -%}
+            <span class="regular-product" data-js-product-price{% if show_sale_separator_status %} data-js-show-sale-separator{% endif %}><span>{{ price | money }}</span></span>
+            {%- endif -%}
+          </div>        
+
+        {% endif %}
+
+      {% endif %}
+
+
+      {%- if show_options and show_custom_options -%}
+      <div class="product-collection__options ">
+        {% include 'product-get-options' with hide_options_without_availability: hide_options_without_availability %}
+      </div>
+      {%- endif -%}
+      {%- if show_button_add_to_cart or show_options -%}
+      <div class="product-collection__variants{% if show_options == false or show_custom_options %} d-none{% endif %}">
+        {% include 'product-get-variants' %}
+      </div>
+      {%- endif -%}
+    </div>
+    {% endform %}
+  </div>
+  <style>
+    .text-button-added, .sold-out{display:none;}
+  </style>
+</div>

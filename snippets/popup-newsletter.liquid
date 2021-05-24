@@ -1,0 +1,159 @@
+{% if settings.display_popup_newsletter %}
+
+
+<script type="text/javascript">// <![CDATA[
+  jQuery(document).ready(function() {    //
+    var $popupwapper        = jQuery('#wapper-popup'),
+        popupnewsletter         = jQuery('#popup-newsletter'),
+        popuppage        = window.location.pathname; 
+    var newsletter_life = {{settings.notification_cookies_cookies_life}};
+
+    $popupwapper.css({'position':'relative'});
+    jQuery('.wrapper #popup-newsletter').remove();
+    $popupwapper.append(popupnewsletter);
+
+    if (jQuery.cookie('emailpopup') != 'closed') {
+      setTimeout(function(){ 
+        openpopup();
+      }, {{settings.popup_newsletter_delay | times: 1000}});
+
+                 };
+                 jQuery('#checkBox').click(function(){
+
+        if(jQuery("#checkBox").is(':checked')){
+          jQuery('#popup-newsletter .btn.close').click(function(e) {
+            e.preventDefault();
+            closepopup();
+          });
+        }else{
+          //jQuery('#popup-newsletter').hide();
+
+        }
+      });
+      jQuery('#popup-newsletter .checkbox-group').click(function(e) {
+        e.preventDefault();
+        closepopup();
+        //jQuery('#popup-newsletter').hide();
+        var date = new Date(),
+            timer = 24 * 60 * 60 * 1000 * newsletter_life;
+
+        date.setTime(date.getTime() + timer);
+
+        $.cookie('emailpopup', 'off', {
+          expires: date,
+          path: '/'
+        });
+      });
+      jQuery('#popup-newsletter .btn.close').click(function(e) {
+        e.preventDefault();
+        //closepopup();
+        jQuery('#popup-newsletter').hide();
+      });
+      jQuery('body').keydown(function(e) {
+        if( e.which == 27) {popup-newsletter
+        closepopup();
+                            jQuery('body').unbind('keydown');
+                           }
+      });
+      jQuery('#mc_embed_signup form').submit(function() {
+        if (jQuery('#mc_embed_signup .email').val() != '') {
+          closepopup();
+        }
+      });
+
+      function closepopup () {
+        jQuery('#popup-newsletter .popupnewsletter').fadeOut(600, function() {
+          jQuery('#popup-newsletter .popup-overlay').fadeOut(600, function() {
+            jQuery('#popup-newsletter').hide();
+            jQuery.cookie('emailpopup', 'closed', {expires:1, path:'/'});
+          });
+        })
+      }
+      function openpopup () {
+        jQuery('#popup-newsletter').fadeIn(600, function() {
+          jQuery('#popup-newsletter .popupnewsletter').fadeIn(600);
+        });
+      }
+      //     jQuery(document).mouseup(function (e){
+
+      //       var container = jQuery(".popupnewsletter");
+
+      //       if (!container.is(e.target) // if the target of the click isn't the container...
+      //           && container.has(e.target).length === 0) // ... nor a descendant of the container
+      //       {
+      //         e.preventDefault();
+      //         closepopup();
+      //       }
+
+      //     });  
+    });
+    // ]]
+    // ]]></script>
+
+<div id="wapper-popup " class="{% if settings.display_popup_mobile %} hiden-mobile{% endif %} ">
+  <div id="popup-newsletter">
+    <div class="popup-overlay"></div>
+    <div class="popupnewsletter">
+      <div class="newsletter-popup">
+        <div class="newsletter-content row"><a class="btn close" title="Close"><span aria-hidden="true" class="cs-font clever-icon-close-1"></span></a>
+          <div class="col-6 col-auto content-newsletter">
+            <div class="wr-content-newsletter">
+              <h2 class="title">{{  settings.popup_newsletter_title }}</h2>
+              <p class="sub-title">{{  settings.popup_newsletter_sub_title }}</p>
+              <div id="email-subscibe">
+                <div id="mc_embed_signup">{% include 'newsletter-form' %}</div>
+                <!--End mc_embed_signup--></div>
+              <h3 class="message">{{  settings.popup_newsletter_message }}</h3>
+              <div class="checkbox-group form-group-top clearfix">
+                <input type="checkbox" id="checkBox">
+                <label for="checkBox"> 
+                  <span class="check"></span>
+                  <span class="box"></span>
+                  <span>{{ 'popup_newletter.show_popup' | t }}</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  {% if template == "index"%}
+  {% unless settings.display_popup_home %}
+  jQuery('#popup-newsletter').addClass('hiden-mobile');
+  {% endunless %}
+  {% endif %}
+  {% if template contains 'collection'%}
+  {% unless settings.display_popup_colection %}
+  jQuery('#popup-newsletter').addClass('hiden-mobile');
+  {% endunless %}
+  {% endif %}
+  {% if template contains 'product'%}
+  {% unless settings.display_popup_product %}
+  jQuery('#popup-newsletter').addClass('hiden-mobile');
+  {% endunless %}
+  {% endif %}
+  {% if template contains 'display_popup_blog'%}
+  {% unless settings.display_popup_product %}
+  jQuery('#popup-newsletter').addClass('hiden-mobile');
+  {% endunless %}
+  {% endif %}
+  {% if template contains 'display_popup_article'%}
+  {% unless settings.display_popup_product %}
+  jQuery('#popup-newsletter').addClass('hiden-mobile');
+  {% endunless %}
+  {% endif %}
+  {% if template contains 'product'%}
+  {% unless settings.display_popup_product %}
+  jQuery('#popup-newsletter').addClass('hiden-mobile');
+  {% endunless %}
+  {% endif %}
+
+</script>
+<style>
+  .hiden-mobile{display:none!important;}
+</style>
+
+{% endif %}

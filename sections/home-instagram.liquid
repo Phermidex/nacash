@@ -1,0 +1,265 @@
+
+{%- if section.settings.reponsive_mt != blank -%}
+{%- assign margin_top_responsive = section.settings.reponsive_mt | split: ',' -%}
+{% capture margin_top %}mt-{{ margin_top_responsive[0] }} mt-sm-{{ margin_top_responsive[1] }} mt-md-{{ margin_top_responsive[2] }} mt-lg-{{ margin_top_responsive[3] }} {% endcapture %}
+
+{%- endif -%}
+{%- if section.settings.reponsive_bt != blank -%}
+{%- assign margin_bottom_responsive = section.settings.reponsive_bt | split: ',' -%}
+{% capture margin_bottom %}mb-{{ margin_bottom_responsive[0] }} mb-sm-{{ margin_bottom_responsive[1] }} mb-md-{{ margin_bottom_responsive[2] }} mb-lg-{{ margin_bottom_responsive[3] }} {% endcapture %}
+{%- elsif section.settings.margin_bottom != blank -%}
+{% capture margin_bottom %}margin-bottom-{{ section.settings.margin_bottom }}{% endcapture %}
+{%- endif -%}
+{{ 'instafeed.min.js' | asset_url | script_tag }}
+<section class="instagram-bottom {{margin_top}} {{margin_bottom}}" style="{%- unless section.settings.reponsive_mt != blank -%}margin-top:{{ section.settings.margin_top }}px;{%endunless %}{%- unless section.settings.reponsive_bt != blank -%}margin-bottom:{{ section.settings.margin_bottom }}px;{%endunless %}">
+  {% if section.settings.show_instagram_boxed %}
+  <div class="">
+    {% else %}
+    <div class="container">
+      {% endif  %}
+      {% if section.settings.instagram_title != blank %}
+      <div class="heading-block">
+        <h3 class="title">
+          {{ section.settings.instagram_title }}
+        </h3>
+        {% if section.settings.instagram_des != blank %}
+        <p class="subtitle">{{ section.settings.instagram_des }}</p>
+        {% endif %}
+      </div>
+      {% endif %}
+
+      <div id="instafeed" class="content owl-theme owl-carousel"></div>  
+
+      {% if section.settings.show_instagram_boxed %}
+    </div>
+    {% endif  %}
+
+
+
+    {% if section.settings.show_carousel_layout_instagram == 'grid' %}
+    <script>
+      var feed = new Instafeed({
+        get: "user",    
+
+        {% if section.settings.user-id != blank %} userId: {{ section.settings.user-id }}, {% endif %}
+        {% if section.settings.accessToken != blank %}accessToken: '{{ section.settings.accessToken }}', {% endif %}
+
+        clientId: '{{ section.settings.client-id }}',
+        limit: '{{ section.settings.limit }}',
+        resolution: '{{ section.settings.resolution_instagram }}',
+        after: function() {
+        jQuery('#instafeed > a').attr( "target", "_blank" );
+        var count_a = jQuery("#instafeed" ).width();
+        var width_item = count_a / {{ section.settings.limit_of_columns }} - 0.3 ;
+        jQuery("#instafeed a").css("width", width_item);
+        jQuery('#instafeed > a').addClass('col-md-2');
+        jQuery('#instafeed ').addClass('row');
+      }
+                               });
+      feed.run();
+
+    </script>
+    {% endif %}
+    {% if section.settings.show_carousel_layout_instagram == 'slide' %}
+    <script>
+
+      var feed = new Instafeed({
+        get: "user",    
+
+        {% if section.settings.user-id != blank %} userId: {{ section.settings.user-id }}, {% endif %}
+        {% if section.settings.accessToken != blank %}accessToken: '{{ section.settings.accessToken }}', {% endif %}
+
+        clientId: '{{ section.settings.client-id }}',
+        limit: '{{ section.settings.limit }}',
+        resolution: '{{ section.settings.resolution_instagram }}',
+        after: function() {
+        jQuery('#instafeed > a').attr( "target", "_blank" );
+        jQuery("#instafeed").owlCarousel({
+
+        responsive:{
+        0:{
+        items:2,
+        nav:true
+      },
+                               600:{
+                               items:3,
+                               nav:true
+                               },
+                               800:{
+                               items:4,
+                               nav:true
+                               },
+                               1000:{
+                               items:6,
+                               nav:true,
+                               loop:false
+                               }
+                               },
+                               autoPlay : false,
+                               stopOnHover : false,
+
+                               lazyLoad : false,
+                               lazyFollow : true,
+                               lazyEffect : "fade",
+                               pagination : false,
+
+                               // Navigation
+                               nav : true,
+                               navText : ['<i class="cs-font clever-icon-prev"></i>','<i class="cs-font clever-icon-next"></i>'],
+                               rewindNav : true,
+                               scrollPerPage : false,
+                               });
+      }
+      });
+      feed.run();
+
+    </script>
+
+    {% endif %}
+    <div class="clearfix"></div>
+    </section>
+{% schema %}
+  {
+  
+	"name": " Instagram",
+    "class": "index-section",
+    "settings": [
+      
+      {
+        "type": "checkbox",
+        "id": "show_instagram_boxed",
+        "label": "Enable Full Width"
+      },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 10
+    },
+    {
+      "type": "text",
+      "id": "reponsive_mt",
+      "label": "Responsive Margin Top",
+      "info": "Example is '0,0,0,0'"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 10
+    },
+    {
+      "type": "text",
+      "id": "reponsive_bt",
+      "label": "Responsive Margin Bottom",
+      "info": "Example is '0,0,0,0'"
+    },
+      {
+        "type": "select",
+        "id": "show_carousel_layout_instagram",
+        "label": "Layout",
+        "options": [
+          {
+            "value": "slide",
+            "label": "Carousel "
+          },
+          {
+            "value": "grid",
+            "label": "Grid "
+          }
+        ],
+        "default": "slide"
+      },
+      {
+        "type": "select",
+        "id": "resolution_instagram",
+        "label": "Resolution ",
+        "options": [
+          {
+            "value": "thumbnail",
+            "label": "Thumbnail(Default) - 150x150 "
+          },
+          {
+            "value": "low_resolution",
+            "label": "Low Resolution - 306x306"
+          },
+          {
+            "value": "standard_resolution",
+            "label": "Standard Resolution - 612x612"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "instagram_title",
+        "label": "Heading",
+        "default": " Instagram"
+      },
+      {
+        "type": "text",
+        "id": "instagram_des",
+        "label": "Instagram Description",
+        "default": "Instagram has become one of the most important marketing channel these days so its important to leverage the benefits of your Instagram traffic by showing real authentic photos on your Shopify store."
+      },
+      {
+        "type": "text",
+        "id": "client-id",
+        "label": "Client Id",
+        "default": "3a81a9fa2a064751b8c31385b91cc25c",
+         "info": "[Get a Instagram Client_ID key](http:\/\/darkwhispering.com\/how-to\/get-a-instagram-client_id-key)"
+      },
+      {
+        "type": "text",
+        "id": "user-id",
+        "label": "User Id",
+        "default": "11707579",
+  		"info": "[Get Instagram User Id](http:\/\/www.ershad7.com\/InstagramUserID)"
+      },
+      {
+        "type": "text",
+        "id": "accessToken",
+        "label": "Access Token",
+        "default": "53102326.3a81a9f.ab5bb63e2ce94c6994b48e507bf66db4",
+        "info": "[Instagram access token generator](https:\/\/elfsight.com\/service\/generate-instagram-access-token)"
+      },
+    {
+      "type": "paragraph",
+      "content": "[Instagram access token](https:\/\/elfsight.com\/blog\/2016\/05\/how-to-get-instagram-access-token/)"
+    },
+      {
+        "type": "text",
+        "id": "limit",
+        "label": "Number of Photos",
+        "default": "10",
+        "info": "Number of photos to show initially"
+      },
+      {
+        "type": "text",
+        "id": "limit_of_columns",
+        "label": "Number of Columns",
+        "default": "10"
+      }
+	],
+    "presets": [
+        {
+          "name": " Instagramm",
+          "category": "ADVANCED BLOCK"
+          
+        }
+  	]
+ }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

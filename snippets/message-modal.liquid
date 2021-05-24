@@ -1,0 +1,70 @@
+<div class="loading cbox"></div>
+<div class="ajax-error-cbox cbox">
+  <div class="modal-inner">
+    <div class="ajax-error-title">Error</div>
+    <div class="ajax-error-message"></div>
+  </div>
+</div>
+<div class="ajax-success-cbox cbox">
+  <div class="overlay"></div>
+  <div class="content">
+    <span class="close-box"><i class="cs-font clever-icon-close"></i></span>	
+    <div class="box-wishlist">
+
+      <p>Please login and you will add product to your wishlist</p>
+      <div class="custom-button">
+        <a href="/account/login" class="btn btn-sign-in">SIGN IN</a>
+        <a href="/account/register" class="btn btn-register">REGISTER</a>
+      </div>
+    </div>
+    <div class="success-message show-cart-wr row">
+      <div class="col-left col-md-6 col-12">
+        <div class="cart-messages"><i class="cs-font clever-icon-check"></i>{{ 'message.success_cart' | t }}</div>
+        <img class="product-image-modal" src="" />
+        <div class="product-title"></div>
+        <div class="product-popups-variant"></div>
+        <div class="product-qty-popups">Qty: <span class="product-qty-popup"></span></div>
+        <div class="product-price-popups">Price: <span class="product-price-popup"></span></div>
+      </div>
+      <div class="col-right col-md-6 col-12">
+        <div class="count-popup">There are <span class="cart-count">{{ cart.item_count }}</span> items<br>in your cart</div>
+        <div class="summary">
+          <p class="total">
+            <span class="label" style="color:#000">{{ 'header.total' | t }}:</span>
+            <span class="price">{{cart.total_price | money}}</span> 
+          </p>
+        </div>
+        <div class="button-continue"><span class="close-box">CONTINUE SHOPPING</span></div>
+        <div class="button-viewcart">
+          <a href="/cart">{{ 'header.viewcart' | t }}</a>
+        </div>
+        <div class="button-checks">
+          <a>I agree with terms and conditions</a>
+        </div>
+        <div class="checkout-buttons disabled">
+          <button class="btn harman_btn4" onclick="window.location='/checkout'"><span data-hover="{{ 'header.checkout' | t }}">{{ 'header.checkout' | t }}</span></button>
+        </div>
+      </div>
+    </div>
+    <p class="success-message show-wishlist">{{ 'message.success_wishlist' | t }}</p> 
+    {% if settings.enable_might_like %}
+    <div class="might_like_title">
+      <div class="related-heading">
+        {% if related_products_title != '' %}
+        <h2>{{ settings.might_like_title }}</h2>
+        {% endif %}
+      </div>
+      <div class="row">
+        {% assign tabnew_collection = settings.tabnew_collection %}
+        {% for product in collections[tabnew_collection].products limit:4 %}
+  {% if product.object_type == 'product' and product.type == 'SHOPSTORM_HIDDEN_PRODUCT' %}{% continue %}{% endif %}
+   
+        <div class="col-md-3 col-12">
+          {% include 'product-item-new' %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </div>    
+</div>

@@ -1,0 +1,156 @@
+{% assign columns_product = settings.collection_results_per_row | plus: 0 %}
+{% assign display_image_cat = section.settings.display_image_cat %}
+{% assign image_category = section.settings.image_category %}
+{% assign product_grid = 12 | divided_by: settings.collection_results_per_row %}
+{% assign columns = 12 | divided_by: columns_product %}
+{% assign collection_banner_title = section.settings.collection_banner_title %}
+{% assign collection_height_image = section.settings.collection_height_image %}
+
+{% assign sidebar_categories_title = section.settings.sidebar_categories_title %}
+{% assign collection_infinite_scrolling = settings.collection_infinite_scrollings %}
+{% assign collection_infinite_scrolling_text = settings.collection_infinite_scrolling_text %}
+{% assign collection_infinite_scrolling_no_more_product_text = collection_infinite_scrolling_no_more_product_text %}
+
+{% unless settings.collection_layout == 'colection_fulwidth'%}
+{% include 'page-header' %} 
+{% endunless %}
+<div class="display-toolbar">
+  {% include 'toolbar' %}
+</div>
+<div class="product-grid-isotope-parent  {%if settings.colection_gutter %} colection_gutter {% endif %}  {%if settings.colection_boder %} colection_boder {% endif %} ">
+      <div class="products-grid product-grid-item collection-grid row">
+
+        
+        {% if collection.products.size > 0 %}      
+        {% paginate collection.products by product_per_page %}  
+        {% for product in collection.products %}
+  {% if product.object_type == 'product' and product.type == 'SHOPSTORM_HIDDEN_PRODUCT' %}{% continue %}{% endif %}
+
+        
+        <div class=" {% if settings.collection_results_per_row != blank and settings.collection_results_per_row != '5' %} col-lg-{{columns}} col-md-4 col-6{% else %} item-col-5 col-md-4 col-6  {% endif %} product-items {% if collection_infinite_scrolling == 'auto_loadmore' %} collection-product-item {% endif %}">
+          {% include 'product-item-new' %}
+        </div>
+        {% else %}
+        {% for i in (1..9) %}
+        <div class="grid__item_add {{ grid_item_width }}">
+          <div class="grid-view-item">
+            <a href="#" class="grid-view-item__link">
+              {% if product.title %}
+              {%- assign compare_at_price = product.compare_at_price -%}
+              {%- assign price = product.price -%}
+              {%- assign price_varies = product.price_varies -%}
+              {%- assign available = product.available -%}
+              {% else %}
+              {%- assign compare_at_price = 1999 -%}
+              {%- assign price = 1999 -%}
+              {%- assign price_varies = false -%}
+              {%- assign available = true -%}
+              {% endif %}
+              <div class="grid-view-item__image">
+                {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+              </div>
+              <div class="h4 grid-view-item__title">{{ 'homepage.onboarding.product_title' | t }}</div>
+              
+              <a href="#looxReviews">
+	<div class="loox-rating" data-id="{{ product.id }}" data-rating="{{ product.metafields.loox.avg_rating }}" data-raters="{{ product.metafields.loox.num_reviews }}">
+	</div>
+</a>
+              
+              <div class="grid-view-item__meta">
+                <s class="product-price__price">{{ compare_at_price | money }}</s>
+              </div>
+            </a>
+          </div>
+        </div>
+        {% endfor %}
+
+        {% endfor %}
+        {% endpaginate %}
+        {% else %}
+        <p style="text-align: center;">{{ 'collection.notice' | t }}</p>
+        {% endif %}
+
+      </div>
+  <!---- START Collection Description ------>
+  <div class="description"><p>{{ collection.description }}</p></div>
+  <!---- END Collection Description ------>
+    </div>
+
+<script>
+  {% if section.settings.enable_full%}
+  jQuery('.collections-pages').addClass('full-width');
+  {% else %}
+  jQuery('.collections-pages').addClass('container');
+  {% endif %}
+
+</script>
+{% schema %}
+{
+  "name": "Topbar",
+  "settings": [
+
+      
+      {
+        "type": "checkbox",
+        "id": "enable_full",
+        "label": "Enable Full Width",
+        "default": true
+      },
+{
+        "type": "header",
+        "content": "Image Category"
+      },
+    {
+        "type": "checkbox",
+        "id": "display_image_cat",
+        "label": "Enable Image Category",
+        "default": true
+      },
+
+{
+        "type": "header",
+        "content": "Collection Title"
+      },
+{
+        "type": "checkbox",
+        "id": "colection_title",
+        "label": "Enable Collection Title",
+        "default": true
+      },
+
+{
+        "type": "header",
+        "content": "Collection Description"
+      },
+{
+        "type": "checkbox",
+        "id": "colection_decription",
+        "label": "Enable Collection Description",
+        "default": true
+      },
+{
+        "type": "header",
+        "content": "Sort By"
+      },
+{
+        "type": "checkbox",
+        "id": "colection_softby",
+        "label": "Enable Sort By",
+        "default": true
+      },
+{
+        "type": "header",
+        "content": "View As"
+      },
+
+{
+        "type": "checkbox",
+        "id": "colection_view",
+        "label": "Enable View As",
+        "default": true
+      }
+      
+  ]
+}
+{% endschema %}

@@ -1,0 +1,241 @@
+{%- if section.settings.reponsive_mt != blank -%}
+{%- assign margin_top_responsive = section.settings.reponsive_mt | split: ',' -%}
+{% capture margin_top %}mt-{{ margin_top_responsive[0] }} mt-sm-{{ margin_top_responsive[1] }} mt-md-{{ margin_top_responsive[2] }} mt-lg-{{ margin_top_responsive[3] }} {% endcapture %}
+
+{%- endif -%}
+{%- if section.settings.reponsive_bt != blank -%}
+{%- assign margin_bottom_responsive = section.settings.reponsive_bt | split: ',' -%}
+{% capture margin_bottom %}mb-{{ margin_bottom_responsive[0] }} mb-sm-{{ margin_bottom_responsive[1] }} mb-md-{{ margin_bottom_responsive[2] }} mb-lg-{{ margin_bottom_responsive[3] }} {% endcapture %}
+{%- elsif section.settings.margin_bottom != blank -%}
+{% capture margin_bottom %}margin-bottom-{{ section.settings.margin_bottom }}{% endcapture %}
+{%- endif -%}
+<div class="home-blog {{margin_top}} {{margin_bottom}}" style="{%- unless section.settings.reponsive_mt != blank -%}margin-top:{{ section.settings.margin_top }}px;{%endunless %}{%- unless section.settings.reponsive_bt != blank -%}margin-bottom:{{ section.settings.margin_bottom }}px;{%endunless %}">
+  <div class="container">
+    <div class="main-blog blog-slide">
+      {% if section.settings.blog_title != blank %}
+      <div class="heading-block">
+        <h3 class="title">{{ section.settings.blog_title }}</h3>
+        {% if section.settings.blog_subtitle %}
+        <p class="subtitle">{{ section.settings.blog_subtitle }}</p>
+        {% endif %}
+      </div>
+      {% endif %}
+      {% assign home_block = section.settings.defaulthome_blogslider2 %}
+      {% assign selected_blog = blogs[home_block] | remove: "Drop" | downcase %}
+      <div id="latest-blogs" class="slide-blog owl-carousel" data-limit="{{ section.settings.blog_limit }}">
+        {%- assign blog = blogs[section.settings.defaulthome_blogslider2] -%}
+        {% for article in blog.articles  %}
+        <div class="item">
+          <div class="blog-item">
+            {% if section.settings.display_blog_image %}
+            <div class="main-blog-left">
+              <div class="image">
+                {%- assign img_url = article.image.src | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                <img class="lazyload"
+                     src="{{ article.image.src | img_url: '2048x'  }}"
+                     data-src="{{ img_url }}"
+                     data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                     data-aspectratio="{{ article.image.src.aspect_ratio }}"
+                     data-sizes="auto"
+                     alt="{{ image.alt | escape }}">
+              </div>
+            </div>
+            {% endif %}
+
+            <div class="blog-content{% if section.settings.home_blog_text_align == 'text_left' %} text-left{% endif %}{% if section.settings.home_blog_text_align == 'text_right' %} text-right{% endif %}{% if section.settings.home_blog_text_align == 'text_center' %} text-center{% endif %}">
+              <h3 class="p10">
+                <a href="{{ article.url }}">{{ article.title }}</a>
+              </h3>
+              {% if section.settings.display_blog_author %}
+              <span class="article__author">{{ 'blog.article.by_author' | t: author: article.author }}</span>
+              {% endif %}
+              {% if section.settings.display_blog_intro %}
+              <div class="short-des">
+
+                {% if article.excerpt.size > 0 %}
+                {{ article.excerpt | strip_html | truncate: 300, ' [...]' }}
+                {% else %}
+                <p>{{ article.content | strip_html | truncate: 300, ' [...]' }}</p>
+                {% endif %}
+
+              </div>
+              {% endif %}
+              {% if section.settings.display_blog_date %}
+              <div class="blog-time-cm">
+                <div class="blog-time">
+                  <span class="blog-month">{{ article.published_at | date: '%b' }}</span> 
+                  <span class="blog-day">{{ article.published_at | date: '%d' }},</span>
+                  <span class="blog-year"> {{ article.published_at | date: '%Y' }}</span>
+                </div>
+              </div>
+              {% endif %}
+              {% if section.settings.display_blog_readmore %}
+              <p class="button">
+                <a href="{{ article.url }}" class="btn-readmore">
+                  {{ section.settings.blog_readmore }}
+                </a>
+              </p>
+              {% endif %}
+            </div>
+
+          </div>
+        </div>
+
+        {% endfor %}
+      </div>
+      {% if section.settings.display_blog_view_all %}
+      <div class="text-center">
+        <a href="{{ blog.url }}" class="btn">
+          {{ 'blog.article.view_all' | t }}
+        </a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+
+
+
+{% schema %}
+  {
+  
+	"name": "Blog",
+    "class": "index-section section",
+    "settings": [
+      
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 10
+    },
+    {
+      "type": "text",
+      "id": "reponsive_mt",
+      "label": "Responsive Margin Top",
+      "info": "Example is '20,30,40,60'"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 10
+    },
+    {
+      "type": "text",
+      "id": "reponsive_bt",
+      "label": "Responsive Margin Bottom",
+      "info": "Example is '20,30,40,60'"
+    },
+		{
+              "type": "select",
+              "id": "home_blog_text_align",
+              "label": "Select Position",
+              "options": [
+                {
+                  "value": "text_left",
+                  "label": "Algin Left"
+                },
+                {
+                  "value": "text_right",
+                  "label": "Algin Right"
+                },
+                {
+                  "value": "text_center",
+                  "label": "Algin Center"
+                }
+              ]
+            },
+      {
+        "type": "checkbox",
+        "id": "display_blog_image",
+        "label": "Show Image",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "display_blog_date",
+        "label": "Show date ",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "display_blog_intro",
+        "label": "Show Intro",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "display_blog_author",
+        "label": "Show author",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "display_blog_view_all",
+        "label": "Show 'View all' button",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "display_blog_readmore",
+        "label": "Show Read More",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "blog_readmore",
+        "label": "Button",
+        "default": "Read More"
+      },
+      {
+        "type": "blog",
+        "id": "defaulthome_blogslider2",
+        "label": "Blog"
+      },
+      {
+        "type": "text",
+        "id": "blog_title",
+        "label": "Heading",
+        "default": "Latest News"
+      },
+      {
+        "type": "text",
+        "id": "blog_subtitle",
+        "label": "Sub Title",
+        "default": "trending fashion style"
+      },
+      {
+        "type": "text",
+        "id": "blog_limit",
+        "label": "Posts",
+        "default": "3"
+      }
+	],
+    "presets": [
+        {
+          "name": "Blog Carousel",
+          "category": "1) Blog",
+          "settings": {
+            "defaulthome_blogslider2": "News",
+            "blog_limit": "3"
+          }
+        }
+      ]
+ }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

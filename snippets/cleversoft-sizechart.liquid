@@ -1,0 +1,34 @@
+{% assign instructions = product.metafields.meta %}
+{% assign key = 'image-size-chart' %}
+{% if instructions.image-size-chart %}
+<div class="size-guide">
+  <a class="size-guide-open">Size Guide</a>
+  <div class="size-guide-inner">
+    <a class="size-guide-close"><i class="cs-font clever-icon-close"></i></a>
+    <img src="{{instructions.image-size-chart }}" alt="{{ image.alt | escape }}">
+  </div>
+  <div class="off-canvas-layer"></div>
+</div>
+
+{%else %}
+{% if section.settings.enable_sizeguide %}
+<div class="size-guide">
+  <a class="size-guide-open">Size Guide</a>
+  <div class="size-guide-inner">
+    <a class="size-guide-close"><i class="cs-font clever-icon-close"></i></a>
+   <img class="lazyload" src="{{ section.settings.image | img_url: '2048x'  }}" alt />
+  </div>
+  <div class="off-canvas-layer"></div>
+</div>
+{% endif %}
+{% endif %}
+<script>
+  jQuery(document).ready(function() {
+    jQuery('.size-guide-open').click(function(){
+      jQuery('body').addClass('open-size-guide');
+    })
+    jQuery('.size-guide-close').click(function(){
+      jQuery('body').removeClass('open-size-guide');
+    })
+  });
+</script>

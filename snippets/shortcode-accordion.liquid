@@ -1,0 +1,37 @@
+{% case shortcode %}
+{% when 'name' %}
+{% if content contains 'title="' %}
+{% assign _content = content | split: 'title="' | last %}
+<!-- {{ _content | split: '"]' | first }} -->
+
+{% if settings.enable_multilang %}
+  {% if _content contains "|" %}
+    {% assign content_lg = _content | split: '|' | first %}
+    <span class="lang1">{{ content_lg }}</span>
+    {% assign content_lg2 = _content | split: '|' | last %}
+ 	<span class="lang2">{{ content_lg2 | split: '"]' | first }}</span>
+  {% else %}
+  	{{ _content | split: '"]' | first }}
+  {% endif %}
+<!--   -->
+{% else %}
+		{{ _content | split: '"]' | first }}
+{% endif %}
+
+{% else %}empty{% endif %}
+{% else %}
+ {% assign _content = content | split: '"]' | last %} 
+ {% assign content1 = _content | split: '"]' | last %} 
+  {% if settings.enable_multilang %}
+  {% if _content contains "|" %}
+    {% assign content_lg = content1 | split: '|' | first %}
+    <span class="lang1">{{ content_lg }}</span>
+    {% assign content_lg2 = content1 | split: '|' | last %}
+    <span class="lang2">{{ content_lg2 | split: '[/accordion]' | first }}</span>
+ {% else %}
+  	{{ _content | split: '[/accordion]' | first }}
+  {% endif %}
+  {% else %}
+	{{ _content | split: '[/accordion]' | first }}
+  {% endif %}
+{% endcase %}

@@ -1,0 +1,252 @@
+{% assign home_tabs_margin = section.settings.home_tabs_margin %}
+{% assign limit_of_columns_product = section.settings.limit_of_columns_product_1 %}
+{% assign row_limit_setting = section.settings.tabs_visible_item %}
+
+{% assign show_tabs_boxed = section.settings.show_tabs_boxed %}
+{% assign number_colum_layout = section.settings.show_carousel_layout_tabs %}
+{% assign number_colum = section.settings.grid %}
+
+{%- if section.settings.grid_responsive != blank -%}
+{%- assign grid_responsive = section.settings.grid_responsive | split: ',' -%}
+{% capture class_grid %}col col-{{ grid_responsive[4] }} col-sm-{{ grid_responsive[3] }} col-md-{{ grid_responsive[2] }} col-lg-{{ grid_responsive[1] }} col-xl-{{ grid_responsive[0] }}{% endcapture %}
+{%- else -%}
+{% capture class_grid %}col-6 col-sm-6 col-md-4 col-lg-{{ 12 | divided_by: section.settings.grid }}{% endcapture %}
+{%- endif -%}
+{%- if section.settings.reponsive_mt != blank -%}
+{%- assign margin_top_responsive = section.settings.reponsive_mt | split: ',' -%}
+{% capture margin_top %}mt-{{ margin_top_responsive[0] }} mt-sm-{{ margin_top_responsive[1] }} mt-md-{{ margin_top_responsive[2] }} mt-lg-{{ margin_top_responsive[3] }} {% endcapture %}
+
+{%- endif -%}
+{%- if section.settings.reponsive_bt != blank -%}
+{%- assign margin_bottom_responsive = section.settings.margin_bottom_responsive | split: ',' -%}
+{% capture margin_bottom %}mb-{{ margin_bottom_responsive[0] }} mb-sm-{{ margin_bottom_responsive[1] }} mb-md-{{ margin_bottom_responsive[2] }} mb-lg-{{ margin_bottom_responsive[3] }} {% endcapture %}
+{%- elsif section.settings.margin_bottom != blank -%}
+{% capture margin_bottom %}margin-bottom-{{ section.settings.margin_bottom }}{% endcapture %}
+{%- endif -%}
+<div class="tabs-product-home tabs-product-carousel grid {{margin_top}} {{margin_bottom}}" style="{%- unless section.settings.reponsive_mt != blank -%}margin-top:{{ section.settings.margin_top }}px;{%endunless %}{%- unless section.settings.reponsive_bt != blank -%}margin-bottom:{{ section.settings.margin_bottom }}px;{%endunless %}">
+  {% if section.settings.enable_full_width_load %}
+  <div class="full-width">
+    {% else %}
+    <div class="container">
+      {% endif  %}
+      {%- if section.settings.show_top_separator -%}
+      <div class="border-top"></div>
+      {%- endif -%}
+    <div class="product-featured tabs-product row">
+      <div class="col-12">
+        {% if section.settings.home_product_title_1 != blank %}
+        <div class="heading-block">
+          <h3 class="title">
+            <span>{{ section.settings.home_product_title_1 }}</span>
+          </h3>
+          {% if section.settings.subtitle %}
+          <p class="subtitle">{{ section.settings.subtitle }}</p>
+          {% endif %}
+        </div>
+        {% endif %}
+        <div class="heading-tabs">
+          <ul class="nav nav-tabs" role="tablist">
+            {% if section.blocks.size > 0 %}
+            {% for block in section.blocks %}
+            {% assign items_tab = block.settings.title %}
+
+            {% unless block.settings.hide_title  %}
+            <li role="presentation" class="{% if forloop.first %} active{% endif %}" ><a href="#{{block.id }}{{ forloop.index }}" role="tab" data-toggle="tab">
+              {% if block.settings.title != blank %}
+              {{ items_tab  }}
+              {% else %}
+              {{ collections[block.settings.tabnew_collection].title }}
+              {% endif %}
+              </a>
+            </li>
+            {% endunless %}
+            {% endfor %}
+            {% endif %}
+
+          </ul>
+        </div>
+        <div class="product-featured-content">
+          <div class="tab-content">
+            {% if section.blocks.size > 0 %}
+            {% for block in section.blocks %}
+            {% assign tabs_collection = block.settings.tabnew_collection %}
+            <div class="tab-pane tabs-content fade {% if forloop.first %} in active show{% endif %}" id="{{block.id }}{{ forloop.index }}">
+              {% assign owl_id = block.id %}
+               {% include 'carousel-product' %}
+            </div>
+            {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <script type="text/javascript" >
+      $('.tabs-product .nav-tabs a').click(function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+      })
+    </script>
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Collection Carousel",
+    "class": "index-section section",
+    "max_blocks": 5,
+    "settings": [
+		{
+          "type": "checkbox",
+          "id": "enable_full_width_load",
+          "label": "Enable Full Width"
+        },
+  
+  
+        {
+            "type": "checkbox",
+            "id": "show_top_separator",
+            "label": "Show top separator",
+            "default": true
+        },
+      {
+        "type": "range",
+        "id": "grid",
+        "min": 2,
+        "max": 5,
+        "step": 1,
+        "label": "Item per row",
+        "default": 4
+      },
+      {
+        "type": "range",
+        "id": "max_count",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "label": "Max Count Products",
+        "default": 10
+      },
+        {
+            "type": "text",
+            "id": "grid_responsive",
+            "label": "Responsive size",
+            "info": "Example is '12,12,12,12', 1 < value < 12"
+        },
+	{
+        "type": "range",
+        "id": "margin_top",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+            "unit": "px",
+        "label": "Margin Top",
+        "default": 10
+      },
+        {
+            "type": "text",
+            "id": "reponsive_mt",
+            "label": "Responsive Margin Top",
+            "info": "Example is '0,0,0,0'"
+        },
+	{
+        "type": "range",
+        "id": "margin_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+            "unit": "px",
+        "label": "Margin Bottom",
+        "default": 10
+      },
+        {
+            "type": "text",
+            "id": "reponsive_bt",
+            "label": "Responsive Margin Bottom",
+            "info": "Example is '0,0,0,0,0'"
+        },
+        {
+            "type": "checkbox",
+            "id": "autoplay",
+            "label": "Autoplay",
+            "default": true
+        },
+        {
+            "type": "range",
+            "id": "speed",
+            "min": 2,
+            "max": 10,
+            "step": 1,
+            "unit": "sec",
+            "label": "Autoplay speed",
+            "default": 5
+        },
+        {
+            "type": "checkbox",
+            "id": "arrows",
+            "label": "Arrows",
+            "default": true
+        },
+        {
+            "type": "checkbox",
+            "id": "bullets",
+            "label": "Bullets",
+            "default": true
+        },
+	{
+        "type": "text",
+        "id": "home_product_title_1",
+        "label": "Heading",
+        "default": "This is the heading"
+      },
+      {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Sub Title",
+        "default": "Latest Product & New Collection"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "tabs",
+        "name": "Collection",
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "hide_title",
+            "label": "Hide Title"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "collection",
+            "id": "tabnew_collection",
+            "label": "Collection to products from"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Collection Carousel",
+        "category": "2) Collection",
+        "blocks": [
+          {
+            "type": "tabs"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,70 @@
+{% assign group_name = group_name | default: null %}
+{% for block in section.blocks %}
+    {% assign for_item_handle = block.settings.for_item | handle %}
+    {% if for_item_handle == link.handle %}
+        {% if group_name == null and block.settings.for_group == blank %}
+            {% assign add_content = true %}
+        {% elsif group_name and block.settings.for_group == group_name %}
+            {% assign add_content = true %}
+        {% else %}
+            {% assign add_content = false %}
+        {% endif %}
+        {% capture content %}
+            {% if group_name == null and block.type == 'megamenu_group' %}
+                {% assign group_name = block.settings.name %}
+                {% assign offset = block.settings.offset %}
+                <div class="menu__group{% if offset == 'small' %} {% endif %} row">
+                    {% include 'megamenu-content' %}
+                </div>
+                {% assign group_name = null %}
+                {% assign offset = null %}
+            {% elsif add_content %}
+                {% if block.type == 'megamenu_custom_html' %}
+                    {{ block.settings.content }}
+                {% elsif block.type == 'megamenu_products' %}
+                    {% assign title_url = collections[block.settings.collection].url %}
+                    {% assign products = collections[block.settings.collection].products %}
+                    <div class="megamenu-product row">
+                        {% if products.size > 0 %}
+                            {% assign limit = block.settings.products_per_row | times: block.settings.products_rows %}
+                            {% for product in products limit: limit %}
+  {% if product.object_type == 'product' and product.type == 'SHOPSTORM_HIDDEN_PRODUCT' %}{% continue %}{% endif %}
+
+                                <div class="col-md-{{ 12 | divided_by: block.settings.products_per_row }} product-col-{{block.settings.products_per_row}}">
+                                    {% include 'meagamenu-product-item' %}
+                                </div>
+                            {% endfor -%}
+                        {% endif -%}
+                    </div>
+                {% elsif block.type == 'megamenu_promobox' %}
+                    {% include 'megamenu-promobox' %}
+                {% elsif block.type == 'megamenu_subscription' %}
+               
+                {% endif %}
+            {% endif %}
+        {% endcapture %}
+        {% if add_content %}
+            {% capture column %}
+                <div class="col-md-{{ block.settings.grid }} d-none d-lg-block{% if offset == 'small' %}{% else %} {% endif %}">
+                    {% if block.settings.title != blank %}
+                        {% assign title_url = title_url | default: block.settings.url %}
+                        {% if title_url %}
+                            <a href="{{ title_url }}" class="menu-title">{{ block.settings.title }}</a>
+                        {% else %}
+                            <div class="menu-title ">{{ block.settings.title }}</div>
+                        {% endif -%}
+                        {% assign title_url = null %}
+                    {% endif %}
+                    {{ content }}
+                </div>
+            {% endcapture %}
+            {% if group_name %}
+                {{ column }}
+            {% elsif block.settings.float == 'left' %}
+                {%- assign columns_left = columns_left | append: column %}
+            {% elsif block.settings.float == 'right' %}
+                {% assign columns_right = columns_right | append: column %}
+            {% endif %}
+        {% endif %}
+    {% endif %}
+{% endfor %}

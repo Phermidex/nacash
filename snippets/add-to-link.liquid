@@ -1,0 +1,10 @@
+{% if settings.enable_quickview %}
+<div class="add-to-link">
+  <div class="quickview-button">
+    <a href="javascript:void(0)" id="{{ product.handle }}" data-toggle="tooltip" data-placement="top" title="Quick View" class="sca-qv-button harman_btn3">
+      <span>{{ 'product.quickview' | t }}</span>
+    </a>
+  </div>
+ 
+</div>
+{%endif%}

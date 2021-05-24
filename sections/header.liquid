@@ -1,0 +1,973 @@
+<div data-section-id="{{ section.id }}" data-section-type="header-section" class="{% if section.settings.enable_header_transparency %}header-absolute {% endif %}{% if section.settings.header_layout == 'header-layout-01' %}header-layout-01{% endif %}{% if section.settings.header_layout == 'header-layout-02' %}header-layout-02{% endif %}{% if section.settings.header_layout == 'header-layout-03' %}header-layout-03{% endif %}{% if section.settings.header_layout == 'header-layout-04' %}header-layout-04{% endif %}">
+  {% if section.settings.enable_header_promobox %}
+  <div class="promotion-box">
+    <div class="container">
+      <a href="{{ section.settings.header_promobox_link }}">
+        <span>{{  section.settings.header_promobox | split: '|' | first }}</span>
+      </a>
+      <div class="close-promobox">
+        <i class="cs-font clever-icon-close"></i>
+      </div>
+    </div>
+  </div>
+  <script>
+    $( ".close-promobox" ).click(function() {
+      $( ".promotion-box" ).toggle();
+    });
+  </script>
+  {% endif %}
+  {% include section.settings.header_layout %}
+  <div id="header-mobile">
+    <div class="container">
+      <div class="toggle-search">
+        <div class="toggle-me">
+          <div class="toggle-menu">
+            <button class="navbar-toggle btn-menu-canvas" data-toggle="offcanvas" data-target="#off-canvas-nav">
+              <i class="cs-font clever-icon-menu-5"></i>
+            </button>
+          </div>
+        </div>
+        <div class="icon-search"><i class="cs-font clever-icon-search-4"> </i></div>
+      </div>
+      <div class="logo-avc">
+        <span class="logo">
+          <a href="/">
+            {% if section.settings.enable_header_logosvg %}
+            {% if section.settings.header_logo_svg  != blank %}
+            <span style="height:{{ section.settings.logo_height_a }}px; width:auto;">
+            {{ section.settings.header_logo_svg }}
+            </span>
+             {% else %}
+             <img class="" src="{{ 'chaos-logo.svg' | asset_url }}" style="height:{{ section.settings.logo_height_a }}px; width:auto;" />
+            {% endif %}
+             {% else %}
+            <img src="{{ section.settings.logo | img_url: '2048x' }}" alt="{{ shop.name }}" style="height:{{ section.settings.logo_height_a }}px; width:auto;"/>
+           {% endif %}
+          </a>
+        </span>
+        
+        <div class="logo-sticky">
+          <a href="/">
+            {% if section.settings.enable_header_logotickysvg %}
+            {% if section.settings.header_logo_tickysvg  != blank %}
+            <span style="height:{{ section.settings.logo_height_a }}px; width:auto;">
+            {{ section.settings.header_logo_tickysvg }}
+            </span>
+             {% else %}
+             <img class="" src="{{ 'chaos-logo.svg' | asset_url }}" style="height:{{ section.settings.logo_height_a }}px; width:auto;" />
+            {% endif %}
+             {% else %}
+            <img src="{{ section.settings.logo_sticky | img_url: '2048x' }}" alt="{{ shop.name }}" style="height:{{ section.settings.logo_sticky_height_a }}px; width:auto"/>
+          {% endif %}
+          </a>
+        </div>
+      </div>
+      <div class="wishlist-cart">
+        <div class="wishlist-header">
+          <a href="/pages/wish-list" title="My Wishlist"><i class="cs-font clever-icon-heart-1" aria-hidden="true"></i></a>
+        </div>
+        <div class="header-cart 1">
+          <div class="top-cart">
+            <div class="top-cart">
+              <a href="#" class="cartToggle">
+                <i class="cs-font {{ section.settings.header_icon_cart }}"></i>
+                {% if cart.item_count > 0 %} <span class="cart-count">{{ cart.item_count }}</span>{% endif %}
+              </a> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="dropdown-cart" class="js-popup-cart-ajax" data-popup-content> 
+    <div class="continue-shoping">
+      <span>{{ 'header.my_cart' | t }} <span class="header-cart-count">(<span class="cart-count">{{ cart.item_count }}</span>)</span></span>
+      <a><i class="cs-font clever-icon-close"></i></a></div>
+    <div class="cart-empty">
+      <p>{{ 'header.no_product' | t }}</p>
+    </div>
+    <div class="mini_cart_header">
+      <ol class="cart-list">  
+        {% for item in cart.items %}
+        <li class="item" id="cart-item-{{item.id}}">
+          <a href="{{item.url}}" title="{{item.title}}" class="product-image"><img src="{{ item.image | product_img_url: 'small' }}" alt="{{item.title}}"></a>
+          <div class="product-inner">
+
+            <p class="product-name"><a href="{{item.url}}">{{ item.product.title }}</a></p>
+            <div class="option">
+              {% if item.product.variants.size != 0 %}
+              {% unless item.variant.title contains 'Default' %}
+              <small>{{ item.variant.title }}</small>
+              {% endunless %}
+              {% endif %}
+            </div>
+            <div class="cart-collateral">
+              <span class="qty-cart">{{ 'header.qty' | t }}:  {{item.quantity}}</span>
+              <span class="price">{{item.price | money}}</span>
+            </div>
+            <a href="javascript:void(0)" title="Remove Item" class="btn-remove"><i class="cs-font clever-icon-close"></i></a>
+          </div>
+        </li>
+        {% endfor %}
+      </ol>
+      <div class="wrap-btcart">
+        <div class="summary">                
+          <p class="total">
+            <span class="label" style="color:#000">{{ 'header.total' | t }}:</span>
+            <span class="price">{{cart.total_price | money}}</span> 
+          </p>
+        </div>
+        {% if settings.calculte_free_shipping %}
+        <div class="progres-cart">
+          <div class="progressbar">
+            <div class="less-than-ten"> </div>
+            <p class="cart-congrats"><i class="cs-font clever-icon-truck"></i>Spend <span class="moneys">${{settings.calculte_free_shipping_number}}.00</span> to get Free Shipping</p>
+            <p class="full-free-ship"><i class="cs-font clever-icon-truck"></i>Free Shipping</p>
+          </div>
+        </div>
+        {% endif %}
+        <div class="actions">
+          <div class="view-cart"><a class="harman_btn4" href="/cart"><span data-hover="{{ 'header.viewcart' | t }}">{{ 'header.viewcart' | t }}</span></a></div>
+          <button class="btn harman_btn4" onclick="window.location='/checkout'"><span data-hover="{{ 'header.checkout' | t }}">{{ 'header.checkout' | t }}</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="search-top-container site-search">
+    <div id="search-top">
+      <div class="search-form" style="display: none;">
+        <div class="search-close">
+          <i class="cs-font clever-icon-close"></i>
+        </div>
+        <div class="header-search-icon">
+          <i class="cs-font clever-icon-search-4"></i>
+        </div>
+        <p>WHAT ARE YOU LOOKING FOR?</p>
+        {% include 'search-bar' %}
+      </div>
+      <div class="overlay-search"></div>
+    </div>
+  </div>
+  <div class="nm-page-overlay"></div>
+
+  <script>
+    jQuery('.top-cart > .cartToggle').click(function(){
+      jQuery('#dropdown-cart').addClass('active');
+      jQuery('.wrapper-container').addClass('show-cart');
+      jQuery('body').css( "overflow", "hidden" );
+    });
+    jQuery('.continue-shoping a').click(function(){
+      jQuery('#dropdown-cart').removeClass('active');
+      jQuery('.wrapper-container').removeClass('show-cart');
+      jQuery('body').css( "overflow", "visible" );
+    });
+    jQuery('.search-close').click(function(){ 
+      jQuery('body').removeClass('active-search');
+      jQuery('#search-top').removeClass('active');
+    });
+    jQuery('.icon-search').click(function(){      
+      jQuery('body').addClass('active-search');
+      jQuery('#search-top').addClass('active');
+    });
+    $(document).ready(function() {
+      $( ".dropdown-sub").hover(
+        function() {
+          $( this ).parent().addClass("has_arrow");
+        }, function() {
+          $( this ).parent().removeClass("has_arrow");
+
+        }
+      );
+    });
+
+    jQuery(document).mouseup(function (e){
+
+      var container = jQuery("#dropdown-cart");
+
+      if (!container.is(e.target) // if the target of the click isn't the container...
+          && container.has(e.target).length === 0) // ... nor a descendant of the container
+      {
+        jQuery('#dropdown-cart').removeClass('active');
+        jQuery('.wrapper-container').removeClass('show-cart');
+        jQuery('body').css( "overflow", "visible" );
+      }
+
+    });
+
+    jQuery('.icon-search').click(function(){
+      jQuery('.search-form').fadeIn('300');        
+      jQuery('.overlay-search').css({"display": "block", "transform": "scale(1, 1)"});
+    });
+    jQuery('.search-close').click(function(){
+      jQuery('.search-form').fadeOut('300'); 
+      jQuery('.overlay-search').removeAttr("style");
+    });
+    {% if section.settings.display_ticky_menu %}
+    jQuery(window).scroll(function() {  
+      var scroll = jQuery(window).scrollTop();
+      if (scroll > 50) {
+        jQuery(".header").addClass("is-ticky");
+      }else{
+        jQuery(" .header").removeClass("is-ticky");
+      }
+    });
+    {% endif %}
+  </script>
+</div>
+<script>
+
+</script>
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+               {
+                 "type": "image_picker",
+                 "id": "logo",
+                 "label": "Logo image"
+               },
+                {
+                  "type": "range",
+                  "id": "logo_height_a",
+                  "min": 30,
+                  "max": 100,
+                  "step": 1,
+          		  "unit": "px",
+                  "label": "Logo image height",
+                  "default": 50
+                },
+
+               {
+                 "type": "checkbox",
+                 "id": "enable_header_logosvg",
+                 "label": "Enable Logo SVG"
+               },
+               {
+                 "type": "textarea",
+                 "id": "header_logo_svg",
+                 "label": "Code of SVG Logo",
+				 "info": "default file is - 'assets/logo.svg'"
+               },
+               {
+                 "type": "select",
+                 "id": "header_layout",
+                 "label": "Header Layout",
+                 "options": [
+                   {
+                     "value": "header-layout-01",
+                     "label": "Header Layout 01"
+                   },
+                   {
+                     "value": "header-layout-02",
+                     "label": "Header Layout 02"
+                   },
+                   {
+                     "value": "header-layout-03",
+                     "label": "Header Layout 03"
+                   },
+                   {
+                     "value": "header-layout-04",
+                     "label": "Header Layout 04"
+                   }
+                 ]
+               },
+				{
+                  "type": "checkbox",
+                  "id": "enable_header_fullwidth",
+                  "label": "Enable Full Width"
+                },
+               {
+                 "type": "checkbox",
+                 "id": "enable_header_transparency",
+                 "label": "Enable Header Transparency "
+               },
+               {
+                 "type": "header",
+                 "content": "Sticky Header"
+               },
+          		{
+                  "type": "checkbox",
+                  "id": "display_ticky_menu",
+                  "label": "Enable Sticky",
+                  "default": true,
+                  "info": "Sticky navigation (also called a fixed navigation) is basically a website menu that is locked into place at the top of the screen so that it does not disappear when the user scrolls down the page; in other words, it is accessible from anywhere on the website without having to scroll."
+                },
+
+               {
+                 "type": "checkbox",
+                 "id": "enable_header_logotickysvg",
+                 "label": "Enable Logo SVG sticky"
+               },
+               {
+                 "type": "textarea",
+                 "id": "header_logo_tickysvg",
+                 "label": "Code of SVG Logo ticky",
+				 "info": "default file is - 'assets/logo.svg'"
+               },
+               {
+                 "type": "image_picker",
+                 "id": "logo_sticky",
+                 "label": "Sticky Logo"
+               },
+                {
+                  "type": "range",
+                  "id": "logo_sticky_height_a",
+                  "min": 30,
+                  "max": 200,
+                  "step": 2,
+          		  "unit": "px",
+                  "label": "Logo image height",
+                  "default": 50
+                },
+               {
+                 "type": "header",
+                 "content": "Header Promobox"
+               },
+               {
+                 "type": "checkbox",
+                 "id": "enable_header_promobox",
+                 "label": "Enable Promobox"
+               },
+               {
+                 "type": "textarea",
+                 "id": "header_promobox",
+                 "label": "Text",
+                 "default": "Summer sale discount off 50%! Shop Now"
+               },
+               {
+                 "type": "text",
+                 "id": "header_promobox_link",
+                 "label": "Link",
+                 "default": "#"
+               },
+               {
+                 "type": "header",
+                 "content": "TopBar",
+				 "info": "Only works for Header Layout 2, 4"
+               },
+               {
+                 "type": "checkbox",
+                 "id": "enable_header_topbar",
+                 "label": "Enable Topbar "
+               },
+               {
+                 "type": "textarea",
+                 "id": "header_topbar_left",
+                 "label": "Text Content Left",
+                 "default": "Content"
+               },
+
+               {
+                "type": "textarea",
+                "id": "header_topbar_center",
+                "label": "Text Content Center",
+                "default": "Content"
+               },
+
+               {
+                 "type": "link_list",
+                 "id": "header_topbar_menu",
+                 "label": "Top Navigation"
+               },
+               {
+                 "type": "header",
+                 "content": "Main Navigation"
+               },
+               {
+                 "type": "link_list",
+                 "id": "menu",
+                 "label": "Menu",
+                 "default": "main-menu"
+               },
+               {
+                 "type": "checkbox",
+                 "id": "show_header_search",
+                 "label": "Show button 'Search'",
+                 "default": true
+               },
+               {
+                 "type": "checkbox",
+                 "id": "show_header_account",
+                 "label": "Show button 'Account'",
+                 "default": true
+               },
+               {
+                 "type": "checkbox",
+                 "id": "show_header_wishlist",
+                 "label": "Show button 'Wishlist'",
+                 "default": true
+               },
+               {
+                 "type": "checkbox",
+                 "id": "show_header_compare",
+                 "label": "Show button 'Compare'",
+                 "default": true
+               },
+               {
+                 "type": "checkbox",
+                 "id": "show_header_currency",
+                 "label": "Show button 'Currency'",
+				 "info": "Visible only with enabled global setting multiple currencies",
+                 "default": true
+               },
+                {
+                    "type": "checkbox",
+                    "id": "show_button_language",
+                    "label": "Show button 'Language'",
+                    "default": true,
+                    "info": "For multiple languages install app 'Weglot Translate'"
+                },
+                {
+                    "type": "select",
+                    "id": "language_app",
+                    "label": "Language app",
+                    "default": "weglot",
+                    "options": [
+                        {
+                            "value": "none",
+                            "label": "Menu with external links"
+                        },
+                        {
+                            "value": "default",
+                            "label": "Weglot Translate APP. Default APP design"
+                        },
+                        {
+                            "value": "weglot",
+                            "label": "Weglot Translate APP. Theme design"
+                        }
+                    ]
+                },
+        {
+            "type": "link_list",
+            "id": "language_link_list",
+            "label": "Menu with external links"
+        },
+               {
+                 "type": "checkbox",
+                 "id": "show_header_cart",
+                 "label": "Show button 'Cart'",
+                 "default": true
+               },
+			   {
+                 "type": "select",
+                 "id": "header_icon_carttype",
+                 "label": "Cart Type",
+                 "options": [
+                   {
+                     "value": "cart_type_1",
+                     "label": "Cart Type 1"
+                   },
+                   {
+                     "value": "cart_type_2",
+                     "label": "Cart Type 2"
+                   }
+                 ]
+               },
+               {
+                 "type": "select",
+                 "id": "header_icon_cart",
+                 "label": "Icon Cart",
+                 "options": [
+                   {
+                     "value": "clever-icon-cart-1",
+                     "label": "Cart 1"
+                   },
+                   {
+                     "value": "clever-icon-cart-2",
+                     "label": "Cart 2"
+                   },
+                   {
+                     "value": "clever-icon-cart-3",
+                     "label": "Cart 3"
+                   },
+                   {
+                     "value": "clever-icon-cart-4",
+                     "label": "Cart 4"
+                   },
+                   {
+                     "value": "clever-icon-cart-5",
+                     "label": "Cart 5"
+                   },
+                   {
+                     "value": "clever-icon-cart-6",
+                     "label": "Cart 6"
+                   },
+                   {
+                     "value": "clever-icon-cart-7",
+                     "label": "Cart 7"
+                   },
+                   {
+                     "value": "clever-icon-cart-8",
+                     "label": "Cart 8"
+                   },
+                   {
+                     "value": "clever-icon-cart-9",
+                     "label": "Cart 9"
+                   },
+                   {
+                     "value": "clever-icon-cart-10",
+                     "label": "Cart 10"
+                   },
+                   {
+                     "value": "clever-icon-cart-11",
+                     "label": "Cart 11"
+                   },
+                   {
+                     "value": "clever-icon-cart-12",
+                     "label": "Cart 12"
+                   },
+                   {
+                     "value": "clever-icon-cart-13",
+                     "label": "Cart 13"
+                   },
+                   {
+                     "value": "clever-icon-cart-14",
+                     "label": "Cart 14"
+                   },
+                   {
+                     "value": "clever-icon-cart-15",
+                     "label": "Cart 15"
+                   },
+                   {
+                     "value": "clever-icon-cart-16",
+                     "label": "Cart 16"
+                   },
+                   {
+                     "value": "clever-icon-cart-17",
+                     "label": "Cart 17"
+                   },
+                   {
+                     "value": "clever-icon-cart-18",
+                     "label": "Cart 18"
+                   }
+                 ]
+               }
+              ],
+  "blocks": [
+
+    {
+      "type": "megamenu",
+      "name": "Mega menu",
+      "settings": [
+        {
+          "type": "header",
+          "content": "General"
+        },
+        {
+          "type": "text",
+          "id": "for_item",
+          "label": "For item"
+        },
+        {
+          "type": "range",
+          "id": "grid",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "/12",
+          "label": "Links column size",
+          "default": 2
+        },
+        {
+          "type": "checkbox",
+          "id": "second_level_column",
+          "label": "Second level is column",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "second_level_column_size",
+          "min": 1,
+          "max": 50,
+          "step": 1,
+          "unit": "lns",
+          "label": "Column lines size",
+          "default": 20
+        }
+      ]
+    },
+    {
+      "type": "megamenu_products",
+      "name": "Products (Mega menu)",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Products"
+        },
+        {
+          "type": "text",
+          "id": "for_item",
+          "label": "For item"
+        },
+        {
+          "type": "text",
+          "id": "for_group",
+          "label": "For group (Name)"
+        },
+        {
+          "type": "range",
+          "id": "grid",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "/12",
+          "label": "Column size",
+          "default": 4
+        },
+        {
+          "type": "select",
+          "id": "float",
+          "label": "Float",
+          "default": "right",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "select",
+          "id": "products_per_row",
+          "label": "Products per row",
+          "default": "2",
+          "options": [
+            {
+              "value": "1",
+              "label": "1"
+            },
+            {
+              "value": "2",
+              "label": "2"
+            },
+            {
+              "value": "3",
+              "label": "3"
+            },
+            {
+              "value": "4",
+              "label": "4"
+            },
+            {
+              "value": "5",
+              "label": "5"
+            },
+            {
+              "value": "6",
+              "label": "6"
+            },
+            {
+              "value": "12",
+              "label": "12"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "products_rows",
+          "min": 1,
+          "max": 6,
+          "step": 1,
+          "label": "Rows",
+          "default": 1
+        }
+      ]
+    },
+    {
+      "type": "megamenu_promobox",
+      "name": "Promo box (Mega menu)",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Promo box"
+        },
+        {
+          "type": "text",
+          "id": "for_item",
+          "label": "For item"
+        },
+        {
+          "type": "text",
+          "id": "for_group",
+          "label": "For group (Name)"
+        },
+        {
+          "type": "range",
+          "id": "grid",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "/12",
+          "label": "Column size",
+          "default": 4
+        },
+        {
+          "type": "select",
+          "id": "float",
+          "label": "Float",
+          "default": "right",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ]
+        },{
+          "type": "select",
+          "id": "stype",
+          "label": "Style",
+          "default": "style_1",
+          "options": [
+            {
+              "value": "style_1",
+              "label": "Style 1"
+            },
+            {
+              "value": "style_2",
+              "label": "Style 2"
+            },
+            {
+              "value": "style_3",
+              "label": "Style 3"
+            },
+            {
+              "value": "style_4",
+              "label": "Style 4"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Url"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "textarea",
+          "id": "custom_html",
+          "label": "Custom HTML"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text",
+          "default": "Button text"
+        }
+      ]
+    },
+    {
+      "type": "megamenu_custom_html",
+      "name": "Custom html (Mega menu)",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Custom html"
+        },
+        {
+          "type": "text",
+          "id": "for_item",
+          "label": "For item"
+        },
+        {
+          "type": "text",
+          "id": "for_group",
+          "label": "For group (Name)"
+        },
+        {
+          "type": "range",
+          "id": "grid",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "/12",
+          "label": "Column size",
+          "default": 4
+        },
+        {
+          "type": "select",
+          "id": "float",
+          "label": "Float",
+          "default": "right",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Url"
+        },
+        {
+          "type": "html",
+          "id": "content",
+          "label": "Content",
+          "default": "<p>Custom html content</p>"
+        }
+      ]
+    },
+    {
+      "type": "megamenu_group",
+      "name": "Group (Mega menu)",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Group"
+        },
+        {
+          "type": "text",
+          "id": "for_item",
+          "label": "For item"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name"
+        },
+        {
+          "type": "range",
+          "id": "grid",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "unit": "/12",
+          "label": "Column size",
+          "default": 4
+        },
+        {
+          "type": "select",
+          "id": "float",
+          "label": "Float",
+          "default": "right",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Url"
+        }
+      ]
+    },
+    {
+      "type": "megamenu_title_image",
+      "name": "Title image (Mega menu)",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Title image",
+          "info": "Only for second level!"
+        },
+        {
+          "type": "text",
+          "id": "for_item",
+          "label": "For item",
+          "info": "Example: Women's+Clothing"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Url"
+        }
+      ]
+    },
+    {
+      "type": "megamenu_label",
+      "name": "Label (Mega menu)",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Label"
+        },
+        {
+          "type": "text",
+          "id": "for_item",
+          "label": "For item",
+          "info": "Example: Men's+Shoes+Flats"
+        },
+        {
+          "type": "select",
+          "id": "type",
+          "label": "Type",
+          "default": "hot",
+          "options": [
+            {
+              "value": "hot",
+              "label": "Hot"
+            },
+            {
+              "value": "sale",
+              "label": "Sale"
+            },
+            {
+              "value": "new",
+              "label": "New"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,82 @@
+{% assign number_of_related_products_to_show = number_of_related_products | plus:1 %}
+
+{% assign current_product = product %}
+{% assign current_product_tags = product.tags %}
+{% assign found_first_match = false %}
+{% assign found_second_match = false %}
+{% assign first_related_product = true %}
+
+{% assign product_count = 1 %}
+
+{% paginate collections.all.products by 1000 %}
+{% for product in collections.all.products %}
+  {% if product.object_type == 'product' and product.type == 'SHOPSTORM_HIDDEN_PRODUCT' %}{% continue %}{% endif %}
+
+{% unless product.handle == current_product.handle %}
+{% for tag in product.tags %}
+{% if current_product_tags contains tag and tag != 'Made in USA' %}
+{% if found_first_match == false %}
+{% assign found_first_match = true %}
+{% assign first_match = tag %}
+{% elsif found_second_match == false %}
+{% assign found_second_match = true %}
+{% assign second_match = tag %}
+{% endif %}
+{% endif %}
+{% endfor %}
+
+{% if found_first_match == true %}
+{% if first_related_product == true %}
+{% assign first_related_product = false %}
+
+<section class="related-products">
+  <div class="container">
+    <div class="related-heading">
+      {% if related_products_title != '' %}
+      <h2>{{ related_products_title }}</h2>
+      {% endif %}
+    </div>
+    <div class="products-grid owl-carousel">
+      {% endif %}
+      {% if product_count < number_of_related_products_to_show %}    
+      {% if product.tags contains first_match or product.tags contains second_match %}          
+      {% include 'product-item-new' with collection.handle %}
+      {% assign product_count = product_count | plus:1 %}
+      {% endif %}
+      {% endif %}
+      {% endif %}
+      {% endunless %}
+      {% endfor %}
+      {% if first_related_product == false %} </div> {% endif %}
+    {% endpaginate %}
+  </div>
+</section>
+<script>
+  $(document).ready(function() {
+    $(".related-products .products-grid").owlCarousel({
+      loop:true,
+      margin:1,
+      responsiveClass:true,
+      navText: ['<i class="cs-font clever-icon-prev"></i>','<i class="cs-font clever-icon-next"></i>'],
+      responsive:{
+        0:{
+          items:1,
+          nav:true
+        },
+        600:{
+          items:2,
+          nav:true
+        },
+        800:{
+          items:4,
+          nav:true
+        },
+        1000:{
+          items:4,
+          nav:true,
+          loop:false
+        }
+      }
+    })
+  })
+</script> 

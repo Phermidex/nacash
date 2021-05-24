@@ -1,0 +1,188 @@
+{% comment %}
+  ---
+  Author: Helium
+  Documentation: https://customerfields.com/help
+  Version: 3.0.7
+  The following snippet exists to serve forms for the Customer Fields app.
+  YOU SHOULD NOT BE EDITING THIS FILE. CHANGES MAY BE OVERWRITTEN!
+  Instead, you should read our documentation and see how you can create 
+  custom forms or reach out to our support team for help.
+  ---
+{% endcomment %}
+
+{% assign custom_data = customer.metafields.customer_fields.data %}
+{% capture cf_init_data %}
+{
+  {% if customer %}
+  "shopifyCustomer": {
+    "id": {{ customer.id | json }},
+    "token": {{ customer.metafields.customer_fields.access_token | json }},
+    "first_name": {{ customer.first_name | json }},
+    "last_name": {{ customer.last_name | json }},
+    "name": {{ customer.name | json }},
+    "email": {{ customer.email | json }},
+    "phone": {{ customer.phone | json }},
+    "default_address": {{ customer.default_address | json }},
+    "addresses": {{ customer.addresses | json }},
+    "addresses_count": {{ customer.addresses_count | json }},
+    "accepts_marketing": {{ customer.accepts_marketing | json }},
+    "orders": {{ customer.orders | json }},
+    "orders_count": {{ customer.orders_count | json }},
+    "tags": {{ customer.tags | json }},
+    "tax_exempt": {{ customer.tax_exempt | json }},
+    "total_spent": {{ customer.total_spent | json }},
+    "custom_data": {{ custom_data | json }}
+  },
+  {% endif %}
+  "domain": {{ shop.permanent_domain | json }},
+  "baseApiUrl": "https://customr.heliumdev.com",
+  "proxyPath": {{ shop.metafields.customer_fields.options.proxy_path | default: "/tools/customr" | json }},
+  "countriesSelectHtml": {{ country_option_tags | json }},
+  "countries": {{ shop.metafields.customer_fields.countries | json }},
+  "theme": {
+    "name": null,
+    "version": null
+  }
+}
+{% endcapture %}
+
+<script data-cf-init type="application/json">
+  {{ cf_init_data }}
+</script>
+
+<script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=URL%2Ces6%2Cfetch%2CCustomEvent"></script>
+
+{% unless customer_api %}
+  {% if form_id != blank %}
+    {% form "create_customer", data-cf-form: form_id %}
+      <div class="cf-react-target">
+        <div class="cf-preload">
+          {% for i in (1..4) %}
+            <div class="cf-preload-label cf-preload-item"></div>
+            <div class="cf-preload-field cf-preload-item"></div>
+          {% endfor %}
+          {% for i in (1..2) %}
+            <span class="cf-preload-button cf-preload-item"></span>
+          {% endfor %}
+        </div>
+      </div>
+      <script data-cf-form="{{ form_id }}" type="application/json">
+        {
+          "id": {{ form_id | json }},
+          "formDataUrl": {{ "cf_form_data." | append: form_id | append: ".json" | asset_url | json }}
+        }
+      </script>
+    {% endform %}
+  {% endif %}
+  
+  <script>
+    document.head.innerHTML += '<link rel="stylesheet" type="text/css" href="{{ 'customer-fields.css' | asset_url }}" />';
+  </script>
+  <script async src="{{ 'customer-fields.js' | asset_url }}"></script>
+  
+
+  <style>
+    .cf-preload {
+      margin-top: 50px;
+      opacity: 0.5;
+    }
+    
+    .cf-preload-item {
+      position: relative;
+      overflow: hidden;
+      background: #e2e2e2;
+      border-radius: 4px;
+    }
+    
+    .cf-preload-item:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.5), rgba(255,255,255,0.5), rgba(255,255,255,0));
+      animation: cf-preload 1s cubic-bezier(0.33, 0.8, 0.85, 0.77) infinite;
+      z-index: 1;
+    }
+    
+    .cf-preload-label {
+      display: inline-block;
+      width: 50%;
+      height: 20px;
+      background: #eee;
+      margin-bottom: 5px;
+    }
+    
+    .cf-preload-field {
+      margin-bottom: 25px;
+      height: 40px;
+    }
+    
+    .cf-preload-button {
+      display: inline-block;
+      width: 120px;
+      margin-right: 15px;
+      height: 40px;
+    }
+    
+    .cf-form-inner {
+      animation: cf-fadein 500ms cubic-bezier(0.11, 0.33, 0.24, 1);
+    }
+  
+    @keyframes cf-preload {
+      from {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(100%);
+        opacity: 1;
+      }
+    }
+    
+    @keyframes cf-fadein {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+{% else %}
+  <script>
+    (function() {
+      var callbacksHandled = [];
+
+      var customerReady = function(callback) {
+        var handleCallback = function() {
+          if (callbacksHandled.indexOf(callback) > -1) return;
+
+          callback();
+          callbacksHandled.push(callback);
+        };
+
+        if ('customer' in window.CF) {
+          handleCallback();
+        } else {
+          document.addEventListener("cf:customer_ready", handleCallback);
+        }
+      };
+
+      if (window.CF) {
+        window.CF.customerReady = customerReady;
+      } else {
+        window.CF = {
+          customerReady: customerReady,
+        }
+      }
+    })();
+  </script>
+
+  
+  <script async src="https://assets.customerfields.com/releases/{{ version | default: '3.0.7' }}/cf-api.js"></script>
+  
+{% endunless %}

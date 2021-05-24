@@ -1,0 +1,304 @@
+<div data-section-id="{{ section.id }}" data-section-type="footbar"> 
+  {% if section.settings.notify_product %}
+  {% assign my_collection = collections[section.settings.notify_product_collection] %}
+  {%- assign notification_text_02 = section.settings.notify_product_text_line_2 | replace: '{time}', '' | replace: '{place}',  ''  -%}
+  {% if my_collection.products.size > 0 %}
+  <script>
+  
+    jQuery("body").addClass("notify-product");
+    var clv_notify = [];
+    {%- for my_product in my_collection.products limit: section.settings.notify_product_limit -%}
+    var product_notify = {
+      "id": 		"{{my_product.id}}",
+      "title": 	"{{my_product.title | escape}}",
+      "url": 		"{{my_product.url}}",
+      "price": 	"{{my_product.price}}",
+      "image": 	"{{my_product.featured_image | product_img_url: '80x80'}}"
+    }
+    clv_notify.push(product_notify); 
+    {%- endfor -%}
+  setTimeout(function(){
+    $(document).ready(function(){
+      mt.settings = {};
+      mt.settings.message = "{product_with_link}";
+      mt.settings.min = {{section.settings.notification_products_range_min}};
+      mt.settings.max = {{section.settings.notification_products_range_max}};
+      mt.settings.initialDelay = {{ section.settings.notify_product_initialDelay| times: 1000 }};
+      mt.settings.displayInterval = {{ section.settings.notify_product_delay| times: 1000 }};
+      mt.settings.displayHold = {{ section.settings.notify_product_display| times: 1000 }};
+      mt.settings.totalPerPage = 15;
+      mt.settings.totalDisplayed = 0;
+      mt.settings.loop = true;
+      mt.settings.money_format = window.money_format;
+      mt.setup(clv_notify);
+
+    });
+}, {{ section.settings.notify_delay| times: 1000 }});
+    var numbersString = "{{ section.settings.country}}";
+    var numbersArray = numbersString.split('|');
+    function randomIntFromInterval(min,max) 
+    {
+
+      var min = {{section.settings.notification_products_range_min}};
+      var max = {{section.settings.notification_products_range_max}};
+      return Math.floor(Math.random() * (+max - +min)) + +min; 
+    }
+
+    function getnumbersArray() {
+      return numbersArray[Math.floor((Math.random()*numbersArray.length))];
+    }
+    var numbertime = "{{ section.settings.timeline}}";
+    var numbersArraytime = numbertime.split('|');
+
+    function getnumbersArraytime() {
+      return numbersArraytime[Math.floor((Math.random()*numbersArraytime.length))];
+    }
+    var mt = {
+      version: 1,
+      isNotifyEnabled: function() {
+        var t = !0,
+            e = document.getElementsByTagName("meta");
+        for (i = 0; i < e.length; i++) "notify:enabled" == e[i].getAttribute("name") && "false" === e[i].getAttribute("content") && (t = !1);
+        return  t
+      },
+      setup: function(t) {
+        if (this.isNotifyEnabled()) {
+          this.products = t;
+          var i = document.createElement("div");
+          i.id = "notify-popup", i.className = "notify-content", document.body.appendChild(i), this.notificationDiv = document.getElementById("notify-popup"), setTimeout("mt.runNotifications()", this.settings.initialDelay + 1)
+        }
+      },
+      runNotifications: function() {
+        var t = !1;
+        if (this.settings.totalDisplayed < this.settings.totalPerPage) {
+          this.settings.totalDisplayed++;
+          for (var i in this.products)
+            if (product = this.products[i], null === localStorage.getItem("snv-" + product.id)) {
+              localStorage.setItem("snv-" + product.id, 1), this.displayNotification(product.title, product.image, product.url, product.price), t = !0;
+              break
+            }
+          t ? setTimeout("mt.runNotifications()", this.settings.displayInterval + this.settings.displayHold) : this.settings.loop && (this.clearLocalStorage(), this.runNotifications())
+        }
+      },
+      displayNotification: function(t, i, e, o) {
+        var a = Shopify.formatMoney(o, this.settings.money_format),
+            m = '<span class="title-box">{{section.settings.notify_product_text_line_1}}</span> <span class="close-popup"><i class="cs-font clever-icon-close"></i></span><br>',
+        tm = '<span class="timeline">'+ randomIntFromInterval() + '{{notification_text_02}}'+ getnumbersArray() + '</span>',
+        n = '<a href="' + e + '">' + t + "</a>",
+          s = this.settings.message.replace("{product_with_link}", n);
+
+        document.getElementById("notify-popup").innerHTML = i ? m +  '<img src="' + i + '"><p>' + s + tm + "</p>" : "<p>" + s + tm + "</p>"  , setTimeout(function() {
+          mt.animateIn()
+        }, {{section.settings.notify_delay | times: 1000}}), setTimeout(function() {
+          mt.animateOut();
+        }, this.settings.displayHold);
+        $('#notify-popup .close-popup').click(function(){
+          mt.animateOut();
+        });
+      },
+      animateIn: function() {
+        var t = 0,
+            i = 0,
+            e = this,
+            o = setInterval(function() {
+              t >= 1 && clearInterval(o), e.notificationDiv.style.bottom = i + "px", e.notificationDiv.style.opacity = t, e.notificationDiv.style.filter = "alpha(opacity=" + 100 * t + ")", e.notificationDiv.style.display = "block", t += .05, i += 1
+            }, 25)
+        },
+      animateOut: function() {
+        var t = 1,
+            i = 20,
+            e = this,
+            o = setInterval(function() {
+              return 0 >= t ? (clearInterval(o), e.notificationDiv.style.display = "none", !1) : (e.notificationDiv.style.bottom = i + "px", e.notificationDiv.style.opacity = t, e.notificationDiv.style.filter = "alpha(opacity=" + 100 * t + ")", t -= .05, t = t.toFixed(2), void(i -= 1))
+            }, 25)
+        },
+      clearLocalStorage: function() {
+        for (var t = localStorage.length - 1; t > 0; t--) "snv" === localStorage.key(t).split("-")[0] && localStorage.removeItem(localStorage.key(t))
+          }
+    };
+ 
+  </script>
+  {% endif %}
+  {% endif %}
+  {%- if section.settings.notification_cookies_enable -%}
+  <div class="notification popup-cookie">
+    <div class="cookies-inner d-none" data-js-show-once="{{ section.settings.notification_cookies_show_once }}" data-js-delay="{{ section.settings.notification_cookies_delay }}" data-js-cookies-life="{{ section.settings.notification_cookies_cookies_life }}" data-js-notification-inner>
+      <div class="notification-cookies ">
+        <p>{{ section.settings.notification_cookies_text }}  <a href="/pages/cookie-policy" target="_blank" class="button-btn button-btn-1">{{ section.settings.notification_cookies_button_information }}</a>
+</p>
+        <div class=" popup-cookie-button">
+          <div class="button-btn button-btn-2" data-js-action="close">{{ section.settings.notification_cookies_button_close }}<i class="cs-font clever-icon-check"></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <script>
+//       jQuery("body").addClass("notifications-cookie");
+      </script>
+  {%- endif -%}
+</div>
+{% schema %}
+  {
+    "name": "Popup",
+
+    "class": "footbar index-section section",
+    "settings": [
+
+      {
+        "type": "header",
+        "content": "Fake Sales Notification"
+      },
+		{
+        "type": "checkbox",
+        "id": "notify_product",
+        "label": "Enable Sales Notification?"
+      },
+      {
+        "type": "collection",
+        "id": "notify_product_collection",
+        "label": "Collection:"
+      },
+      {
+        "type": "text",
+        "id": "notify_product_limit",
+        "label": "Limit Product:"
+      },
+      {
+        "type": "text",
+        "id": "notify_product_text_line_1",
+        "label": "Text line #1:"
+      },
+
+      {
+        "type": "text",
+        "id": "notify_product_text_line_2",
+        "label": "Text line #2:"
+      },
+
+        {
+            "type": "range",
+            "id": "notification_products_range_min",
+            "min": 0,
+            "max": 60,
+            "step": 1,
+            "label": "Min time value in line #2 (minutes)",
+            "default": 2
+        },
+        {
+            "type": "range",
+            "id": "notification_products_range_max",
+            "min": 0,
+            "max": 60,
+            "step": 1,
+            "label": "Max time value in line #2 (minutes)",
+            "default": 20
+        },
+
+      {
+        "type": "textarea",
+        "id": "country",
+        "label": "country:",
+        "info": "Separate by a comma, i.e \"Melbourne, Australia | London, England | New York | Washington\"."
+      },
+ {
+            "type": "range",
+            "id": "notify_delay",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "label": "Delay(ms):",
+            "default": 20
+        },
+        {
+            "type": "range",
+            "id": "notify_product_delay",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "label": "Min interval (ms):",
+            "default": 20
+        },
+{
+            "type": "range",
+            "id": "notify_product_initialDelay",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "label": "Max interval (ms):",
+            "default": 20
+        },
+{
+            "type": "range",
+            "id": "notify_product_display",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "label": "Max time life (ms):",
+            "default": 20
+        }, {
+            "type": "header",
+            "content": "COOKIES NOTIFICATION"
+        },
+        {
+            "type": "checkbox",
+            "id": "notification_cookies_enable",
+            "label": "Enable",
+            "default": true
+        },
+        {
+            "type": "text",
+            "id": "notification_cookies_text",
+            "label": "Text",
+            "default": "This is a standard cookie notice which you can easily adapt or disable as you like in the admin. We use cookies to ensure that we give you the best experience on our website."
+        },
+        {
+            "type": "text",
+            "id": "notification_cookies_button_information",
+            "label": "Button information",
+            "default": "PRIVACY POLICY"
+        },
+        {
+            "type": "text",
+            "id": "notification_cookies_button_close",
+            "label": "Button close",
+            "default": "ACCEPT"
+        },
+        {
+            "type": "range",
+            "id": "notification_cookies_delay",
+            "min": 0,
+            "max": 60,
+            "step": 1,
+            "unit": "sec",
+            "label": "Delay",
+            "default": 0
+        },
+        {
+            "type": "checkbox",
+            "id": "notification_cookies_show_once",
+            "label": "Show once?",
+            "info": "If user close notification",
+            "default": true
+        },
+        {
+            "type": "select",
+            "id": "notification_cookies_cookies_life",
+            "label": "Cookies life",
+            "default": "1",
+            "options": [
+                { "value": "1", "label": "1 day" },
+                { "value": "3", "label": "3 days" },
+                { "value": "7", "label": "1 week" },
+                { "value": "31", "label": "1 month" },
+                { "value": "365", "label": "1 year" }
+            ]
+        }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

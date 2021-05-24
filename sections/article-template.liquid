@@ -1,0 +1,682 @@
+{% comment %}
+Comments will not appear right after they are submitted, either to be checked for spam
+or to await moderation. When a comment is submitted, the browser is redirected to a page
+that includes the new comment id in its URL.
+Example: http://shopname.myshopify.com/blogs/news/2022072-my-post?comment=3721372
+
+More information:
+- http://docs.shopify.com/themes/liquid-variables/comment
+{% endcomment %}
+
+{% comment %}
+We're going to reference the number of comments below, so let's hold it in a variable.
+{% endcomment %}
+{% assign number_of_comments = article.comments_count %}
+
+{% comment %}
+If a comment was just submitted and it has no blank fields, we have an extra comment to count.
+{% endcomment %}
+{% if comment and comment.created_at %}
+{% assign number_of_comments = article.comments_count | plus: 1 %}
+{% endif %}
+
+
+<!--<header class="page-header">
+{% if current_tags %}
+<h2>{{ blog.title | link_to: blog.url }} &raquo; {{ current_tags.first }}</h2>
+{% else %}
+<h2>{{ blog.title }}</h2>
+{% endif %}
+</header>-->
+
+<div class="row">
+   {% if section.settings.layout == 'left_column' %}
+    <div class="col-12 col-md-3 col-lg-3 sidebar">
+        {% if section.blocks.size > 0 %}
+    {% for block in section.blocks %}
+    {%- case block.type -%}
+    {%- when 'block_custom' -%}
+        <div class="widget-title">
+        <h3>{{  block.settings.title }}</h3>
+        <div class="aboutme-container">
+          {%- assign img_url = block.settings.blog_image_aboutme | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+          <img class="lazyload image-me" style="border-radius:{{block.settings.grid }}%"
+               src="{{ block.settings.blog_image_aboutme | img_url: '2048x'  }}"
+               data-src="{{ img_url }}"
+               data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+               data-aspectratio="{{ block.settings.blog_image_aboutme.aspect_ratio }}"
+               data-sizes="auto"
+               alt="{{ image.alt | escape }}">
+          <div class="aboutme-content">{{  block.settings.blog_aboutme_content }}</div>
+         
+        </div>
+      </div>
+      {%- when 'block_social' -%}
+       <div class="widget-title">
+        <h3>{{  block.settings.title }}</h3>
+        <div class="followus-container">
+          <div class="followus-content">
+            {% if block.settings.footer_column_4_icon_link_1  %}
+            <a href="{{ block.settings.footer_column_4_icon_link_1 }}">
+              <i class="cs-font clever-icon-facebook"></i>
+            </a>
+            {% endif %}
+            {% if block.settings.footer_column_4_icon_link_2  %}
+            <a href="{{ block.settings.footer_column_4_icon_link_2 }}">
+              <i class="cs-font clever-icon-instagram"></i>
+            </a>
+            {% endif %}
+            {% if block.settings.footer_column_4_icon_link_3  %}
+            <a href="{{ block.settings.footer_column_4_icon_link_3 }}">
+              <i class="cs-font clever-icon-twitter"></i>
+            </a>
+            {% endif %}
+            {% if block.settings.footer_column_4_icon_link_4  %}
+            <a href="{{ block.settings.footer_column_4_icon_link_4 }}">
+              <i class="cs-font clever-icon-pinterest"></i>
+            </a>
+            {% endif %}
+            {% if block.settings.footer_column_4_icon_link_5  %}
+            <a href="{{ block.settings.footer_column_4_icon_link_5 }}">
+              <i class="cs-font clever-icon-youtube-2"></i>
+            </a>
+            {% endif %}
+
+            {% if block.settings.footer_column_4_icon_link_6  %}
+            <a href="{{ block.settings.footer_column_4_icon_link_6 }}">
+              <i class="cs-font clever-icon-googleplus"></i>
+            </a>
+            {% endif %}
+
+            {% if block.settings.footer_column_4_icon_link_8  %}
+            <a href="{{ block.settings.footer_column_4_icon_link_8 }}">
+              <i class="cs-font clever-icon-skype"></i>
+            </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {%- when 'block_newsletter' -%}
+      <div class="blog-newsletter">
+
+        {% assign blog_display_newsletter = block.settings.blog_display_newsletter %}
+        {% assign blog_title_newsletter = block.settings.title %}
+        {% assign blog_newsletter_content = block.settings.blog_newsletter_content %}
+        {% assign blog_newsletter_go = block.settings.blog_newsletter_go %}
+        {% assign blog_sub_title_newsletter = block.settings.blog_sub_title_newsletter %}
+        {% assign blog_mailing_list_form_action = block.settings.blog_mailing_list_form_action %}
+        {% include 'blog-newsletter' %}
+      </div>
+      {%- when 'widget_article' -%}
+       {% include 'widget_article' %}
+      {%- when 'widget_tags' -%}
+      <div class="widget widget-tags">
+        {% if blog.all_tags.size > 0 %}
+        <div class="widget-title">
+          <h3><span>{{ block.settings.title }}</span></h3>
+        </div>
+        <div class="widget-content">
+          <ul class="tags">
+            {% for tag in blog.all_tags %}
+            {% if current_tags contains tag %}
+            <li class="active">{{ tag | link_to_remove_tag: tag }}</li>
+            {% else %}
+            <li>{{ tag | link_to_tag: tag }}</li>
+            {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+      </div>
+     {%- endcase -%}
+    {% endfor %}
+    {% endif %}
+  
+
+    </div>
+    {% endif %}
+  <div class="col-12 {% unless section.settings.layout == 'no_column' %}col-md-9 col-lg-9{% endunless %} blog-detail col-main">
+
+    <div class="inner-container">
+
+      <div class="article-content">
+
+          <h1 class="p10 post-title">{{ article.title }}</h1>
+
+        <div class="date-author">
+          <div class="blog-time-cm">
+            {% if section.settings.enable_author %}                  <span class="blog_author">{{ article.author }} </span> {% endif %}
+            {% if section.settings.enable_time %}
+            <div class="blog-time">
+              <span class="blog-day">{{ article.published_at | date: '%d' }}</span>
+              <span class="blog-month">{{ article.published_at | date: '%b' }}</span>
+              <span class="blog-year">, {{ article.published_at | date: '%Y' }}</span>
+            </div>
+            {% endif %}
+
+            {% if section.settings.enable_comments_count %} 
+              <div class="blog-comment">
+                - <a class="blog-cm" href="{{ article.url }}#comments">
+                {{ article.comments_count }} Comment(s)
+                </a>
+              </div>
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+
+    {% comment %}
+    <div class="image">
+      <a href="{{ article.url }}">
+        {{ article | img_url: '1024x' | img_tag: article.title }}
+      </a>
+    </div>
+    {% endcomment %}
+
+    {% comment %}
+    <div class="meta"> 
+      {% assign instructions = article.metafields.meta %}
+      {% assign key = 'add-more' %}
+      {% if instructions.add-more %}
+      {{ instructions.add-more  }}
+      {% endif %} 
+    </div>
+    {% endcomment %}
+    
+
+    <div class="article-content">
+
+      <div class="rte">
+        {{ article.content }}
+<!--         <div class="dd">
+           <img src="https://cdn.shopify.com/s/files/1/0315/1131/4570/files/Untitled_design_12_1.png?v=1587666289">
+        </div> -->
+      </div>
+
+      {% comment %}
+      Show off meta information like comments and tags.
+      {% endcomment %}
+       {% if section.settings.enable_tags %}
+      <ul class="user-tags tags-blog row">
+        <li class=" col-12">
+          {% for tag in article.tags %}
+          <a href="{{ blog.url }}/tagged/{{ tag | handle }}" {% if section.settings.enable_uppercase %}style="text-transform: uppercase;"{% endif %}>{{ tag }}</a>
+          {% endfor %}
+        </li>
+      </ul>
+      {% endif %}
+      <ul class="user-tags share-blog row">
+        <li class=" col-12 col-md-12 col-md-7">
+          <span class="blog_author">{{ article.author }}</span> - <span class="date-time-bottom">{{ article.published_at | date: '%b %d, %Y' }}</span>
+        </li>
+         {% if section.settings.enable_sharing %}
+                  <li class="share-link col-12 col-md-12 col-md-5">
+                    {% capture share_url %}{{ shop.url }}{{ article.url }}{% endcapture %}
+                    {% if settings.icon_isocal_1 != blank %}
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ share_url }}" target="_blank" class="facebook" title="Facebook"><i class="cs-font clever-icon-facebook"></i></a>
+                    {% endif %}
+                    {% if settings.icon_isocal_2 != blank %}
+                    <a href="//twitter.com/share?url={{ share_url }}&text={{ product.title }}" target="_blank" class="twitter" title="Twitter"> <i class="cs-font clever-icon-twitter"></i></a>
+                    {% endif %}
+                    {% if settings.icon_isocal_3 != blank %}
+                    <a href="//pinterest.com/pin/create/button/?url={{ share_url }}" target="_blank" class="vimeo" title="Pinterest"><i class="cs-font clever-icon-pinterest"></i></a>
+                    {% endif %}
+                    {% if settings.icon_isocal_4 != blank %}
+                    <a href="//plus.google.com/share?url={{ share_url }}" target="_blank" class="google-plus" title="Google plus"><i class="cs-font clever-icon-googleplus"></i></a>
+                    {% endif %}
+                  </li>
+                  {% endif %}
+      </ul>
+
+      {% comment %}
+      Addthis
+      {% endcomment %}	
+
+
+      {% comment %}
+      Create links to the next and previous articles, if available.
+      {% endcomment %}
+
+      {% if blog.next_article or blog.previous_article %}
+
+      {% comment %}
+      If you only have elements floated in a container, you can use the
+      .clearfix class to force the parent to maintain its structure.
+      {% endcomment %}
+      <div class="action-btn">
+        {% if blog.previous_article %}
+        <span class="left">{{ '&larr; Previous Post' | link_to: blog.previous_article }}</span>
+        {% endif %}
+        {% if blog.next_article %}
+        <span class="right">{{ 'Next Post &rarr;' | link_to: blog.next_article }}</span>
+        {% endif %}
+      </div>
+      {% endif %}
+
+      {% if blog.comments_enabled? %}
+
+      {% comment %}
+      Just like our blog.liquid page, define how many comments should be on each page.
+      {% endcomment %}
+
+      <h2 class="title-comment">{{'blog.title_comment' | t }}</h2>
+
+      {% paginate article.comments by 5 %}
+
+      {% comment %}
+      #comments is required, it is used as an anchor link by Shopify.
+      {% endcomment %}
+      <div id="comments">
+
+        {% if comment and comment.created_at %}
+        <p class="note form-success">
+          {% if blog.moderated? %}
+          <span>{{'blog.comment_moderated' | t }}</span>
+          {% else %}
+          <span>{{'blog.comment_successfully' | t }}</span>
+          {% endif %}
+        </p>
+        {% endif %}
+
+        {% if number_of_comments > 0 %}
+        <ul>
+          {% comment %}If a comment was just submitted with no blank field, let's show it.{% endcomment %}
+          {% if comment and comment.created_at %}
+          <li id="{{ comment.id }}" class="comment first{% if article.comments_count == 0 %} last{% endif %}">
+            {% include 'comment' %}
+          </li>
+          {% endif %}
+
+          {% comment %}
+          Showing the rest of the comments.
+          {% endcomment %}
+          {% for comment in article.comments %}
+          <li id="{{ comment.id }}" class="comment{% unless number_of_comments > article.comments_count %}{% if forloop.first %} first{% endif %}{% endunless %}{% if forloop.last %} last {% endif %}">
+            {% include 'comment' %}
+          </li>
+          {% endfor %}
+        </ul>
+
+        {% if paginate.pages > 1 %}
+        <div class="text-center">
+          {% include 'pagination' %}
+        </div>
+        {% endif %}
+        {% endif %}
+
+        {% comment %}
+        Comment submission form
+        {% endcomment %}
+
+        {% form article %}
+        {% comment %}
+        #add-comment-title is used simply as an anchor link
+        {% endcomment %}
+        {% include 'form-errors-custom' %}
+
+        <div class="message">
+          <textarea {% if form.errors contains "body" %} class="error"{% endif %} name="comment[body]" id="comment-body" placeholder="Messenger">{{ form.body }}</textarea>
+        </div>
+
+        <div class="comment-form">
+          <input {% if form.errors contains "author" %} class="error"{% endif %} type="text" name="comment[author]" id="comment-author" value="{{ form.author }}" placeholder="Your name">
+          <input {% if form.errors contains "email" %} class="error"{% endif %} type="email" name="comment[email]" id="comment-email" value="{{ form.email }}" placeholder="Your mail">
+        </div>
+
+        <p class="note">All blog comments are checked prior to publishing</p>
+        <input type="submit" class="btn-secondary harman_btn4" value="Post Comment">
+        {% if form.errors %}
+        <script>
+          window.location.hash = '#add-comment-title';
+        </script>
+        {% endif %}
+
+        {% if form.posted_successfully? %}
+        <script>
+          window.location.hash = '#comments';
+        </script>
+        {% endif %}
+        {% endform %}
+      </div>
+      {% endpaginate %}
+      {% endif %}
+    </div>
+
+    </div> <!-- .inner-container-->
+
+  </div>
+
+ {% if section.settings.layout == 'right_column' %}
+    <div class="col-12 col-md-3 col-lg-3 sidebar">
+        {% if section.blocks.size > 0 %}
+    {% for block in section.blocks %}
+    {%- case block.type -%}
+    {%- when 'block_custom' -%}
+        <div class="widget-title">
+        <h3>{{  block.settings.title }}</h3>
+        <div class="aboutme-container">
+          {%- assign img_url = block.settings.blog_image_aboutme | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+          <img class="lazyload image-me" style="border-radius:{{block.settings.grid }}%"
+               src="{{ block.settings.blog_image_aboutme | img_url: '2048x'  }}"
+               data-src="{{ img_url }}"
+               data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+               data-aspectratio="{{ block.settings.blog_image_aboutme.aspect_ratio }}"
+               data-sizes="auto"
+               alt="{{ image.alt | escape }}">
+          <div class="aboutme-content">{{  block.settings.blog_aboutme_content }}</div>
+         
+        </div>
+      </div>
+      {%- when 'block_social' -%}
+       <div class="widget-title">
+        <h3>{{  block.settings.title }}</h3>
+        <div class="followus-container">
+          <div class="followus-content">
+            {% if block.settings.footer_column_4_icon_link_1  %}
+            <a href="{{ block.settings.footer_column_4_icon_link_1 }}">
+              <i class="cs-font clever-icon-facebook"></i>
+            </a>
+            {% endif %}
+            {% if block.settings.footer_column_4_icon_link_2  %}
+            <a href="{{ block.settings.footer_column_4_icon_link_2 }}">
+              <i class="cs-font clever-icon-instagram"></i>
+            </a>
+            {% endif %}
+            {% if block.settings.footer_column_4_icon_link_3  %}
+            <a href="{{ block.settings.footer_column_4_icon_link_3 }}">
+              <i class="cs-font clever-icon-twitter"></i>
+            </a>
+            {% endif %}
+            {% if block.settings.footer_column_4_icon_link_4  %}
+            <a href="{{ block.settings.footer_column_4_icon_link_4 }}">
+              <i class="cs-font clever-icon-pinterest"></i>
+            </a>
+            {% endif %}
+            {% if block.settings.footer_column_4_icon_link_5  %}
+            <a href="{{ block.settings.footer_column_4_icon_link_5 }}">
+              <i class="cs-font clever-icon-youtube-2"></i>
+            </a>
+            {% endif %}
+
+            {% if block.settings.footer_column_4_icon_link_6  %}
+            <a href="{{ block.settings.footer_column_4_icon_link_6 }}">
+              <i class="cs-font clever-icon-googleplus"></i>
+            </a>
+            {% endif %}
+
+            {% if block.settings.footer_column_4_icon_link_8  %}
+            <a href="{{ block.settings.footer_column_4_icon_link_8 }}">
+              <i class="cs-font clever-icon-skype"></i>
+            </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {%- when 'block_newsletter' -%}
+      <div class="blog-newsletter">
+
+        {% assign blog_display_newsletter = block.settings.blog_display_newsletter %}
+        {% assign blog_title_newsletter = block.settings.title %}
+        {% assign blog_newsletter_content = block.settings.blog_newsletter_content %}
+        {% assign blog_newsletter_go = block.settings.blog_newsletter_go %}
+        {% assign blog_sub_title_newsletter = block.settings.blog_sub_title_newsletter %}
+        {% assign blog_mailing_list_form_action = block.settings.blog_mailing_list_form_action %}
+        {% include 'blog-newsletter' %}
+      </div>
+      {%- when 'widget_article' -%}
+       {% include 'widget_article' %}
+      {%- when 'widget_tags' -%}
+      <div class="widget widget-tags">
+        {% if blog.all_tags.size > 0 %}
+        <div class="widget-title">
+          <h3><span>{{ block.settings.title }}</span></h3>
+        </div>
+        <div class="widget-content">
+          <ul class="tags">
+            {% for tag in blog.all_tags limit:3 %}
+            {% if current_tags contains tag %}
+            <li class="active">{{ tag | link_to_remove_tag: tag }}</li>
+            {% else %}
+            <li>{{ tag | link_to_tag: tag }}</li>
+            {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+      </div>
+     {%- endcase -%}
+    {% endfor %}
+    {% endif %}
+  
+
+    </div>
+    {% endif %}
+</div>
+
+
+
+ {% schema %}
+  {
+  "name": "Posts",
+  "settings": [
+    {
+        "type": "select",
+        "id": "layout",
+        "label": "Design",
+        "default": "left_column",
+        "options": [
+          {
+            "value": "left_column",
+            "label": "with Left Column"
+          },
+          {
+            "value": "right_column",
+            "label": "with Right Column"
+          },
+          {
+            "value": "no_column",
+            "label": "No Column"
+          }
+        ]
+      }, 
+      {
+        "type": "checkbox",
+        "id": "enable_author",
+        "label": "Enable Author",
+        "default": true
+      },
+
+      {
+        "type": "checkbox",
+        "id": "enable_comments_count",
+        "label": "Enable Comments Count",
+        "default": true
+      },
+
+
+   {
+        "type": "checkbox",
+        "id": "enable_tags",
+        "label": "Enable Tags",
+        "default": true
+      },
+   {
+        "type": "checkbox",
+        "id": "enable_uppercase",
+        "label": "Tags uppercase ",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_time",
+        "label": "Enable Time",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_sharing",
+        "label": "Enable Social Sharing Button",
+        "default": true
+      }
+  ],
+  "blocks": [
+    {
+      "type": "block_custom",
+      "name": "Custom HTML",
+      "settings": [
+      
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "About Me"
+      },
+        {
+          "type": "range",
+          "id": "grid",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "label": "Border Radius",
+          "default": 4
+        },
+      {
+        "type": "image_picker",
+        "id": "blog_image_aboutme",
+        "label": "Images"
+      },
+      {
+        "type": "textarea",
+        "id": "blog_aboutme_content",
+        "label": "Content",
+        "default": "Content"
+      }
+      ]
+    },
+     {
+      "type": "widget_tags",
+      "name": "Tags",
+      "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Tags"
+      }
+      ]
+    },
+     {
+      "type": "widget_article",
+      "name": "Latest Post",
+      "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Latest Post"
+      }
+      ]
+    },
+    {
+      "type": "block_newsletter",
+      "name": "Newsletter Signup",
+      "settings": [
+      
+  {
+    "type": "textarea",
+    "id": "title",
+    "label": "Title",
+    "default": "Content"
+  },
+  {
+    "type": "textarea",
+    "id": "blog_newsletter_content",
+    "label": "Placeholder",
+    "default": "Email for Newsletter"
+  },
+  {
+    "type": "textarea",
+    "id": "blog_newsletter_go",
+    "label": "Button Text",
+    "default": "subcribe"
+  },
+  {
+    "type": "textarea",
+    "id": "blog_sub_title_newsletter",
+    "label": "Sub Title",
+    "default": "Content"
+  },
+  {
+    "type": "text",
+    "id": "blog_mailing_list_form_action",
+    "label": "MailChimp form action URL",
+    "info": "[Where do I find my MailChimp form action URL?](http:\/\/docs.shopify.com\/support\/configuration\/store-customization\/where-do-i-get-my-mailchimp-form-action)"
+  }
+      ]
+    },
+  {
+      "type": "block_social",
+      "name": "Social Media",
+      "settings": [
+      
+      
+  {
+    "type": "text",
+    "id": "title",
+    "label": "Title"
+  },
+  {
+        "type": "text",
+        "id": "footer_column_3_title",
+        "label": "Social Title"
+      },
+	{
+        "type": "checkbox",
+        "id": "footer_column_4_icon_link_1",
+        "label": "Facebook"
+      },
+{
+        "type": "checkbox",
+        "id": "footer_column_4_icon_link_2",
+        "label": "Instagram"
+      },
+{
+        "type": "checkbox",
+        "id": "footer_column_4_icon_link_3",
+        "label": "Twitter"
+      },
+{
+        "type": "checkbox",
+        "id": "footer_column_4_icon_link_4",
+        "label": "Pinterest"
+      },
+{
+        "type": "checkbox",
+        "id": "footer_column_4_icon_link_5",
+        "label": "Youtube"
+      },
+{
+        "type": "checkbox",
+        "id": "footer_column_4_icon_link_6",
+        "label": "Google+"
+      },
+{
+        "type": "checkbox",
+        "id": "footer_column_4_icon_link_8",
+        "label": "Skype"
+      }
+      ]
+    }
+  ]
+  }
+  {% endschema %}
+
+  {% stylesheet %}
+  {% endstylesheet %}
+
+  {% javascript %}
+  {% endjavascript %}
+
+
+

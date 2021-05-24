@@ -1,0 +1,119 @@
+{% comment %}
+The {{ content_for_header }} in theme.liquid will output the following stylesheet just for this page:
+- <link rel="stylesheet" href="/global/search.css" type="text/css">
+
+It has a few helpers in there, but this theme writes its own styles so there
+are no dependencies or conflicts. You can ignore that file.
+
+Return only products or pages in results:
+- http://docs.shopify.com/manual/configuration/store-customization/return-only-product-in-storefront-search-results
+- Or manually add type=product or type=page to the search URL as a parameter
+{% endcomment %}
+
+
+{% comment %}
+If you're only showing products with the method above, why not show them off in a grid instead?
+Set grid_results to true and see your updated results page for the new layout.
+{% endcomment %}
+
+{% assign grid_results = false %}
+<div class="search-page">
+  {% if search.performed %}
+
+  {% comment %}
+  Avoid accessing search.results before the opening paginate tag.
+  If you do, the pagination of results will be broken.
+  {% endcomment %}
+
+  {% paginate search.results by 12 %}
+
+  {% comment %}
+  We don't have any results to show. Feel free to show off featured products
+  or suggested searches here.
+  {% endcomment %}
+
+  {% if search.results_count == 0 %}
+  <header class="page-header">
+    <h2>Your search for "{{ search.terms }}" did not yield any results.</h2>
+    <div class="wrapper-search-bar">{% include 'search-bar' %}</div>
+  </header>
+  {% else %}
+  <header class="page-header">
+    <h2>Your search for "{{ search.terms }}" revealed the following:</h2>
+    <div class="wrapper-search-bar">{% include 'search-bar' %}</div>
+  </header>
+
+  {% comment %}
+  Each result template, based on the grid_layout variable above
+  {% endcomment %}
+  <div class="products-grid row">
+    {% if grid_results == false %}
+    {% for product in search.results %}
+  {% if product.object_type == 'product' and product.type == 'SHOPSTORM_HIDDEN_PRODUCT' %}{% continue %}{% endif %}
+
+    <div class="col-md-3 col-sm-4 col-xs-12">
+      {% include 'search-result' %}
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="grid-uniform">
+      {% for item in search.results %}
+  {% if item.object_type == 'product' and item.type == 'SHOPSTORM_HIDDEN_PRODUCT' %}{% continue %}{% endif %}
+
+      {% include 'search-result-grid' %}
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% endif %}
+  </div>
+
+  {% if paginate.pages > 1 %}
+  <div class="text-center">
+    <div class="toolbar toolbar-bottom">
+
+      <ul class="pagination-page">
+        {% if paginate.previous %}
+        <li id="PreviousPaginationLink" class="prev"><a href="{{ paginate.previous.url }}" title="{{ paginate.previous.title }}"><i class="cs-font clever-icon-prev"></i></a></li>
+        {% else %}
+
+        {% endif %}
+
+        {% for part in paginate.parts %}
+        {% if part.is_link %}
+        <li>
+          <a href="{{ part.url }}" title="">{{ part.title }}</a>
+        </li>
+        {% else %}
+        {% if part.title == paginate.current_page %}
+        <li class="active"><span>{{ part.title }}</span></li>
+        {% else %}
+        <li><span>{{ part.title }}</span></li>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+
+        {% if paginate.next %}
+        <li id="NextPaginationLink" class="next"><a href="{{ paginate.next.url }}" title="{{ paginate.next.title }}"><i class="cs-font clever-icon-next"></i></a></li>
+        {% else %}
+
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+  {% endif %}
+  {% endpaginate %}
+
+  {% else %}
+
+  {% comment %}
+  If search.performed is false, someone either accessed the page without
+  the q parameter, or it was blank.
+  Be sure to show a search form here, along with anything else you want to showcase.
+  {% endcomment %}
+
+  <header class="page-header">
+    <h2>{{ 'page_cms.search.title' | t }}</h2>
+    {% include 'search-bar' %}
+  </header>
+  {% endif %}
+</div>

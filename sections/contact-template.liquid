@@ -1,0 +1,154 @@
+{% comment %}
+This page template is a requirement if you are submitting your theme to the Shopify Theme Store.
+Be sure to select page.contact as the template from the admin page to have this template take effect.
+
+For information on adding more fields, visit:
+- http://docs.shopify.com/support/configuration/store-customization/adding-fields-to-the-liquid-contact-form
+{% endcomment %}
+
+<div class="contactus-page">
+  {% comment %}
+  Regular page content goes here.
+  {% endcomment %}
+  <div class="rte">
+    {{ page.content }}
+  </div>
+
+  {% comment %}
+  Contact form starts here
+  {% endcomment %}
+
+  <div class="container">
+    
+    {% if section.blocks.size > 0 %}
+    {% for block in section.blocks %}
+    {%- case block.type -%}
+    {%- when 'title' -%}
+    <div class="row text-center">
+      <div class="col-12 contact-title">
+       <h2>{{ block.settings.title }}</h2> 
+      </div>
+    </div>
+     {%- when 'map' -%}
+    <div class="row contact-maps">
+      <div class="col-12">
+        <div class="maps">
+          {% if block.settings.google_map_code != blank %}
+          {{ block.settings.google_map_code }}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% when 'block_text' %}
+   <div class="row contact-info text-center">
+    
+        {{ block.settings.contact_info_1 }}
+     
+    </div>
+    {% when 'contact_title' %}
+     <div class="row">
+      <div class="col-12 contact-form">
+        {% form 'contact' %}
+        {% comment %}
+        Successful message
+        {% endcomment %}
+        {% if form.posted_successfully? %}
+        <p class="note form-success">
+          {{ 'page_cms.contact_success' | t }}
+        </p>
+        {% endif %}
+        {% include 'form-errors-custom' %}
+        <div id="contactFormWrapper">
+          {% if block.settings.contact_title_1 != blank %}
+          <h1>
+            {{ block.settings.contact_title_1 }}
+          </h1>
+          {% endif %}
+          <div class="row">
+            <div class="col-xs col-md-6">
+              <input type="text" name="contact[name]" id="contactFormName" placeholder="{{ 'page_cms.contact_yourname' | t }}">
+              <input type="email" name="contact[email]" id="contactFormEmail" autocorrect="off" autocapitalize="off" placeholder="{{ 'page_cms.contact_youremail' | t }}">
+              <input type="tel" name="contact[phone]" pattern="[0-9\-]*" id="contactFormTel" class="form-control" placeholder="Your Phone">
+            </div>
+            <div class="col-xs col-md-6">
+              <textarea rows="4" name="contact[body]" id="contactFormMessage" placeholder="{{ 'page_cms.contact_yourcomment' | t }}"></textarea>
+            </div>
+            <input type="submit" class="btn left" value="{{ 'page_cms.contact_button' | t }}">
+          </div>
+        </div>
+        {% endform %}
+      </div>  
+    </div>
+     {%- endcase -%}
+    {% endfor %}
+    {% endif %}
+    
+   
+  </div>
+</div>
+<script>
+  jQuery('.main-content > .container').removeClass('container');
+</script>
+{% schema %}
+  {
+    "name": "Contact",
+    
+	"blocks": [
+    {
+      "type": "title",
+      "name": "Title",
+      "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "title"
+      }
+      ]
+    },
+	{
+        "type": "map",
+        "name": "Google Map",
+        "settings": [
+
+        {
+          "type": "textarea",
+          "id": "google_map_code",
+          "label": "Google Map Code"
+        }
+    ]
+    },
+  {
+      "type": "block_text",
+      "name": "Custom Content",
+      "settings": [
+      
+	  {
+        "type": "textarea",
+        "id": "contact_info_1",
+        "label": "Content",
+        "default": "Content"
+      }
+      ]
+    },
+{
+      "type": "contact_title",
+      "name": "Form Contact",
+      "settings": [
+	  {
+        "type": "text",
+        "id": "contact_title_1",
+        "label": "Contact Title Form",
+        "default": "Get In Touch"
+      }
+      ]
+    }
+	]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

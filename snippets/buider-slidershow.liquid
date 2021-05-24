@@ -1,0 +1,129 @@
+<li class="slide slideshow__slide horizontal-{{ block.settings.alignment }} slide-{{block.id}} parallax_effect--{{ block.settings.parallax_effect }} vertical-{{block.settings.subheading2_title_alignment}} {% if is_background_video %} slideshow__slide--background-video{% endif %}" {{ block.shopify_attributes }}>
+  {% if block.settings.link != blank %}
+  {% endif %}
+   {%- assign video_mp4_url = video_mp4_url | default: block.settings.video_mp4_url -%}
+  {%- assign video_external_url = video_external_url | default: block.settings.video_external_url -%}
+  {%- assign video_autoplay = video_autoplay | default: block.settings.video_autoplay -%}
+  {%- assign video_controls = video_controls | default: block.settings.video_controls -%}
+  {%- if video_mp4_url == blank or video_external_url == blank -%}
+  {% if block.settings.image != blank %}
+  {% unless block.settings.parallax_effect %}
+ <style>
+    .slideshow__image--{{ block.id }} {
+      background-position: center {{ block.settings.alignment }};
+    }
+    .slideshow__image--{{ block.id }} {
+      background-image: url('{{ block.settings.image | img_url: '2048x' }}');
+        }
+  </style>
+  {% endunless %}
+  {% endif %}
+  {% endif %}
+   <div class="{% if block.settings.parallax_effect %}bcg {% endif %} slideshow__image--{{ block.id }}" data-image="{{ block.settings.image | img_url: '2048x' }}"
+        {% if block.settings.parallax_effect %}
+       style=" background-image:url( {{ block.settings.image | img_url: '2048x' }});"
+        data-bottom-top="background-position: 50% 20vh;"
+        data-top-bottom="background-position: 50% -20vh;"
+      {% endif %}
+          >
+  <div class="slideshow__image slideshow__image--{{ block.id }}" data-image="{{ block.settings.image | img_url: '2048x' }}">
+    
+    {% if block.settings.image == blank %}
+    <div class="placeholder-background">
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    </div>
+    {% endif %}
+
+    {% if block.settings.video_mp4_url != blank %}
+    <video muted playsinline preload="none"{% if video_controls %} controls{% endif %}{% if video_autoplay %} autoplay loop{% endif %} poster="{{ block.settings.image | img_url: '2048x' }}" preload="auto" class="{% if responsive_height %}rimage__video{% endif %} w-100">
+      <source src="{{ video_mp4_url }}" type="video/mp4">
+    </video>
+    {%- elsif block.settings.video_external_url != blank -%}
+    <div class="embed-responsive embed-responsive-16by9">
+      {%- if video_external_url.type == 'youtube' -%}
+      <iframe src="https://www.youtube.com/embed/{{ video_external_url.id }}?rel=0&amp;controls=0&amp;showinfo=0{% if video_autoplay %}&amp;autoplay=1&amp;loop=1{% endif %}" frameborder="0" allow="autoplay; encrypted-media" webkitallowfullscreen mozallowfullscreen allowfullscreen class="embed-responsive-item"></iframe>
+      {%- elsif video_external_url.type == 'vimeo' -%}
+      <iframe src="https://player.vimeo.com/video/{{ video_external_url.id }}?color=ffffff&amp;title=0&amp;byline=0{% if video_autoplay %}&amp;autoplay=1&amp;loop=1{% endif %}" frameborder="0" allow="autoplay; encrypted-media" webkitallowfullscreen mozallowfullscreen allowfullscreen class="embed-responsive-item"></iframe>
+      {%- endif -%}
+    </div>
+    {% endif %}
+    
+  </div>
+  <div class="slideshow__text-wrap{% if block.settings.heading != blank or block.settings.subheading != blank %} slideshow__overlay{% endif %}" >
+    <div class="slideshow_wapper" style="margin-left:{% if block.settings.offset_reverse_h%}-{%endif%}{{block.settings.offset_h}}px;margin-top:{% if block.settings.offset_reverse_v%}-{%endif%}{{block.settings.offset_v}}px">
+      <div class="slideshow__text-content {{block.settings.subheading2_title_alignment}}" >
+        <div class="page-width style-color-{{block.settings.style_color_text}} effect-{{block.settings.effect_text}} text_align_{{block.settings.text_align}}">
+          {% unless block.settings.heading == blank %}
+          <div class="slide-text slide-text-1">
+            {{ block.settings.heading }}
+          </div>
+          {% endunless %}
+          {% unless block.settings.subheading == blank %}
+          <div class="slide-text slide-text-2">
+            {{ block.settings.subheading }}
+          </div>
+          {% endunless %}
+          {% unless block.settings.subheading_1 == blank %}
+          <div class="slide-text slide-text-3">
+            {{ block.settings.subheading_1 }}
+          </div>
+          {% endunless %}
+          <div class="button-slider-wr {{block.settings.color_button_type }}" >
+            {% unless block.settings.button_label == blank %}
+            <a class="sl-button sl-button-1 " href="{{ block.settings.link }}">{{ block.settings.button_label }}</a>
+            {% endunless %}
+            {% unless block.settings.button_label_1 == blank %}
+            <a class="sl-button sl-button-2 " href="{{ block.settings.link_1 }}">{{ block.settings.button_label_1 }}</a>
+            {% endunless %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% if block.settings.link != blank %}
+  {% endif %}
+     </div>
+  <style>
+    .slider-{{ block.id }} .slideshow-wrapper .slick-arrow{display:none!important;}
+    .slider-{{ block.id }} .slideshow-wrapper:hover .slick-arrow{display:none!important;}
+    {% if show_navigation %}
+    .slider-{{ block.id }} .slideshow-wrapper:hover .slick-arrow{display:block!important;}
+    {% endif %}
+    {% if show_pavigation %}
+    .slider-{{ block.id }} .slideshow-wrapper ul.slick-dots {display:block!important;}
+    {% endif %}
+    .slider-{{ block.id }} ul.slick-dots{display:none!important;}
+    .parallax-banner{overflow:hidden;}
+    .parallax_effect--true .bcg {-webkit-backface-visibility: hidden;}
+    .slideshow .slides .slideshow__slide{transition: 0s;}
+    .bcg {background-position: center center;background-repeat: no-repeat;position: relative;background-color: #363636;transition: 0s;background-attachment: fixed;}
+  
+  </style>
+  <script>
+    jQuery(document).ready(function($){
+      setTimeout(function(){ 
+        $(window).scroll(function () {
+          var scroll = jQuery(window).scrollTop();  
+          var ofset_top = $('.slide-{{block.id}}').offset().top;
+                            var ofset_to = ofset_top - 250 ;
+                            var height = $( window ).height() + 30;
+          var ofset_tr = ofset_top - height ;
+
+          if(scroll > ofset_tr){
+            if ($('.slideshow__slide.slide-{{block.id}}').hasClass('parallax_effect--true')){
+                  if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) && $(window).width() > 300) {
+              skrollr.init({forceHeight: false});
+
+              var s = skrollr.init({forceHeight: false});
+              s.refresh($(".bcg"));
+
+            } else if ($(window).width() > 300) {
+              $('.slideshow__slide.slide-{{block.id}}').removeClass('parallax_effect--true').addClass('parallax_effect--false');
+                }
+                }
+                }
+                });
+            }, 1000);
+          });
+  </script>
+</li>

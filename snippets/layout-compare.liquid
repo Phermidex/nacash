@@ -1,0 +1,77 @@
+<!---- Product Compare
+<div id="compare-popup" class="modal fade" role="dialog" aria-hidden="true" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <button class="close" aria-label="Close" data-dismiss="modal" type="button">
+          <span aria-hidden="true">&#xD7;</span>
+      </button>
+      <div class="content-wrapper row">
+        <div class="row">
+          <div class="product-comparison-template-wrapper hidden" id="product-comparison-template-wrapper">
+            <table class="table table-bordered product_comparison_template">
+               <tbody>
+                  <tr class="features {% unless settings.enable_product_compare_features %} hidden {% endunless %}">
+                     <td class="heading-col feature-features"> <span>{{ 'general.compare.compare_table.features' | t }}</span></td>
+                     <td class="product-col comparison_features product-___product_id___">
+                        <div class="remove"> <a class="compare_remove remove-product-compare" href="#" title="Remove" data-handle-product="___product_handle___" data-id-product="___product_id___"> <i class="fa fa-trash fa-2x"></i> </a></div>
+                        <div class="product-image-block">
+                           <a class="product_image" href="___product_url___" title="___product_title___"> <img class="img-responsive cmp-product-image" att-image-src="___product_image___" alt="___product_title___"> </a>
+                           <div class="label-box">___product_label_sale___   ___product_label_new___</div>
+                        </div>
+                        <h5 class="product-name"> <a class="product-title" href="___product_url___" title="___product_title___">___product_title___</a></h5>
+                        <div class="product-price"><span class="price price-compare product-old-price hidden">___product_old_price___</span><span class="price">___product_price___</span></div>
+                        <div class="product_desc"> ___product_decs___</div>
+                        <div class="comparison_product_infos">
+                           <p class="comparison_availability_statut"> <span class="availability_label">{{ 'general.compare.compare_table.availability' | t }} </span> <span class="availability_value"> ___product_availability___ </span></p>
+                           <div class="clearfix">
+                              <div class="button-container"> 
+                                  <form action="/cart/add" method="post" class="product-action variants" enctype="multipart/form-data">
+  {% include 'product-customizer' %}
+
+                                    <button type="button" class="add-to-cart btn btn-primary" id="add-to-cart">{{ 'products.product.add_to_cart' | t }}</button>
+                                    <input type="text" value="1" min="1" name="quantity" class="item-quantity hidden" id="quantity">
+                                    <input class="hidden" type="hidden" name="id" id="product-select-___product_variant_id___" value="___product_variant_id___" />
+                                  </form>  
+                                  <a class=" lnk_view btn" href="___product_url___" title="{{ 'general.compare.compare_table.view' | t }}"> <span>{{ 'general.compare.compare_table.view' | t }}</span> </a></div>
+                           </div>
+                        </div>
+                     </td>
+                  </tr>
+                  <tr class="availability {% unless settings.enable_product_compare_availability %} hidden {% endunless %}">
+                     <td class="heading-col feature-availability"> <strong>{{ 'general.compare.compare_table.availability' | t }}</strong></td>
+                     <td class="product-col comparison_availability product-___product_id___">___product_availability___</td>
+                  </tr>     
+
+                  <tr class="options {% unless settings.enable_product_compare_options %} hidden {% endunless %}">
+                     <td class="heading-col feature-options"> <strong>{{ 'general.compare.compare_table.options' | t }}</strong></td>
+                     <td class="product-col comparison_options product-___product_id___">___product_options___</td>
+                  </tr>
+                  <tr class="vendor {% unless settings.enable_product_compare_vendor %} hidden {% endunless %}">
+                     <td class="heading-col feature-vendor"> <strong>{{ 'general.compare.compare_table.vendor' | t }}</strong></td>
+                     <td class="product-col comparison_vendor product-___product_id___">___product_vendor___</td>
+                  </tr>
+                  <tr class="collection {% unless settings.enable_product_compare_collection %} hidden {% endunless %}">
+                     <td class="heading-col feature-collection"> <strong>{{ 'general.compare.compare_table.collection' | t }}</strong></td>
+                     <td class="product-col comparison_collection product-___product_id___">___product_collection___</td>
+                  </tr>
+
+                  <tr class="rating {% unless settings.enable_product_compare_rating %} hidden {% endunless %}">
+                     <td class="heading-col feature-rating"> <strong>{{ 'general.compare.compare_table.rating' | t }}</strong></td>
+                     <td class="product-col comparison_rating product-___product_id___">___product_rating___</td>
+                  </tr> 
+               </tbody>
+            </table>  
+          </div>
+          <div id="product-compare"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+   {{ 'compare-product.js' | asset_url | script_tag }}
+<script>
+jQuery(document).ready(function($) {
+  Shopify.Compare.initCompare();
+});  
+</script>
+END ---->

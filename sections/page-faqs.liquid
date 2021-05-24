@@ -1,0 +1,88 @@
+{% assign home_faqs_margin = section.settings.home_faqs_margin %}
+{% assign titlefaq = section.settings.titlefaq %}
+{% assign subtitlefaq_page = section.settings.subtitlefaq_page %}
+<div class="container page-faq">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="faq-title">{{ page.title }}</h1>
+      <div class="faq-subtitle">{{ subtitlefaq_page }}</div>
+
+      {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+
+      <div class="panel-group" id="accordion">
+        {% if block.settings.subtitlefaq != blank %}
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#faqs-{{block.id}}">
+                {{ block.settings.subtitlefaq }}
+              </a>
+            </h4>
+          </div>
+          <div id="faqs-{{block.id}}" class="panel-collapse collapse contents">
+            {{ block.settings.contentfaq }}
+          </div>
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "FAQs",
+  "class": "index-section",
+  "max_blocks": 20,
+  "settings": [
+    {
+      "type": "text",
+      "id": "home_faqs_margin",
+      "label": "Margin",
+      "default": "0px 0px 0px 0px"
+    },
+	{
+        "type": "text",
+        "id": "titlefaq",
+        "label": "Page’s Title"
+      },
+      {
+        "type": "textarea",
+        "id": "subtitlefaq_page",
+        "label": "Intro"
+      }
+    
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "Faq",
+      "settings": [
+        
+      {
+        "type": "text",
+        "id": "subtitlefaq",
+        "label": "Question",
+        "default": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "contentfaq",
+        "label": "Answer",
+        "default": "Answer"
+      }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+  {% stylesheet %}
+  {% endstylesheet %}
+
+  {% javascript %}
+  {% endjavascript %}

@@ -1,0 +1,355 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">  </script>
+<style>
+
+   .box {
+      overflow: hidden;
+   }
+  .section-header__title.text-center{
+  	margin-bottom: 30px;
+  }
+   .slide-img {
+      position: relative;
+   }
+  .owl-nav button span{
+  	font-size: 3rem;
+  }
+   .slide-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      box-sizing: border-box;
+   }
+   .detail-box {
+      width: 100%;
+      display: block;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 50px;
+      box-sizing: border-box;
+      background-color: {{ section.settings.detail-box }};
+   }
+   .type {
+      display: flex;
+      flex-direction: column;
+   }
+   .type a {
+      color: #222222;
+      margin: 5px 0px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      padding-right: 8px;
+   }
+   .type span {
+      color: rgba(26, 26, 26, 0.5);
+   }
+   .price {
+      color: #333333;
+      font-weight: 600;
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+   }
+   .overlay {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      background-color: {{ section.settings.color_bg--overlay | color_modify: 'alpha', 0.6}};
+      display: flex;
+      justify-content: center;
+      align-items: center;
+   }
+   .buy-btn {
+      width: 160px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #FFFFFF;
+      color: #252525;
+      font-weight: 700;
+      letter-spacing: 1px;
+      border-radius: {{section.settings.buybtn-radius}}px;
+      box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.2);
+   }
+   .buy-btn:hover {
+      color: #FFFFFF;
+      background-color: {{ section.settings.color_bg--buyBtn }};
+      transition: all ease 0.3s;
+   }
+   .overlay {
+      visibility: hidden;
+   }
+   .slide-img:hover .overlay {
+      visibility: visible;
+      animation: fade 0.5s;
+   }
+   @keyframes fade {
+      0% {
+         opacity: 0;
+      }
+      100% {
+         opacity: 1;
+      }
+   }
+   :focus {
+      outline: none !important;
+   }
+   .slick-dots li button::before {
+      font-size: 22px !important;
+   }
+   span.icon.icon-arrow-left.slick-arrow,
+   span.icon.icon-arrow-right.slick-arrow {
+      display: none !important;
+   }
+   ul.slick-dots {
+      display: none !important;
+   }
+   @media screen and (max-width: 479px) {
+      /* start of phone styles */
+      .box {
+/*          width: 265px; */
+      }
+      .type a {
+         font-size: 16px;
+      }
+      .type span {
+         font-size: 16px;
+      }
+      .detail-box {
+         padding: 10px !important;
+      }
+   }
+  .owl-carousel .owl-nav button.owl-prev {
+      left: -45px !important;
+  }
+  .owl-carousel .owl-nav button.owl-next {
+      right: -45px !important;
+  }
+   .owl-dots{
+  	text-align:center;
+    margin-top: 20px;
+   }
+   button.owl-dot.active {
+      background: #e21b4d !important;
+      border-radius: 50%;
+   }
+   .owl-dots .owl-dot.active span{
+      height: 10px;
+      width: 10px;
+      display: block;
+   }
+   .owl-dots button.owl-dot{
+  	    background: rgba(26, 26, 26, 0.5);
+    	border-radius: 50%;
+            margin: 2px !important;
+   } 
+   .owl-dots button.owl-dot span{
+      height: 10px;
+      width: 10px;
+      display: block;
+   }
+</style>
+
+{%- if section.settings.arrows -%}
+<style>
+   span.icon.icon-arrow-left.slick-arrow,
+   span.icon.icon-arrow-right.slick-arrow {
+      position: absolute;
+      top: 50%;
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+      cursor: pointer;
+      display: inline !important;
+   }
+   span.icon.icon-arrow-left.slick-arrow {
+      left: -22px;
+   }
+   span.icon.icon-arrow-right.slick-arrow {
+      right: -22px;
+   }
+   @media screen and (max-width: 479px) {
+      /* start of phone styles */
+      span.icon.icon-arrow-left.slick-arrow,
+      span.icon.icon-arrow-right.slick-arrow {
+         display: none !important;
+      }
+   }
+</style>
+{%- endif -%}
+
+{%- if section.settings.dots -%}
+<style>
+   ul.slick-dots {
+      display: block !important;
+   }
+</style>
+{%- endif -%}
+{% if article.metafields.global.rp_collection_handle %}
+<div class="row">
+<div class="col-12 col-md-9 col-lg-9">  
+{%- if section.settings.enable -%}
+<div class="index-section post-related-products">
+  <h2 class="section-header__title text-center">Shop This Post</h2>
+   {% assign currentCol =  article.metafields.global.rp_collection_handle  %}
+   <section>
+      <div class="moteeb owl-carousel ">
+         {%- for block in section.blocks -%}
+         {%- for product in collections[currentCol].products -%}
+         <div class="item-a">
+            <!--box-slider--------------->
+            <div class="box">
+               <!--img-box---------->
+               <div class="slide-img">
+                  <img style="object-fit: contain;" src="{{ product.featured_image.src | img_url: "large" }}"
+                     alt="{{ product.featured_image.alt | escape }}">
+                  <!--overlayer---------->
+                  <a href="{{ product.url | within: collection }}" class="overlay">
+                     <!--buy-btn------>
+                     <div  class="buy-btn">{{ section.settings.btn-title }}</div>
+                  </a>
+               </div>
+               <!--detail-box--------->
+               <div class="detail-box">
+                  <!--type-------->
+                  <div class="type">
+                     <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
+                     <span>{{ product.vendor }}</span>
+                  </div>
+                  <!--price-------->
+                  <a href="{{ product.url | within: collection }}" class="price">{{ product.price | money }}</a>
+               </div>
+            </div>
+         </div>
+         {% else %}
+            The collection is empty!
+         {%- endfor -%}
+         {%- endfor -%}
+      </div>
+   </section>
+</div>
+{%- endif -%}
+</div>
+<div class="col-12 col-md-3 col-lg-3"></div>  
+</div> 
+{%endif%}
+<script>
+  $(document).ready(function() {
+    
+    $('.owl-carousel').owlCarousel({
+        loop:true,
+        margin:10,
+        nav:true,
+        dots:true,
+        responsive:{
+            0:{
+                items:1,
+                nav:false
+            },
+            600:{
+                items:3,
+                nav:true
+            },
+            1000:{
+                items:3
+            }
+        }
+    });
+    
+    
+  });
+</script> 
+
+{% schema %}
+{
+   "name": "Product Carousel",
+   "settings": [
+      {
+      "type": "checkbox",
+      "id": "enable",
+      "label": "Enable",
+      "default": true
+      },
+      {
+      "type": "checkbox",
+      "id": "arrows",
+      "label": "Show arrows",
+      "default": true
+      },
+      {
+      "type": "checkbox",
+      "id": "dots",
+      "label": "Show Slider Dots",
+      "default": true
+      },
+      {
+      "type": "color",
+      "id": "color_bg--overlay",
+      "label": "Overlay Color",
+      "default": "#000"
+      },
+      {
+      "type": "color",
+      "id": "detail-box",
+      "label": "Detail Box",
+      "default": "#f3f3f3"
+      },
+      {
+      "type": "text",
+      "id": "btn-title",
+      "default": "View More",
+      "label": "Button Title"
+      },
+      {
+      "type": "color",
+      "id": "color_bg--buyBtn",
+      "label": "Button Color on Hover",
+      "default": "#CBD5CC"
+      },
+      {
+      "type": "range",
+      "id": "buybtn-radius",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Button Radius",
+      "default": 20
+      },
+      {
+      "type": "range",
+      "id": "card-width",
+      "min": 300,
+      "max": 440,
+      "step": 10,
+      "unit": "px",
+      "label": "Card Width",
+      "default": 350
+      }
+   ],
+   "blocks": [
+      {
+         "type": "collection",
+         "name": "Collection",
+         "limit": 1,
+         "settings": [
+            {
+            "type": "collection",
+            "id": "collection",
+            "label": "Collection"
+            }
+
+         ]
+      }
+   ],
+   "presets": [
+      {
+      "name": "Products carousel",
+      "category": "Carousel Sections"
+      }
+   ]
+}
+{% endschema %}

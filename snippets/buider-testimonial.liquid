@@ -1,0 +1,21 @@
+{%- if block.type == 'group_testimonial_item' and block.settings.for_item == slider_name -%}
+<li class="slide testimonial-item {{block.settings.style}}">
+  <span  class="quote cs-font clever-icon-quote-2"></span>
+  {% if block.settings.style == 'type_3' %}
+  <div class="image"{% if block.settings.image != blank %} style="width:{{block.settings.image_size }};height:{{block.settings.image_size }};background-image: url('{{ block.settings.image | img_url: '2048x'  }}');"{% endif %}>
+  </div>
+  {% endif %}
+  <div class="content-text-testimonial">
+    <div class="text">{{block.settings.text }}</div>
+    <div class="author">
+      {% if block.settings.style == 'type_2' %}
+      <div class="image"{% if block.settings.image != blank %} style="width:{{block.settings.image_size }};height:{{block.settings.image_size }};background-image: url('{{ block.settings.image | img_url: '2048x'  }}');"{% endif %}>
+      </div>
+      {% endif %}
+      {% if block.settings.author != blank %}
+      <div class="name-author">{{block.settings.author }}</div>
+      {% endif %}
+    </div>
+  </div>
+</li>
+{% endif %}

@@ -1,0 +1,49 @@
+{% comment %}
+This template will be automatically generated for you if the file doesn't exist,
+but where's the fun in having no control? Define your layout below.
+
+The 'layout settings.customer_layout' line is inserted at the top of every customer account template.
+Your theme's settings determine to use the 'default' or 'theme' customer templates.
+More info:
+- http://www.tetchi.ca/shopify-theme-from-scratch-part-11/
+{% endcomment %}
+
+
+<div class="create-an-account">
+  <h1>{{ 'customers.register.title' | t }}</h1>
+
+  {% comment %}
+  This form must use 'create_customer'
+  {% endcomment %}
+  {% form 'create_customer' %}
+  <input type="hidden" name="return_to" value="/account">
+  {% include 'form-errors-custom' %}
+  <div id="first_name">
+    <label for="first_name">{{ 'customers.register.first_name' | t }}<em>*</em></label>
+    <input type="text" value="" name="customer[first_name]" id="first_name" {% if form.errors contains "first_name" %} class="error"{% endif %} >
+  </div>
+
+  <div id="last_name">
+    <label for="last_name">{{ 'customers.register.last_name' | t }}<em>*</em></label>
+    <input type="text" value="" name="customer[last_name]" id="last_name" {% if form.errors contains "last_name" %} class="error"{% endif %} >
+  </div>
+
+  <div id="email">
+    <label for="email">{{ 'customers.register.email' | t }}<em>*</em></label>
+    <input type="email" value="" name="customer[email]" id="email" {% if form.errors contains "email" %} class="error"{% endif %}  >
+  </div>
+
+  <div id="create_password">
+    <label for="password">{{ 'customers.register.password' | t }}<em>*</em></label>
+    <input type="password" value="" name="customer[password]" id="create_password" {% if form.errors contains "password" %} class="error"{% endif %}>
+  </div>
+
+  <div class="buttons-set">
+    <p><input type="submit" class="btn-login harman_btn5" value="{{ 'customers.register.link_create_account' | t }}"></p>
+  </div>
+  <p class="hr-login"><span>{{ 'customers.register.or' | t }}</span></p>
+  <div class="buttons-set">
+    <a title="Create an account" href="/account/login" class="btn-creatacc harman_btn5">{{ 'customers.register.link_sign_in' | t }}</a>
+  </div>
+  {% endform %}
+</div>

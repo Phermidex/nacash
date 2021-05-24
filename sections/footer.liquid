@@ -1,0 +1,431 @@
+<footer class="footer-container {{section.settings.footer_layout}} {% if section.settings.show_top_border %} border-top {% endif %}" style="margin: {{ section.settings.layout_footer }};">
+  <div class="footer-center">
+    <div class="{% if section.settings.enable_block_home_icon_full  %} full-width{% else %} container{%endif %}"> 
+
+        {% for block in section.blocks %}
+        {%- case block.type -%}
+        {% when 'iconsocial' %}
+        {% capture iconsocial %}
+        <div class="footer-isocal">
+          {% if  block.settings.footer_column_3_title != blank %}
+          <h3 class="module-title">{{ block.settings.footer_column_3_title }}</h3>
+          {% endif %}
+          <div class="footer-icon-share">
+            {% if block.settings.footer_column_4_icon_link_1  %}
+            <a href="https://www.facebook.com/NacachWax" target="_blank">
+              <i class="cs-font clever-icon-facebook"></i>
+            </a>
+            {% endif %}
+            {% if block.settings.footer_column_4_icon_link_2  %}
+            <a href="https://www.instagram.com/nacachwax/" target="_blank">
+              <i class="cs-font clever-icon-instagram"></i>
+            </a>
+            {% endif %}
+            {% if block.settings.footer_column_4_icon_link_3  %}
+            <a href="{{ block.settings.footer_column_4_icon_link_3 }}" target="_blank">
+              <i class="cs-font clever-icon-twitter"></i>
+            </a>
+            {% endif %}
+            {% if block.settings.footer_column_4_icon_link_4  %}
+            <a href="https://www.pinterest.com/nacachwax/" target="_blank">
+              <i class="cs-font clever-icon-pinterest"></i>
+            </a>
+            {% endif %}
+            {% if block.settings.footer_column_4_icon_link_5  %}
+            <a href="https://www.youtube.com/channel/UCyStaRBWhN-aWOFY2tkWujg" target="_blank">
+              <i class="cs-font clever-icon-youtube-2"></i>
+            </a>
+            {% endif %}
+
+            {% if block.settings.footer_column_4_icon_link_6  %}
+            <a href="{{ block.settings.footer_column_4_icon_link_6 }}" target="_blank">
+              <i class="cs-font clever-icon-googleplus"></i>
+            </a>
+            {% endif %}
+
+            {% if block.settings.footer_column_4_icon_link_8  %}
+            <a href="{{ block.settings.footer_column_4_icon_link_8 }}" target="_blank">
+              <i class="cs-font clever-icon-skype"></i>
+            </a>
+            {% endif %}
+          </div>
+        </div>
+        {% endcapture %}
+        {% when 'logo' %}
+        {% capture logo %}
+        <div class="footer-logo">
+          {%- assign img_url = block.settings.logo | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+          <img src="{{ block.settings.logo | img_url: '2048x'  }}" alt="{{ image.alt | escape }}">
+
+        </div>
+        {% endcapture %}
+        {% when 'newsletter' %}
+        {% capture newsletter %}
+        <div class="footer-newsletter">
+          <div class="newsletter">
+            {% if block.settings.home_newsletter_title != blank %}
+            <div class="title_newsletter">
+              {{ block.settings.home_newsletter_title }}
+            </div>
+            {% endif %}
+            <div class="content">
+              <form action="{{ block.settings.mailing_list_form_action }}" method="post" name="mc-embedded-subscribe-form" target="_blank" class="input-group">
+                <div class="input-group newsletter_form_content">
+                  <input  class="input__field input-group-field" type="email" value="" placeholder="{{ 'footer.footer_newsletter_content' | t }}" name="EMAIL" aria-label="Email Address">
+                  <span class="input-group-btn">
+                    <input type="submit" class="btn" value="subscribe" name="subscribe">
+                  </span>
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+        {% endcapture %}
+        {% when 'menu' %}
+        {% capture menu %}
+
+
+      <div class="row">
+
+        <div class="footer-link">
+
+          <ul class="content menu-1">
+            {%- assign footercol1 = block.settings.footercol1_1 -%}
+            {% for link in linklists[footercol1].links %}
+              <li>
+                <a href="{{ link.url }}">{{ link.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+
+          <ul class="content menu-2">
+            {%- assign footercol2 = block.settings.footercol1_2 -%}
+            {% for link in linklists[footercol2].links %}
+              <li>
+                <a href="{{ link.url }}">{{ link.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+
+        </div>
+      </div>
+
+        {% endcapture %}
+
+        {% when 'copyright' %}
+        {% capture copyright %}
+        <div class="footer-copyright">
+          <address>
+            {{ block.settings.footer_copyright }}
+          </address>
+        </div>
+        {% endcapture %}
+        {%- endcase -%}
+        {% endfor %}
+
+        {% if section.settings.footer_layout == 'footer_layout_1' %}
+          <div class="col-lg-6 col-md-12 col-12 footer-isocal">
+            {% for block in section.blocks %}
+            {%- case block.type -%}
+            {% when 'iconsocial' %}
+            {{iconsocial}}
+            {%- endcase -%}
+            {% endfor %}
+          </div>
+          <div class="col-lg-6 col-md-12 col-12">
+            {% for block in section.blocks %}
+            {%- case block.type -%}
+            {% when 'menu' %}
+            {{menu}}
+            {% when 'newsletter' %}
+            {{newsletter}}
+            {% when 'copyright' %}
+            {{copyright}}
+            {% when 'logo' %}
+            {{logo}}
+            {%- endcase -%}
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        {% if section.settings.footer_layout == 'footer_layout_2' %}
+          <div class="col-md-4 col-12 text-left">
+            {% for block in section.blocks %}
+            {%- case block.type -%}
+            {% when 'copyright' %}
+            {{copyright}}
+            {%- endcase -%}
+            {% endfor %}
+          </div>
+          <div class="col-md-4 col-12 text-center">
+            {% for block in section.blocks %}
+            {%- case block.type -%}
+            {% when 'menu' %}
+            {{menu}}
+            {%- endcase -%}
+            {% endfor %}
+          </div>
+          <div class="col-md-4 col-12 footer-isocal text-right">
+            {% for block in section.blocks %}
+            {%- case block.type -%}
+            {% when 'iconsocial' %}
+            {{iconsocial}}
+            {%- endcase -%}
+            {% endfor %}
+          </div>
+        {% endif %}
+
+
+        {% if section.settings.footer_layout == 'footer_layout_3' %}
+        <div class="row footer_layout_3_container">
+
+          <div class="col-xs-12 col-sm-12 col-md-3 col-lg-2 text-left">
+            {% for block in section.blocks %}
+            {%- case block.type -%}
+            {% when 'logo' %}
+            {{logo}}
+            {%- endcase -%}
+            {% endfor %}
+          </div>
+
+          <div class="col-xs-12 col-sm-12 col-md-1 col-lg-5">
+          </div>
+
+          <div class="col-xs-12 col-sm-12 col-md-8 col-lg-5">
+            <div class="row">
+
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 menus-container text-right">
+                {% for block in section.blocks %}
+                {%- case block.type -%}
+                {% when 'menu' %}
+                {{menu}}
+                {%- endcase -%}
+                {% endfor %}
+              </div>
+
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">
+                {% for block in section.blocks %}
+                {%- case block.type -%}
+                {% when 'iconsocial' %}
+                {{iconsocial}}
+                {%- endcase -%}
+                {% endfor %}
+              </div>              
+
+            </div> <!-- .row -->
+
+          </div> <!-- .col -->
+
+        </div> <!-- .row -->
+
+      {% endif %}        
+
+      </div> <!-- .row -->
+
+      <div class="row copyright-container">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+          {% for block in section.blocks %}
+            {%- case block.type -%}
+              {% when 'copyright' %}
+            {{copyright}}
+            {%- endcase -%}
+          {% endfor %}
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</footer>
+
+{% if section.settings.show_button_back_to_top %}
+<div id="back-top" style="display: none;"><a class="" href="#top"><i class="cs-font clever-icon-up"></i></a></div>
+{% endif %}
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+ 
+    {
+      "type": "text",
+      "id": "layout_footer",
+      "label": "Margin",
+      "default": "0px 0px 0px 0px"
+    },
+    {
+      "type": "select",
+      "id": "footer_layout",
+      "label": "Type",
+      "options": [
+        {
+          "value": "footer_layout_1",
+          "label": "Type #1"
+        },
+        {
+          "value": "footer_layout_2",
+          "label": "Type #2"
+        },
+        {
+          "value": "footer_layout_3",
+          "label": "Type #3"
+        }       
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_block_home_icon_full",
+      "label": "Enable Full Width"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_top_border",
+      "label": "Show top border",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_button_back_to_top",
+      "label": "Show button 'Back to top'",
+      "default": true
+    }
+  ],
+  "max_blocks": 9,
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "text",
+          "id": "margin_logo",
+          "label": "Margin",
+          "default": "0px 0px 0px 0px"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "image"
+        }
+      ]
+    },
+    {
+      "type": "menu",
+      "name": "Menu",
+      "settings": [        
+        {
+          "type": "header",
+          "content": "Menu 1"
+        },      
+        {
+          "type": "text",
+          "id": "footer_heading_1",
+          "label": "Heading 1",
+          "default": "Heading 1"
+        },
+        {
+          "type": "link_list",
+          "id": "footercol1_1",
+          "label": "Link List 1"
+        },
+
+        {
+          "type": "header",
+          "content": "Menu 2"
+        },      
+        {
+          "type": "text",
+          "id": "footer_heading_2",
+          "label": "Heading 2",
+          "default": "Heading 2"
+        },
+        {
+          "type": "link_list",
+          "id": "footercol1_2",
+          "label": "Link List 2"
+        }
+
+      ]
+    },
+    {
+      "type": "newsletter",
+      "name": "Newsletter",
+      "settings": [  
+        {
+          "type": "text",
+          "id": "home_newsletter_title",
+          "label": "Heading",
+          "default": "Newsletter"
+        },
+        {
+          "type": "text",
+          "id": "mailing_list_form_action",
+          "label": "MailChimp form action URL",
+          "info": "[Where do I find my MailChimp form action URL?](http:\/\/docs.shopify.com\/support\/configuration\/store-customization\/where-do-i-get-my-mailchimp-form-action)"
+        }
+      ]
+    },
+    {
+      "type": "iconsocial",
+      "name": "Social Media",
+      "settings": [
+        {
+          "type": "text",
+          "id": "footer_column_3_title",
+          "label": "Social Title"
+        },
+        {
+          "type": "checkbox",
+          "id": "footer_column_4_icon_link_1",
+          "label": "Facebook"
+        },
+        {
+          "type": "checkbox",
+          "id": "footer_column_4_icon_link_2",
+          "label": "Instagram"
+        },
+        {
+          "type": "checkbox",
+          "id": "footer_column_4_icon_link_3",
+          "label": "Twitter"
+        },
+        {
+          "type": "checkbox",
+          "id": "footer_column_4_icon_link_4",
+          "label": "Pinterest"
+        },
+        {
+          "type": "checkbox",
+          "id": "footer_column_4_icon_link_5",
+          "label": "Youtube"
+        },
+        {
+          "type": "checkbox",
+          "id": "footer_column_4_icon_link_6",
+          "label": "Google+"
+        },
+        {
+          "type": "checkbox",
+          "id": "footer_column_4_icon_link_8",
+          "label": "Skype"
+        }
+      ]
+    },
+    {
+      "type": "copyright",
+      "name": "Copyright",
+      "settings": [
+       
+        {
+          "type": "textarea",
+          "id": "footer_copyright",
+          "label": "Copyright",
+          "default": "Copyright"
+        }
+
+      ]
+    }
+
+  ]
+}
+{% endschema %}

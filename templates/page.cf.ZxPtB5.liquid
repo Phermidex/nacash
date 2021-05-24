@@ -1,0 +1,14 @@
+
+<header class="page-header">
+    <h2>{{ page.title }}</h2>
+</header>
+
+{% include 'hypervisual' %}
+
+{% comment %}
+  Regular page content goes here.
+{% endcomment %}
+<div class="rte">
+  {{ page.content }}
+  {% render "customer-fields", form_id: "ZxPtB5" %}
+</div>

@@ -1,0 +1,231 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if IE 9 ]><html class="ie9 no-js"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+
+  <!-- Basic page needs ================================================== -->
+  <meta charset="utf-8">
+
+  <!-- Title and description ================================================== -->
+  <title>
+    {{ page_title }}{% if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif %}{% if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+  </title>
+
+  {% if page_description %}
+  <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+
+
+  <!-- Helpers ================================================== -->
+  <link rel="canonical" href="{{ canonical_url }}">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  {% include 'meta-social' %}
+  <!-- Favicon -->
+  {% if settings.favicon != blank %}
+  <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+  {% endif %}
+  {% include 'font-family' %}
+
+
+  {{ 'lazysizes.js' | asset_url | script_tag }}
+  <!-- Styles -->
+  {% if settings.layout_body =='body_ltr'%} 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  {% elsif settings.layout_body == 'body_rtl' %}
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  {{ 'bootstrap-rtl.min.css' | asset_url | stylesheet_tag }}
+  {{ 'styles-rtl.css' | asset_url | stylesheet_tag }}
+  {% endif %}
+  {% if settings.layout_fullpage %}
+  {{ 'fullpage.css' | asset_url | stylesheet_tag }}
+  {% endif %}
+  <!-- Theme base and media queries -->
+  {{ 'theme_exention.css' | asset_url | stylesheet_tag }}
+  {{ 'styles.css' | asset_url | stylesheet_tag }}
+  {{ 'owl.theme.css' | asset_url | stylesheet_tag }}
+  {{ 'theme_core.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'responsive.css' | asset_url | stylesheet_tag }}
+  {% if settings.display_csseditor %}
+  {{ 'bannereditor.css' | asset_url | stylesheet_tag }}
+  {% endif %}
+  <!-- Scripts -->
+  {% include 'head_scripts' %}
+  {{ 'skrollr.js' | asset_url | script_tag }}
+  {{ "tricky3.infinite-scroll.v2.min.js" | asset_url | script_tag }}
+  <!-- 360 Product -->
+  {{ 'threesixty.min.js' | asset_url | script_tag }}
+  <!-- Header hook for plugins ================================================== -->
+  {{ content_for_header }}
+  {%- capture CFH -%}{{ content_for_header }}{%- endcapture -%}
+  {%- if CFH contains 'design_mode' -%}
+  {%- assign isAdmin = true -%}
+  {%- else -%}
+  {%- assign isAdmin = false -%}
+  {%- endif -%}
+  <!--[if lt IE 9]>
+{{ '//html5shiv.googlecode.com/svn/trunk/html5.js' | script_tag }}
+<![endif]-->
+
+  {% comment %}
+  If you store has customers disabled, you can remove the following JS file
+  {% endcomment %}
+  {% if template contains 'customers' %}
+  {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+  {{ 'customer_area.js'  | shopify_asset_url | script_tag }}
+  {% endif %}
+
+{% include 'weglot_hreftags' %}
+{% include 'weglot_switcher' %}
+
+  {% include 'shogun-head' %}
+  {% include 'qikify-navigator' %}
+  {% include 'qikify-smartmenu-data' %}
+  <script type="text/javascript" src="https://sdk.qikify.com/tmenu/app-v5.js?token=pXzzu5HdenHzdmfUt0YEsY35IDQVeBIQ&shop=nacach.myshopify.com" defer="defer"></script>
+</head>
+
+{% comment %}
+Add the page template as a class for easy page or template specific styling.
+{% endcomment %}
+<body id="{{ page_title | handle }}" class="{% if settings.layout_width_body =='boxed' %} boxed-layout {% endif %}{% if settings.display_none_footer %}display_none_footer {% endif %} {{ settings.layout_fullpage_ancho}} {% if customer %}customer-logged-in {% endif %} {% if settings.layout_body =='body_ltr'%} ltr {% elsif settings.layout_body == 'body_rtl' %} rtl{% endif %} template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}">
+  <div id="loading"></div>
+  <div class="wrapper-container">
+    <div class="header-wrapper">
+      {% section 'header' %}
+    </div>
+    <div class="product-quickview"></div>
+    {% include 'breadcrumb' %}
+    <main class="main-content" >
+      {% if settings.header_layout == "header-vertical-left" %}
+      {% include 'header-search-cart' %}
+      {% endif %}
+
+      <div class="{% unless template contains 'collection' %}container {% endunless %}main_container">
+        {{ content_for_layout }}
+      </div>
+    </main>
+    {% section 'footer' %}
+    {% section 'popups' %}
+    {% include 'message-modal' %}
+    {% include 'quick-view-product' %}
+    {% include 'popup-newsletter' %}
+    {% include 'layout-compare' %}
+   
+  </div>
+  {% include 'canvas-menu' %}
+  {% include 'search-autocomplete' %}
+  {% include 'footer_scripts' %}
+  {% if template contains 'index' and isAdmin %}
+  {% include 'setup_demo' %}
+  {% endif %}
+  {{ weglot_includes }}
+  <style>
+    {% if settings.use_scale_product_image %}
+.products-grid .grid-item .grid-image img{width:auto;max-height:{{settings.product_scale_height }}px;}
+.products-grid .grid-item .product-image{height:{{settings.product_container_scale_height}}px;}
+{% endif %}
+  </style>
+  {% if settings.age_verify %}
+  <div class="age-verify" style="">
+    <div class="content-popup">
+      {% if settings.age_verify_title != blank %}
+      <h3> {{settings.age_verify_title }}</h3>
+      {% endif %}
+      {% if settings.age_verify_subtitle != blank %}
+      <p>{{settings.age_verify_subtitle }}</p>
+      {% endif %}
+      <div class="button">
+        <a class="enter-page">Enter <i class="cs-font clever-icon-arrow-right-4"></i></a> or <a class="button-close" href="{{settings.age_verify_link}}">Exit</a>
+      </div>
+    </div>
+  </div>
+  <style>
+    .age-verify{display:none;}
+  </style>
+  <script>
+    $(document).ready(function(){
+      $(window).load(function() {
+        // if no cookie
+        // if no cookie
+        if ($.cookie('alert') != "true") {
+          $('.age-verify').show();
+          $(".age-verify .enter-page").click(function () {
+            $(".age-verify").slideUp("slow");
+            // set the cookie for 24 hours
+            var date = new Date();
+            date.setTime(date.getTime() + 24 * 60 * 60 * 1000);
+            $.cookie('alert', "true", {
+              expires: date
+            });
+          });
+        }
+
+      });
+    });
+  </script>
+  {% endif %}
+
+
+
+
+  {% if template contains 'cart' %}
+  <script>
+    window.theme = window.theme || {};
+    /**
+ * Module to add a shipping rates calculator to cart page.
+ *
+ * Copyright (c) 2011-2016 Caroline Schnapp (11heavens.com)
+ * Dual licensed under the MIT and GPL licenses:
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.gnu.org/licenses/gpl.html
+ * Modified by David Little, 2016
+ */
+
+    "object"==typeof Countries&&(Countries.updateProvinceLabel=function(e,t){if("string"==typeof e&&Countries[e]&&Countries[e].provinces){if("object"!=typeof t&&(t=document.getElementById("address_province_label"),null===t))return;t.innerHTML=Countries[e].label;var r=jQuery(t).parent();r.find("select");r.find(".custom-style-select-box-inner").html(Countries[e].provinces[0])}}),"undefined"==typeof Shopify.Cart&&(Shopify.Cart={}),Shopify.Cart.ShippingCalculator=function(){var _config={submitButton:"Calculate shipping",submitButtonDisabled:"Calculating...",templateId:"shipping-calculator-response-template",wrapperId:"wrapper-response",customerIsLoggedIn:!1,moneyFormat:"${{amount}}"},_render=function(e){var t=jQuery("#"+_config.templateId),r=jQuery("#"+_config.wrapperId);if(t.length&&r.length){var templateSettings={evaluate:/<%([\s\S]+?)%>/g,interpolate:/<%=([\s\S]+?)%>/g,escape:/<%-([\s\S]+?)%>/g};var n=Handlebars.compile(jQuery.trim(t.text())),a=n(e);if(jQuery(a).appendTo(r),"undefined"!=typeof Currency&&"function"==typeof Currency.convertAll){var i="";jQuery("[name=currencies]").size()?i=jQuery("[name=currencies]").val():jQuery("#currencies span.selected").size()&&(i=jQuery("#currencies span.selected").attr("data-currency")),""!==i&&Currency.convertAll(shopCurrency,i,"#wrapper-response span.money, #estimated-shipping span.money")}}},_enableButtons=function(){jQuery(".get-rates").removeAttr("disabled").removeClass("disabled").val(_config.submitButton)},_disableButtons=function(){jQuery(".get-rates").val(_config.submitButtonDisabled).attr("disabled","disabled").addClass("disabled")},_getCartShippingRatesForDestination=function(e){var t={type:"POST",url:"/cart/prepare_shipping_rates",data:jQuery.param({shipping_address:e}),success:_pollForCartShippingRatesForDestination(e),error:_onError};jQuery.ajax(t)},_pollForCartShippingRatesForDestination=function(e){var t=function(){jQuery.ajax("/cart/async_shipping_rates",{dataType:"json",success:function(r,n,a){200===a.status?_onCartShippingRatesUpdate(r.shipping_rates,e):setTimeout(t,500)},error:_onError})};return t},_fullMessagesFromErrors=function(e){var t=[];return jQuery.each(e,function(e,r){jQuery.each(r,function(r,n){t.push(e+" "+n)})}),t},_onError=function(XMLHttpRequest,textStatus){jQuery("#estimated-shipping").hide(),jQuery("#estimated-shipping em").empty(),_enableButtons();var feedback="",data=eval("("+XMLHttpRequest.responseText+")");feedback=data.message?data.message+"("+data.status+"): "+data.description:"Error : "+_fullMessagesFromErrors(data).join("; ")+".","Error : country is not supported."===feedback&&(feedback="We do not ship to this destination."),_render({rates:[],errorFeedback:feedback,success:!1}),jQuery("#"+_config.wrapperId).show()},_onCartShippingRatesUpdate=function(e,t){_enableButtons();var r="";if(t.zip&&(r+=t.zip+", "),t.province&&(r+=t.province+", "),r+=t.country,e.length){"0.00"==e[0].price?jQuery("#estimated-shipping em").html("FREE"):jQuery("#estimated-shipping em").html(_formatRate(e[0].price));for(var n=0;n<e.length;n++)e[n].price=_formatRate(e[n].price)}_render({rates:e,address:r,success:!0}),jQuery("#"+_config.wrapperId+", #estimated-shipping").fadeIn()},_formatRate=function(e){function t(e,t){return"undefined"==typeof e?t:e}function r(e,r,n,a){if(r=t(r,2),n=t(n,","),a=t(a,"."),isNaN(e)||null==e)return 0;e=(e/100).toFixed(r);var i=e.split("."),o=i[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g,"$1"+n),s=i[1]?a+i[1]:"";return o+s}if("function"==typeof Shopify.formatMoney)return Shopify.formatMoney(e,_config.moneyFormat);"string"==typeof e&&(e=e.replace(".",""));var n="",a=/\{\{\s*(\w+)\s*\}\}/,i=_config.moneyFormat;switch(i.match(a)[1]){case"amount":n=r(e,2);break;case"amount_no_decimals":n=r(e,0);break;case"amount_with_comma_separator":n=r(e,2,".",",");break;case"amount_no_decimals_with_comma_separator":n=r(e,0,".",",")}return i.replace(a,n)};return _init=function(){new Shopify.CountryProvinceSelector("address_country","address_province",{hideElement:"address_province_container"});var e=jQuery("#address_country"),t=jQuery("#address_province_label").get(0);"undefined"!=typeof Countries&&(Countries.updateProvinceLabel(e.val(),t),e.change(function(){Countries.updateProvinceLabel(e.val(),t)})),jQuery(".get-rates").click(function(){_disableButtons(),jQuery("#"+_config.wrapperId).empty().hide();var e={};e.zip=jQuery("#address_zip").val()||"",e.country=jQuery("#address_country").val()||"",e.province=jQuery("#address_province").val()||"",_getCartShippingRatesForDestination(e)}),_config.customerIsLoggedIn&&jQuery(".get-rates:eq(0)").trigger("click")},{show:function(e){e=e||{},jQuery.extend(_config,e),jQuery(function(){_init()})},getConfig:function(){return _config},formatRate:function(e){return _formatRate(e)}}}();
+
+  Shopify.Cart.ShippingCalculator.show( {
+    submitButton: theme.strings.shippingCalcSubmitButton,
+    submitButtonDisabled: theme.strings.shippingCalcSubmitButtonDisabled,
+    customerIsLoggedIn: theme.strings.shippingCalcCustomerIsLoggedIn,
+    moneyFormat: theme.strings.shippingCalcMoneyFormat                                     
+  } );
+  </script>
+  {% endif %}
+  
+  <script>
+    document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+
+    window.theme = {
+        strings: {
+          
+                 items_count_one: {{ 'layout.cart.items_count.one' | t | json }},
+            items_count_other: {{ 'layout.cart.items_count.other' | t | json }},  
+            addToCart: {{ 'products.product.add_to_cart' | t | json }},
+            soldOut: {{ 'products.product.sold_out' | t | json }},
+            unavailable: {{ 'products.product.unavailable' | t | json }},
+            priceSaleSeparator: {{ 'products.product.price_sale_separator' | t | json }},
+            availability_value_in_stock: {{ 'products.product.availability_value_in_stock' | t | json }},
+            availability_value_out_stock: {{ 'products.product.availability_value_out_stock' | t | json }},
+            stock_countdown: {
+                title: {{ 'products.product.stock_countdown_html' | t | json }}
+            }
+        },
+        multipleСurrencies: {{ settings.show_multiple_currencies | json }},
+        moneyFormat: {{ shop.money_format | json }}
+
+
+    };
+</script>
+  
+   {{ "parallax.js" | asset_url | script_tag }}
+  {{ 'vendor.js' | asset_url | script_tag }}
+   {{ 'jquery_newcore.js' | asset_url | script_tag }}
+  {{ 'function_theme.js' | asset_url | script_tag }}
+
+</body>
+</html>

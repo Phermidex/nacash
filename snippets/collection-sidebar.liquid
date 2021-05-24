@@ -1,0 +1,258 @@
+{% comment %}
+Refined tags
+{% endcomment %}
+
+{% if current_tags == blank %}
+{% assign has_refined = false %}
+{% else %}
+{% assign has_refined = true %}
+{% endif %}
+
+
+{%- if section.settings.sidebar_nav_enabled -%}
+  <div class="sidebar-nav-custom">
+    <h2>{{ section.settings.sidebar_nav_title}}</h2>
+    {{ section.settings.sidebar_link_list}}
+
+    {%- if section.settings.sidebar_nav_link_list != blank and linklists[section.settings.sidebar_nav_link_list].links.size > 0 -%}
+      <ul class="level-1">
+        {%- for link in linklists[section.settings.sidebar_nav_link_list].links -%}
+        {%- assign submenu = link.title | handleize -%}
+        <li class="menu-item {% if link.active %}current-menu-page{% endif %}">
+          <a href="{{- link.url -}}" data-toggle="">         
+            {{- link.title -}}
+          </a>
+          {%- if link.links.size > 0 -%}
+            <ul class="level-2">
+              {% for sub_link in link.links %}
+                <li class="menu-item {% if link.active %}current-menu-page{% endif %}">
+                  <a href="{{- sub_link.url -}}" data-toggle="">
+                    {{- sub_link.title -}}
+                  </a>        
+                </li>            
+              {% endfor %}
+            </ul>
+          {%- endif -%}
+        </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+  </div> <!-- .sidebar-nav-custom-->
+{%- endif -%}
+
+
+<div class="continue-filter">
+  <span></span>
+  <span class="close-sibade"></span>
+</div>
+
+<div class="sidebar-filter-wr">
+
+  <div class="filter-wr">
+
+
+    <div class="filter-top-wr">
+      <div class="addlabel sidebar-custom sidebar-tag ">
+        <div class="filter-title-wr">
+          <div class="title">{{ 'collection.sidebar.title_filter' | t }}</div>
+        </div>
+        <ul>  
+          {% for t in current_tags %}
+          {% assign tag = t  | downcase | strip %}
+
+          {%- assign tag1 = t | strip | downcase -%}
+          {%- assign checktag = '"' | append: tag1 | append: '"' -%}
+          {% assign tag_value = checktag  | handleize %}
+          <li>
+            <span>{{tag}}</span> <a role="button" data-filter-tag="{{ tag }}"><i class="cs-font clever-icon-close-1"></i></a></li>
+          {% endfor %}
+        </ul>
+        <a class="clear-all">{{ 'collection.sidebar.clear_filter' | t }}</a>
+      </div>
+    </div>
+    <div class="sidebar-block">
+      {% assign current_tags = current_tags  | downcase  %}
+      {% for block in section.blocks %}
+        {% assign shop_by_tags_1_title = block.settings.shop_by_tags_1_title %}
+        {% assign enable_shop_by_tags_1 = block.settings.enable_shop_by_tags_1 %}
+        {% assign enable_shop_by_tags_2 = block.settings.enable_shop_by_tags_2 %}
+        {% assign shop_by_tags_2_title = block.settings.title %}
+        {% assign shop_by_tags_2_list_tags = block.settings.shop_by_tags_2_list_tags %}
+        {% assign enable_shop_by_tags_show_text = block.settings.enable_shop_by_tags_show_text %}
+        {% assign enable_shop_by_tags_image = block.settings.enable_shop_by_tags_image %}
+        {%- case block.type -%}
+        {% when 'block_filter_categories' %}
+        
+          {% include 'filter-menu' %}
+        
+        {% when 'block_filter_size' %}
+
+          <div class="sidebar-custom sidebar-tag size {{ block.settings.style_filter}}">
+            {% assign tags = shop_by_tags_2_list_tags | split: ',' %}
+            <div class="title">
+              <h3><span>{{ shop_by_tags_2_title }}</span>
+                {% if block.settings.open_tabs %}
+                <span class="novetty_caret"><i class="cs-font clever-icon-down" aria-hidden="true"></i></span>
+                {% endif %}
+              </h3>
+            </div>
+            <div class="content">
+              <ul class="widget-content {{block.settings.style_filter}}" >
+                {% for t in tags %}
+                  {%- assign tag = t  | strip -%}
+
+                  {% assign tag_value = tag | downcase | handleize %}
+
+                  {%- assign all_tags = collection.all_tags  -%}
+
+
+                  {%- assign tag1 = t | strip | downcase -%}
+                  {%- assign all_tags1 = collection.all_tags | downcase -%}
+                  {%- assign checktag = '"' | append: tag1 | append: '"' -%}
+                  {%- assign colors = ',' | append: settings.product_colors | strip_newlines | downcase | append: ',' -%}
+                  {%- assign _tag = tag | downcase | strip -%}
+                  {%- assign _tag = ',' | append: _tag | append: ':' -%}
+                  {%- capture curcol -%}{%- if colors contains _tag -%}{{ colors | split: _tag | last | split: ',' | first | strip }}{%- else -%}{%- endif -%}{%- endcapture -%}
+                  {% if block.settings.style_filter == 'color' %}
+                  {%- assign s = 'style="background:' | append: curcol | append: '"' -%}
+                  {% endif %}
+                  {% if current_tags contains checktag %}
+                  <li><input type="checkbox" value="{{ tag_value }}" checked/><label>
+                    <span>{{ tag }}</span>
+                    <div {{s}}></div>{%if block.settings.show_tooltips %}<span class="tooltip">{{ tag_value }}</span>{% endif %}</label></li>
+                  {% elsif all_tags1 contains tag1 %}
+                  <li><input type="checkbox" value="{{ tag_value }}"/><label>
+                    <span>{{ tag }}</span>
+                    <div {{s}}></div>
+                    {%if block.settings.show_tooltips %}<span class="tooltip">{{ tag }}</span>{% endif %}</label></li>
+                  {% endif %}
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+
+          {% when 'block_filter_material' %}
+
+            <div class="sidebar-custom sidebar-tag color">
+              <div class="title">
+                <h3><span>{{  block.settings.title }}</span>
+                  {% if block.settings.open_tabs %}
+                  <span class="novetty_caret"><i class="cs-font clever-icon-down" aria-hidden="true"></i></span>
+                  {% endif %}
+                </h3>
+              </div>
+              <div class="content">
+                <ul class="widget-content color" >
+
+                  {% for i in (1..10) %}   
+                  {% capture material_name %}material_name_{{ i }}{% endcapture %}
+                  {% assign material_name = settings[material_name] %} 
+
+                  {% assign material_name = material_name |strip %} 
+                  {% capture material_image %}material_{{ i }}{% endcapture %}
+                  {% assign material_image = settings[material_image] %} 
+                  {% if material_name != blank %}
+                  {% if current_tags contains material_name %}
+                  <li>
+                    {% assign tag_value = material_name | handleize %}
+                    <input type="checkbox" value="{{ tag_value }}" {% if current_tags contains material_name %}checked{% endif %}/>
+                    <a href="javascript:void(0)"  {% if current_tags contains material_name %} class="active" {% endif %} title="{{material_name}}">
+
+                      {{material_image | img_url: '160x160' | img_tag  }}
+
+                      <span class="tooltip">{{ tag_value }}</span>
+                    </a>
+                  </li>
+                  {% elsif collection.tags contains material_name %}
+                  <li>
+                    {% assign tag_value = material_name | handleize %}
+                    <input type="checkbox" value="{{ tag_value }}" />
+                    <a href="javascript:void(0)"   title="{{material_name}}">
+                      {{material_image | img_url: '160x160' | img_tag  }}
+                      <span class="tooltip">{{ material_name }}</span>
+                    </a>
+                  </li>
+                  {% endif %}
+                  {% endif %}
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+
+          {% when 'block_promobox' %}
+
+            <div class="sidebar-promobox">
+              {{ block.settings.image | img_url: 'master' | img_tag  }}
+              <div class="content-promobox">
+                <h3>{{ block.settings.title }}</h3>
+                <p>{{block.settings.custom_html }}</p>
+                <a href="{{block.settings.url }}">{{block.settings.button_text }}</a>
+              </div>
+            </div>
+            {% when 'block_customhtml' %}
+            <div class="sidebar-customhtml">
+              <div class="content-customhtml">
+                <h3>{{ block.settings.title }}</h3>
+                <p>{{block.settings.custom_html }}</p>
+                <a href="{{block.settings.url }}">{{block.settings.button_text }}</a>
+              </div>
+            </div>
+
+          {% when 'block_newsletter' %}
+
+            <div class="block_newsletter">
+              {% if block.settings.home_newsletter_title != blank %}
+              <div class="title_newsletter">
+                {{ block.settings.home_newsletter_title }}
+              </div>
+              {% endif %}
+              {% if block.settings.home_newsletter_subtitle != blank %}
+              <div class="subtitle_newsletter">
+                {{ block.settings.home_newsletter_subtitle }}
+              </div>
+              {% endif %}
+              <form action="{{ block.settings.mailing_list_form_action }}" method="post" name="mc-embedded-subscribe-form" target="_blank" class="input-group">
+                <div class="input-group newsletter_form_content">
+                  <input  class="input__field input-group-field" type="email" value="" name="EMAIL" aria-label="Email Address" placeholder="{{ 'footer.footer_newsletter_content' | t }}">
+                  <span class="input-group-btn">
+                    <input type="submit" class="btn" value="{{ 'footer.footer_newsletter_go' | t }}" name="subscribe">
+
+                  </span>
+                </div>
+              </form>
+            </div>
+
+          {% when 'block_product' %}
+
+            <div class="sidebar-product">
+              {% if block.settings.tabs_title_block != blank %}
+              <div class="heading-block">
+                <h3 class="title"><span>{{ block.settings.tabs_title_block }}</span></h3>
+                {% if block.settings.subtitle %}
+                <p class="subtitle">{{ block.settings.subtitle }}
+                </p>
+                {% endif %}
+                <div class="products-grid-sidebar">
+                  {% assign tabnew_collection = block.settings.tabnew_collection %}
+                  {% assign collection =   collections[tabnew_collection] %}
+                  {% for product in collections[tabnew_collection].products limit:block.settings.products_limit %}
+  {% if product.object_type == 'product' and product.type == 'SHOPSTORM_HIDDEN_PRODUCT' %}{% continue %}{% endif %}
+
+                  <div class="product-sidebar-item">
+                    {% include 'product-item-new' %}
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+              {% endif %}	
+            </div>
+
+          {%- endcase -%}
+      {% endfor %}
+
+    </div> <!-- .sidebar-block-->
+
+  </div> <!-- .filter-wr -->
+
+</div> <!-- .sidebar-filter-wr -->

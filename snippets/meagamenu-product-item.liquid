@@ -1,0 +1,147 @@
+
+{% assign lable_sale = false %}
+{% if product.compare_at_price_min > product.price_min %}
+{% assign lable_sale = true %}
+{% endif %}
+
+{% comment %}
+Check if the product is sold out and set a variable to be used below.
+{% endcomment %}
+
+{% assign lable_out = true %}
+{% if product.available  %}
+{% assign lable_out = false %}
+{% endif %}
+
+{% comment %}
+Set a class for sold-out and on-sale items
+{% endcomment %}
+
+{% assign product_limitation = 0 %}
+{% if settings.display_infinite_scrolling_homepage %}
+{% assign product_limitation = settings.product_list_limit | plus: 0 %}
+{% assign productIndex = forloop.index |minus:1 | modulo: product_limitation %}
+{% else %}
+{% assign productIndex = forloop.index |minus:1 %}
+{% endif %}
+
+{% comment %}
+date_difference = 60 * 60 * 24 * day counter, this is new product period in seconds
+{% endcomment %}
+{% assign date_now = 'now' | date: "%s" %}
+{% assign date_published = product.published_at | date: "%s" %}
+{% assign date_difference = date_now | minus: date_published %}
+{% assign date_limit = 86400 | times: settings.new_product_period %}
+{% assign variant = product.selected_or_first_available_variant %}
+
+{% assign delayTime = 200 | times : productIndex %}
+{% if settings.collection_results_per_row1 != blank and settings.collection_results_per_row1 != '5' %}
+{% assign product_grid = 12 | divided_by: settings.collection_results_per_row1 %}
+{% assign columns = 12 | divided_by: product_grid %}
+<div class="grid-item product-item"  id="product-{{ product.id }}" >
+
+  {% else %}
+  <div class="grid-item product-item"  id="product-{{ product.id }}" >
+    {% endif %}
+    <div class="product-inner {{ settings.select_option_hover_product }}">
+      <div class="product-image">
+
+        {% if lable_sale or lable_out %}
+        <div class="product-label">
+          {% if lable_sale %}
+          {% if settings.sale_label_style =='percentage_label'%}
+          -{{ product.compare_at_price_max | minus:product.price | times:100 | divided_by:product.compare_at_price_max |round: 0 }}%
+          {% elsif settings.sale_label_style == 'text_label' %}
+          Sale
+          {% endif %}
+          {% endif %}
+          {% if lable_out %}
+          <span>{{ 'product.out_of_stock' | t }}</span>
+          {% endif %}
+        </div>
+        {% endif %}
+        {% include 'cleversoft-label' %}
+        <a href="{{ product.url | within: collection }}" class="grid-image">
+          {% if number_colum_layout == 'slide' %}
+          <img class="lazyOwl feature-images" alt="" data-src="{{ product.featured_image.src | product_img_url: 'master' }}">
+          {% else %}
+          <img class="lazyOwl feature-images" src="{{ product.featured_image.src | product_img_url: 'master' }}" >
+          {% endif %}
+          {% if settings.product_image_hover %}
+          <span class="product-image-hover" data-idproduct="{{ product.id }}">
+            {% for image in product.images %}
+            {% if forloop.first != true %}
+            <img alt="{{ product.title }}" src="{{ image.src | product_img_url: 'master' }}">
+            {% break %}
+            {% endif %}
+            {% endfor %}
+          </span>
+          {% endif %}
+        </a>
+
+      </div>
+      {% if settings.select_option_hover_product !='option_hover_product_9'  %}
+      <div class="product-content">
+        <h3><a class="product-title" href="{{ product.url | within: collection }}">
+          {{ product.title }}
+          </a></h3>
+        <div class="price-box">
+          {% if lable_sale %}
+          <p class="sale">
+            <span class="old-price"> {{ product.compare_at_price_min | money }}</span>
+            <span class="special-price">{% if product.price_varies %}<em>{{ 'from_price' | t }} </em>{% endif %}{{ product.price_min | money }}</span>
+          </p>
+          {% else %}
+          <p class="regular-product">
+            {% comment %}
+            You can show a leading 'from' or 'up to' by checking 'product.price_varies'
+            if your variants have different prices.
+            {% endcomment %}
+            <span >{% if product.price_varies %}<em>{{ 'from_price' | t }} </em>{% endif %}{{ product.price_min | money }}</span>
+          </p>
+          {% endif %}
+        </div>
+
+        {% if settings.display_product_reviews %}
+        <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+        {% endif %}
+
+        {% if settings.product_style_images_click %}
+        <ul class="color-swatch-item">  
+          {% for option in product.options %}
+          {% if option == 'Color' %}
+          {% assign index = forloop.index0 %}
+          {% assign colorlist = '' %}
+          {% assign color = '' %}
+          {% for variant in product.variants %}
+          {% capture color %}
+          {{ variant.options[index] }}
+          {% endcapture %}
+
+          {% unless colorlist contains color %} 
+          {% if variant.image.src != blank %}
+          <li><a href="javascript:void(0);" data-image="{{ variant.image.src | img_url: 'large' }}">
+            {% if settings.swatch_style == 'image_variant' %}
+            <img src="{{ variant.image.src | img_url: 'large' }}" alt="" />
+            {%else %}
+            <img src="{{ color | downcase | strip_newlines | strip_html | remove: '  ' | append: '.png' | replace: ' ', '-' | asset_url }}" alt="{{ color }}" />
+            {% endif %}
+            </a>
+          </li>
+          {% endif %}
+          {% capture tempList %}
+          {{colorlist | append: color | append: ' '}}
+          {% endcapture %}
+          {% assign colorlist = tempList %}
+          {% endunless %}
+          {% endfor %}
+          {% endif %}
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+

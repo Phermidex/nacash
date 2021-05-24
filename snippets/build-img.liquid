@@ -1,0 +1,31 @@
+{%- if disable_lazyload != blank -%}
+{%- assign disable_lazyload = disable_lazyload | default: false -%}
+{%- else -%}
+{%- if settings.layout_images_lazyload == false -%}
+{%- assign disable_lazyload = true -%}
+{%- endif -%}
+{%- endif -%}
+{%- if height_procent -%}
+{%- assign aspect_ratio = height_procent | divided_by: 100.0 -%}
+{%- assign aspect_ratio = 1 | divided_by: aspect_ratio -%}
+{%- endif -%}
+{% assign aspect_ratio = aspect_ratio | default: image.aspect_ratio %}
+{%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+<div class="rimage"{% if image %} style="{% if width %} width: {{ width }}px;{% endif %}"{% endif %}>
+  <img class="rimage__img{% if stretch_size %} rimage__img--{{ stretch_size }}{% endif %}{% unless disable_lazyload %} rimage__img--{{ settings.layout_images_lazyload_effect }} lazyload{% endunless %}"
+       {% if image %}data-master="{{ img_url }}"{% endif %}
+       {% if image %}{% unless disable_lazyload %}data-{% endunless %}srcset="{{ image | img_url: size }} 1x, {{ image.src | img_url: size, scale: 2 }} 2x"{% endif %}
+       {% if scale %}data-scale="{{ scale }}"{% endif %}
+       {% if scale_perspective %}data-scale-perspective="{{ scale_perspective }}"{% endif %}
+       {% if attr %}{{ attr }}{% endif %}
+       alt="{{ alt | default: image.alt | escape }}">
+</div>
+{%- assign disable_lazyload = null -%}
+{%- assign size = null -%}
+{%- assign width = null -%}
+{%- assign aspect_ratio = null -%}
+{%- assign height_procent = null -%}
+{%- assign stretch_size = stretch_size -%}
+{%- assign scale = stretch_size -%}
+{%- assign scale_perspective = stretch_size -%}
+{%- assign attr = null -%}

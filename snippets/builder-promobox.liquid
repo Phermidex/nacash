@@ -1,0 +1,62 @@
+{% capture image_video %}
+{%- if block.settings.video_mp4_url != blank -%}
+<video muted playsinline preload="none"{% if block.settings.video_controls %} controls{% endif %}{% if video_autoplay %} autoplay loop{% endif %}{% if block.settings.image != blank %} poster="{{ block.settings.image | img_url: block.settings.image_size }}"{% endif %} preload="auto" class="w-100">
+  <source src="{{ block.settings.video_mp4_url }}" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+{%- elsif block.settings.video_external_url != blank -%}
+<div class="promobox-video">
+  {%- if block.settings.video_external_url.type == 'youtube' -%}
+  <iframe src="https://www.youtube.com/embed/{{ block.settings.video_external_url.id }}?rel=0&amp;controls=0&amp;showinfo=0{% if block.settings.video_autoplay %}&amp;autoplay=1&amp;loop=1{% endif %}" frameborder="0" allow="autoplay; encrypted-media" webkitallowfullscreen mozallowfullscreen allowfullscreen class="embed-responsive-item"></iframe>
+  {%- elsif block.settings.video_external_url.type == 'vimeo' -%}
+  <iframe src="https://player.vimeo.com/video/{{ block.settings.video_external_url.id }}?color=ffffff&amp;title=0&amp;byline=0{% if block.settings.video_autoplay %}&amp;autoplay=1&amp;loop=1{% endif %}" frameborder="0" allow="autoplay; encrypted-media" webkitallowfullscreen mozallowfullscreen allowfullscreen class="embed-responsive-item"></iframe>
+  {%- endif -%}
+</div>
+{%- else -%}
+
+<div class="image">
+  {% if block.settings.image != blank %}
+  <a href="{{block.settings.url}}">
+    {%- assign img_url = block.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+    <img class="lazyload"
+         src="{{ block.settings.image | img_url: '2048x'  }}"
+         data-src="{{ img_url }}"
+         data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+         data-aspectratio="{{ block.settings.image.aspect_ratio }}"
+         data-sizes="auto"
+         alt="{{ image.alt | escape }}">
+  </a>
+  {% else %}
+  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+  {% endif %}
+</div>
+
+{% endif %}
+{% endcapture %}
+<div class="promobox-content promobox-{{block.settings.type }}">
+  <div class="promobox-image-video">
+    {{image_video}}
+  </div>
+  {% if block.settings.custom_html != blank %}
+  <div class="promobox-content-text">{{block.settings.custom_html }}</div>
+  {% endif %}
+  <div class="promobox-wt-content">
+    {% if block.settings.button_text == blank %}
+    <div class="text-line1"><a href="{{block.settings.url}}" style="color:{{block.settings.color_text_line_1}}">{{block.settings.text_line_1 }}</a></div>
+    <div class="text-line2"> <a href="{{block.settings.url}}" style="color:{{block.settings.color_text_line_2}}">{{block.settings.text_line_2 }}</a></div>
+    <div class="text-line3"><a href="{{block.settings.url}}" style="color:{{block.settings.color_text_line_3}}">{{block.settings.text_line_3 }}</a></div>
+    {% else %}
+    <div class="text-line1" style="color:{{block.settings.color_text_line_1}}">{{block.settings.text_line_1 }}</div>
+    <div class="text-line2" style="color:{{block.settings.color_text_line_2}}">{{block.settings.text_line_2 }}</div>
+    <div class="text-line3" style="color:{{block.settings.color_text_line_3}}" >{{block.settings.text_line_3 }}</div>
+    <div class="button-view button-type{{block.settings.color_button_type}}"><a  style="color:{{ block.settings.color_button_link }};background: {{ block.settings.bg_button_link }};" href="{{block.settings.url}}">{{block.settings.button_text }}</a></div>
+    {% endif %}
+  </div>
+
+</div>
+
+<style>
+  .grid-builder-image .promobox.promobox-{{ block.id }} .promobox-content .promobox-wt-content .button-type{{block.settings.color_button_type}} a:before {
+    background: {{ block.settings.color_button_link }};
+  }
+</style>

@@ -1,0 +1,60 @@
+{% assign instructions = product.metafields.meta %}
+{% assign key = 'degree-360-preview' %}
+{% if instructions.degree-360-preview %}
+<div id="clv-product360" class="clv-product360">
+  <div class="product-image-360" style="">
+    <div class="close-360"><i class="cs-font clever-icon-close-1"></i></div>
+    <div class="nav_bar">
+      <a href="#" class="custom_previous"><i class="cs-font clever-icon-arrow-left-5"></i></a><a href="#" class="custom_play"><i class="cs-font clever-icon-360-1"></i></a><a href="#" class="custom_stop"><i class="cs-font clever-icon-360-1"></i></a><a href="#" class="custom_next"><i class="cs-font clever-icon-arrow-right-5"></i></a>
+      <p>Drag to ratation</p>
+    </div>
+    <ul class="product-images-item" style="display: block;"></ul>
+    <div class="spinner"><span>0%</span></div>
+  </div>
+
+  {% assign items = instructions.degree-360-preview | split:"," %}
+
+  <script type="text/javascript">
+    var string = '{{instructions.degree-360-preview}}';
+    var array = string.split(',');
+    var count_ht = array.length;
+    console.log(count_ht);
+    window.onload = init;
+    var product;
+    function init(){
+      jQuery('.image-360').click(function(){
+        car = $('.product-image-360').ThreeSixty({
+          totalFrames: count_ht,
+          endFrame: count_ht, 
+          currentFrame: 1, 
+          imgList: '.product-images-item', 
+          progress: '.spinner',
+          imgArray: array,
+          height: null,
+          width: null,
+          responsive: true,
+          navigation: false
+        });
+      });
+      $('.custom_previous').bind('click', function(e) {
+        car.previous();
+      });
+
+      $('.custom_next').bind('click', function(e) {
+        car.next();
+      });
+
+      $('.custom_play').bind('click', function(e) {
+        car.play();
+        $('.nav_bar').addClass('play-video');
+      });
+
+      $('.custom_stop').bind('click', function(e) {
+        car.stop();
+        $('.nav_bar').removeClass('play-video');
+      });
+    }
+  </script>
+</div>
+
+{% endif %}

@@ -1,0 +1,102 @@
+{% unless product.has_only_default_variant %}
+{% assign options_type_circle_color = 'Color|Colour' | escape | downcase | split: '|' %}
+{% assign options_type_large_text = 'Size|size' | escape | downcase | split: '|' %}
+{% assign options_type = options_type | default: 1 %}
+{% capture options_type_class %}
+{% case options_type -%}
+{% when 1 %}product-options--type-collection
+{% when 2 %}product-options--type-page
+{% when 3 %}product-options--type-footbar
+{% endcase %}
+{% endcapture %}
+<div class="product-options  {{ options_type_class }} {% unless trigger %} js-product-options{% endunless %}" data-js-product-options{% if options_type == 1 and settings.product_variant_change_on_hover %} data-js-options-onhover{% endif %}{% if change_history %} data-js-change-history{% endif %}>
+  {% for option in product.options_with_values %}
+  <div class="variant-option-wapper">
+    {% assign clear_name = option.name | escape | downcase %}
+    {% if options_type_circle_color contains clear_name %}
+    <div class="product-options-variant 1 {{ option.name | handleize }}" data-style="color" data-property="{{ option.name | handleize }}">
+      {% for value in option.values %}
+      {% include 'product-get-options-res-status' %}
+      {% if hide_options_without_availability != true or disabled_value != true %}
+      {% assign option_image = null %}
+      {% for variant in product.variants %}
+      {% if value == variant.option1 or value == variant.option2 or value == variant.option3 %}
+      {% if variant.image != blank %}
+      {% assign option_image = variant.image %}
+      {% break %}
+      {% endif %}
+      {% endif %}
+      {% endfor %}
+      {% if option_image == null %}
+
+      {% endif %}
+      <div class="option-{{ value | handleize }}{% if disabled_value %} disabled{% endif %}{% if active_value %} active{% endif %}" data-js-option-value data-value="{{ value | handleize }}" {{ trigger_attr }}
+           style=" {% if option_image != blank %}background-image: url({{ option_image | img_url }});
+                  {%else%}
+                  background-image: url({{ value | downcase | strip_newlines | strip_html | remove: '  ' | append: '.png' | replace: ' ', '-' | asset_url }});
+                  background-color:{{ value}};{% endif %}
+                  ">
+        <span class="tooltip">{{ value }}</span>{{ value }} 
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+    {% elsif options_type_large_text contains clear_name %}
+    <div class="product-options-variant 2 {{ option.name | handleize }}" data-style="large-text" data-property="{{ option.name | handleize }}">
+      {% for value in option.values %}
+      {% include 'product-get-options-res-status' %}
+      {% if hide_options_without_availability != true or disabled_value != true %}
+      <div class="option-{{ value | handleize }} {% if disabled_value %} disabled{% endif %}{% if active_value %} active{% endif %}" data-js-option-value data-value="{{ value | handleize }}" {{ trigger_attr }}>{{ value }}</div>
+      {% endif -%}
+      {% endfor -%}
+    </div>
+    {% elsif options_type_select contains clear_name %}
+    <div class="select position-relative js-dropdown js-select 8">
+      {% assign select_dropdown_html = '' %}
+      <div data-js-dropdown-button>
+        <select class="product-options-variant 3" data-style="select" data-property="{{ option.name | handleize }}" data-js-option-select>
+          {% for value in option.values %}
+          {% include 'product-get-options-res-status' %}
+          {% if hide_options_without_availability != true or disabled_value != true %}
+          <option{% if active_value %} selected="selected"{% endif %} data-value="{{ value | handleize }}"{% if disabled_value %} disabled="disabled"{% endif %}>{{ value }}</option>
+          {% capture select_dropdown_html %}
+          {{ select_dropdown_html }}
+          <span{% if active_value %} class="selected"{% endif %} data-value="{{ value }}"{% if disabled_value %} disabled="disabled"{% endif %} {{ trigger_attr }}>{{ value }}</span>
+          {% endcapture %}
+          {% endif -%}
+          {% endfor -%}
+        </select>
+      </div>
+      <div class="select__dropdown dropdown d-none" data-js-dropdown data-js-select-dropdown>
+        <div class="custom-html">
+          {{ select_dropdown_html }}
+        </div>
+      </div>
+    </div>
+    {% else -%}
+    <div class="product-options-variant 4" data-style="text" data-property="{{ option.name | handleize }}">
+      {% for value in option.values %}
+
+      {% include 'product-get-options-res-status' %}
+      {% if hide_options_without_availability != true or disabled_value != true %}
+      <div class="option-{{ value | handleize }} {% if disabled_value %} disabled{% endif %}{% if active_value %} active{% endif %}" data-js-option-value data-value="{{ value | handleize }}" {{ trigger_attr }} style=" {% for i in (1..10) %}
+                                                                            {% capture material_name %}material_name_{{ i }}{% endcapture %} 
+                                                                            {% assign material_name = settings[material_name] %}  
+                                                                            {% assign material_name = material_name | downcase |strip %}  
+                                                                            {% capture material_image %}material_{{ i }}{% endcapture %} 
+                                                                            {% assign material_image = settings[material_image] %} 
+                                                                            {%- assign materia = value | downcase | strip -%}
+                                                                            {% if materia == material_name %} 
+                                                                            font-size:0;background-image: url(http:{{material_image | img_url: '160x160' }}); 
+                                                                            {%endif %}
+                                                                            {% endfor %}">{{ value }}</div>
+      {% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>
+{% endunless %}
+{% assign trigger = null %}
+{% assign trigger_id = null %}

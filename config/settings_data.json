@@ -1,0 +1,1992 @@
+{
+  "current": {
+    "favicon": "shopify:\/\/shop_images\/Nacach-Wax-LogoFavicon_eba10833-01a4-4daa-a67e-25fea65259a7.png",
+    "layout_width_body": "100%",
+    "body_rtl": true,
+    "display_breadcrumb": true,
+    "padding_background_breadcrumb": "5",
+    "display_backgound_images": false,
+    "breadcrumb_align": "left",
+    "logo_password": "",
+    "block_home_image": "shopify:\/\/shop_images\/First_Time_to_Nacach_Hero.jpg",
+    "home_block_title_7": "Coming Soon",
+    "home_block_sub_title_7": "",
+    "home_block_countdown_7": "2020\/12\/31 10:30:00",
+    "body_color": "#121212",
+    "body_link_color": "#000000",
+    "body_link_color_hover": "#e21b4d",
+    "bg_body_color": "#ffffff",
+    "promotion_box_bg_color": "#ff93af",
+    "promotion_box_color": "#000000",
+    "bg_header_top_color": "#ffccd9",
+    "header_top_text_color": "#000000",
+    "header_top_link_color": "#000000",
+    "header_top_link_color_hover": "#e21b4d",
+    "bg_header_color": "#ffffff",
+    "background_megamenu_ticky": "#ffffff",
+    "link_megamenu_ticky": "#000000",
+    "link_hover_megamenu_ticky": "#e21b4d",
+    "color_megamenu_ticky_text_cart": "#ffffff",
+    "color_megamenu_ticky_icon_cart": "#e21b4d",
+    "link_color_levertop": "#000000",
+    "link_color_levertop_hover": "#e21b4d",
+    "background_dropdown": "#ffffff",
+    "link_color_title": "#000000",
+    "link_color_sub_menu": "#3a3a3a",
+    "link_color_sub_menu_hover": "#e21b4d",
+    "white_slider_headding_1": "#ffffff",
+    "white_slider_headding_2": "#ffffff",
+    "white_slider_headding_3": "#ffffff",
+    "dark_slider_headding_1": "#000000",
+    "dark_slider_headding_2": "#000000",
+    "dark_slider_headding_3": "#000000",
+    "bg_footer_color": "#ffffff",
+    "footer_title_color": "#000000",
+    "footer_text_color": "#666666",
+    "footer_link_color": "#000000",
+    "footer_link_hover": "#f56f5e",
+    "sale_tag_color": "#000000",
+    "sale_tag_bordercolor": "#000000",
+    "Second_sale_tag_bg_color": "#ffe0c0",
+    "new_tag_color": "#ffffff",
+    "new_tag_bordercolor": "#000000",
+    "Second_new_tag_bg_color": "#59b210",
+    "price_color_compare": "#959595",
+    "price_color": "#000000",
+    "breadcrumb_bg_color": "#f6f8fa",
+    "breadcrumb_border_color": "rgba(0,0,0,0)",
+    "breadcrumb_color": "#000000",
+    "primary_button_bg_color": "#000000",
+    "primary_button_border_color": "#000000",
+    "primary_button_text_color": "#fff",
+    "primary_button_bg_color_hover": "#ffffff",
+    "primary_button_border_color_hover": "#000000",
+    "primary_button_text_color_hover": "#000000",
+    "second_button_bg_color": "#ffffff",
+    "second_button_border_color": "#000000",
+    "second_button_text_color": "#000000",
+    "second_button_bg_color_hover": "#000000",
+    "second_button_border_color_hover": "#000000",
+    "second_button_text_color_hover": "#fff",
+    "second_button_bg_color_3": "rgba(0,0,0,0)",
+    "second_button_border_color_3": "#ffffff",
+    "second_button_text_color_3": "#ffffff",
+    "second_button_bg_color_hover_3": "rgba(0,0,0,0)",
+    "second_button_border_color_hover_3": "#ffffff",
+    "second_button_text_color_hover_3": "#fff",
+    "body_font_size": 16,
+    "fonts_name_0": "https:\/\/fonts.googleapis.com\/css?family=Hind|Source+Sans+Pro|Vollkorn|Lato|Merriweather|Merriweather+Sans&display=swap",
+    "fonts_name_1": "'Montserrat', sans-serif",
+    "fonts_weight_1": "400",
+    "fonts_name_2": "'Montserrat', sans-serif",
+    "fonts_weight_2": "800",
+    "fonts_name_3": "'Montserrat', sans-serif",
+    "fonts_weight_3": "400",
+    "fonts_name_4": "'Montserrant', sans-serif",
+    "fonts_weight_4": "600",
+    "enable_transforms": "capitalize",
+    "enable_buttons": "uppercase",
+    "enable_title": "normal",
+    "enable_navigation": "uppercase",
+    "collection_layout": "colection-left",
+    "isotope_collection_results_per_page": "16",
+    "collection_results_per_row": "3",
+    "collection_infinite_scrollings": "default",
+    "collection_infinite_scrolling_text": "Show More",
+    "collection_infinite_scrolling_no_more_product_text": "All products loaded",
+    "colection_boder": false,
+    "colection_gutter": false,
+    "flash_sold_min_qty": 5,
+    "flash_sold_max_qty": 25,
+    "flash_sold_min_time": 3,
+    "flash_sold_max_time": 8,
+    "product_visitors_min": 7,
+    "product_visitors_max": 21,
+    "product_visitors_stroke": 4,
+    "product_visitors_interval_min": 1,
+    "product_visitors_interval_max": 3,
+    "bagde_image": "shopify:\/\/shop_images\/cruelty-free.png",
+    "product_text_countdown_reset_time": 3,
+    "product_text_countdown_delivery_time": 5,
+    "percent_min_value": 4,
+    "percent_max_value": 2,
+    "instock_min_value": 2,
+    "instock_max_value": 100,
+    "enable_quickview": true,
+    "product_flash_sold_enable": false,
+    "show_visitors": false,
+    "show_text_countdown": false,
+    "display_spend_shipping": true,
+    "product_bagde_image": true,
+    "use_color_swatch": false,
+    "swatch_style": "image_variant",
+    "sale_label_style": "text_label",
+    "space_between_product": "30",
+    "product_add_tocart": true,
+    "product_ajax_preload_json": true,
+    "product_collection_show_options": false,
+    "product_collection_price": true,
+    "product_collection_lable_sale": true,
+    "product_collection_lable_new": true,
+    "product_collection_countdown": true,
+    "enable_wishlist": true,
+    "display_product_reviews": true,
+    "product_image_hover": false,
+    "use_scale_product_image": true,
+    "product_scale_height": "300",
+    "product_container_scale_height": "300",
+    "enable_product_compare": false,
+    "enable_product_compare_features": false,
+    "enable_product_compare_availability": false,
+    "enable_product_compare_options": false,
+    "enable_product_compare_vendor": false,
+    "enable_product_compare_collection": false,
+    "enable_product_compare_rating": false,
+    "designoption1": "button",
+    "designoption2": "button",
+    "designoption3": "button",
+    "product_colors": "black: #000000,\nblue: #084a9f,\ngreen: #00ff00,\npurple: #b080c7,\nsilver: #c0c0c0,\nwhite: #ffffff,\nbrown: #7B3F00,\nlight-brown: #feb035,\ndark-turquoise: #23cddc,\norange: #fe9001,\ntan: #eacea7,\nviolet: #EE82EE,\npink: #FFC0CB,\ngray: #808080,\nred: #ff0000,\nyellow: #c6b15e,",
+    "material_name_1": "Dark Green",
+    "material_1": "shopify:\/\/shop_images\/New-Sample-PackagingDark-Green-Hard-Wax.png",
+    "material_name_2": "Purple",
+    "material_2": "shopify:\/\/shop_images\/New-Sample-PackagingPurple-Hard-Wax.png",
+    "material_name_3": "Black",
+    "material_3": "shopify:\/\/shop_images\/New-Sample-PackagingBlack-Hard-Wax.png",
+    "material_name_4": "Yellow",
+    "material_4": "shopify:\/\/shop_images\/New-Sample-PackagingYellow-Hard-Wax.png",
+    "material_name_5": "",
+    "material_5": "",
+    "material_name_6": "",
+    "material_6": "",
+    "material_name_7": "",
+    "material_7": "",
+    "material_name_8": "",
+    "material_8": "",
+    "material_name_9": "",
+    "material_9": "",
+    "material_name_10": "",
+    "material_10": "",
+    "display_popup_newsletter": false,
+    "display_popup_mobile": false,
+    "display_popup_home": true,
+    "display_popup_colection": false,
+    "display_popup_product": false,
+    "display_popup_blog": true,
+    "display_popup_article": true,
+    "display_popup_other": true,
+    "display_ajax_mailchimp": true,
+    "popup_newsletter_delay": 6,
+    "notification_cookies_cookies_life": "1",
+    "popup_newsletter_title": "Newsletter",
+    "popup_newsletter_sub_title": "Sign up here to get the latest news, updates and special offers delivered directly to your inbox.",
+    "popup_newsletter_message": "",
+    "footer_newsletter_go": "Subcribe",
+    "mailing_list_form_action": "\/\/myshopify.us11.list-manage.com\/subscribe\/post?u=dc2f7ae277cf94bbd789185dd&amp;id=3526f8367b",
+    "footer_column_4_icon_link_1": "https:\/\/www.facebook.com\/NacachWax",
+    "footer_column_4_icon_link_2": "https:\/\/www.instagram.com\/nacachwax\/",
+    "footer_column_4_icon_link_3": "",
+    "footer_column_4_icon_link_4": "https:\/\/www.pinterest.com\/nacachwax\/",
+    "footer_column_4_icon_link_5": "https:\/\/www.youtube.com\/channel\/UCyStaRBWhN-aWOFY2tkWujg",
+    "footer_column_4_icon_link_6": "",
+    "footer_column_4_icon_link_7": "",
+    "footer_column_4_icon_link_8": "",
+    "age_verify": false,
+    "age_verify_title": "PLEASE VERIFY YOUR AGE",
+    "age_verify_subtitle": "This website contains adult material and is only suitable for those 18 years or older.<br>Click Enter only if you are at least 18 years of age.",
+    "age_verify_link": "https:\/\/themeforest.net\/user\/cleversoft\/portfolio",
+    "enable_multilang": false,
+    "lange_1": "English",
+    "lange_2": "French",
+    "show_multiple_currencies": false,
+    "currency_format": "money_format",
+    "supported_currencies_1": "USD",
+    "supported_currencies_2": "EUR",
+    "supported_currencies_3": "AUD",
+    "supported_currencies_4": "GBP",
+    "supported_currencies_5": "JPY",
+    "calculte_free_shipping_number": "74.99",
+    "shipping_calculator": "Enabled",
+    "shipping_calculator_heading": "Get shipping estimates",
+    "shipping_calculator_default_country": "United States",
+    "shipping_calculator_submit_button_label": "Calculate shipping",
+    "shipping_calculator_submit_button_label_disabled": "Calculating...",
+    "cart_notes": true,
+    "ajax_cart": true,
+    "ajax_bagde": false,
+    "calculte_free_shipping": true,
+    "calculte_agree_terms": true,
+    "page_id": "",
+    "enable_might_like": true,
+    "might_like_title": "You might also like",
+    "tabnew_collection": "wax-accessories",
+    "pt_show_refine": true,
+    "pt_show_collection_group": false,
+    "pt_show_clear": true,
+    "pt_show_view_all": true,
+    "pt_show_collection_count": true,
+    "pt_show_show_single_group": true,
+    "pt_scroll_filter_group": true,
+    "pt_show_inactive_filters": false,
+    "pt_force_dropdown": false,
+    "pt_hide_headers": false,
+    "pt_float_filters": "false",
+    "pt_refine_text": "Filters",
+    "pt_clear_text": "clear",
+    "pt_view_all_text": "view all",
+    "pt_tags_text": "Tags",
+    "pt_sort_by_text": "Sort By",
+    "pt_collection_text": "Collection",
+    "pt_search_placeholder_text": "search...",
+    "pt_mobile_text": "Filter",
+    "pt_show_tags_group": false,
+    "pt_show_tags_grouped": false,
+    "pt_show_sort_by_group": false,
+    "pt_sort_position": "top",
+    "pt_sort_by_dropdown": false,
+    "pt_show_sort_by_checkboxes": true,
+    "pt_sort_manual_text": "Featured",
+    "pt_sort_price_asc_text": "Price: Low to High",
+    "pt_sort_price_desc_text": "Price: High to Low",
+    "pt_sort_title_asc_text": "A-Z",
+    "pt_sort_title_desc_text": "Z-A",
+    "pt_sort_created_asc_text": "Newest Last",
+    "pt_sort_created_desc_text": "Newest First",
+    "pt_sort_best_selling_text": "Best Selling",
+    "color_pt_header_text": "#222",
+    "color_pt_header_border": "#ddd",
+    "color_pt_header_top_border": "rgba(0,0,0,0)",
+    "pt_header_size": 18,
+    "pt_header_font_override": false,
+    "pt_header_font": "work_sans_n6",
+    "pt_header_weight": "600",
+    "color_pt_links": "#222",
+    "color_pt_links_selected": "#333",
+    "color_pt_links_hover": "#444",
+    "color_pt_counts_color": "#888",
+    "pt_links_size": 14,
+    "pt_links_font_override": false,
+    "pt_links_font": "work_sans_n6",
+    "pt_links_weight": "300",
+    "pt_show_checkboxes": true,
+    "pt_checkbox_style": "0",
+    "pt_checkbox_swatch_style": "3",
+    "pt_checkbox_primary_color": "#888",
+    "pt_checkbox_secondary_color": "#e21b4d",
+    "pt_checkbox_size": 15,
+    "pt_checkbox_size_swatch": 25,
+    "pt_checkbox_checkbox_align": "middle",
+    "pt_color_swatch_type": "swatch",
+    "color_pt_clear_bg": "#eee",
+    "color_pt_clear_text": "#222",
+    "color_pt_clear_bg_hover": "#ddd",
+    "color_pt_clear_text_hover": "#222",
+    "color_pt_bg": "rgba(0,0,0,0)",
+    "color_pt_bg_border": "rgba(0,0,0,0)",
+    "pt_bg_padding": 0,
+    "pt_bg_radius": 3,
+    "pt_mobile_enable": true,
+    "pt_accordion_enable": false,
+    "pt_accordion_mode": "all",
+    "pt_mobile_color": "#222",
+    "pt_mobile_max_width": "767px",
+    "pt_mobile_vertical": 7,
+    "pt_mobile_text_vertical": 14,
+    "pt_mobile_font_override": false,
+    "pt_mobile_font": "work_sans_n6",
+    "pt_mobile_size": "",
+    "pt_mobile_hide_selected": false,
+    "color_pt_small_box_bg": "#ffffff",
+    "color_pt_small_box_bg_hover": "#ff93af",
+    "color_pt_small_box_text_hover": "#ffffff",
+    "pt_small_box_radius": 3,
+    "pt_small_box_border": true,
+    "pt_small_box_shadow": true,
+    "pt_view_more_enable": false,
+    "pt_view_more_count": 10,
+    "pt_view_more_text": "View More...",
+    "pt_apply_button_enable": false,
+    "pt_apply_button_text": "Apply",
+    "pt_apply_button_color": "#e21b4d",
+    "pt_apply_button_hover_color": "#ff93af",
+    "pt_apply_button_disabled_color": "#cccccc",
+    "pt_sticky_enable": false,
+    "pt_sticky_mode": "basic",
+    "pt_sticky_selector": ".filter-menu",
+    "pt_sticky_offset": "25px",
+    "pt_sticky_min_width": "767px",
+    "pt_ajax_enable": false,
+    "pt_ajax_selector": "#main",
+    "pt_ajax_script": ";",
+    "pt_show_only_on_collections": false,
+    "pt_clear_to_current_collection": false,
+    "pt_desktop_always_show_selected": true,
+    "pt_filter_padding": 6,
+    "pt_temporary_disable": false,
+    "checkout_header_image": "",
+    "checkout_logo_image": "shopify:\/\/shop_images\/Nacach-Wax-Logo-2_6ebe2a70-297b-49e6-8498-431e484498e3.jpg",
+    "checkout_logo_position": "left",
+    "checkout_logo_size": "medium",
+    "checkout_body_background_image": "",
+    "checkout_body_background_color": "#fff",
+    "checkout_input_background_color_mode": "white",
+    "checkout_sidebar_background_image": "",
+    "checkout_sidebar_background_color": "#fef8e9",
+    "checkout_heading_font": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+    "checkout_body_font": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+    "checkout_accent_color": "#e21b4d",
+    "checkout_button_color": "#e21b4d",
+    "checkout_error_color": "#e32c2b",
+    "white_slider_button_1": "#ffffff",
+    "white_slider_border_button_1": "#ffffff",
+    "white_slider_bg_button_1": "#ffffff",
+    "white_slider_button_2": "#ffffff",
+    "white_slider_border_button_2": "#ffffff",
+    "white_slider_bg_button_2": "#ffffff",
+    "dark_slider_button_1": "#ffffff",
+    "dark_slider_border_button_1": "#000000",
+    "dark_slider_bg_button_1": "#000000",
+    "dark_slider_button_2": "#000000",
+    "dark_slider_border_button_2": "#000000",
+    "dark_slider_bg_button_2": "rgba(0,0,0,0)",
+    "notsamewidth": "false",
+    "product_image_resize": "true",
+    "product_image_crop": "false",
+    "product_image_ratio_width": "1",
+    "product_image_ratio_height": "1.35",
+    "layout_include_weglot_app": "true",
+    "product_qv_variants": "true",
+    "material_title": "Material",
+    "product_style_images_click": "true",
+    "product_show_custom_options": "true",
+    "footer_column_4_icon_1": "cs-font clever-icon-facebook",
+    "footer_column_4_icon_2": "cs-font clever-icon-twitter",
+    "footer_column_4_icon_3": "cs-font clever-icon-pinterest",
+    "footer_column_4_icon_4": "cs-font clever-icon-googleplus",
+    "footer_column_4_icon_5": "cs-font clever-icon-youtube",
+    "display_csseditor": "false",
+    "layout_body": "body_ltr",
+    "layout_fullpage": "false",
+    "layout_fullpage_ancho": "noancho",
+    "layout_boxed": "false",
+    "bg_body_img": "none",
+    "bg_body_position_x": "left",
+    "bg_body_position_y": "top",
+    "bg_body_repeat": "repeat",
+    "bg_body_attachment": "scroll",
+    "notify_product": "true",
+    "notify_product_collection": "",
+    "notify_product_limit": "6",
+    "notify_product_delay": "10",
+    "notify_product_display": "6",
+    "country": "Melbourne, Australia | London, England | New York | Washington",
+    "timeline": "2 hours ago | 15 min ago | 40 min ago",
+    "breadcrumb_text_transform": "uppercase",
+    "enable_font": "google_font",
+    "select_option_hover_product": "option_hover_product_5",
+    "display_ticky_menu": "true",
+    "bg_footer_top_color": "#ffffff",
+    "footer_top_title_color": "#000000",
+    "footer_top_text_color": "#000000",
+    "footer_top_link_color": "#000000",
+    "footer_top_link_hover": "#f56f5e",
+    "bg_footer_bottom_color": "#282828",
+    "footer_bottom_title_color": "#aaaaaa",
+    "footer_bottom_text_color": "#aaaaaa",
+    "footer_bottom_link_color": "#aaaaaa",
+    "footer_bottom_link_hover": "#f56f5e",
+    "verticalmenu_enable": "true",
+    "verticalmenu_background_color": "#fc6a21",
+    "verticalmenu_text_color": "#ffffff",
+    "menu_headers": "",
+    "vermenuicon_enable": "true",
+    "vermenuicon_color": "#000000",
+    "vermenuicon_font_1": "cs-font clever-icon-small-diamond",
+    "vermenuicon_font_2": "cs-font clever-icon-baby-toy-2",
+    "vermenuicon_font_3": "cs-font clever-icon-online-shopping",
+    "vermenuicon_font_4": "cs-font clever-icon-tivi",
+    "vermenuicon_font_5": "cs-font clever-icon-ball",
+    "vermenuicon_font_6": "cs-font clever-icon-support",
+    "vermenuicon_font_7": "cs-font clever-icon-plane-1",
+    "vermenuicon_font_8": "cs-font clever-icon-picture",
+    "vermenuicon_font_9": "cs-font clever-icon-truck",
+    "vermenuicon_font_10": "cs-font clever-icon-horse",
+    "vermenuicon_font_11": "cs-font clever-icon-perfume",
+    "verticalmenu_title": "CATEGORIES",
+    "vermenuitem_enable_1": "true",
+    "vermenuitem_title_1": "Babies & Moms",
+    "vermenuitem_eimage_1": "true",
+    "vermenu_position_image_1": "right_bottom",
+    "vermenuitem_width_1": "950px",
+    "vermenuitem_eblocklinks_1": "true",
+    "vermenuitem_columns_blocklinks_1": "12",
+    "vermenuitem_columns_1": "4",
+    "vermenuitem_evideo_1": "false",
+    "vermenuitem_columns_blockvideo_1": "3",
+    "vermenuitem_cvideo_1": "",
+    "vermenuitem_eproduct_1": "false",
+    "vermenuitem_columns_blockproducts_1": "3",
+    "vermenuitem_tproduct_1": "",
+    "vermenuitem_cproduct_1": "",
+    "vermenuitem_nproduct_1": "3",
+    "vermenuitem_ehtml_1": "false",
+    "vermenuitem_columns_blockhtml_1": "3",
+    "vermenuitem_thtml_1": "",
+    "vermenuitem_chtml_1": "",
+    "vermenuitem_enable_2": "false",
+    "vermenuitem_title_2": "",
+    "vermenuitem_eimage_2": "false",
+    "vermenu_position_image_2": "left_top",
+    "vermenuitem_width_2": "",
+    "vermenuitem_eblocklinks_2": "false",
+    "vermenuitem_columns_blocklinks_2": "9",
+    "vermenuitem_columns_2": "3",
+    "vermenuitem_evideo_2": "false",
+    "vermenuitem_columns_blockvideo_2": "3",
+    "vermenuitem_cvideo_2": "",
+    "vermenuitem_eproduct_2": "false",
+    "vermenuitem_columns_blockproducts_2": "3",
+    "vermenuitem_tproduct_2": "",
+    "vermenuitem_cproduct_2": "",
+    "vermenuitem_nproduct_2": "3",
+    "vermenuitem_ehtml_2": "false",
+    "vermenuitem_columns_blockhtml_2": "3",
+    "vermenuitem_thtml_2": "",
+    "vermenuitem_chtml_2": "",
+    "vermenuitem_enable_3": "false",
+    "vermenuitem_title_3": "",
+    "vermenuitem_eimage_3": "false",
+    "vermenu_position_image_3": "left_top",
+    "vermenuitem_width_3": "",
+    "vermenuitem_eblocklinks_3": "false",
+    "vermenuitem_columns_blocklinks_3": "9",
+    "vermenuitem_columns_3": "4",
+    "vermenuitem_evideo_3": "false",
+    "vermenuitem_columns_blockvideo_3": "3",
+    "vermenuitem_cvideo_3": "",
+    "vermenuitem_eproduct_3": "false",
+    "vermenuitem_columns_blockproducts_3": "3",
+    "vermenuitem_tproduct_3": "",
+    "vermenuitem_cproduct_3": "",
+    "vermenuitem_nproduct_3": "3",
+    "vermenuitem_ehtml_3": "false",
+    "vermenuitem_columns_blockhtml_3": "3",
+    "vermenuitem_thtml_3": "",
+    "vermenuitem_chtml_3": "",
+    "vermenuitem_enable_4": "false",
+    "vermenuitem_title_4": "",
+    "vermenuitem_eimage_4": "false",
+    "vermenu_position_image_4": "left_top",
+    "vermenuitem_width_4": "",
+    "vermenuitem_eblocklinks_4": "false",
+    "vermenuitem_columns_blocklinks_4": "9",
+    "vermenuitem_columns_4": "4",
+    "vermenuitem_evideo_4": "false",
+    "vermenuitem_columns_blockvideo_4": "3",
+    "vermenuitem_cvideo_4": "",
+    "vermenuitem_eproduct_4": "false",
+    "vermenuitem_columns_blockproducts_4": "3",
+    "vermenuitem_tproduct_4": "",
+    "vermenuitem_cproduct_4": "",
+    "vermenuitem_nproduct_4": "3",
+    "vermenuitem_ehtml_4": "false",
+    "vermenuitem_columns_blockhtml_4": "3",
+    "vermenuitem_thtml_4": "",
+    "vermenuitem_chtml_4": "",
+    "vermenuitem_enable_5": "false",
+    "vermenuitem_title_5": "",
+    "vermenuitem_eimage_5": "false",
+    "vermenu_position_image_5": "left_top",
+    "vermenuitem_width_5": "",
+    "vermenuitem_eblocklinks_5": "false",
+    "vermenuitem_columns_blocklinks_5": "9",
+    "vermenuitem_columns_5": "4",
+    "vermenuitem_evideo_5": "false",
+    "vermenuitem_columns_blockvideo_5": "3",
+    "vermenuitem_cvideo_5": "",
+    "vermenuitem_eproduct_5": "false",
+    "vermenuitem_columns_blockproducts_5": "3",
+    "vermenuitem_tproduct_5": "",
+    "vermenuitem_cproduct_5": "",
+    "vermenuitem_nproduct_5": "3",
+    "vermenuitem_ehtml_5": "false",
+    "vermenuitem_columns_blockhtml_5": "3",
+    "vermenuitem_thtml_5": "",
+    "vermenuitem_chtml_5": "",
+    "display_none_footer": "false",
+    "product_show_popup_add_to_cart": "true",
+    "product_stock_countdown_min": "10",
+    "product_show_review_loading": "true",
+    "product_cursor": "",
+    "product_options_type_circle_color": "Color|Colour",
+    "product_options_type_circle_image": "Material",
+    "product_options_type_square_color": "Color 2|Colour 2",
+    "product_options_type_square_image": "Material 2",
+    "product_options_type_select": "Select",
+    "product_options_type_large_text": "Size",
+    "product_hide_options_without_availability": "true",
+    "product_replace_images_hover": "true",
+    "product_enable_tooltips": "true",
+    "product_enable_payment_tooltips": "true",
+    "product_enable_option_tooltips": "true",
+    "product_variant_change_on_hover": "true",
+    "product_collection_image_size": "contain",
+    "product_collection_image_height_procent": "128",
+    "product_collection_show_collections": "true",
+    "product_collection_show_title": "true",
+    "product_collection_show_price": "true",
+    "product_collection_show_sale_price_separator": "true",
+    "product_collection_show_label_in_stock": "false",
+    "product_collection_show_label_out_stock": "false",
+    "product_collection_show_label_sale": "false",
+    "product_collection_show_label_new": "false",
+    "product_collection_show_label_hot": "true",
+    "product_collection_show_button_quick_view": "true",
+    "product_collection_show_countdown": "true",
+    "product_collection_show_images_navigation": "true",
+    "product_collection_show_quantity": "true",
+    "product_collection_show_button_add_to_cart": "true",
+    "product_collection_show_button_add_to_wishlist": "true",
+    "product_collection_show_button_add_to_compare": "true",
+    "product_collection_show_reviews": "true",
+    "product_collection_hide_reviews_counter": "true",
+    "product_collection_hide_reviews_mobile_counter": "true",
+    "product_collection_hide_empty_reviews": "true",
+    "product_collection_show_sku": "true",
+    "product_collection_show_barcode": "true",
+    "product_collection_show_availability": "true",
+    "product_collection_show_type": "false",
+    "product_collection_show_vendor": "false",
+    "product_collection_show_description": "false",
+    "quick_view_layout": "1",
+    "quick_view_show_arrows": "true",
+    "quick_view_show_btn_fullscreen": "true",
+    "quick_view_enable_zoom": "true",
+    "quick_view_show_label_in_stock": "true",
+    "quick_view_show_label_out_stock": "true",
+    "quick_view_show_label_sale": "true",
+    "quick_view_show_label_new": "true",
+    "quick_view_show_label_hot": "true",
+    "quick_view_show_collections": "true",
+    "quick_view_show_title": "true",
+    "quick_view_show_price": "true",
+    "quick_view_show_sale_price_separator": "true",
+    "quick_view_show_sku": "true",
+    "quick_view_show_barcode": "true",
+    "quick_view_show_availability": "true",
+    "quick_view_show_type": "true",
+    "quick_view_show_vendor": "true",
+    "quick_view_show_reviews": "true",
+    "quick_view_hide_reviews_counter": "false",
+    "quick_view_hide_empty_reviews": "true",
+    "quick_view_show_countdown": "true",
+    "quick_view_show_stock_countdown": "true",
+    "quick_view_show_stock_countdown_range": "true",
+    "quick_view_show_text_countdown": "true",
+    "quick_view_show_visitors": "true",
+    "quick_view_show_options": "true",
+    "quick_view_show_quantity": "true",
+    "quick_view_show_size_guide": "true",
+    "quick_view_show_delivery_return": "true",
+    "quick_view_show_button_add_to_cart": "true",
+    "quick_view_show_button_add_to_wishlist": "true",
+    "quick_view_show_button_add_to_compare": "true",
+    "quick_view_show_free_shipping": "true",
+    "quick_view_show_payments": "true",
+    "quick_view_payments_type": "dark",
+    "product_show_power_by_stripe": "true",
+    "product_power_by_stripe_url": "",
+    "product_show_shopify_secure": "true",
+    "product_shopify_secure_url": "",
+    "product_show_aes_256bit": "true",
+    "product_aes_256bit_url": "",
+    "product_show_paypal": "true",
+    "product_paypal_url": "",
+    "product_show_visa": "true",
+    "product_visa_url": "",
+    "product_show_mastercard": "true",
+    "product_mastercard_url": "",
+    "product_show_discover_network": "true",
+    "product_discover_network_url": "",
+    "product_show_american_express": "true",
+    "product_american_express_url": "",
+    "product_show_mcafee_secure": "true",
+    "product_mcafee_secure_url": "",
+    "css_animation_duration": "0.3",
+    "product_hover_animation_duration": "0.3",
+    "product_hover_animation_type": "fade",
+    "promobox_animation_duration": "0.5",
+    "tooltips_animation_type": "scale",
+    "tooltips_animation_inertia": "true",
+    "tooltips_animation_show_duration": "0.2",
+    "tooltips_animation_hide_duration": "0.1",
+    "header_animation_sticky_fade_duration": "0.2",
+    "header_animation_sticky_opacity": "0.9",
+    "menu_desktop_animation_duration": "0.4",
+    "menu_mobile_animation_duration": "0.4",
+    "header_tape_animation_duration": "0.3",
+    "dropdown_animation_duration": "0.3",
+    "accordion_animation_duration": "0.4",
+    "popup_animation_duration": "0.4",
+    "notification_animation_duration": "0.4",
+    "footbar_product_animation_duration": "0.4",
+    "tabs_animation_duration": "0.4",
+    "tabs_animation_scroll_duration": "0.4",
+    "backtotop_animation_scroll_duration": "0.4",
+    "menuitem_enable_1": "true",
+    "menuitem_title_1": "shop | boutique",
+    "enable_hot_1": "false",
+    "menuitem_title_label_1": "Hot",
+    "menuitem_title_label_color_1": "#ffffff",
+    "menuitem_title_label_background_1": "#000000",
+    "header_megamenu_style_1": "megamenu_1",
+    "menuitem_fullwidth_1": "true",
+    "menuitem_width_1": "",
+    "enable_img_1": "false",
+    "menuitem_eblocklinks_1": "true",
+    "menuitem_columns_blocklinks_1": "8",
+    "menuitem_columns_1": "6",
+    "menuitem_eproduct_1": "false",
+    "menuitem_columns_blockproducts_1": "3",
+    "menuitem_tproduct_1": "",
+    "menuitem_cproduct_1": "",
+    "menuitem_nproduct_1": "3",
+    "menuitem_eimage_1": "true",
+    "menuitem_columns_blockhtml_1": "4",
+    "menu_link_image_1": "#",
+    "menuitem_enable_2": "true",
+    "menuitem_title_2": "Products | produits",
+    "enable_hot_2": "false",
+    "menuitem_title_label_2": "New",
+    "menuitem_title_label_color_2": "#ffffff",
+    "menuitem_title_label_background_2": "#666",
+    "header_megamenu_style_2": "megamenu_1",
+    "menuitem_fullwidth_2": "true",
+    "menuitem_width_2": "",
+    "enable_img_2": "false",
+    "menuitem_eblocklinks_2": "true",
+    "menuitem_columns_blocklinks_2": "8",
+    "menuitem_columns_2": "4",
+    "menuitem_eproduct_2": "false",
+    "menuitem_columns_blockproducts_2": "3",
+    "menuitem_tproduct_2": "",
+    "menuitem_cproduct_2": "",
+    "menuitem_nproduct_2": "3",
+    "menuitem_eimage_2": "true",
+    "menuitem_columns_blockhtml_2": "4",
+    "menu_link_image_2": "#",
+    "menuitem_enable_3": "false",
+    "menuitem_title_3": "Home | Accueil",
+    "enable_hot_3": "false",
+    "menuitem_title_label_3": "",
+    "menuitem_title_label_color_3": "#666",
+    "menuitem_title_label_background_3": "#666",
+    "header_megamenu_style_3": "megamenu_1",
+    "menuitem_fullwidth_3": "true",
+    "menuitem_width_3": "",
+    "enable_img_3": "false",
+    "menuitem_eblocklinks_3": "true",
+    "menuitem_columns_blocklinks_3": "12",
+    "menuitem_columns_3": "3",
+    "menuitem_eproduct_3": "false",
+    "menuitem_columns_blockproducts_3": "3",
+    "menuitem_tproduct_3": "",
+    "menuitem_cproduct_3": "",
+    "menuitem_nproduct_3": "3",
+    "menuitem_eimage_3": "false",
+    "menuitem_columns_blockhtml_3": "3",
+    "menu_link_image_3": "#",
+    "menuitem_enable_4": "true",
+    "menuitem_title_4": "blog",
+    "enable_hot_4": "false",
+    "menuitem_title_label_4": "",
+    "menuitem_title_label_color_4": "#666",
+    "menuitem_title_label_background_4": "#666",
+    "header_megamenu_style_4": "megamenu_1",
+    "menuitem_fullwidth_4": "true",
+    "menuitem_width_4": "",
+    "enable_img_4": "true",
+    "menuitem_eblocklinks_4": "true",
+    "menuitem_columns_blocklinks_4": "12",
+    "menuitem_columns_4": "2",
+    "menuitem_eproduct_4": "false",
+    "menuitem_columns_blockproducts_4": "3",
+    "menuitem_eimage_4": "false",
+    "menuitem_columns_blockhtml_4": "3",
+    "menu_link_image_4": "#",
+    "menuitem_enable_5": "false",
+    "menuitem_title_5": "",
+    "enable_hot_5": "false",
+    "menuitem_title_label_5": "",
+    "menuitem_title_label_color_5": "#666",
+    "menuitem_title_label_background_5": "#666",
+    "header_megamenu_style_5": "megamenu_1",
+    "menuitem_fullwidth_5": "false",
+    "menuitem_width_5": "",
+    "enable_img_5": "false",
+    "menuitem_eblocklinks_5": "false",
+    "menuitem_columns_blocklinks_5": "9",
+    "menuitem_columns_5": "3",
+    "menuitem_eproduct_5": "false",
+    "menuitem_columns_blockproducts_5": "3",
+    "menuitem_tproduct_5": "",
+    "menuitem_cproduct_5": "",
+    "menuitem_nproduct_5": "3",
+    "menuitem_eimage_5": "false",
+    "menuitem_columns_blockhtml_5": "3",
+    "menu_link_image_5": "#",
+    "bg_header_bottom_color": "#1c252e",
+    "header_bottom_text_color": "#ffffff",
+    "header_bottom_link_color": "#ffffff",
+    "header_bottom_link_color_hover": "#fc6a21",
+    "content_custom_canvas": "Content Text Custom",
+    "color_megamenu_ticky_icon": "#000",
+    "display_megamenu": "true",
+    "btn3_bg": "transparent",
+    "btn3_border": "#fff",
+    "btn3_text": "#fff",
+    "btn3_bg_hv": "#fff",
+    "btn3_border_hv": "#fff",
+    "btn3_text_hv": "#a499c9",
+    "sections": {
+      "header": {
+        "type": "header",
+        "blocks": {
+          "1581647434988": {
+            "type": "megamenu_label",
+            "settings": {
+              "for_item": "Professional Wax",
+              "type": "sale",
+              "text": "Sale"
+            }
+          },
+          "1581648024087": {
+            "type": "megamenu",
+            "settings": {
+              "for_item": "About",
+              "grid": 3,
+              "second_level_column": false,
+              "second_level_column_size": 20
+            }
+          },
+          "1581648040822": {
+            "type": "megamenu_title_image",
+            "settings": {
+              "for_item": "About + Our Story",
+              "image": "shopify:\/\/shop_images\/Nacach_Our_Story.png",
+              "url": "shopify:\/\/pages\/about"
+            }
+          },
+          "1581648160047": {
+            "type": "megamenu_title_image",
+            "settings": {
+              "for_item": "About + Rewards",
+              "url": "shopify:\/\/pages\/rewards"
+            }
+          },
+          "1581648297692": {
+            "type": "megamenu_title_image",
+            "settings": {
+              "for_item": "About + Ingredients",
+              "image": "shopify:\/\/shop_images\/ingredients-glossary-beeswax.png",
+              "url": "shopify:\/\/pages\/ingredients-glossary"
+            }
+          },
+          "1581669839115": {
+            "type": "megamenu_title_image",
+            "settings": {
+              "for_item": "About + Academy",
+              "image": "shopify:\/\/shop_images\/Academy.jpg",
+              "url": "shopify:\/\/blogs\/academy"
+            }
+          },
+          "1581792547578": {
+            "type": "megamenu",
+            "settings": {
+              "for_item": "our wax",
+              "grid": 3,
+              "second_level_column": false,
+              "second_level_column_size": 40
+            }
+          },
+          "1581792613265": {
+            "type": "megamenu_promobox",
+            "settings": {
+              "for_item": "our wax",
+              "for_group": "",
+              "grid": 3,
+              "float": "right",
+              "stype": "style_1",
+              "title": "FREE HARD WAX SAMPLES",
+              "url": "shopify:\/\/pages\/rewards",
+              "image": "shopify:\/\/shop_images\/Free_Sample_Offer_Mega_Menu.jpg",
+              "custom_html": "<h3>ENJOY FREE SAMPLES ON US<\/h3>\n<h6>Shipping and Handling apply<\/h6>",
+              "button_text": "GET FREE SAMPLES"
+            }
+          },
+          "1581796025473": {
+            "type": "megamenu",
+            "settings": {
+              "for_item": "OUR WARMERS",
+              "grid": 4,
+              "second_level_column": false,
+              "second_level_column_size": 20
+            }
+          },
+          "1581796433169": {
+            "type": "megamenu_promobox",
+            "settings": {
+              "for_item": "our warmers",
+              "for_group": "",
+              "grid": 6,
+              "float": "right",
+              "stype": "style_2",
+              "title": "",
+              "url": "shopify:\/\/blogs\/news\/what-is-sugaring",
+              "image": "shopify:\/\/shop_images\/What_is_Sugaring_Mega_Menu.jpg",
+              "custom_html": "<h4>FOR SUGAR PASTE<\/h4>\n<p>Have you tried Sugar Paste? <br>Learn more about what sugaring is and<br>how you can use it for your customers.<\/p>",
+              "button_text": "Read More"
+            }
+          },
+          "1581797678717": {
+            "type": "megamenu_promobox",
+            "settings": {
+              "for_item": "our warmers",
+              "for_group": "",
+              "grid": 6,
+              "float": "right",
+              "stype": "style_2",
+              "title": "",
+              "url": "shopify:\/\/collections\/waxing-kits",
+              "image": "shopify:\/\/shop_images\/Waxing_Kit_Mega_Menu2.jpg",
+              "custom_html": "<h4>AVAILABLE WAXING KITS<\/h4>\n<p>Not sure how to get started? <br>Checkout our professional waxing kits,<br> curated for all levels of expertise.<\/p>",
+              "button_text": "View Wax Kits"
+            }
+          },
+          "1581799552140": {
+            "type": "megamenu_label",
+            "settings": {
+              "for_item": "Wax Warmers+For Roll-On Wax+Multi-Combine Wax Warmer",
+              "type": "hot",
+              "text": "Works with Soft Wax"
+            }
+          }
+        },
+        "block_order": [
+          "1581647434988",
+          "1581648024087",
+          "1581648040822",
+          "1581648160047",
+          "1581648297692",
+          "1581669839115",
+          "1581792547578",
+          "1581792613265",
+          "1581796025473",
+          "1581796433169",
+          "1581797678717",
+          "1581799552140"
+        ],
+        "settings": {
+          "logo": "shopify:\/\/shop_images\/Nacach-Wax-Logo-2.jpg",
+          "logo_height_a": 50,
+          "enable_header_logosvg": false,
+          "header_logo_svg": "",
+          "header_layout": "header-layout-02",
+          "enable_header_fullwidth": true,
+          "enable_header_transparency": false,
+          "display_ticky_menu": true,
+          "enable_header_logotickysvg": false,
+          "header_logo_tickysvg": "",
+          "logo_sticky": "shopify:\/\/shop_images\/Nacach-Wax-Logo-2.jpg",
+          "logo_sticky_height_a": 56,
+          "enable_header_promobox": false,
+          "header_promobox": "Summer sale discount off 50%! Shop Now",
+          "header_promobox_link": "https:\/\/nacach.com\/collections\/waxing-products",
+          "enable_header_topbar": true,
+          "header_topbar_left": "",
+          "header_topbar_center": "<b>Free Shipping on orders $75 or more!<\/b>",
+          "header_topbar_menu": "top-bar",
+          "menu": "menu",
+          "show_header_search": true,
+          "show_header_account": true,
+          "show_header_wishlist": true,
+          "show_header_compare": false,
+          "show_header_currency": false,
+          "show_button_language": false,
+          "language_app": "weglot",
+          "language_link_list": "",
+          "show_header_cart": true,
+          "header_icon_carttype": "cart_type_1",
+          "header_icon_cart": "clever-icon-cart-16"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "1553133361423": {
+            "type": "menu",
+            "settings": {
+              "footer_heading_1": "Heading 1",
+              "footercol1_1": "footer-menu-1",
+              "footer_heading_2": "Heading 2",
+              "footercol1_2": "footer-menu-2"
+            }
+          },
+          "1553133246914": {
+            "type": "iconsocial",
+            "settings": {
+              "footer_column_3_title": "FOLLOW US",
+              "footer_column_4_icon_link_1": true,
+              "footer_column_4_icon_link_2": true,
+              "footer_column_4_icon_link_3": false,
+              "footer_column_4_icon_link_4": true,
+              "footer_column_4_icon_link_5": true,
+              "footer_column_4_icon_link_6": false,
+              "footer_column_4_icon_link_8": false
+            }
+          },
+          "1553133419344": {
+            "type": "copyright",
+            "settings": {
+              "footer_copyright": "<center>Copyright 2021 © Nacach Wax \n<\/center>"
+            }
+          },
+          "1583441879618": {
+            "type": "logo",
+            "settings": {
+              "margin_logo": "0px 0px 0px 0px",
+              "logo": "shopify:\/\/shop_images\/nacach-wax-logo.jpgv_1581700928.jpg"
+            }
+          }
+        },
+        "block_order": [
+          "1553133361423",
+          "1553133246914",
+          "1553133419344",
+          "1583441879618"
+        ],
+        "settings": {
+          "layout_footer": "80px 0px 0px 0px",
+          "footer_layout": "footer_layout_3",
+          "enable_block_home_icon_full": true,
+          "show_top_border": true,
+          "show_button_back_to_top": true
+        }
+      },
+      "collection-template": {
+        "type": "collection-template",
+        "blocks": {
+          "1583852368086": {
+            "type": "block_filter_categories",
+            "settings": {
+              "sidebar_categories_title": "Collections",
+              "open_tabs": true
+            }
+          },
+          "1581720015032": {
+            "type": "block_promobox",
+            "settings": {
+              "title": "Nacach Rewards",
+              "url": "shopify:\/\/pages\/rewards",
+              "image": "shopify:\/\/shop_images\/nacach-rewards.jpg",
+              "custom_html": "",
+              "button_text": "JOIN REWARDS"
+            }
+          }
+        },
+        "block_order": [
+          "1583852368086",
+          "1581720015032"
+        ],
+        "settings": {
+          "sidebar_nav_enabled": true,
+          "sidebar_nav_title": "Collections",
+          "sidebar_nav_link_list": "collections-sidebar-nav"
+        }
+      },
+      "product-template": {
+        "type": "product-template",
+        "settings": {
+          "product_layouts": "product-v1",
+          "enable_product_image_zoom": true,
+          "show_quantity_selector": true,
+          "show_vendor": false,
+          "show_type": false,
+          "show_barcode": false,
+          "show_sku": false,
+          "show_categories": false,
+          "show_tag": false,
+          "display_prev_next_product": true,
+          "display_availability": false,
+          "display_sale": true,
+          "enable_wishlist": true,
+          "enable_payment_button": false,
+          "display_spend_shipping": true,
+          "product_bagde_image": true,
+          "product_flash_sold_enable": false,
+          "show_visitors": false,
+          "show_text_countdown": false,
+          "height_button": 50,
+          "product_conditions": false,
+          "product_conditions_title": "I agree with terms and conditions",
+          "enable_sizeguide": false,
+          "enable_delivery": true,
+          "delivery_lable": "Shipping & Returns",
+          "delivery_content": "<span>SHIPPING<\/span>\n<ul>\n    <li>All orders are shipped within 24-48 hours if placed before 1:00 p.m. EST Monday - Friday<\/li>\n    <li>You will receive shipping confirmation once shipped. We recommend using \"Arrive\" by Shopify at checkout.<\/li>\n    <li>Free Shipping applies ONLY for the US continental territory. It doesn’t include Alaska, Hawaii, Puerto Rico or any US island.<\/li>\n    <li>All orders must be shipped to the delivery address on your order.<\/li>\n<li>We cannot change the shipping address in your transaction to any other address after purchase.<\/li>\n    <li>We do no ship to P.O. BOX addresses and\/or APO or FPO addresses.<\/li>\n<li>For more information on Shipping, visit our <a href=\"\/policies\/shipping-policy\">Shipping Policy<\/a> page or <a href=\"\/pages\/faq\">FAQ<\/a>\n<\/li>\n<\/ul>\n<span>RETURNS AND EXCHANGES<\/span>\n<ul>\n    <li>Easy and complimentary, within 14 days<\/li>\n<li>We do not accept returns on opened, used products, empty containers\/pots, special or customized orders.<\/li>\n<li>No returns on all sales items. All sales are final!<\/li>\n    <li>See conditions and procedure in our return <a href=\"\/pages\/faq\">FAQs<\/a>\n<\/li>\n<\/ul>",
+          "enable_ask_product": true,
+          "contact_lable": "Ask about this product",
+          "contact_title_1": "Have a question?",
+          "enable_product_icon_isocal": false,
+          "icon_isocal_1": true,
+          "icon_isocal_2": true,
+          "icon_isocal_3": true,
+          "display_product_detail_description": true,
+          "display_product_reviews": false
+        }
+      },
+      "blog-template": {
+        "type": "blog-template",
+        "blocks": {
+          "1554274294447": {
+            "type": "widget_article",
+            "settings": {
+              "title": "Latest Post"
+            }
+          }
+        },
+        "block_order": [
+          "1554274294447"
+        ],
+        "settings": {
+          "layout": "no_column",
+          "layout_blog": "grid",
+          "enable_author": false,
+          "enable_except": false,
+          "enable_tags": true,
+          "enable_uppercase": false,
+          "enable_time": false
+        }
+      },
+      "article-template": {
+        "type": "article-template",
+        "blocks": {
+          "1583782064226": {
+            "type": "widget_article",
+            "settings": {
+              "title": "Latest Post"
+            }
+          }
+        },
+        "block_order": [
+          "1583782064226"
+        ],
+        "settings": {
+          "layout": "right_column",
+          "enable_author": false,
+          "enable_comments_count": false,
+          "enable_tags": false,
+          "enable_uppercase": false,
+          "enable_time": false,
+          "enable_sharing": true
+        }
+      },
+      "about-template": {
+        "type": "about-template",
+        "settings": {
+          "title_about": "Our story so far.",
+          "enable_about_banner": true,
+          "bg_about_banner": "",
+          "sub_title_about_texts_1": "<p> A great About Us page helps builds trust between you and your customers. The more content you provide about you and your business, the more confident people will be when purchasing from your store.<\/p>\n<p>Your About Us page might include:<\/p>\n<ul>\n<li>Who you are<\/li>\n<li>Why you sell the items you sell<\/li>\n<li>Where you are located<\/li>\n<li>How long you have been in business<\/li>\n<li>How long you have been running your online shop<\/li>\n<li>Who are the people on your team<\/li>\n<li>Contact information<\/li>\n<li>Social links (Twitter, Facebook)<\/li>\n<\/ul>\n<p>To edit the content on this page, go to the Pages section of your Shopify admin.<\/p>",
+          "enable_about_address": true,
+          "bg_image_address_1": ""
+        }
+      },
+      "contact-template": {
+        "type": "contact-template",
+        "blocks": {
+          "1554193845082": {
+            "type": "title",
+            "settings": {
+              "title": "We'd love to hear from you."
+            }
+          },
+          "1554193851438": {
+            "type": "block_text",
+            "settings": {
+              "contact_info_1": "<div class=\"col-md-4 col-xs\">\n    <i class=\"cs-font clever-icon-support\"><\/i>\n    <div class=\"content\">\n      <h5>Talk to a Representative<\/h5>\n      <p>Phone: 1-866-460-1460<\/p>\n      <p><\/p>\n    <\/div>\n  <\/div>\n  <div class=\"col-md-4 col-xs\">\n    <i class=\"cs-font clever-icon-map-4\"><\/i>\n    <div class=\"content\">\n      <h5>Mail us<\/h5>\n      <p>P.O Box: 268145 Weston, FL 33326<\/p>\n      <p><\/p>\n    <\/div>\n  <\/div>\n  <div class=\"col-md-4 col-xs\">\n    <i class=\"cs-font clever-icon-comment-1\"><\/i>\n    <div class=\"content\">\n      <h5>Chat with Us<\/h5>\n      <p>Click <a href=\"https:\/\/nacach.myshopify.com\/pages\/contact-us\/?chat\">here<\/a> or the Chat Icon<\/p>\n    <\/div>\n  <\/div>"
+            }
+          },
+          "1554193854114": {
+            "type": "contact_title",
+            "settings": {
+              "contact_title_1": "Get In Touch with Nacach"
+            }
+          }
+        },
+        "block_order": [
+          "1554193845082",
+          "1554193851438",
+          "1554193854114"
+        ],
+        "settings": {}
+      },
+      "1548129042448": {
+        "type": "home-blog",
+        "settings": {
+          "margin_top": 0,
+          "reponsive_mt": "20,30,40,60",
+          "margin_bottom": 0,
+          "reponsive_bt": "",
+          "home_blog_text_align": "text_left",
+          "display_blog_image": true,
+          "display_blog_date": false,
+          "display_blog_intro": false,
+          "display_blog_author": false,
+          "display_blog_view_all": false,
+          "display_blog_readmore": true,
+          "blog_readmore": "Read More",
+          "defaulthome_blogslider2": "news",
+          "blog_title": "Latest News",
+          "blog_subtitle": "Informational and Thought Provoking News",
+          "blog_limit": "3"
+        }
+      },
+      "1552036125305": {
+        "type": "grid-builder",
+        "blocks": {
+          "1552036143796": {
+            "type": "promobox",
+            "settings": {
+              "for_item": "",
+              "home_padding_item": "0px 0px 0px 0px",
+              "grid": 6,
+              "margin_top": 0,
+              "margin_bottom": 0,
+              "type": "1",
+              "image": "shopify:\/\/shop_images\/Untitled_design_6.png",
+              "disable_lazyload": false,
+              "video_mp4_url": "",
+              "video_external_url": "",
+              "video_autoplay": false,
+              "video_controls": false,
+              "url": "shopify:\/\/collections\/wax-warmer",
+              "text_line_1": "Wax Warmers",
+              "text_line_2": "Reliable pots",
+              "text_line_3": "Made for the busy professional",
+              "button_text": "Shop Now",
+              "menu": "",
+              "custom_html": "",
+              "color_text_line_1": "#000000",
+              "color_text_line_2": "#000000",
+              "color_text_line_3": "#000000",
+              "color_button_link": "#000000",
+              "bg_button_link": "#ffffff",
+              "color_button_type": "3"
+            }
+          },
+          "1552036220207": {
+            "type": "promobox",
+            "settings": {
+              "for_item": "",
+              "home_padding_item": "0px 0px 0px 0px",
+              "grid": 6,
+              "margin_top": 0,
+              "margin_bottom": 0,
+              "type": "1",
+              "image": "shopify:\/\/shop_images\/Untitled_design_7.png",
+              "disable_lazyload": false,
+              "video_mp4_url": "",
+              "video_external_url": "",
+              "video_autoplay": false,
+              "video_controls": false,
+              "url": "shopify:\/\/collections\/sugar-paste",
+              "text_line_1": "Sugar Paste",
+              "text_line_2": "Pleasing Peeling",
+              "text_line_3": "Deeply Moisturizing to the Skin",
+              "button_text": "SHOP NOW",
+              "menu": "",
+              "custom_html": "",
+              "color_text_line_1": "#000000",
+              "color_text_line_2": "#000000",
+              "color_text_line_3": "#000000",
+              "color_button_link": "#000000",
+              "bg_button_link": "#ffffff",
+              "color_button_type": "3"
+            }
+          }
+        },
+        "block_order": [
+          "1552036143796",
+          "1552036220207"
+        ],
+        "settings": {
+          "enable_block_home_icon_full": true,
+          "margin_top": 10,
+          "reponsive_mt": "",
+          "margin_bottom": 10,
+          "reponsive_bt": "",
+          "vertical_align": "top",
+          "min_height": 300,
+          "background_color": "#ffffff",
+          "parallax_effect": false
+        }
+      },
+      "1552037189229": {
+        "type": "grid-builder",
+        "blocks": {
+          "1552037226370": {
+            "type": "promobox",
+            "settings": {
+              "for_item": "",
+              "home_padding_item": "0px 5px 0px 5px",
+              "grid": 4,
+              "margin_top": 0,
+              "margin_bottom": 0,
+              "type": "1",
+              "image": "shopify:\/\/shop_images\/corn-starch-powder.png",
+              "disable_lazyload": false,
+              "video_mp4_url": "",
+              "video_external_url": "",
+              "video_autoplay": false,
+              "video_controls": false,
+              "url": "shopify:\/\/collections\/pre-wax-care",
+              "text_line_1": "Pre Wax Care",
+              "text_line_2": "help prepare Your clients",
+              "text_line_3": "perfect way to condition the skin",
+              "button_text": "Shop Now",
+              "menu": "",
+              "custom_html": "",
+              "color_text_line_1": "#000000",
+              "color_text_line_2": "#000000",
+              "color_text_line_3": "#000000",
+              "color_button_link": "#000000",
+              "bg_button_link": "#ffffff",
+              "color_button_type": "3"
+            }
+          },
+          "1552037876016": {
+            "type": "promobox",
+            "settings": {
+              "for_item": "",
+              "home_padding_item": "0px 5px 0px 5px",
+              "grid": 4,
+              "margin_top": 0,
+              "margin_bottom": 0,
+              "type": "1",
+              "image": "shopify:\/\/shop_images\/post-wax-care_83236fb8-fb3c-4ae9-b4c4-372316873ff0.jpg",
+              "disable_lazyload": false,
+              "video_mp4_url": "",
+              "video_external_url": "",
+              "video_autoplay": false,
+              "video_controls": false,
+              "url": "shopify:\/\/collections\/post-wax-care",
+              "text_line_1": "Post Wax Care",
+              "text_line_2": "integral to waxing experience",
+              "text_line_3": "leave the skin feeling soft and refreshed",
+              "button_text": "Shop Now",
+              "menu": "",
+              "custom_html": "",
+              "color_text_line_1": "#000000",
+              "color_text_line_2": "#000000",
+              "color_text_line_3": "#000000",
+              "color_button_link": "#000000",
+              "bg_button_link": "#ffffff",
+              "color_button_type": "3"
+            }
+          },
+          "1552037938671": {
+            "type": "promobox",
+            "settings": {
+              "for_item": "",
+              "home_padding_item": "0px 5px 0px 5px",
+              "grid": 4,
+              "margin_top": 0,
+              "margin_bottom": 0,
+              "type": "1",
+              "image": "shopify:\/\/shop_images\/waxinng-kits_caffd9b5-b386-4106-be97-88d631e74bc8.jpg",
+              "disable_lazyload": false,
+              "video_mp4_url": "",
+              "video_external_url": "",
+              "video_autoplay": false,
+              "video_controls": false,
+              "url": "shopify:\/\/collections\/waxing-kits",
+              "text_line_1": "Waxing<br> Kits",
+              "text_line_2": "Practical, <br>convenient, <br>and equipped",
+              "text_line_3": "",
+              "button_text": "Shop Now",
+              "menu": "",
+              "custom_html": "",
+              "color_text_line_1": "#000000",
+              "color_text_line_2": "#000000",
+              "color_text_line_3": "#000000",
+              "color_button_link": "#000000",
+              "bg_button_link": "#ffffff",
+              "color_button_type": "3"
+            }
+          }
+        },
+        "block_order": [
+          "1552037226370",
+          "1552037876016",
+          "1552037938671"
+        ],
+        "settings": {
+          "enable_block_home_icon_full": true,
+          "margin_top": 10,
+          "reponsive_mt": "",
+          "margin_bottom": 10,
+          "reponsive_bt": "",
+          "vertical_align": "top",
+          "min_height": 300,
+          "background_color": "",
+          "parallax_effect": false
+        }
+      },
+      "product-related": {
+        "type": "product-related",
+        "settings": {
+          "display_related_products": true,
+          "related_products_title": "Related Products",
+          "number_of_related_products": "8",
+          "related_products_type": "collection"
+        }
+      },
+      "recently-viewed-products": {
+        "type": "recently-viewed-products",
+        "settings": {
+          "display_recently_viewed_products": false,
+          "recently_viewed_products_title": "Recently Viewed Products",
+          "number_of_recently_viewed_products": "4"
+        }
+      },
+      "popups": {
+        "type": "popups",
+        "settings": {
+          "notify_product": false,
+          "notify_product_collection": "",
+          "notify_product_limit": "4",
+          "notify_product_text_line_1": "Someone purched a",
+          "notify_product_text_line_2": "{time} mins ago from {place}",
+          "notification_products_range_min": 2,
+          "notification_products_range_max": 20,
+          "country": "Melbourne, Australia | London, England | New York | Washington",
+          "notify_delay": 5,
+          "notify_product_delay": 5,
+          "notify_product_initialDelay": 1,
+          "notify_product_display": 17,
+          "notification_cookies_enable": false,
+          "notification_cookies_text": "This is a standard cookie notice which you can easily adapt or disable as you like in the admin. We use cookies to ensure that we give you the best experience on our website.",
+          "notification_cookies_button_information": "Privacy Policy",
+          "notification_cookies_button_close": "ACCEPT",
+          "notification_cookies_delay": 0,
+          "notification_cookies_show_once": true,
+          "notification_cookies_cookies_life": "7"
+        }
+      },
+      "collection-template1": {
+        "type": "collection-template1",
+        "settings": {
+          "enable_full": false,
+          "display_image_cat": true,
+          "colection_title": true,
+          "colection_decription": true,
+          "colection_softby": true,
+          "colection_view": true
+        }
+      },
+      "page-faqs": {
+        "type": "page-faqs",
+        "blocks": {
+          "1554180521444": {
+            "type": "faq",
+            "settings": {
+              "subtitlefaq": "What Are Good Waxing Products?",
+              "contentfaq": "If you are en esthetician looking to provide your clientele with the best service, it is crucial that you have the best waxing products. Our goal is to provide estheticians and students with the best waxing products available today. Nacach wax products are imported from Italy and made with the finest ingredients carefully selected for flawless results so your clients keep coming back for more. No harmful chemicals or unnatural substances, ever."
+            }
+          },
+          "1554180530658": {
+            "type": "faq",
+            "settings": {
+              "subtitlefaq": "What Supplies Do I Need As An Esthetician?",
+              "contentfaq": "Regardless of your experience, any professional or aspiring esthetician should always be equipped with a complete collection of products to meet different needs. People have different types of skin and hair, so it is important that you have a diverse lineup of waxing products that includes different waxes, lotions, warmers, and accessories."
+            }
+          },
+          "1554180550586": {
+            "type": "faq",
+            "settings": {
+              "subtitlefaq": "Where To Buy Waxing Products?",
+              "contentfaq": "Nacach waxing products and supplies can be bought online on Nacach.com. All our products, from our waxes to lotions, are guaranteed to arrive at your doorstep by their estimated delivery date, so you can start delivering flawless results right away."
+            }
+          },
+          "1554180579279": {
+            "type": "faq",
+            "settings": {
+              "subtitlefaq": "Where To Buy Esthetician Supplies?",
+              "contentfaq": "At Nacach, we specialize in all things waxing. In addition to our best-selling waxes, Nacach offers a wide selection of waxing supplies and accessories to make the most of your services. Check out our collection of supplies to learn more."
+            }
+          },
+          "1583583158236": {
+            "type": "faq",
+            "settings": {
+              "subtitlefaq": "What Is Hard Wax?",
+              "contentfaq": "Hard wax is a type of wax mostly used for hair removal procedures involving the bikini area, underarm, face, and other delicate parts of the body. Unlike soft wax, hard wax does not require strips to be removed, which is why hard wax is also known as stripless wax."
+            }
+          },
+          "1583583171619": {
+            "type": "faq",
+            "settings": {
+              "subtitlefaq": "How To Use Hard Wax?",
+              "contentfaq": "Before using hard wax, or any type of wax, it’s important to make sure the skin is cleansed of all dirt, makeup, sweat, and lotions. This enables the wax to adhere to the area effectively. Once the skin is ready for waxing, follow the next steps:\n\nPour the wax warmer and heat until wax beads are completely melted.\nUsing a clean spatula, apply hard wax in layers of about 2-3 mm in the direction of hair growth.\nWait a few moments until it cools, then quickly and firmly peel off against the direction of hair growth.\nFor more detailed instructions on how to use each of our products, click on the respective product."
+            }
+          },
+          "1583583194766": {
+            "type": "faq",
+            "settings": {
+              "subtitlefaq": "How To Use Hard Wax Beads?",
+              "contentfaq": "Hard wax comes in different shapes, but they are all applied using the same method described above. Nacach hard wax comes in the shape of tiny beans, or beads, so you can measure and control exactly how much hard wax you want to use each time."
+            }
+          },
+          "1583583210472": {
+            "type": "faq",
+            "settings": {
+              "subtitlefaq": "Where To Buy Hard Wax?",
+              "contentfaq": "Nacach hard wax beads can be bought on Nacach.com. All our hard wax varieties are imported from Italy, where they are made with the best ingredients to ensure premium quality and flawless results."
+            }
+          }
+        },
+        "block_order": [
+          "1554180521444",
+          "1554180530658",
+          "1554180550586",
+          "1554180579279",
+          "1583583158236",
+          "1583583171619",
+          "1583583194766",
+          "1583583210472"
+        ],
+        "settings": {
+          "home_faqs_margin": "0px 0px 0px 0px",
+          "titlefaq": "Faqs",
+          "subtitlefaq_page": ""
+        }
+      },
+      "page-comingsoon": {
+        "type": "page-comingsoon",
+        "settings": {
+          "logo_password": "shopify:\/\/shop_images\/Nacach-Wax-LogoFavicon_c6a4f67b-a9ef-49bb-92b4-ad2d77d7a4a7.png",
+          "block_home_image": "",
+          "home_block_title_7": "Coming Soon",
+          "home_block_sub_title_7": "",
+          "home_block_countdown_7": "2020\/12\/31 10:30:00"
+        }
+      },
+      "1551932566860": {
+        "type": "grid-builder",
+        "blocks": {
+          "1552034057183": {
+            "type": "promobox",
+            "settings": {
+              "for_item": "",
+              "home_padding_item": "0px 5px 0px 5px",
+              "grid": 4,
+              "margin_top": 0,
+              "margin_bottom": 0,
+              "type": "1",
+              "image": "shopify:\/\/shop_images\/hard-wax.jpg",
+              "disable_lazyload": false,
+              "video_mp4_url": "",
+              "video_external_url": "",
+              "video_autoplay": false,
+              "video_controls": false,
+              "url": "shopify:\/\/collections\/hard-wax",
+              "text_line_1": "Hard Wax",
+              "text_line_2": "Low melting-point",
+              "text_line_3": "Available in Relaxing Aromas",
+              "button_text": "SHOP NOW",
+              "menu": "",
+              "custom_html": "",
+              "color_text_line_1": "#000000",
+              "color_text_line_2": "#000000",
+              "color_text_line_3": "#000000",
+              "color_button_link": "#000000",
+              "bg_button_link": "#ffffff",
+              "color_button_type": "3"
+            }
+          },
+          "1552034201078": {
+            "type": "promobox",
+            "settings": {
+              "for_item": "",
+              "home_padding_item": "0px 5px 0px 5px",
+              "grid": 4,
+              "margin_top": 0,
+              "margin_bottom": 0,
+              "type": "1",
+              "image": "shopify:\/\/shop_images\/soft-wax.jpg",
+              "disable_lazyload": false,
+              "video_mp4_url": "",
+              "video_external_url": "",
+              "video_autoplay": false,
+              "video_controls": false,
+              "url": "shopify:\/\/collections\/soft-wax",
+              "text_line_1": "Soft Wax",
+              "text_line_2": "Gentle and Effective",
+              "text_line_3": "Available in hypoallergenic resins",
+              "button_text": "SHOP NOW",
+              "menu": "",
+              "custom_html": "",
+              "color_text_line_1": "#000000",
+              "color_text_line_2": "#000000",
+              "color_text_line_3": "#000000",
+              "color_button_link": "#000000",
+              "bg_button_link": "#ffffff",
+              "color_button_type": "3"
+            }
+          },
+          "1552034262469": {
+            "type": "promobox",
+            "settings": {
+              "for_item": "",
+              "home_padding_item": "0px 5px 0px 5px",
+              "grid": 4,
+              "margin_top": 0,
+              "margin_bottom": 0,
+              "type": "1",
+              "image": "shopify:\/\/shop_images\/nacach-wax-products.png",
+              "disable_lazyload": false,
+              "video_mp4_url": "",
+              "video_external_url": "",
+              "video_autoplay": false,
+              "video_controls": false,
+              "url": "shopify:\/\/collections\/roll-on-wax",
+              "text_line_1": "Roll-On Wax",
+              "text_line_2": "convenient and practical",
+              "text_line_3": "designed for All Skin Types",
+              "button_text": "SHOP NOW",
+              "menu": "",
+              "custom_html": "",
+              "color_text_line_1": "#000000",
+              "color_text_line_2": "#000000",
+              "color_text_line_3": "#000000",
+              "color_button_link": "#000000",
+              "bg_button_link": "#ffffff",
+              "color_button_type": "3"
+            }
+          }
+        },
+        "block_order": [
+          "1552034057183",
+          "1552034201078",
+          "1552034262469"
+        ],
+        "settings": {
+          "enable_block_home_icon_full": true,
+          "margin_top": 10,
+          "reponsive_mt": "",
+          "margin_bottom": 10,
+          "reponsive_bt": "",
+          "vertical_align": "top",
+          "min_height": 300,
+          "background_color": "",
+          "parallax_effect": false
+        }
+      },
+      "1554453713819": {
+        "type": "grid-builder",
+        "blocks": {
+          "1554454155240": {
+            "type": "group_slider",
+            "settings": {
+              "for_group": "slide 1",
+              "grid": 12,
+              "grid_responsive": "",
+              "margin_top": 0,
+              "reponsive_mt": "",
+              "margin_bottom": 0,
+              "reponsive_bt": "",
+              "gridheight": "800px,500px,450px,450px",
+              "autoplay": true,
+              "autoplay_speed": 7,
+              "pause_on_hover": true,
+              "navigation_type": "navigation_light",
+              "show_navigation": true,
+              "arrows_type": "arrows_simple",
+              "button_size": "button_size_medium",
+              "show_bullets": true,
+              "style_dots": "dashes_space"
+            }
+          },
+          "1554454239323": {
+            "type": "group_slider_item",
+            "settings": {
+              "for_item": "slide 1",
+              "image": "shopify:\/\/shop_images\/nacach_banner_6_1_1_1_-min.png",
+              "video_mp4_url": "",
+              "video_external_url": "",
+              "video_autoplay": false,
+              "video_controls": false,
+              "alignment": "left",
+              "offset_h": 105,
+              "offset_reverse_h": false,
+              "subheading2_title_alignment": "middle",
+              "offset_v": 10,
+              "offset_reverse_v": true,
+              "style_color_text": "dark",
+              "heading": "<h4>First time here?<\/h4>",
+              "subheading": "GET 15% OFF YOUR<br>FIRST PURCHASE",
+              "subheading_1": "<h6>Use Code: FIRSTPURCHASE<\/h6>",
+              "button_label": "SHOP NOW",
+              "link": "shopify:\/\/collections\/waxing-products",
+              "button_label_1": "",
+              "text_align": "left",
+              "effect_text": "fade_in_left",
+              "color_button_type": "color_button_type_2",
+              "parallax_effect": false
+            }
+          },
+          "1585673447954": {
+            "type": "group_slider_item",
+            "settings": {
+              "for_item": "slide 1",
+              "image": "shopify:\/\/shop_images\/banner_nacach_5_1_1_1_-min.png",
+              "video_mp4_url": "",
+              "video_external_url": "",
+              "video_autoplay": true,
+              "video_controls": false,
+              "alignment": "left",
+              "offset_h": 105,
+              "offset_reverse_h": false,
+              "subheading2_title_alignment": "middle",
+              "offset_v": 10,
+              "offset_reverse_v": true,
+              "style_color_text": "dark",
+              "heading": "<h4>Get All You Need With<\/h4>",
+              "subheading": "PROFESSIONAL<br>WAXING KITS",
+              "subheading_1": "<h6>Enjoy up to 30% in discounts.<\/h6>",
+              "button_label": "Shop Now",
+              "link": "shopify:\/\/collections\/waxing-kits",
+              "button_label_1": "",
+              "text_align": "left",
+              "effect_text": "fade_in_left",
+              "color_button_type": "color_button_type_2",
+              "parallax_effect": false
+            }
+          },
+          "1585674578332": {
+            "type": "group_slider_item",
+            "settings": {
+              "for_item": "",
+              "image": "shopify:\/\/shop_images\/4.jpg",
+              "video_mp4_url": "",
+              "video_external_url": "",
+              "video_autoplay": true,
+              "video_controls": false,
+              "alignment": "left",
+              "offset_h": 105,
+              "offset_reverse_h": false,
+              "subheading2_title_alignment": "middle",
+              "offset_v": 10,
+              "offset_reverse_v": true,
+              "style_color_text": "dark",
+              "heading": "<h5>Free 1lb Yellow Hard Wax Beads<\/h5>",
+              "subheading": "BUY NEPTUNE<br>GET YELLOW",
+              "subheading_1": "YES, ABSOLUTELY FREE<br><b>Use Code: FreeWax<\/b>",
+              "button_label": "Shop Now",
+              "link": "shopify:\/\/products\/neptune-wax-warmer",
+              "button_label_1": "",
+              "text_align": "left",
+              "effect_text": "fade_in_left",
+              "color_button_type": "color_button_type_2",
+              "parallax_effect": false
+            }
+          },
+          "1585674032982": {
+            "type": "group_slider_item",
+            "settings": {
+              "for_item": "",
+              "image": "shopify:\/\/shop_images\/New_Product_Alert_3.jpg",
+              "video_mp4_url": "",
+              "video_external_url": "",
+              "video_autoplay": false,
+              "video_controls": false,
+              "alignment": "left",
+              "offset_h": 100,
+              "offset_reverse_h": false,
+              "subheading2_title_alignment": "middle",
+              "offset_v": 45,
+              "offset_reverse_v": true,
+              "style_color_text": "dark",
+              "heading": "New Product Alert!",
+              "subheading": "ALL NEW <br>NEPTUNE<br>WAX WARMER",
+              "subheading_1": "Get a Free Neptune Warmer<br>When You Order $300+<br><br><b>Use Code: FreeWarmer<\/b>",
+              "button_label": "Shop Now",
+              "link": "shopify:\/\/products\/neptune-wax-warmer",
+              "button_label_1": "",
+              "text_align": "left",
+              "effect_text": "fade_in_left",
+              "color_button_type": "color_button_type_2",
+              "parallax_effect": false
+            }
+          }
+        },
+        "block_order": [
+          "1554454155240",
+          "1554454239323",
+          "1585673447954",
+          "1585674578332",
+          "1585674032982"
+        ],
+        "settings": {
+          "enable_block_home_icon_full": true,
+          "margin_top": 0,
+          "reponsive_mt": "0,0,0,0",
+          "margin_bottom": 0,
+          "reponsive_bt": "",
+          "vertical_align": "center",
+          "min_height": 400,
+          "background_color": "#ffffff",
+          "parallax_effect": false
+        }
+      },
+      "1580156066196": {
+        "type": "product-carousel",
+        "blocks": {
+          "1580156103313": {
+            "type": "tabs",
+            "settings": {
+              "hide_title": true,
+              "title": "",
+              "tabnew_collection": "frontpage"
+            }
+          },
+          "6080a54c-34bd-4618-8b4d-de4b33acf3d6": {
+            "type": "tabs",
+            "settings": {
+              "hide_title": false,
+              "title": "",
+              "tabnew_collection": ""
+            }
+          }
+        },
+        "block_order": [
+          "1580156103313",
+          "6080a54c-34bd-4618-8b4d-de4b33acf3d6"
+        ],
+        "settings": {
+          "enable_full_width_load": false,
+          "show_top_separator": true,
+          "grid": 3,
+          "max_count": 9,
+          "grid_responsive": "",
+          "margin_top": 100,
+          "reponsive_mt": "",
+          "margin_bottom": 100,
+          "reponsive_bt": "",
+          "autoplay": true,
+          "speed": 5,
+          "arrows": true,
+          "bullets": true,
+          "home_product_title_1": "Top Selling",
+          "subtitle": "Nacach Most Wanted Products"
+        }
+      },
+      "filter-menu-settings": {
+        "type": "filter-menu-settings",
+        "settings": {}
+      },
+      "1582117539284": {
+        "type": "grid-builder",
+        "blocks": {
+          "1582655005770": {
+            "type": "text",
+            "settings": {
+              "for_item": "",
+              "home_padding_item": "50px 50px 50px 100px",
+              "horizontal_align": "left",
+              "vertical_align": "center",
+              "grid": 12,
+              "grid_responsive": "",
+              "text": "<h3>HARD WAX<br>  SAMPLES<\/h3><h6>Not sure if Nacach is for you?<br>Try us out today!<\/h6>",
+              "color": "#000000",
+              "button_label": "CLICK HERE TO GET SAMPLES",
+              "button_link": "shopify:\/\/products\/wax-samples",
+              "color_button_type": "color_button_type_3"
+            }
+          }
+        },
+        "block_order": [
+          "1582655005770"
+        ],
+        "settings": {
+          "enable_block_home_icon_full": true,
+          "margin_top": 0,
+          "reponsive_mt": "",
+          "margin_bottom": 20,
+          "reponsive_bt": "0, 0, 0, 30",
+          "vertical_align": "center",
+          "min_height": 600,
+          "background_color": "#fbd0da",
+          "image": "shopify:\/\/shop_images\/Untitled_design_42.png",
+          "parallax_effect": true
+        }
+      },
+      "1582653073783": {
+        "type": "loox-carousel-reviews",
+        "settings": {
+          "max_width": 1400,
+          "arrows_color": "",
+          "dots_color": "",
+          "button_color": "",
+          "show_more": false,
+          "only_photos": false,
+          "use_widget_font": true,
+          "product_handle": "jasmin-green-hard-wax-beads"
+        }
+      },
+      "1582653228381": {
+        "type": "grid-builder",
+        "blocks": {
+          "1582653313575": {
+            "type": "text",
+            "settings": {
+              "for_item": "",
+              "home_padding_item": "50px 0px 50px 0px",
+              "horizontal_align": "center",
+              "vertical_align": "center",
+              "grid": 12,
+              "grid_responsive": "",
+              "text": "<h4>Catch the latest<\/h4>\n<p>Get insider updates,  promotions and upcoming sales by subscribing to our newsletter!<\/p><center><div class=\"klaviyo-form-KmL9mW\"><\/div><\/center>",
+              "color": "#ffffff",
+              "button_label": "",
+              "color_button_type": "color_button_type_1"
+            }
+          }
+        },
+        "block_order": [
+          "1582653313575"
+        ],
+        "settings": {
+          "enable_block_home_icon_full": false,
+          "margin_top": 10,
+          "reponsive_mt": "",
+          "margin_bottom": 0,
+          "reponsive_bt": "",
+          "vertical_align": "center",
+          "min_height": 350,
+          "background_color": "#d6d3fa",
+          "parallax_effect": false
+        }
+      },
+      "tfc-collection-faq-according": {
+        "type": "tfc-collection-faq-according",
+        "settings": {
+          "section_enabled": true,
+          "section_class": "collection-page-faq-custom-container",
+          "section_title": "FAQ's"
+        }
+      },
+      "giveaway-logo-section": {
+        "type": "giveaway-logo-section",
+        "settings": {
+          "logo_img": "shopify:\/\/shop_images\/giveaway-logo.png"
+        }
+      },
+      "giveaway-content-section": {
+        "type": "giveaway-content-section",
+        "settings": {
+          "hero_title": "Giveaway <span>Alert!<\/span>",
+          "hero_sub_title": "Win Nacach’s signature <i>Hypoallergenic<br> Pomegranate Hard Wax, Pre Waxing Cleanser<br> (8oz), and their Post Depilatory Milk (8oz)<\/i>",
+          "content_title": "Here’s How to<br> Qualify to Win:",
+          "content_icon_1": "shopify:\/\/shop_images\/sticker-1.png",
+          "content_text_1": "<b>Follow us<\/b> and like the giveaway<br> post on instagram",
+          "content_icon_2": "shopify:\/\/shop_images\/sticker-2.png",
+          "content_text_2": "<b>Enter your information<\/b> in the<br> submission form below",
+          "content_icon_3": "shopify:\/\/shop_images\/sticker-3.png",
+          "content_text_3": "And that’s it! The winner will be<br> announced via <b>Instagram and<br> Email on the 21st.<\/b>",
+          "form_title": "Fill Out The<br>Form To Enter",
+          "form_code": "<div class=\"klaviyo-form-WFCLmN giveaway-klaviyo-form\"><\/div>",
+          "form_img": "shopify:\/\/shop_images\/giveaway-form-image.png",
+          "sticker_1": "shopify:\/\/shop_images\/giveaway-sticker-1.png",
+          "sticker_2": "shopify:\/\/shop_images\/giveaway-sticker-2.png",
+          "sticker_3": "shopify:\/\/shop_images\/giveaway-sticker-3.png"
+        }
+      },
+      "giveaway-footer": {
+        "type": "giveaway-footer",
+        "blocks": {
+          "9be68ae2-3dee-4325-a6d4-b5861235b6ed": {
+            "type": "item",
+            "settings": {
+              "social_link": "https:\/\/www.facebook.com\/NacachWax",
+              "social_icon": "shopify:\/\/shop_images\/giveaway-facebook.png"
+            }
+          },
+          "122a4775-7d8d-41ec-b4f8-3eed185091db": {
+            "type": "item",
+            "settings": {
+              "social_link": "https:\/\/www.instagram.com\/accounts\/login\/?next=\/nacachwax\/",
+              "social_icon": "shopify:\/\/shop_images\/giveaway-instagram.png"
+            }
+          }
+        },
+        "block_order": [
+          "9be68ae2-3dee-4325-a6d4-b5861235b6ed",
+          "122a4775-7d8d-41ec-b4f8-3eed185091db"
+        ],
+        "settings": {
+          "footer_text": "Make sure you also check out our website and follow us on social media!"
+        }
+      },
+      "1603814407edfa85cc": {
+        "type": "home-html",
+        "settings": {
+          "html": "<h1 class=\"home-under-banner-text\">Professional Waxing Products, Kits &amp; Accessories<\/h1>"
+        }
+      },
+      "post-related-products": {
+        "type": "post-related-products",
+        "blocks": {
+          "7beb93f1-b1eb-4ef7-a84b-3339eb01f468": {
+            "type": "collection",
+            "settings": {
+              "collection": "roll-on-wax-creamy"
+            }
+          }
+        },
+        "block_order": [
+          "7beb93f1-b1eb-4ef7-a84b-3339eb01f468"
+        ],
+        "settings": {
+          "enable": true,
+          "arrows": true,
+          "dots": true,
+          "color_bg--overlay": "#000000",
+          "detail-box": "rgba(0,0,0,0)",
+          "btn-title": "Shop Now",
+          "color_bg--buyBtn": "#e21b4d",
+          "buybtn-radius": 20,
+          "card-width": 300
+        }
+      },
+      "161195300644900bc5": {
+        "type": "earn-reward",
+        "settings": {}
+      }
+    },
+    "content_for_index": [
+      "1554453713819",
+      "1603814407edfa85cc",
+      "1551932566860",
+      "1580156066196",
+      "1582117539284",
+      "1582653073783",
+      "1552036125305",
+      "1552037189229",
+      "161195300644900bc5",
+      "1548129042448",
+      "1582653228381"
+    ]
+  },
+  "presets": {
+    "Default": {}
+  }
+}

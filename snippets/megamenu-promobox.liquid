@@ -1,0 +1,22 @@
+<div class="custom-block-html {{block.settings.stype }}">
+  <div class="image">
+    {% if block.settings.image != blank %}
+    <a href="{{block.settings.url }}">
+      <img class="" src="{{ block.settings.image | img_url: '2048x'  }}" alt="{{ image.alt | escape }}" />
+    </a>
+    {% else %}
+    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+    {% endif %}
+  </div>
+  <div class="content-text-menu">
+    {% if block.settings.title != blank %}
+    <h4>{{ block.settings.title }}</h4>
+    {% endif %}
+    {% if block.settings.custom_html != blank %}
+    {{ block.settings.custom_html }}
+    {% endif %}
+    {% if block.settings.button_text != blank %}
+    <a href="{{block.settings.url }}">{{ block.settings.button_text }}</a>
+    {% endif %}
+  </div>
+</div>

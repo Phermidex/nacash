@@ -1,0 +1,49 @@
+{% capture row_limit %}
+{{ row_limit_setting | times: 5 }}
+{% endcapture %}
+
+<div class="box-content">
+  <div id="{{ owl_id }}">
+     {% assign number_colum = section.settings.grid %}
+    <div class="slider owl-carousel owl-theme" data-limit="{{number_colum}}" data-dots="{{section.settings.bullets}}" data-button="{{section.settings.arrows}}" data-autoplay="{{section.settings.autoplay}}" data-speed="{{section.settings.speed }}">
+    {% for product in collections[tabs_collection].products limit: section.settings.max_count %}
+  {% if product.object_type == 'product' and product.type == 'SHOPSTORM_HIDDEN_PRODUCT' %}{% continue %}{% endif %}
+          
+    {% assign current_collection = collections[tabs_collection] %}
+   
+    {% include 'product-item-new' %}
+    
+    {% else %}
+    {% for i in (1..4) %}
+    <div class="grid__item_add col-md-12">
+      <div class="grid-view-item">
+        <a href="#" class="grid-view-item__link">
+          {% if product.title %}
+          {%- assign compare_at_price = product.compare_at_price -%}
+          {%- assign price = product.price -%}
+          {%- assign price_varies = product.price_varies -%}
+          {%- assign available = product.available -%}
+          {% else %}
+          {%- assign compare_at_price = 1999 -%}
+          {%- assign price = 1999 -%}
+          {%- assign price_varies = false -%}
+          {%- assign available = true -%}
+          {% endif %}
+          <div class="grid-view-item__image">
+            {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+            {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+          <div class="h4 grid-view-item__title">{{ 'homepage.onboarding.product_title' | t }}</div>
+          <div class="grid-view-item__meta">
+            <s class="product-price__price">{{ compare_at_price | money }}</s>
+          </div>
+        </a>
+      </div>
+    </div>
+    {% endfor %}
+      
+    {% endfor %}
+      </div>
+  </div>
+</div>
+

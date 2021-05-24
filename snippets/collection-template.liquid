@@ -1,0 +1,263 @@
+{% assign collection_infinite_scrolling = settings.collection_infinite_scrollings %}
+{% assign collection_infinite_scrolling_text = settings.collection_infinite_scrolling_text %}
+{% if settings.isotope_collection_results_per_page != blank %}
+{% assign product_per_page = settings.isotope_collection_results_per_page %}
+{% else %}
+{% assign product_per_page = 14 %}
+{% endif %}
+{% assign collection_infinite_scrolling_no_more_product_text = settings.collection_infinite_scrolling_no_more_product_text %}
+<div class="collections-pages {{ collection.handle}}"> 
+  <div class="row main_row sidebar-left {% if settings.collection_layout == 'colection_fulwidth'%} colection_fulwidth{% endif %} {{settings.collection_layout }} {% if settings.collection_layout == 'colection_fulwidth'%} hidden-sidebar {% endif %}">
+
+    {% if settings.collection_layout == 'colection-left'%}
+      <div class=" {% if settings.collection_layout == 'colection-left' %} col-lg-3 col-md-3 col-12 {% else %} col-12 {% endif %}col-left" id="filter-sidebar"> 
+        {% section 'collection-template' %}
+      </div>
+    {% endif %}
+
+    {% if settings.collection_layout == 'colection_fulwidth'%}
+      {% include 'page-header' %}
+    {% endif %}
+
+    <div class="{% if settings.collection_layout == 'colection-left' or settings.collection_layout == 'right_sibar'%}col-lg-9 col-md-12 col-12 {% else %} col-12 {% endif %} col-main  collection-page">
+
+      {% if settings.collection_layout == 'colection_fulwidth'%} 
+        <div class=" col-12 col-left" id="filter-sidebar"> 
+        {% section 'collection-template' %}
+        </div>
+      {% endif %}
+
+      <div class="loadding-collection" style="display:none;"> <img src="{{ 'loadding-icon.gif' | asset_url }}" alt="brand{{ i }}" />
+      </div>
+
+      {% paginate collection.products by product_per_page %}   
+        {% comment %}
+        Use .grid--rev so that the collection tags appear below the products on mobile
+        {% endcomment %}
+        {% comment %}
+        Use class grid-uniform to have evenly sized columns clear
+        each other properly at each breakpoint.
+        {% endcomment %}
+      {% section 'collection-template1' %}
+      {% if paginate.pages > 1 %}
+        <div class="padding">
+          {% include 'pagination-page' %}
+        </div>
+      {% endif %}
+      {% endpaginate %}
+
+      {% if collection_infinite_scrolling == 'auto_loadmore' %}
+        {% paginate collection.products by product_per_page %}
+          <div class="component-pagination" style="display: none;">
+            {%- if paginate.next -%}
+            <span class="next-page-wrapper">
+              <a href="{{ paginate.next.url }}" id="paginatie-next">More posts</a>
+            </span>
+            {%- endif -%}
+            {%- if paginate.previous -%}
+            <span>
+              <a href="{{ paginate.previous.url }}" id="paginatie-previous">Previous posts</a>
+            </span>
+            {%- endif -%}
+          </div>
+        {% endpaginate %}
+      {% endif %}
+
+    </div>
+
+    {% if settings.collection_layout == 'right_sibar'%}
+      <div class=" {% if settings.collection_layout == 'right_sibar' %} col-lg-3 col-md-3 col-12 {% else %} col-12 {% endif %}col-left" id="filter-sidebar"> 
+        {% section 'collection-template' %}
+      </div>
+    {% endif %}
+    <div class="overlay-filter"></div>
+  </div> <!-- .row -->
+
+
+  {%- section "tfc-collection-faq-according" -%}
+
+
+</div> <!-- .collections-pages-->
+
+<script>
+  
+  {% if settings.collection_layout == 'colection_fulwidth'%}
+  jQuery('body').addClass('colection_fulwidth');
+  {% else %}
+  jQuery('body').addClass('colection-left');
+  {% endif%}
+
+  {%- comment -%} FAQ Accordion {%- endcomment -%}
+  jQuery( document ).ready(function() {
+    jQuery('#product-faq-accordion').accordion({
+      heightStyle: "content"
+    });
+  });
+ 
+</script>
+
+<style>
+  @media (min-width: 992px){
+    .item-col-5{width:20%;}
+  }
+
+  .template-collection .product-content h3 {
+    margin-bottom: 5px;
+  }
+
+  .template-collection .product-content .price-box {
+    margin-top: 10px;
+  }
+
+  .template-collection .product-content .price-box .old-price {
+    color: #e21b4a;
+    opacity: 0.9;
+  }
+
+  .template-collection .collection-page-faq-custom-container h2 {
+    font-size: 40px;
+    line-height: 50px;
+    letter-spacing: 1px;
+  }
+
+  .template-collection .collection-page-faq-custom-container{
+    background-color: #fef8e9;
+    padding: 80px 10px;
+    margin: 30px 0 0px 0;
+  }
+
+  .template-collection .collection-page-faq-custom-container .ui-accordion-header {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    line-height: 20px;
+    padding: 10px 0px 15px 0px;
+    color: #121212;
+    cursor: pointer;
+    outline: 0;
+    transition: all 0.3s;
+    text-transform: capitalize;
+  }
+
+  .template-collection .collection-page-faq-custom-container .ui-accordion-header:hover {
+    color: #dd3f1b;
+  }
+
+  .template-collection .collection-page-faq-custom-container .ui-accordion-content {
+    font-family: Poppins;
+    font-size: 17px;
+    letter-spacing: 0.3px;
+    line-height: 1.8em !important;
+    padding: 0px 5% 20px 0;
+    font-weight: 300;
+    color: #121212;
+  }
+
+  .template-collection .collection-page-faq-custom-container .ui-accordion-content li {
+    font-family: Poppins;
+    font-size: 17px;
+    letter-spacing: 0.22px;
+    line-height: 1.8em !important;
+    font-weight: 300;
+    color: #121212;
+
+    margin: 0px 0 0px 25px;
+    list-style: disc; 
+  }
+
+  .template-collection .collection-page-faq-custom-container .ui-accordion-content li ul li{
+    list-style: circle;
+  }
+
+  .template-collection .collection-page-faq-custom-container .ui-accordion-content ol li {
+    list-style-type:decimal;
+  }
+
+  .template-collection .collection-page-faq-custom-container .ui-accordion-header .ui-accordion-header-icon {
+    content: "";
+    height: 14px;
+    width: 14px;
+    display: inline-block;
+    color: #121212;
+    float: right;
+    background: url(https://cdn.shopify.com/s/files/1/0315/1131/4570/files/product-page-plus-icon-img.png?v=1583354756);  
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-top: 3px;
+  }
+
+  .template-collection .collection-page-faq-custom-container .ui-accordion-header.ui-accordion-header-active .ui-accordion-header-icon {
+    background: url(https://cdn.shopify.com/s/files/1/0315/1131/4570/files/product-page-minus-icon-img.png?v=1583354756);  
+  }
+
+
+  /* Sidebar */
+
+  .sidebar-nav-custom {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .sidebar-nav-custom h2 {
+    margin-left: 0px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+    padding-left: 5px;
+  }
+
+  .sidebar-nav-custom  li {
+    margin-bottom: 1px;
+  }
+
+  .sidebar-nav-custom ul li a {
+    transition: all 0.3s;
+    display: block;
+    padding: 7px 15px;
+    
+  }
+
+  .sidebar-nav-custom ul li a:hover {
+    background-color: #424242;
+    color: #fff;
+  }
+
+  .sidebar-nav-custom .menu-item.current-menu-page a {
+    background-color: #424242;
+    color: #fff;
+  }
+
+  .sidebar-nav-custom .level-1 {
+    margin-left: 0px !important;
+    padding-right: 10%;
+  }
+
+  .sidebar-nav-custom ul {
+    margin-bottom: 0px !important;
+    padding-top: 0;
+    padding-bottom: 0px !important;
+    border-bottom: 0px solid #ebebeb !important;
+    margin-left: 10px;
+  }
+
+
+  .template-collection  .filter-group.refine-header {
+    display: none;
+  }
+
+  .template-collection .filter-group ul li {
+    padding: 5px 10px;
+  }
+
+  @media only screen and (max-width: 767px) {
+    .filter-menu .pt-mobile-header {
+        display: none;
+    }
+  }    
+  
+
+
+
+</style>
